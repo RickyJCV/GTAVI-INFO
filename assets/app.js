@@ -40,7 +40,7 @@
   // Selector de audiencia
   var btns = document.querySelectorAll("[data-aud-btn]");
   function setAud(a) {
-    document.documentElement.setAttribute("data-aud", a);
+    document.documentElement.setAttribute("data-reader", a);
     btns.forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-aud-btn") === a)); });
   }
   setAud(store.get("lh-aud") === "nuevos" ? "nuevos" : "fans");
@@ -62,9 +62,12 @@
         btn.classList.add("is-done"); if (label) label.textContent = "¡Copiado!";
         setTimeout(function () { btn.classList.remove("is-done"); if (label) label.textContent = "Copiar"; }, 1800);
       };
+      var settled = false;
+      var finish = function (okFn) { if (!settled) { settled = true; okFn(); } };
       if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(text).then(done, fallback);
-      } else fallback();
+        navigator.clipboard.writeText(text).then(function () { finish(done); }, function () { finish(fallback); });
+        setTimeout(function () { finish(fallback); }, 1500); // por si el navegador no responde
+      } else finish(fallback);
       function fallback() {
         var ta = document.createElement("textarea");
         ta.value = text; ta.setAttribute("readonly", ""); ta.style.position = "fixed"; ta.style.opacity = "0";

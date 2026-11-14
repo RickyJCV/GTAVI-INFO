@@ -78,6 +78,17 @@ p { margin: 0 0 1em; }
 @media (min-width: 860px) {
   .nav { order: 0; width: auto; }
 }
+/* Móvil: cabecera compacta y no fija, para no tapar el contenido */
+@media (max-width: 859px) {
+  .site-header { position: static; }
+  .site-header__inner { gap: 6px 12px; padding-top: 10px; padding-bottom: 6px; }
+  .brand .mark { width: 36px; height: 36px; }
+  .brand__name { font-size: 1.3rem; }
+  .brand__tag { display: none; }
+  .pill-count { font-size: 0.72rem; padding: 6px 10px; }
+  .nav { margin: 0 -6px; }
+  .nav a { padding: 7px 10px; font-size: 0.9rem; }
+}
 
 /* ---------- hero ---------- */
 .hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--line); }
@@ -138,9 +149,11 @@ p { margin: 0 0 1em; }
   font: 600 0.85rem var(--font); color: var(--muted); background: none; border: 0; padding: 8px 14px; border-radius: 999px; cursor: pointer;
 }
 .aud-toggle button[aria-pressed="true"] { background: var(--grad); color: #1a0b2e; }
-[data-aud="nuevos"] { display: none; }
-html[data-aud="nuevos"] [data-aud="nuevos"] { display: block; }
-html[data-aud="nuevos"] [data-aud="fans"] { display: none; }
+/* El nivel elegido va en <html data-reader>; los textos llevan data-aud. Son atributos distintos
+   para que la regla que oculta un nivel nunca pueda ocultar la página entera. */
+.story__text[data-aud="nuevos"] { display: none; }
+html[data-reader="nuevos"] .story__text[data-aud="nuevos"] { display: block; }
+html[data-reader="nuevos"] .story__text[data-aud="fans"] { display: none; }
 
 /* ---------- historias ---------- */
 .stories { display: flex; flex-direction: column; gap: 14px; }

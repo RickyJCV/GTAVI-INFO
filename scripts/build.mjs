@@ -182,6 +182,7 @@ ${published ? `<meta property="article:published_time" content="${published}">` 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap">
+<script>try{if(localStorage.getItem("lh-aud")==="nuevos")document.documentElement.setAttribute("data-reader","nuevos")}catch(e){}</script>
 <link rel="stylesheet" href="${u("/assets/styles.css")}?v=${BUILD_TIME.slice(0, 10)}">
 ${ADS ? `<meta name="google-adsense-account" content="${esc(ADS)}">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${esc(ADS)}" crossorigin="anonymous"></script>` : ""}
