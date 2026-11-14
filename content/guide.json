@@ -1,0 +1,111 @@
+{
+  "updated": "2026-11-14",
+  "title": "Guía rápida de GTA VI: fecha, precio, plataformas y tamaño",
+  "description": "Todo lo confirmado de GTA VI en una página: cuándo sale, a qué hora, cuánto cuesta, en qué consolas, cuánto ocupa y si saldrá en PC.",
+  "facts": [
+    {
+      "label": "Lanzamiento",
+      "value": "19 de noviembre de 2026"
+    },
+    {
+      "label": "Hora",
+      "value": "00:00 hora local (desbloqueo por región)"
+    },
+    {
+      "label": "Plataformas",
+      "value": "PS5 y Xbox Series X|S"
+    },
+    {
+      "label": "Precio (EE. UU.)",
+      "value": "79,99 $ estándar · 99,99 $ Ultimate"
+    },
+    {
+      "label": "Precarga",
+      "value": "≈ 210 GB"
+    },
+    {
+      "label": "Rendimiento",
+      "value": "30 FPS en consolas"
+    }
+  ],
+  "faq": [
+    {
+      "q": "¿Cuándo sale GTA VI?",
+      "a": "El 19 de noviembre de 2026 en PS5 y Xbox Series X|S. Se desbloquea a las 00:00 hora local de cada región.",
+      "sources": [
+        {
+          "name": "Variety",
+          "url": "https://variety.com/2026/gaming/news/gta-6-preorders-expectations-launch-1236943278/"
+        }
+      ]
+    },
+    {
+      "q": "¿Cuánto cuesta GTA VI?",
+      "a": "En EE. UU., 79,99 $ la edición estándar y 99,99 $ la Ultimate. Ambas incluyen como bonus de reserva el Vintage Vice City Pack y un mes de GTA+. El precio en euros puede variar según la tienda.",
+      "sources": [
+        {
+          "name": "Variety",
+          "url": "https://variety.com/2026/gaming/news/gta-6-preorders-expectations-launch-1236943278/"
+        }
+      ]
+    },
+    {
+      "q": "¿GTA VI sale en PC?",
+      "a": "No está confirmado. Take-Two ha dicho que cualquier anuncio sobre PC o sobre disco físico lo hará Rockstar.",
+      "sources": [
+        {
+          "name": "TweakTown",
+          "url": "https://www.tweaktown.com/news/114580/grand-theft-auto-6-pc-and-physical-disc-news-will-come-from-rockstar-confirms-take-two/index.html"
+        }
+      ]
+    },
+    {
+      "q": "¿Cuánto ocupa GTA VI?",
+      "a": "La precarga ronda los 210 GB en la mayoría de regiones, más el parche obligatorio 1.002.000 (≈1,07 GB en PS5 y ≈2,18 GB en Xbox).",
+      "sources": [
+        {
+          "name": "Kotaku",
+          "url": "https://kotaku.com/gta-6-smaller-in-australia-japan-censorship-concerns-rockstar-2000755882"
+        },
+        {
+          "name": "tbreak",
+          "url": "https://tbreak.com/gta-6-update-1-002-000/"
+        }
+      ]
+    },
+    {
+      "q": "¿A cuántos FPS va GTA VI?",
+      "a": "Rockstar apunta a 30 FPS en PS5, PS5 Pro y Xbox Series. En PS5 Pro añade PSSR y sombras con trazado de rayos. Un modo a 60 FPS no está confirmado.",
+      "sources": [
+        {
+          "name": "Beebom",
+          "url": "https://beebom.com/gta-6-officially-targets-30-fps-on-ps5-and-xbox-confirms-rockstar/"
+        },
+        {
+          "name": "VGC",
+          "url": "https://www.videogameschronicle.com/news/gta-6-is-confirmed-to-be-30-frames-per-second-at-launch-no-performance-mode-at-launch/"
+        }
+      ]
+    },
+    {
+      "q": "¿Hay que descargar algo antes de jugar?",
+      "a": "Sí. La actualización 1.002.000, publicada el 13 de noviembre, es obligatoria. Déjala descargada antes del día 19.",
+      "sources": [
+        {
+          "name": "ComicBook.com",
+          "url": "https://comicbook.com/gaming/news/gta-6-update-patch-notes-1002000/"
+        }
+      ]
+    },
+    {
+      "q": "¿Dónde puedo ver GTA VI en directo el día del lanzamiento?",
+      "a": "YouTube emite 24 horas seguidas desde el 19 de noviembre a las 00:00 hora del Este (06:00 en España peninsular), con más de 30 creadores.",
+      "sources": [
+        {
+          "name": "KeenGamer",
+          "url": "https://www.keengamer.com/articles/news/gta-6-announces-24-hour-youtube-livestream-event-for-launch-day/"
+        }
+      ]
+    }
+  ]
+}

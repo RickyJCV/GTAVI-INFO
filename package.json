@@ -1,0 +1,11 @@
+{
+  "name": "leonida-hoy",
+  "private": true,
+  "type": "module",
+  "description": "Leonida Hoy — el resumen matutino de GTA VI",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "preview": "SITE_URL=http://localhost:8080 node scripts/build.mjs && cd _site && python3 -m http.server 8080",
+    "images": "node scripts/make-images.mjs"
+  }
+}

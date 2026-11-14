@@ -1,0 +1,27 @@
+{
+  "name": "Leonida Hoy",
+  "tagline": "El resumen matutino de GTA VI",
+  "description": "Las 5 noticias de GTA VI que importan hoy, con fuente enlazada y explicadas en palabras simples. Cada mañana, en español.",
+  "siteUrl": "https://rickyjcv.github.io/GTAVI-INFO",
+  "lang": "es",
+  "locale": "es_ES",
+  "launchDate": "2026-11-19T00:00:00",
+  "adsense": {
+    "client": "",
+    "slots": {
+      "top": "",
+      "inFeed": "",
+      "sidebar": "",
+      "bottom": ""
+    }
+  },
+  "analytics": {
+    "ga4": ""
+  },
+  "social": {
+    "x": "",
+    "telegram": "",
+    "whatsapp": "",
+    "tiktok": ""
+  }
+}

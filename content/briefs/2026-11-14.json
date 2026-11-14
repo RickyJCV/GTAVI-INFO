@@ -1,0 +1,87 @@
+{
+  "date": "2026-11-14",
+  "title": "GTA VI recibe su primer parche obligatorio a 5 días del lanzamiento",
+  "summary": "Parche 1.002.000 obligatorio, maratón de 24 horas en YouTube, versiones más ligeras en Japón y Australia, códigos visibles en algunas cajas y el efecto GTA VI en la economía.",
+  "lead": "Quedan 5 días. Rockstar ya ha movido ficha con un parche que todos tendréis que descargar, y YouTube prepara la noche de estreno más grande de su historia en videojuegos.",
+  "stories": [
+    {
+      "tag": "Actualización",
+      "title": "Llega el parche 1.002.000 y es obligatorio",
+      "change": "Rockstar publicó el 13 de noviembre la primera actualización: unos 1,07 GB en PS5 y 2,18 GB en Xbox Series. Es obligatoria para jugar el día 19 y no tiene notas del parche. Se desplegó por fases y a las 23:00 UTC ya estaba para todos.",
+      "plain": "Antes de jugar tendrás que descargar una pequeña actualización. Si ya precargaste el juego, enciende la consola y déjala bajando.",
+      "sources": [
+        { "name": "tbreak", "url": "https://tbreak.com/gta-6-update-1-002-000/" },
+        { "name": "ComicBook.com", "url": "https://comicbook.com/gaming/news/gta-6-update-patch-notes-1002000/" }
+      ]
+    },
+    {
+      "tag": "Evento",
+      "title": "YouTube emitirá 24 horas seguidas de GTA VI el día del estreno",
+      "change": "Arranca el 19 de noviembre a las 00:00 hora del Este de EE. UU. (06:00 en España peninsular), con un pre-show de RDCWorld la noche anterior. Más de 30 creadores jugarán en directo y el cierre será desde Miami.",
+      "plain": "Si aún no tienes el juego, podrás verlo en directo gratis en YouTube durante todo el día de lanzamiento.",
+      "sources": [
+        { "name": "KeenGamer", "url": "https://www.keengamer.com/articles/news/gta-6-announces-24-hour-youtube-livestream-event-for-launch-day/" },
+        { "name": "Notebookcheck", "url": "https://www.notebookcheck.net/YouTube-to-host-24-hour-GTA-6-release-date-livestream-with-launch-day-gameplay.1449040.0.html" }
+      ]
+    },
+    {
+      "tag": "Polémica",
+      "title": "La precarga es más ligera en Japón y Australia",
+      "change": "Según Kotaku, la versión japonesa pesa unos 1,2 GB menos y la de Australia y Nueva Zelanda no incluye un archivo de unos 704 KB. Hay miedo a censura, pero Rockstar no ha confirmado ningún recorte.",
+      "plain": "En algunos países el juego ocupa un poco menos. Nadie sabe aún si falta contenido; de momento solo hay sospechas.",
+      "sources": [
+        { "name": "Kotaku", "url": "https://kotaku.com/gta-6-smaller-in-australia-japan-censorship-concerns-rockstar-2000755882" }
+      ]
+    },
+    {
+      "tag": "Aviso",
+      "title": "Algunas cajas físicas dejan ver el código con una linterna",
+      "change": "VideoCardz recoge que en ciertas ediciones físicas (que son un código dentro de una caja) el código de descarga se puede leer sin abrirla. Las pruebas con copias de EE. UU. y Reino Unido fallaron; algunas europeas podrían no estar igual de protegidas.",
+      "plain": "Si compras la edición en caja, hazlo en una tienda de confianza y comprueba que el código funciona nada más abrirla.",
+      "sources": [
+        { "name": "VideoCardz", "url": "https://videocardz.com/newz/some-gta-6-physical-copies-may-expose-download-codes-without-opening-the-box-fans-discover-flashlight-trick" }
+      ]
+    },
+    {
+      "tag": "Impacto",
+      "title": "CNBC: GTA VI puede notarse en el delivery, el turismo y las bajas laborales",
+      "change": "CNBC analiza cómo el lanzamiento del día 19 podría disparar los pedidos de comida a domicilio, los días de vacaciones pedidos y hasta el turismo en Miami.",
+      "plain": "El juego es tan grande que hasta los economistas esperan que mucha gente se quede en casa esa semana.",
+      "sources": [
+        { "name": "CNBC", "url": "https://www.cnbc.com/2026/11/14/gta-6-grand-theft-auto-launch.html" }
+      ]
+    }
+  ],
+  "biggest": 0,
+  "posts": [
+    "GTA VI ya tiene su primer parche: unos 1 GB en PS5 y 2 GB en Xbox. Es obligatorio. Déjalo descargado antes del 19 y entra a jugar sin esperas. 🎮",
+    "¿Precargaste GTA VI? Mira tu consola: falta la actualización 1.002.000. Sin ella no podrás jugar el 19 de noviembre. Tarda unos minutos. ✅",
+    "Rockstar ha sacado un parche de GTA VI sin decir qué cambia. Lo único seguro: es obligatorio y ya está disponible para todos. Esta noche, consola encendida. 🌴"
+  ],
+  "context": [
+    {
+      "title": "Las reservas superan los 1.000 millones de dólares (estimación)",
+      "text": "The Washington Post, citando a Sensor Tower, habla de más de 10 millones de reservas en PS5 y Xbox. Es una estimación externa, no una cifra oficial.",
+      "date": "2026-11-11",
+      "sources": [
+        { "name": "The Washington Post", "url": "https://www.washingtonpost.com/entertainment/video-games/2026/11/11/grand-theft-auto-vi-reportedly-passes-1b-sales-week-before-release/" }
+      ]
+    },
+    {
+      "title": "Take-Two: las reservas van \"muy por encima\" de lo esperado",
+      "text": "Strauss Zelnick lo dijo en la presentación de resultados, sin dar cifras. La previsión anual se mantiene en 8.000–8.200 millones de dólares.",
+      "date": "2026-11-10",
+      "sources": [
+        { "name": "GamesHub", "url": "https://www.gameshub.com/news/article/gta-6-pre-orders-zelnick-earnings-call-2929876/" }
+      ]
+    },
+    {
+      "title": "GTA VI: The Festival, el 21 de noviembre en Miami",
+      "text": "Rockstar y PlayStation montan un festival en Mana Wynwood con Travis Scott, Cardi B, Metro Boomin y Justice. Entradas por sorteo.",
+      "date": "2026-11-09",
+      "sources": [
+        { "name": "The FADER", "url": "https://www.thefader.com/2026/11/09/gta-vi-festival-miami-lineup-tickets" }
+      ]
+    }
+  ]
+}

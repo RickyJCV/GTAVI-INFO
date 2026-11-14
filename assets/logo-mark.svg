@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Leonida Hoy">
+  <defs>
+    <linearGradient id="lh-sun" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffe14d"/>
+      <stop offset=".45" stop-color="#ff8a3d"/>
+      <stop offset="1" stop-color="#ff2e88"/>
+    </linearGradient>
+    <linearGradient id="lh-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2a0f4f"/>
+      <stop offset="1" stop-color="#0e0722"/>
+    </linearGradient>
+    <clipPath id="lh-clip"><rect width="100" height="100" rx="24"/></clipPath>
+  </defs>
+  <g clip-path="url(#lh-clip)">
+    <rect width="100" height="100" fill="url(#lh-bg)"/>
+    <circle cx="50" cy="56" r="30" fill="url(#lh-sun)"/>
+    <g fill="#160a33">
+      <rect x="0" y="62" width="100" height="2"/>
+      <rect x="0" y="68" width="100" height="3"/>
+      <rect x="0" y="74.5" width="100" height="4"/>
+      <rect x="0" y="81" width="100" height="19"/>
+    </g>
+    <rect x="0" y="81" width="100" height="1.6" fill="#2de2e6"/>
+    <g fill="#0a0518">
+      <path d="M61 82 C62 70 60 58 55 46 L58.5 45 C64 57 66.5 70 65.5 82 Z"/>
+      <path d="M56 45 Q41 36 26 47 Q40 40 56 47.5 Z"/>
+      <path d="M56 45 Q44 27 29 27 Q44 32 56 47 Z"/>
+      <path d="M56 45 Q55 28 63 17 Q59 31 58 46 Z"/>
+      <path d="M56 45 Q71 27 86 31 Q70 33 57.5 47 Z"/>
+      <path d="M56 45 Q73 39 85 53 Q71 44 57 48 Z"/>
+    </g>
+  </g>
+</svg>
