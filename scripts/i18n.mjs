@@ -17,6 +17,7 @@ export const LOCALES = {
       archive: "/archivo/",
       about: "/acerca/",
       privacy: "/privacidad/",
+      legal: "/aviso-legal/",
       brief: (d) => `/resumen/${d}/`,
       feed: "/feed.xml",
     },
@@ -127,7 +128,7 @@ export const LOCALES = {
       readToday: "Leer el resumen de hoy",
       footerNote: "Web de fans independiente. No está afiliada, patrocinada ni aprobada por Rockstar Games ni Take-Two Interactive. Grand Theft Auto y GTA son marcas de sus respectivos propietarios.",
       footerNav: "Pie",
-      footerLinks: { guide: "Guía GTA VI", archive: "Archivo", about: "Acerca y normas", privacy: "Privacidad y cookies" },
+      footerLinks: { guide: "Guía GTA VI", archive: "Archivo", about: "Acerca y normas", privacy: "Privacidad y cookies", legal: "Aviso legal" },
       langHint: "Also available in English",
       langHintCta: "Read in English →",
       langHintClose: "Cerrar",
@@ -152,6 +153,25 @@ export const LOCALES = {
     <p>¿Ves un error o tienes una pista con fuente? Abre una incidencia en el <a href="${issues}" rel="noopener" target="_blank">repositorio del proyecto</a>. Corregimos rápido y lo indicamos.</p>
     <h2>Aviso</h2>
     <p>Leonida Hoy es una web de fans independiente. No está afiliada, patrocinada ni aprobada por Rockstar Games ni Take-Two Interactive.</p>`,
+      legalTitle: "Aviso legal",
+      legalDesc: "Quién publica Leonida Hoy, cómo usamos las fuentes y cómo pedir una corrección o retirada.",
+      legalBody: ({ owner, email, issues }) => `
+    <h2>Quién publica esta web</h2>
+    <p>Leonida Hoy es un proyecto personal e independiente${owner ? `, publicado por ${owner}` : ""}. Contacto: ${email ? `<a href="mailto:${email}">${email}</a> o ` : ""}el <a href="${issues}" rel="noopener" target="_blank">formulario público del proyecto</a>.</p>
+    <h2>Sin relación con Rockstar Games</h2>
+    <p>Esta web no está afiliada, patrocinada ni aprobada por Rockstar Games ni Take-Two Interactive. «Grand Theft Auto», «GTA» y los nombres del juego son marcas de sus propietarios y se usan solo para identificar el juego del que se informa. No usamos sus logotipos, imágenes ni música.</p>
+    <h2>Cómo usamos las fuentes</h2>
+    <p>Cada noticia es un resumen breve escrito con nuestras propias palabras a partir de hechos publicados por otros medios. No reproducimos sus artículos, fotos ni vídeos. Siempre indicamos el medio y enlazamos al artículo original para que puedas leerlo completo.</p>
+    <h2>Rumores</h2>
+    <p>Los rumores se publican en una sección aparte, marcados como no confirmados, con quién los difunde y una valoración orientativa de su fiabilidad. No son hechos y pueden no cumplirse.</p>
+    <h2>Exactitud y responsabilidad</h2>
+    <p>Los resúmenes se preparan a diario con ayuda de inteligencia artificial y pueden contener errores. Comprueba la fuente original antes de tomar decisiones de compra. No nos hacemos responsables del contenido de las webs externas enlazadas.</p>
+    <h2>Correcciones y retirada de contenido</h2>
+    <p>Si eres titular de derechos o ves un error, escríbenos por el contacto de arriba indicando la página. Corregimos o retiramos el contenido lo antes posible.</p>
+    <h2>Propiedad del contenido propio</h2>
+    <p>El diseño, el logotipo y los textos propios de Leonida Hoy están protegidos. Puedes citar fragmentos breves enlazando a esta web.</p>
+    <h2>Publicidad</h2>
+    <p>La web puede mostrar publicidad de Google AdSense. Consulta la política de privacidad y cookies para más detalles.</p>`,
       privacyTitle: "Política de privacidad y cookies",
       privacyDesc: "Cómo usa Leonida Hoy las cookies y la publicidad de Google AdSense.",
       privacyEyebrow: "Legal",
@@ -187,6 +207,7 @@ export const LOCALES = {
       archive: "/en/archive/",
       about: "/en/about/",
       privacy: "/en/privacy/",
+      legal: "/en/legal/",
       brief: (d) => `/en/brief/${d}/`,
       feed: "/en/feed.xml",
     },
@@ -297,7 +318,7 @@ export const LOCALES = {
       readToday: "Read today's briefing",
       footerNote: "Independent fan site. Not affiliated with, sponsored or endorsed by Rockstar Games or Take-Two Interactive. Grand Theft Auto and GTA are trademarks of their respective owners.",
       footerNav: "Footer",
-      footerLinks: { guide: "GTA VI guide", archive: "Archive", about: "About & standards", privacy: "Privacy & cookies" },
+      footerLinks: { guide: "GTA VI guide", archive: "Archive", about: "About & standards", privacy: "Privacy & cookies", legal: "Legal notice" },
       langHint: "También disponible en español",
       langHintCta: "Leer en español →",
       langHintClose: "Close",
@@ -322,6 +343,25 @@ export const LOCALES = {
     <p>Spotted a mistake or have a sourced tip? Open an issue in the <a href="${issues}" rel="noopener" target="_blank">project repository</a>. We fix things quickly and say so.</p>
     <h2>Disclaimer</h2>
     <p>Leonida Hoy is an independent fan site. It is not affiliated with, sponsored or endorsed by Rockstar Games or Take-Two Interactive.</p>`,
+      legalTitle: "Legal notice",
+      legalDesc: "Who publishes Leonida Hoy, how we use sources and how to request a correction or removal.",
+      legalBody: ({ owner, email, issues }) => `
+    <h2>Who publishes this site</h2>
+    <p>Leonida Hoy is an independent personal project${owner ? `, published by ${owner}` : ""}. Contact: ${email ? `<a href="mailto:${email}">${email}</a> or ` : ""}the <a href="${issues}" rel="noopener" target="_blank">project's public form</a>.</p>
+    <h2>Not connected to Rockstar Games</h2>
+    <p>This site is not affiliated with, sponsored or endorsed by Rockstar Games or Take-Two Interactive. "Grand Theft Auto", "GTA" and the game's names are trademarks of their owners and are used only to identify the game being covered. We don't use their logos, images or music.</p>
+    <h2>How we use sources</h2>
+    <p>Every story is a short summary written in our own words from facts published by other outlets. We don't reproduce their articles, photos or videos. We always name the outlet and link to the original article so you can read it in full.</p>
+    <h2>Rumors</h2>
+    <p>Rumors are published in a separate section, marked as unconfirmed, with who is spreading them and an indicative reliability rating. They are not facts and may never happen.</p>
+    <h2>Accuracy and liability</h2>
+    <p>Summaries are prepared daily with the help of artificial intelligence and may contain mistakes. Check the original source before making purchase decisions. We are not responsible for the content of external sites we link to.</p>
+    <h2>Corrections and content removal</h2>
+    <p>If you are a rights holder or spot a mistake, contact us through the details above and tell us the page. We will correct or remove the content as soon as possible.</p>
+    <h2>Ownership of our own content</h2>
+    <p>The design, logo and original texts of Leonida Hoy are protected. You may quote short excerpts with a link to this site.</p>
+    <h2>Advertising</h2>
+    <p>The site may show Google AdSense advertising. See the privacy and cookie policy for details.</p>`,
       privacyTitle: "Privacy and cookie policy",
       privacyDesc: "How Leonida Hoy uses cookies and Google AdSense advertising.",
       privacyEyebrow: "Legal",

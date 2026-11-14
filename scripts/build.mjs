@@ -22,6 +22,7 @@ const ISSUES_URL = "https://github.com/leonidahoy/leonidahoy.github.io/issues";
 const assetVer = (f) => crypto.createHash("sha1").update(fs.readFileSync(path.join(ROOT, "assets", f))).digest("hex").slice(0, 8);
 const CSS_V = assetVer("styles.css");
 const JS_V = assetVer("app.js");
+const FONTS_V = assetVer("fonts.css");
 
 // ---------- utilidades ----------
 const esc = (s = "") =>
@@ -241,6 +242,7 @@ const footer = (L) => {
         <a href="${u(P.archive)}">${esc(L.t.footerLinks.archive)}</a>
         <a href="${u(P.about)}">${esc(L.t.footerLinks.about)}</a>
         <a href="${u(P.privacy)}">${esc(L.t.footerLinks.privacy)}</a>
+        <a href="${u(P.legal)}">${esc(L.t.footerLinks.legal)}</a>
         <a href="${u(P.feed)}" class="rss">${icon.rss} RSS</a>
         ${soc.map(([k, v]) => `<a href="${esc(v)}" rel="me noopener" target="_blank">${esc(k === "x" ? "X" : k.charAt(0).toUpperCase() + k.slice(1))}</a>`).join("")}
       </nav>
@@ -292,9 +294,9 @@ ${published ? `<meta property="article:published_time" content="${published}">` 
 <link rel="apple-touch-icon" href="${u("/assets/apple-touch-icon.png")}">
 <link rel="manifest" href="${u("/manifest.webmanifest")}">
 <link rel="alternate" type="application/rss+xml" title="${esc(cfg.name)} (${L.label})" href="${u(L.paths.feed)}">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Yellowtail&family=Inter:wght@400;500;600;700;800&display=swap">
+<link rel="preload" href="${u("/assets/fonts/inter-latin.woff2")}" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="${u("/assets/fonts/anton-latin.woff2")}" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="${u("/assets/fonts.css")}?v=${FONTS_V}">
 <script>(function(){var r=document.documentElement,t=null;try{if(localStorage.getItem("lh-aud")==="nuevos")r.setAttribute("data-reader","nuevos");t=localStorage.getItem("lh-theme")}catch(e){}if(t==="light"||t==="dark")r.setAttribute("data-theme",t);var n=t==="light"||t==="dark"?t:(window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches?"light":"dark");r.setAttribute("data-theme-now",n);var m=document.querySelector("[data-theme-color]");if(m)m.setAttribute("content",n==="light"?"#fff6fb":"#0b0618")})()</script>
 <link rel="stylesheet" href="${u("/assets/styles.css")}?v=${CSS_V}">
 ${ADS ? `<meta name="google-adsense-account" content="${esc(ADS)}">
@@ -845,6 +847,22 @@ for (const code of ACTIVE) {
     })
   );
   sitemap.push(["privacy", P.privacy, latest.date, "yearly", "0.2"]);
+
+  // Aviso legal
+  write(
+    P.legal,
+    layout(L, {
+      title: L.t.legalTitle,
+      description: L.t.legalDesc,
+      key: "legal",
+      active: "",
+      body: `
+  <section class="page-head"><div class="wrap"><p class="eyebrow">${esc(L.t.privacyEyebrow)}</p><h1>${esc(L.t.legalTitle)}</h1><p class="muted">${esc(L.t.privacyUpdated(dLong(BUILD_TIME.slice(0, 10))))}</p></div></section>
+  <div class="wrap narrow prose">${L.t.legalBody({ owner: esc(cfg.legal?.owner || ""), email: esc(cfg.legal?.email || ""), issues: ISSUES_URL })}
+  </div>`,
+    })
+  );
+  sitemap.push(["legal", P.legal, latest.date, "yearly", "0.2"]);
 
   // RSS por idioma
   const rfc822 = (d) => new Date(d + "T06:00:00Z").toUTCString();
