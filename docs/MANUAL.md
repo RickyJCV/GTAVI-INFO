@@ -24,3 +24,12 @@
 3. Activa **Auto ads** en el panel de AdSense. Si además creas bloques manuales, pega sus IDs en `adsense.slots` (`top`, `inFeed`, `sidebar`, `bottom`); los huecos ya están colocados y reservan espacio para no mover el diseño.
 4. Para visitantes de la UE/Reino Unido, activa el mensaje de consentimiento en **AdSense → Privacidad y mensajes → RGPD** (es obligatorio un CMP certificado; el de Google es gratis).
 5. Requisitos que AdSense revisa y que ya están cubiertos: contenido original, página «Acerca», política de privacidad, navegación clara. Publica a diario unas 2–3 semanas antes de solicitarlo para tener contenido suficiente.
+
+## Buscadores
+
+- **Bing, Yandex y otros (IndexNow):** automático. Cada publicación avisa de todas las URLs del sitemap.
+- **Google Search Console:** añade una propiedad «Prefijo de la URL» con `https://rickyjcv.github.io/GTAVI-INFO/`, elige verificación «Etiqueta HTML», copia el valor de `content="…"` en `googleSiteVerification` de `site.config.json`, publica, pulsa «Verificar» y envía `sitemap.xml` en «Sitemaps».
+
+## Resumen automático
+
+Una tarea programada de Claude se ejecuta cada mañana: busca las noticias de GTA VI de las últimas 24 horas, crea `content/briefs/<fecha>.json`, comprueba que la web se construye y lo sube a `main`.

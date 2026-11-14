@@ -158,6 +158,7 @@ const layout = ({ title, description, pathName, body, active, type = "website", 
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <meta name="theme-color" content="#0e0722">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+${cfg.googleSiteVerification ? `<meta name="google-site-verification" content="${esc(cfg.googleSiteVerification)}">` : ""}
 <meta name="color-scheme" content="dark">
 <meta property="og:site_name" content="${esc(cfg.name)}">
 <meta property="og:locale" content="${cfg.locale}">
@@ -628,5 +629,6 @@ write(
   )
 );
 write(".nojekyll", "");
+if (cfg.indexNowKey) write(`${cfg.indexNowKey}.txt`, cfg.indexNowKey);
 
 console.log(`✓ ${briefs.length} resumen(es) · último ${latest.date} · ${ADS ? "AdSense ON" : "AdSense OFF (sin client)"} → ${path.relative(ROOT, OUT)}/`);

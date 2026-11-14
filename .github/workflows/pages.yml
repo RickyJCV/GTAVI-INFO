@@ -42,3 +42,10 @@ jobs:
           git add -A
           git commit -q -m "Publicar ${GITHUB_SHA::7}"
           git push -q -f "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" gh-pages
+      - name: Avisar a los buscadores (IndexNow)
+        continue-on-error: true
+        run: |
+          sleep 90
+          node scripts/indexnow.mjs
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
