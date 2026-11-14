@@ -75,8 +75,12 @@ const markSvg = fs
   .readFileSync(path.join(ROOT, "assets/logo-mark.svg"), "utf8")
   .replace(/ id="lh-/g, ' id="m-lh-')
   .replace(/url\(#lh-/g, "url(#m-lh-")
+  .replace(/href="#lh-/g, 'href="#m-lh-')
   .replace("<svg ", '<svg class="mark" aria-hidden="true" ')
   .replace(/ role="img" aria-label="[^"]*"/, "");
+
+const palmSvg = (cls) =>
+  `<svg class="hero__palm ${cls}" viewBox="-30 -26 60 120" aria-hidden="true"><path d="M-1.6 0 C1 14 3.4 28 4 94 L8.2 94 C7.6 28 4.6 13 1.9 -.6 Z"/><path d="M0 0 C-8 -6 -18 -4 -25 4.5 C-17 -1 -9 -1 0 2.2 Z"/><path d="M0 0 C-6 -10 -15.5 -13.5 -23 -10.5 C-13.5 -9 -7 -5 0 1.2 Z"/><path d="M0 0 C-3 -9 -2 -16.5 2.4 -21.5 C0 -14 .6 -7 1.2 1 Z"/><path d="M0 0 C8 -9.5 18.5 -9.5 25 -3 C16.5 -5.2 9 -3 1 2 Z"/><path d="M0 0 C9.5 -3 18 2 22 10.5 C14.5 4.2 8 2 0 2.6 Z"/><circle cx=".6" cy="2.4" r="1.7"/><circle cx="-1.6" cy="1.6" r="1.4"/></svg>`;
 
 const shareLinks = (text, url) => {
   const t = encodeURIComponent(text);
@@ -118,7 +122,7 @@ const header = (active) => {
     <div class="wrap site-header__inner">
       <a class="brand" href="${u("/")}" aria-label="${esc(cfg.name)}, inicio">
         ${markSvg}
-        <span class="brand__text"><span class="brand__name">LEONIDA<em>HOY</em></span><span class="brand__tag">${esc(cfg.tagline)}</span></span>
+        <span class="brand__text"><span class="brand__name">LEONIDA<em>Hoy</em></span><span class="brand__tag">${esc(cfg.tagline)}</span></span>
       </a>
       <nav class="nav" aria-label="Principal">
         ${nav.map(([href, label, key]) => `<a href="${u(href)}"${key === active ? ' aria-current="page"' : ""}>${label}</a>`).join("")}
@@ -134,7 +138,7 @@ const footer = () => {
   <footer class="site-footer">
     <div class="wrap site-footer__inner">
       <div>
-        <a class="brand brand--sm" href="${u("/")}">${markSvg}<span class="brand__name">LEONIDA<em>HOY</em></span></a>
+        <a class="brand brand--sm" href="${u("/")}">${markSvg}<span class="brand__name">LEONIDA<em>Hoy</em></span></a>
         <p class="muted small">Web de fans independiente. No está afiliada, patrocinada ni aprobada por Rockstar Games ni Take-Two Interactive. Grand Theft Auto y GTA son marcas de sus respectivos propietarios.</p>
       </div>
       <nav class="footer-nav" aria-label="Pie">
@@ -186,7 +190,7 @@ ${published ? `<meta property="article:published_time" content="${published}">` 
 <link rel="alternate" type="application/rss+xml" title="${esc(cfg.name)}" href="${u("/feed.xml")}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Yellowtail&family=Inter:wght@400;500;600;700;800&display=swap">
 <script>try{if(localStorage.getItem("lh-aud")==="nuevos")document.documentElement.setAttribute("data-reader","nuevos")}catch(e){}</script>
 <link rel="stylesheet" href="${u("/assets/styles.css")}?v=${CSS_V}">
 ${ADS ? `<meta name="google-adsense-account" content="${esc(ADS)}">
@@ -201,6 +205,7 @@ ${header(active)}
 <main id="main">
 ${body}
 </main>
+<button class="to-top" type="button" aria-label="Volver arriba" data-to-top><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M6 15l6-6 6 6"/></svg></button>
 ${footer()}
 <script src="${u("/assets/app.js")}?v=${JS_V}" defer></script>
 </body>
@@ -237,8 +242,8 @@ const briefBody = (b, { isHome }) => {
         <div class="story__body">
           <div class="story__meta"><span class="tag">${esc(s.tag || "Noticia")}</span>${i === (b.biggest ?? 0) ? '<span class="tag tag--hot">La más grande</span>' : ""}</div>
           <h3 class="story__title">${esc(s.title)}</h3>
-          <p class="story__text" data-aud="fans"><strong>Qué cambió:</strong> ${esc(s.change)}</p>
-          <p class="story__text" data-aud="nuevos"><strong>En corto:</strong> ${esc(s.plain || s.change)}</p>
+          <p class="story__text aud" data-aud="fans"><strong>Qué cambió:</strong> ${esc(s.change)}</p>
+          <p class="story__text aud" data-aud="nuevos"><strong>En corto:</strong> ${esc(s.plain || s.change)}</p>
           ${sourcesHtml(s.sources)}
         </div>
       </article>${i === 1 ? adUnit("inFeed") : ""}`
@@ -285,14 +290,17 @@ const briefBody = (b, { isHome }) => {
   const HeadingTag = isHome ? "h1" : "h1";
   return `
   <section class="hero">
-    <div class="hero__sky" aria-hidden="true"></div>
+    <div class="hero__sky" aria-hidden="true"><div class="hero__sun"></div><div class="hero__sea"></div>${palmSvg("hero__palm--l")}${palmSvg("hero__palm--r")}<div class="hero__veil"></div></div>
     <div class="wrap hero__inner">
       <div class="hero__copy">
         <p class="eyebrow"><time datetime="${b.date}">${esc(fmtDate(b.date))}</time> · Resumen matutino</p>
         <${HeadingTag} class="hero__title">${esc(b.title)}</${HeadingTag}>
         <p class="hero__lead">${esc(b.lead || b.summary)}</p>
-        <div class="hero__share">${shareLinks(`${b.title} — las 5 noticias de GTA VI de hoy`, pageUrl)}
-          <button class="btn btn--ghost" type="button" data-native-share data-title="${esc(b.title)}" data-url="${pageUrl}">Compartir</button></div>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="#top5">Ver las 5 noticias ↓</a>
+          ${shareLinks(`${b.title} — las 5 noticias de GTA VI de hoy`, pageUrl)}
+          <button class="btn btn--ghost" type="button" data-native-share data-title="${esc(b.title)}" data-url="${pageUrl}">Compartir</button>
+        </div>
       </div>
       ${countdown("lg")}
     </div>
@@ -305,12 +313,15 @@ const briefBody = (b, { isHome }) => {
       <section class="block" aria-labelledby="top5">
         <div class="block__head">
           <h2 id="top5">Las 5 que importan hoy</h2>
-          <div class="aud-toggle" role="group" aria-label="Elige tu nivel">
-            <button type="button" data-aud-btn="fans" aria-pressed="true">Sigo cada update</button>
-            <button type="button" data-aud-btn="nuevos" aria-pressed="false">Soy nuevo</button>
+          <div class="reader">
+            <span class="reader__label" id="reader-label">¿Cómo lo quieres leer?</span>
+            <div class="aud-toggle" role="group" aria-labelledby="reader-label">
+              <button type="button" data-aud-btn="fans" aria-pressed="true">🎮 Sigo cada update</button>
+              <button type="button" data-aud-btn="nuevos" aria-pressed="false">🌴 Soy nuevo</button>
+            </div>
           </div>
         </div>
-        <p class="rules muted small">Solo historias de las últimas 24 horas · nada de rumores sin fuente con nombre · enlace bajo cada noticia.</p>
+        <p class="rules muted small"><span class="aud" data-aud="fans">Mostrando el detalle para fans.</span><span class="aud" data-aud="nuevos">Mostrando la explicación sencilla.</span> Solo historias de las últimas 24 horas · nada de rumores sin fuente con nombre · enlace bajo cada noticia.</p>
         <div class="stories">${stories}</div>
       </section>
 

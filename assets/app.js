@@ -86,6 +86,14 @@
     });
   });
 
+  // Botón «volver arriba»
+  var top = document.querySelector("[data-to-top]");
+  if (top) {
+    var onScroll = function () { top.classList.toggle("is-visible", window.scrollY > 700); };
+    window.addEventListener("scroll", onScroll, { passive: true }); onScroll();
+    top.addEventListener("click", function () { window.scrollTo({ top: 0, behavior: "smooth" }); });
+  }
+
   // AdSense: activa cada bloque manual presente en la página
   var ads = document.querySelectorAll("ins.adsbygoogle");
   if (ads.length) {
