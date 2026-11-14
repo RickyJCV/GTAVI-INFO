@@ -3,6 +3,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import crypto from "node:crypto";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const OUT = path.resolve(ROOT, process.env.OUT_DIR || "_site");
@@ -15,6 +16,10 @@ const BASE = new URL(SITE + "/").pathname.replace(/\/$/, ""); // "/GTAVI-INFO" o
 const ADS = cfg.adsense?.client?.trim() || "";
 const GA = cfg.analytics?.ga4?.trim() || "";
 const BUILD_TIME = new Date().toISOString();
+// Versión de CSS/JS según su contenido: cada cambio obliga al navegador a descargarlos de nuevo.
+const assetVer = (f) => crypto.createHash("sha1").update(fs.readFileSync(path.join(ROOT, "assets", f))).digest("hex").slice(0, 8);
+const CSS_V = assetVer("styles.css");
+const JS_V = assetVer("app.js");
 
 // ---------- utilidades ----------
 const esc = (s = "") =>
@@ -183,7 +188,7 @@ ${published ? `<meta property="article:published_time" content="${published}">` 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap">
 <script>try{if(localStorage.getItem("lh-aud")==="nuevos")document.documentElement.setAttribute("data-reader","nuevos")}catch(e){}</script>
-<link rel="stylesheet" href="${u("/assets/styles.css")}?v=${BUILD_TIME.slice(0, 10)}">
+<link rel="stylesheet" href="${u("/assets/styles.css")}?v=${CSS_V}">
 ${ADS ? `<meta name="google-adsense-account" content="${esc(ADS)}">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${esc(ADS)}" crossorigin="anonymous"></script>` : ""}
 ${GA ? `<script async src="https://www.googletagmanager.com/gtag/js?id=${esc(GA)}"></script>
@@ -197,7 +202,7 @@ ${header(active)}
 ${body}
 </main>
 ${footer()}
-<script src="${u("/assets/app.js")}?v=${BUILD_TIME.slice(0, 10)}" defer></script>
+<script src="${u("/assets/app.js")}?v=${JS_V}" defer></script>
 </body>
 </html>
 `;
