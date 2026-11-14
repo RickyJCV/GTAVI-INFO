@@ -27,12 +27,13 @@ node scripts/build.mjs   # genera _site/
 npm run preview          # http://localhost:8080
 ```
 
-## Publicar en GitHub Pages (una sola vez)
+## Publicar en GitHub Pages
 
-1. Fusiona esta rama en `main`.
-2. En GitHub: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-3. Cada push a `main` publica la web en `https://rickyjcv.github.io/GTAVI-INFO/`.
-   También puedes lanzarlo a mano en **Actions → Publicar en GitHub Pages → Run workflow**.
+Cada push a `main` construye la web y la publica en la rama `gh-pages` (workflow `.github/workflows/pages.yml`).
+GitHub Pages debe servir esa rama: **Settings → Pages → Build and deployment → Source: Deploy from a branch → `gh-pages` / `(root)`**.
+La web queda en `https://rickyjcv.github.io/GTAVI-INFO/`.
+
+> Con el plan gratuito de GitHub, Pages solo funciona en repositorios **públicos**.
 
 ## Rutina diaria (5 minutos)
 
