@@ -89,13 +89,26 @@ const localize = (b, code) => {
   return out;
 };
 
+const slugify = (t) =>
+  t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 70).replace(/-+$/, "");
 const DATA = {};
 for (const code of Object.keys(LOCALES)) {
   const briefs = rawBriefs.map((b) => localize(b, code)).filter(Boolean);
   briefs.forEach((b) => validate(b, `content/briefs/${b.date}.json [${code}]`));
   const gfile = path.join(ROOT, code === "es" ? "content/guide.json" : `content/guide.${code}.json`);
   const guide = fs.existsSync(gfile) ? JSON.parse(fs.readFileSync(gfile, "utf8")) : null;
-  DATA[code] = { briefs, guide, dates: new Set(briefs.map((b) => b.date)) };
+  // Cada noticia y cada rumor es un elemento con página propia
+  const P = LOCALES[code].paths;
+  const items = [];
+  for (const b of briefs) {
+    [...b.stories, ...(b.more || [])].forEach((s, i) =>
+      items.push({ ...s, kind: "news", date: b.date, key: `item:news:${b.date}:${i}`, top: i < b.stories.length, big: i === (b.biggest ?? 0), path: P.newsItem(b.date, slugify(s.title)) })
+    );
+    (b.rumors || []).forEach((s, i) => items.push({ ...s, kind: "rumor", date: b.date, key: `item:rumor:${b.date}:${i}`, path: P.rumorItem(b.date, slugify(s.title)) }));
+  }
+  const paths = new Set(items.map((i) => i.path));
+  if (paths.size !== items.length) fail(`[${code}] hay dos noticias o rumores con el mismo título el mismo día`);
+  DATA[code] = { briefs, guide, dates: new Set(briefs.map((b) => b.date)), items, byKey: new Map(items.map((i) => [i.key, i])) };
 }
 const ACTIVE = Object.keys(LOCALES).filter((c) => DATA[c].briefs.length && DATA[c].guide);
 
@@ -107,7 +120,10 @@ const counterparts = (key) => {
     if (key.startsWith("brief:")) {
       const d = key.slice(6);
       if (DATA[code].dates.has(d)) out[code] = P.brief(d);
-    } else if (P[key]) out[code] = P[key];
+    } else if (key.startsWith("item:")) {
+      const it = DATA[code].byKey.get(key);
+      if (it) out[code] = it.path;
+    } else if (typeof P[key] === "string") out[code] = P[key];
   }
   return out;
 };
@@ -171,9 +187,10 @@ const header = (L, active, alts) => {
   const P = L.paths;
   const nav = [
     [P.home, L.t.nav.home, "home"],
+    [P.news, L.t.nav.news, "news"],
+    [P.rumors, L.t.nav.rumors, "rumors"],
     [P.guide, L.t.nav.guide, "guide"],
     [P.archive, L.t.nav.archive, "archive"],
-    [P.about, L.t.nav.about, "about"],
   ];
   return `
   <header class="site-header">
@@ -218,6 +235,8 @@ const footer = (L) => {
         <p class="muted small">${esc(L.t.footerNote)}</p>
       </div>
       <nav class="footer-nav" aria-label="${esc(L.t.footerNav)}">
+        <a href="${u(P.news)}">${esc(L.t.nav.news)}</a>
+        <a href="${u(P.rumors)}">${esc(L.t.nav.rumors)}</a>
         <a href="${u(P.guide)}">${esc(L.t.footerLinks.guide)}</a>
         <a href="${u(P.archive)}">${esc(L.t.footerLinks.archive)}</a>
         <a href="${u(P.about)}">${esc(L.t.footerLinks.about)}</a>
@@ -311,84 +330,74 @@ const sourcesHtml = (L, sources) =>
     .map((s) => `<a href="${esc(s.url)}" target="_blank" rel="noopener nofollow">${esc(s.name)}${icon.ext}</a>`)
     .join(" ")}</div>`;
 
-// ---------- página de un resumen ----------
+// ---------- tarjetas, portada, listados y páginas de detalle ----------
+const relLevel = { alta: 3, media: 2, baja: 1 };
+const relMeter = (L, r) =>
+  `<span class="rel rel--${r}"><span class="rel__bars" aria-hidden="true">${[1, 2, 3].map((n) => `<i${n <= relLevel[r] ? ' class="on"' : ""}></i>`).join("")}</span>${esc(L.t.reliability[r])}</span>`;
+const via = (L, sources) =>
+  `<span class="via">${esc(L.t.via)} ${sources.map((s) => `<a href="${esc(s.url)}" target="_blank" rel="noopener nofollow">${esc(s.name)}</a>`).join(", ")}</span>`;
+const metaTags = (L, it) =>
+  it.kind === "rumor"
+    ? `<span class="tag tag--rumor">${esc(L.t.rumor)}</span>${relMeter(L, it.reliability)}`
+    : `<span class="tag">${esc(it.tag || L.t.news)}</span>${it.big ? `<span class="tag tag--hot">${esc(L.t.biggest)}</span>` : ""}`;
+const readerHtml = (L) => `
+          <div class="reader">
+            <span class="reader__label" id="reader-label">${esc(L.t.readerQ)}</span>
+            <div class="aud-toggle" role="group" aria-labelledby="reader-label">
+              <button type="button" data-aud-btn="fans" aria-pressed="true">${esc(L.t.fans)}</button>
+              <button type="button" data-aud-btn="nuevos" aria-pressed="false">${esc(L.t.nuevos)}</button>
+            </div>
+          </div>`;
+
+// Tarjeta de noticia o rumor: toda la tarjeta lleva a su página de detalle
+const itemCard = (L, it, { num, variant = "mini" } = {}) => {
+  const rumor = it.kind === "rumor";
+  const story = variant === "story";
+  return `
+      <article class="${story ? "story" : "mini-story"} item item--${it.kind}${it.big && story ? " story--big" : ""}${rumor ? ` rumor rumor--${it.reliability}` : ""}"${rumor ? ` data-rel="${it.reliability}"` : ""}>
+        ${num ? `<div class="story__num">${num}</div>` : ""}
+        <div class="story__body">
+          <div class="story__meta">${metaTags(L, it)}</div>
+          <h3 class="story__title"><a href="${u(it.path)}">${esc(it.title)}</a></h3>
+          <p class="story__text aud" data-aud="fans">${story ? `<strong>${esc(L.t.whatChanged)}</strong> ` : ""}${esc(it.change)}</p>
+          <p class="story__text aud" data-aud="nuevos">${story ? `<strong>${esc(L.t.inShort)}</strong> ` : ""}${esc(it.plain || it.change)}</p>
+          ${rumor && it.who ? `<p class="rumor__who small"><strong>${esc(L.t.who)}</strong> ${esc(it.who)}</p>` : ""}
+          <div class="item__foot"><span class="more-link">${esc(L.t.readMore)}</span>${via(L, it.sources)}</div>
+        </div>
+      </article>`;
+};
+
+const sideCards = (L, { facts = true } = {}) => {
+  const { guide } = DATA[L.code];
+  const P = L.paths;
+  return `
+      <div class="card">${countdown(L, "sm")}</div>
+      ${adUnit(L, "sidebar", "ad--sticky")}
+      ${
+        facts
+          ? `<div class="card">
+        <h2 class="card__title">${esc(L.t.tenSec)}</h2>
+        <ul class="facts">${guide.facts.slice(0, 4).map((f) => `<li><span>${esc(f.label)}</span><b>${esc(f.value)}</b></li>`).join("")}</ul>
+        <a class="btn btn--primary btn--block" href="${u(P.guide)}">${esc(L.t.guideCta)}</a>
+      </div>`
+          : ""
+      }`;
+};
+
+// ---------- portada / resumen de un día ----------
 const briefBody = (L, b) => {
-  const { briefs, guide } = DATA[L.code];
+  const { briefs, guide, items } = DATA[L.code];
   const P = L.paths;
   const pageUrl = abs(P.brief(b.date));
-  const bigIdx = b.biggest ?? 0;
-  const big = b.stories[bigIdx];
+  const today = items.filter((i) => i.date === b.date);
+  const top = today.filter((i) => i.kind === "news" && i.top);
+  const more = today.filter((i) => i.kind === "news" && !i.top);
+  const rumors = today.filter((i) => i.kind === "rumor");
+  const big = top.find((i) => i.big) || top[0];
   const idx = briefs.indexOf(b);
   const newer = briefs[idx - 1];
   const older = briefs[idx + 1];
   const dShort = (d) => fmtDate(L, d, { day: "numeric", month: "short" });
-
-  const stories = b.stories
-    .map(
-      (s, i) => `
-      <article class="story${i === bigIdx ? " story--big" : ""}" id="h${i + 1}">
-        <div class="story__num">${String(i + 1).padStart(2, "0")}</div>
-        <div class="story__body">
-          <div class="story__meta"><span class="tag">${esc(s.tag || L.t.news)}</span>${i === bigIdx ? `<span class="tag tag--hot">${esc(L.t.biggest)}</span>` : ""}</div>
-          <h3 class="story__title">${esc(s.title)}</h3>
-          <p class="story__text aud" data-aud="fans"><strong>${esc(L.t.whatChanged)}</strong> ${esc(s.change)}</p>
-          <p class="story__text aud" data-aud="nuevos"><strong>${esc(L.t.inShort)}</strong> ${esc(s.plain || s.change)}</p>
-          ${sourcesHtml(L, s.sources)}
-        </div>
-      </article>${i === 1 ? adUnit(L, "inFeed") : ""}`
-    )
-    .join("");
-
-  const moreHtml = (b.more || []).length
-    ? `
-      <section class="block" aria-labelledby="more">
-        <div class="block__head"><h2 id="more">${esc(L.t.moreTitle)}</h2></div>
-        <p class="muted small">${esc(L.t.moreIntro)}</p>
-        <div class="briefs-grid">${b.more
-          .map(
-            (s) => `
-          <article class="mini-story">
-            <div class="story__meta"><span class="tag">${esc(s.tag || L.t.news)}</span></div>
-            <h3 class="story__title">${esc(s.title)}</h3>
-            <p class="story__text aud" data-aud="fans">${esc(s.change)}</p>
-            <p class="story__text aud" data-aud="nuevos">${esc(s.plain || s.change)}</p>
-            ${sourcesHtml(L, s.sources)}
-          </article>`
-          )
-          .join("")}</div>
-      </section>`
-    : "";
-
-  const relLevel = { alta: 3, media: 2, baja: 1 };
-  const rumorsHtml = (b.rumors || []).length
-    ? `
-      <section class="block" aria-labelledby="rumors">
-        <div class="block__head"><h2 id="rumors">${esc(L.t.rumorsTitle)}</h2></div>
-        <p class="rumor-note small">${esc(L.t.rumorsIntro)}</p>
-        <div class="briefs-grid">${b.rumors
-          .map(
-            (s) => `
-          <article class="mini-story rumor rumor--${s.reliability}">
-            <div class="story__meta"><span class="tag tag--rumor">${esc(L.t.rumor)}</span>
-              <span class="rel" title="${esc(L.t.reliability[s.reliability])}"><span class="rel__bars" aria-hidden="true">${[1, 2, 3].map((n) => `<i${n <= relLevel[s.reliability] ? ' class="on"' : ""}></i>`).join("")}</span>${esc(L.t.reliability[s.reliability])}</span></div>
-            <h3 class="story__title">${esc(s.title)}</h3>
-            <p class="story__text aud" data-aud="fans">${esc(s.change)}</p>
-            <p class="story__text aud" data-aud="nuevos">${esc(s.plain || s.change)}</p>
-            ${s.who ? `<p class="rumor__who small"><strong>${esc(L.t.who)}</strong> ${esc(s.who)}</p>` : ""}
-            ${sourcesHtml(L, s.sources)}
-          </article>`
-          )
-          .join("")}</div>
-      </section>`
-    : "";
-
-  const jumps = [
-    ["top5", L.t.jumpTop],
-    ...((b.more || []).length ? [["more", L.t.moreTitle]] : []),
-    ...((b.rumors || []).length ? [["rumors", L.t.rumorsTitle]] : []),
-    ...((b.posts || []).length ? [["posts", L.t.postsTitle]] : []),
-    ...((b.context || []).length ? [["ctx", L.t.ctxTitle]] : []),
-  ];
 
   const posts = (b.posts || [])
     .map(
@@ -414,11 +423,6 @@ const briefBody = (L, b) => {
     )
     .join("");
 
-  const facts = guide.facts
-    .slice(0, 4)
-    .map((f) => `<li><span>${esc(f.label)}</span><b>${esc(f.value)}</b></li>`)
-    .join("");
-
   const archive = briefs
     .slice(0, 6)
     .map(
@@ -426,6 +430,9 @@ const briefBody = (L, b) => {
         `<li><a href="${u(P.brief(x.date))}"${x === b ? ' aria-current="page"' : ""}><time datetime="${x.date}">${esc(dShort(x.date))}</time><span>${esc(x.title)}</span></a></li>`
     )
     .join("");
+
+  const tile = (cls, href, emoji, name, sub) =>
+    `<a class="hub__tile hub__tile--${cls}" href="${u(href)}"><span class="hub__icon" aria-hidden="true">${emoji}</span><span class="hub__txt"><b>${esc(name)}</b><small>${esc(sub)}</small></span></a>`;
 
   return `
   <section class="hero">
@@ -445,26 +452,42 @@ const briefBody = (L, b) => {
     </div>
   </section>
 
-  <div class="wrap">${adUnit(L, "top")}</div>
+  <div class="wrap">
+    <nav class="hub" aria-label="${esc(L.t.jumpsLabel)}">
+      ${tile("news", P.news, "📰", L.t.nav.news, L.t.hubNewsSub(top.length + more.length))}
+      ${tile("rumors", P.rumors, "🕵️", L.t.nav.rumors, L.t.hubRumorsSub(rumors.length))}
+      ${tile("guide", P.guide, "🧭", L.t.nav.guide, L.t.hubGuideSub)}
+      ${tile("archive", P.archive, "🗓️", L.t.nav.archive, L.t.hubArchiveSub)}
+    </nav>
+    ${adUnit(L, "top")}
+  </div>
 
   <div class="wrap layout">
     <div class="col-main">
-      <nav class="jumps" aria-label="${esc(L.t.jumpsLabel)}">${jumps.map(([id, label]) => `<a href="#${id}">${esc(label)}</a>`).join("")}</nav>
-      <section class="block" aria-labelledby="top5">
+      <section class="block zone zone--news" aria-labelledby="top5">
+        <span class="kicker kicker--news">✔ ${esc(L.t.kickerNews)}</span>
         <div class="block__head">
           <h2 id="top5">${esc(L.t.top5)}</h2>
-          <div class="reader">
-            <span class="reader__label" id="reader-label">${esc(L.t.readerQ)}</span>
-            <div class="aud-toggle" role="group" aria-labelledby="reader-label">
-              <button type="button" data-aud-btn="fans" aria-pressed="true">${esc(L.t.fans)}</button>
-              <button type="button" data-aud-btn="nuevos" aria-pressed="false">${esc(L.t.nuevos)}</button>
-            </div>
-          </div>
+          ${readerHtml(L)}
         </div>
         <p class="rules muted small"><span class="aud" data-aud="fans">${esc(L.t.showingFans)}</span><span class="aud" data-aud="nuevos">${esc(L.t.showingNew)}</span> ${esc(L.t.rules)}</p>
-        <div class="stories">${stories}</div>
+        <div class="stories">${top.map((it, i) => itemCard(L, it, { num: String(i + 1).padStart(2, "0"), variant: "story" }) + (i === 1 ? adUnit(L, "inFeed") : "")).join("")}</div>
+        ${more.length ? `<h3 class="sub" id="more">${esc(L.t.moreTitle)}</h3><div class="briefs-grid">${more.map((it) => itemCard(L, it)).join("")}</div>` : ""}
+        <p class="zone__more"><a class="btn btn--ghost" href="${u(P.news)}">${esc(L.t.allNews)}</a></p>
       </section>
-${moreHtml}${rumorsHtml}
+
+      ${
+        rumors.length
+          ? `<section class="block zone zone--rumor" aria-labelledby="rumors">
+        <span class="kicker kicker--rumor">⚠ ${esc(L.t.kickerRumor)}</span>
+        <div class="block__head"><h2 id="rumors">${esc(L.t.rumorsTitle)}</h2></div>
+        <p class="rumor-note small">${esc(L.t.rumorsIntro)}</p>
+        <div class="briefs-grid">${rumors.map((it) => itemCard(L, it)).join("")}</div>
+        <p class="zone__more"><a class="btn btn--ghost" href="${u(P.rumors)}">${esc(L.t.allRumors)}</a></p>
+      </section>`
+          : ""
+      }
+
       ${
         posts
           ? `<section class="block" aria-labelledby="posts">
@@ -494,7 +517,7 @@ ${moreHtml}${rumorsHtml}
     <aside class="col-side">
       <div class="card">
         <h2 class="card__title">${esc(L.t.tenSec)}</h2>
-        <ul class="facts">${facts}</ul>
+        <ul class="facts">${guide.facts.slice(0, 4).map((f) => `<li><span>${esc(f.label)}</span><b>${esc(f.value)}</b></li>`).join("")}</ul>
         <a class="btn btn--primary btn--block" href="${u(P.guide)}">${esc(L.t.guideCta)}</a>
       </div>
       ${adUnit(L, "sidebar", "ad--sticky")}
@@ -509,6 +532,115 @@ ${moreHtml}${rumorsHtml}
         <a class="btn btn--ghost btn--block" href="${u(P.feed)}">${icon.rss} ${esc(L.t.rss)}</a>
       </div>
     </aside>
+  </div>`;
+};
+
+// ---------- listado de noticias o de rumores ----------
+const listBody = (L, kind) => {
+  const { items } = DATA[L.code];
+  const P = L.paths;
+  const rumor = kind === "rumor";
+  const list = items.filter((i) => i.kind === kind);
+  const days = new Map();
+  list.forEach((i) => days.set(i.date, [...(days.get(i.date) || []), i]));
+  return `
+  <section class="page-head page-head--${kind}"><div class="wrap">
+    <span class="kicker kicker--${kind}">${rumor ? "⚠ " + esc(L.t.kickerRumor) : "✔ " + esc(L.t.kickerNews)}</span>
+    <h1>${esc(rumor ? L.t.rumorsH1 : L.t.newsH1)}</h1><p class="muted">${esc(rumor ? L.t.rumorsIntro : L.t.newsIntro)}</p></div></section>
+  <div class="wrap layout">
+    <div class="col-main">
+      ${
+        rumor
+          ? `<div class="legend"><b>${esc(L.t.legendTitle)}</b><ul>${["alta", "media", "baja"].map((r) => `<li>${relMeter(L, r)}<span>${esc(L.t.legend[r])}</span></li>`).join("")}</ul></div>`
+          : ""
+      }
+      <div class="toolbar">
+        ${
+          rumor
+            ? `<div class="reader"><span class="reader__label">${esc(L.t.filterLabel)}</span><div class="filter" role="group" aria-label="${esc(L.t.filterLabel)}">
+          <button type="button" data-rel-filter="all" aria-pressed="true">${esc(L.t.filterAll)}</button>
+          ${["alta", "media", "baja"].map((r) => `<button type="button" data-rel-filter="${r}" aria-pressed="false">${esc(L.t.reliabilityShort[r])}</button>`).join("")}
+        </div></div>`
+            : ""
+        }
+        ${readerHtml(L)}
+      </div>
+      ${list.length ? "" : `<p class="muted">${esc(L.t.emptyList)}</p>`}
+      ${[...days]
+        .map(
+          ([d, arr]) => `
+      <section class="day" data-day>
+        <h2 class="day__title"><time datetime="${d}">${esc(fmtDate(L, d))}</time></h2>
+        <div class="briefs-grid">${arr.map((it) => itemCard(L, it)).join("")}</div>
+      </section>`
+        )
+        .join("")}
+      ${adUnit(L, "bottom")}
+    </div>
+    <aside class="col-side">
+      <a class="hub__tile hub__tile--${rumor ? "news" : "rumors"}" href="${u(rumor ? P.news : P.rumors)}"><span class="hub__icon" aria-hidden="true">${rumor ? "📰" : "🕵️"}</span><span class="hub__txt"><b>${esc(rumor ? L.t.nav.news : L.t.nav.rumors)}</b><small>${esc(rumor ? L.t.kickerNews : L.t.kickerRumor)}</small></span></a>
+      ${sideCards(L)}
+    </aside>
+  </div>`;
+};
+
+// ---------- página de detalle de una noticia o un rumor ----------
+const itemBody = (L, it) => {
+  const { items } = DATA[L.code];
+  const P = L.paths;
+  const rumor = it.kind === "rumor";
+  const pageUrl = abs(it.path);
+  const listPath = rumor ? P.rumors : P.news;
+  const same = items.filter((i) => i.kind === it.kind);
+  const idx = same.indexOf(it);
+  const newer = same[idx - 1];
+  const older = same[idx + 1];
+  const related = items
+    .filter((i) => i.date === it.date && i !== it)
+    .sort((a, b) => (a.kind === it.kind ? 0 : 1) - (b.kind === it.kind ? 0 : 1))
+    .slice(0, 4);
+  const paras = (x) => (Array.isArray(x) ? x : String(x).split(/\n\s*\n/)).map((p) => `<p>${esc(p)}</p>`).join("");
+  return `
+  <section class="page-head page-head--${it.kind}"><div class="wrap">
+    <nav class="crumbs" aria-label="${esc(L.t.crumbs)}"><a href="${u(P.home)}">${esc(L.t.nav.home)}</a><span aria-hidden="true">›</span><a href="${u(listPath)}">${esc(rumor ? L.t.nav.rumors : L.t.nav.news)}</a></nav>
+    <div class="story__meta">${metaTags(L, it)}</div>
+    <h1 class="article__title">${esc(it.title)}</h1>
+    <p class="muted small"><time datetime="${it.date}">${esc(fmtDate(L, it.date))}</time></p>
+  </div></section>
+  <div class="wrap layout">
+    <div class="col-main">
+      <article class="article">
+        ${
+          rumor
+            ? `<div class="rumor-banner"><b>⚠ ${esc(L.t.rumorBannerTitle)}</b><p>${esc(L.t.rumorBanner)}</p>
+          ${it.who ? `<p><strong>${esc(L.t.who)}</strong> ${esc(it.who)}</p>` : ""}
+          <p class="rumor-banner__rel">${relMeter(L, it.reliability)}<span>${esc(L.t.legend[it.reliability])}</span></p></div>`
+            : ""
+        }
+        <p class="article__lead">${esc(it.change)}</p>
+        <div class="plainbox"><b>${esc(L.t.plainTitle)}</b><p>${esc(it.plain || it.change)}</p></div>
+        ${it.detail ? `<h2>${esc(L.t.details)}</h2>${paras(it.detail)}` : ""}
+        ${it.why ? `<h2>${esc(L.t.why)}</h2>${paras(it.why)}` : ""}
+        <h2>${esc(L.t.originals)}</h2>
+        <p class="muted small">${esc(L.t.originalsNote)}</p>
+        ${sourcesHtml(L, it.sources)}
+        <div class="article__share">${shareLinks(L, it.title, pageUrl)}
+          <button class="btn btn--ghost" type="button" data-native-share data-title="${esc(it.title)}" data-url="${pageUrl}">${esc(L.t.share)}</button></div>
+      </article>
+      ${adUnit(L, "bottom")}
+      ${
+        related.length
+          ? `<section class="block block--related" aria-labelledby="rel"><div class="block__head"><h2 id="rel">${esc(L.t.moreToday)}</h2></div>
+        <div class="briefs-grid">${related.map((r) => itemCard(L, r)).join("")}</div></section>`
+          : ""
+      }
+      <nav class="pager pager--items" aria-label="${esc(rumor ? L.t.nav.rumors : L.t.nav.news)}">
+        ${older ? `<a href="${u(older.path)}">← ${esc(older.title)}</a>` : "<span></span>"}
+        ${newer ? `<a href="${u(newer.path)}">${esc(newer.title)} →</a>` : ""}
+      </nav>
+      <p><a class="btn btn--ghost" href="${u(listPath)}">${esc(rumor ? L.t.allRumors : L.t.allNews)}</a></p>
+    </div>
+    <aside class="col-side">${sideCards(L)}</aside>
   </div>`;
 };
 
@@ -575,6 +707,45 @@ for (const code of ACTIVE) {
       })
     );
     sitemap.push([`brief:${b.date}`, P.brief(b.date), b.date, "monthly", "0.8"]);
+  }
+
+  // Noticias y rumores: listados y una página de detalle por elemento
+  for (const [kind, key] of [["news", "news"], ["rumor", "rumors"]]) {
+    write(P[key], layout(L, { title: kind === "rumor" ? L.t.rumorsPageTitle : L.t.newsTitle, description: kind === "rumor" ? L.t.rumorsDesc : L.t.newsDesc, key, active: key, body: listBody(L, kind) }));
+    sitemap.push([key, P[key], latest.date, "daily", "0.9"]);
+  }
+  for (const it of DATA[code].items) {
+    const rumor = it.kind === "rumor";
+    const title = rumor ? `${L.t.rumor}: ${it.title}` : it.title;
+    write(
+      it.path,
+      layout(L, {
+        title,
+        description: it.plain || it.change,
+        key: it.key,
+        active: rumor ? "rumors" : "news",
+        type: "article",
+        published: `${it.date}T07:00:00+01:00`,
+        body: itemBody(L, it),
+        jsonLd: [
+          {
+            "@context": "https://schema.org",
+            "@type": "NewsArticle",
+            headline: title.slice(0, 110),
+            description: it.change,
+            inLanguage: code,
+            datePublished: `${it.date}T07:00:00+01:00`,
+            dateModified: BUILD_TIME,
+            mainEntityOfPage: abs(it.path),
+            image: [abs(code === "es" ? "/assets/og.png" : `/assets/og-${code}.png`)],
+            author: { "@type": "Organization", name: cfg.name, url: abs(P.about) },
+            publisher,
+            citation: it.sources.map((x) => x.url),
+          },
+        ],
+      })
+    );
+    sitemap.push([it.key, it.path, it.date, "monthly", "0.7"]);
   }
 
   // Archivo

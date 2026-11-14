@@ -131,6 +131,23 @@
     if (close) close.addEventListener("click", function () { hint.hidden = true; store.set("lh-hint-off", "1"); });
   }
 
+  // Rumores: filtrar por fiabilidad
+  var relBtns = document.querySelectorAll("[data-rel-filter]");
+  relBtns.forEach(function (b) {
+    b.addEventListener("click", function () {
+      var want = b.getAttribute("data-rel-filter");
+      relBtns.forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+      document.querySelectorAll("[data-day]").forEach(function (day) {
+        var shown = 0;
+        day.querySelectorAll("[data-rel]").forEach(function (card) {
+          var ok = want === "all" || card.getAttribute("data-rel") === want;
+          card.hidden = !ok; if (ok) shown++;
+        });
+        day.hidden = shown === 0;
+      });
+    });
+  });
+
   // Botón «volver arriba»
   var top = document.querySelector("[data-to-top]");
   if (top) {

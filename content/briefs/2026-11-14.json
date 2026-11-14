@@ -18,7 +18,9 @@
           "name": "ComicBook.com",
           "url": "https://comicbook.com/gaming/news/gta-6-update-patch-notes-1002000/"
         }
-      ]
+      ],
+      "detail": "La actualización lleva el número de versión 1.002.000 y Rockstar la activó por fases: primero a la mitad de los jugadores y, al final del día, a todos. La hora de desbloqueo del juego no cambia.",
+      "why": "Rockstar no ha dicho si este es el parche del día uno, así que podría llegar otro antes del 19."
     },
     {
       "tag": "Evento",
@@ -34,7 +36,9 @@
           "name": "Notebookcheck",
           "url": "https://www.notebookcheck.net/YouTube-to-host-24-hour-GTA-6-release-date-livestream-with-launch-day-gameplay.1449040.0.html"
         }
-      ]
+      ],
+      "detail": "YouTube lo organiza junto a Rockstar. Habrá partidas en directo, creadores recorriendo el mapa de Leonida por primera vez y conexiones desde Miami. El programa detallado, tramo a tramo, aún no se ha publicado.",
+      "why": "Es la forma gratuita y oficial de ver el juego desde el primer minuto."
     },
     {
       "tag": "Polémica",
@@ -46,7 +50,9 @@
           "name": "Kotaku",
           "url": "https://kotaku.com/gta-6-smaller-in-australia-japan-censorship-concerns-rockstar-2000755882"
         }
-      ]
+      ],
+      "detail": "La precarga en PS5 ronda los 209,9 GB en la mayoría de países y unos 208,7 GB en Japón. En Australia y Nueva Zelanda la diferencia es mínima: falta un único archivo cuyo contenido nadie conoce. Kotaku ha pedido explicaciones a Take-Two.",
+      "why": "Si se confirman recortes, no todos los jugadores recibirían exactamente el mismo juego."
     },
     {
       "tag": "Aviso",
@@ -58,7 +64,9 @@
           "name": "VideoCardz",
           "url": "https://videocardz.com/newz/some-gta-6-physical-copies-may-expose-download-codes-without-opening-the-box-fans-discover-flashlight-trick"
         }
-      ]
+      ],
+      "detail": "La edición física no trae disco, sino un código de descarga dentro de la caja. Según VideoCardz, en algunos envases el código se transparenta al iluminarlo. En las copias de EE. UU. y Reino Unido que se probaron no funcionó.",
+      "why": "Un código que se puede leer sin abrir la caja podría canjearlo otra persona antes que el comprador."
     },
     {
       "tag": "Impacto",
@@ -70,7 +78,9 @@
           "name": "CNBC",
           "url": "https://www.cnbc.com/2026/11/14/gta-6-grand-theft-auto-launch.html"
         }
-      ]
+      ],
+      "detail": "El reportaje de CNBC repasa qué sectores pueden notar el estreno: comida a domicilio, días libres pedidos en el trabajo y viajes a Miami, donde hay una gran campaña de promoción.",
+      "why": "Da una idea del tamaño del lanzamiento más allá de los videojuegos."
     }
   ],
   "biggest": 0,
@@ -123,31 +133,41 @@
         "tag": "Update",
         "title": "Patch 1.002.000 is here and it's mandatory",
         "change": "Rockstar released the first update on November 13: about 1.07 GB on PS5 and 2.18 GB on Xbox Series. It's required to play on the 19th and has no patch notes. It rolled out in stages and reached everyone by 23:00 UTC.",
-        "plain": "You'll need to download a small update before you can play. If you already preloaded the game, switch your console on and let it download."
+        "plain": "You'll need to download a small update before you can play. If you already preloaded the game, switch your console on and let it download.",
+        "detail": "The update carries version number 1.002.000 and Rockstar switched it on in stages: first for half of players and, by the end of the day, for everyone. The game's unlock time doesn't change.",
+        "why": "Rockstar hasn't said whether this is the day-one patch, so another one could arrive before the 19th."
       },
       {
         "tag": "Event",
         "title": "YouTube will stream 24 straight hours of GTA VI on launch day",
         "change": "It starts November 19 at 12:00 a.m. ET (6:00 a.m. in Spain), with an RDCWorld pre-show the night before. More than 30 creators will play live and it wraps up from Miami.",
-        "plain": "If you don't have the game yet, you can watch it live for free on YouTube all launch day."
+        "plain": "If you don't have the game yet, you can watch it live for free on YouTube all launch day.",
+        "detail": "YouTube is running it together with Rockstar. Expect live gameplay, creators exploring the Leonida map for the first time and segments from Miami. The detailed schedule hasn't been published yet.",
+        "why": "It's the free, official way to see the game from the very first minute."
       },
       {
         "tag": "Controversy",
         "title": "The preload is smaller in Japan and Australia",
         "change": "According to Kotaku, the Japanese version is about 1.2 GB smaller and the Australia and New Zealand version is missing a file of roughly 704 KB. People fear censorship, but Rockstar hasn't confirmed any cuts.",
-        "plain": "In some countries the game takes up a bit less space. Nobody knows yet if content is missing; so far it's just suspicion."
+        "plain": "In some countries the game takes up a bit less space. Nobody knows yet if content is missing; so far it's just suspicion.",
+        "detail": "The PS5 preload is about 209.9 GB in most countries and around 208.7 GB in Japan. In Australia and New Zealand the gap is tiny: a single file is missing and nobody knows what's in it. Kotaku has asked Take-Two for comment.",
+        "why": "If cuts are confirmed, not every player would be getting exactly the same game."
       },
       {
         "tag": "Heads-up",
         "title": "Some physical boxes reveal the code with a flashlight",
         "change": "VideoCardz reports that on certain physical editions (which are a code in a box) the download code can be read without opening it. Tests on US and UK copies failed; some European ones may be less protected.",
-        "plain": "If you buy the boxed edition, get it from a store you trust and check the code works as soon as you open it."
+        "plain": "If you buy the boxed edition, get it from a store you trust and check the code works as soon as you open it.",
+        "detail": "The physical edition has no disc, just a download code inside the box. According to VideoCardz, on some packaging the code shows through when you shine a light on it. It didn't work on the US and UK copies that were tested.",
+        "why": "A code that can be read without opening the box could be redeemed by someone else before the buyer."
       },
       {
         "tag": "Impact",
         "title": "CNBC: GTA VI may show up in food delivery, tourism and time off",
         "change": "CNBC looks at how the launch on the 19th could boost food delivery orders, vacation days taken and even tourism in Miami.",
-        "plain": "The game is so big that even economists expect lots of people to stay home that week."
+        "plain": "The game is so big that even economists expect lots of people to stay home that week.",
+        "detail": "CNBC's report looks at which sectors may feel the launch: food delivery, days off requested at work and trips to Miami, where a big marketing campaign is under way.",
+        "why": "It shows how big this launch is beyond video games."
       }
     ],
     "posts": [
@@ -174,13 +194,17 @@
         "tag": "Studio",
         "title": "Rockstar's UK staff vote on recognizing a union",
         "change": "Around 1,600 workers vote from November 12 to 26 on recognizing the IWGB union, right across launch week. A yes would make it the biggest recognized union in the UK games industry.",
-        "plain": "While the game launches, the people who made it decide whether to join a union."
+        "plain": "While the game launches, the people who made it decide whether to join a union.",
+        "detail": "The vote is separate from the employment tribunal over Rockstar's 2025 dismissals, which staff and the union describe as retaliation. That case has no ruling yet.",
+        "why": "The result arrives a week after launch and could change how conditions are negotiated at the studio."
       },
       {
         "tag": "Gameplay",
         "title": "Rob Nelson: for the first time, a GTA encourages empathy",
         "change": "Rockstar North's co-studio head says GTA VI includes mechanics that let you play \"the good guy\" if you want, something new for the series.",
-        "plain": "You'll be able to choose to do the right thing in many situations, not just cause chaos."
+        "plain": "You'll be able to choose to do the right thing in many situations, not just cause chaos.",
+        "detail": "Nelson said it in an interview reported by Insider Gaming. The idea is to give players more ways to react to what happens in the world, not only with violence.",
+        "why": "It points to a GTA with more choices and a slightly different tone from earlier entries."
       }
     ],
     "rumors": [
@@ -188,25 +212,33 @@
         "title": "Reviews reportedly drop November 18, a day early",
         "change": "NateTheHate posted that Rockstar has sent review copies with an embargo on the 18th, and Insider Gaming says it verified this independently. Rockstar hasn't confirmed it.",
         "plain": "You may be able to read the first review scores on Wednesday the 18th.",
-        "who": "NateTheHate · Insider Gaming"
+        "who": "NateTheHate · Insider Gaming",
+        "detail": "NateTheHate posted it on October 26. Some outlets add that the embargo may be tiered, so part of the reviews wouldn't appear until the 19th.",
+        "why": "If it holds, you'll be able to see scores before deciding whether to buy on day one."
       },
       {
         "title": "The PC version would arrive in Q1 2027",
         "change": "GamesBeat, citing four anonymous industry sources, points to January–March 2027. Take-Two hasn't confirmed it, and its revenue outlook reportedly doesn't include PC before March.",
         "plain": "If you play on PC, you may have to wait a few months.",
-        "who": "GamesBeat (4 anonymous sources)"
+        "who": "GamesBeat (4 anonymous sources)",
+        "detail": "Another leaker points to February 2027, while part of the industry expects the PC version later, towards the end of 2027. Rockstar usually takes a year or more to bring its games to PC.",
+        "why": "PC-only players would have to choose between waiting and buying a console."
       },
       {
         "title": "The new GTA Online won't be there on the 19th, but may come soon",
         "change": "A look at the game files found references to the online mode, and a leaker talks about a debut within a month of launch. The only sure thing: it won't be available on the 19th.",
         "plain": "Multiplayer would arrive a few weeks after the game.",
-        "who": "Dataminers · leaker with no verified track record"
+        "who": "Dataminers · leaker with no verified track record",
+        "detail": "Some reports point the other way and place the online mode later, in 2027. With GTA V and Red Dead Redemption 2, multiplayer arrived weeks after the game.",
+        "why": "The online mode is what keeps a GTA alive for years."
       },
       {
         "title": "A collector's edition poster may reveal map locations",
         "change": "Photos of a display at Selfridges in London show Leonida area names such as Lummox County and Goose Key. Rockstar hasn't confirmed anything.",
         "plain": "Some new places on the map may already be known before you play.",
-        "who": "Display photos · PC Games"
+        "who": "Display photos · PC Games",
+        "detail": "The photos come from a collector's edition display at the Selfridges department store. The names couldn't be checked against any official source.",
+        "why": "It would give the first hints of the map's size and areas before launch."
       }
     ]
   },
@@ -225,7 +257,9 @@
           "name": "Insider Gaming",
           "url": "https://insider-gaming.com/rockstar-uk-union-vote-1600-workers/"
         }
-      ]
+      ],
+      "detail": "La votación es independiente del juicio laboral por los despidos de 2025 en Rockstar, que la plantilla y el sindicato consideran una represalia. Ese caso sigue sin sentencia.",
+      "why": "El resultado llegará una semana después del lanzamiento y puede cambiar cómo se negocian las condiciones en el estudio."
     },
     {
       "tag": "Jugabilidad",
@@ -237,7 +271,9 @@
           "name": "Insider Gaming",
           "url": "https://insider-gaming.com/gta-6-empathy-first-time-rockstar-history"
         }
-      ]
+      ],
+      "detail": "Nelson lo contó en una entrevista recogida por Insider Gaming. La idea es que el jugador tenga más formas de reaccionar ante lo que ocurre en el mundo, no solo con violencia.",
+      "why": "Apunta a un GTA con más decisiones y un tono algo distinto al de entregas anteriores."
     }
   ],
   "rumors": [
@@ -256,7 +292,9 @@
           "name": "Beebom",
           "url": "https://beebom.com/gta-6-review-embargo-date-revealed/"
         }
-      ]
+      ],
+      "detail": "NateTheHate lo publicó el 26 de octubre. Algunos medios añaden que el embargo podría ser escalonado, de modo que parte de los análisis no saldrían hasta el día 19.",
+      "why": "Si se cumple, podrás ver las notas antes de decidir si lo compras el primer día."
     },
     {
       "title": "La versión de PC llegaría en el primer trimestre de 2027",
@@ -273,7 +311,9 @@
           "name": "MP1st",
           "url": "https://mp1st.com/news/rumor-gta-6-pc-release-planned-q1-2027"
         }
-      ]
+      ],
+      "detail": "Otro filtrador habla de febrero de 2027, mientras que parte del sector espera la versión de PC más tarde, hacia finales de 2027. Rockstar suele tardar un año o más en llevar sus juegos a PC.",
+      "why": "Quien solo juegue en ordenador tendría que elegir entre esperar o comprar una consola."
     },
     {
       "title": "El nuevo GTA Online no estará el día 19, pero llegaría pronto",
@@ -290,7 +330,9 @@
           "name": "OpenCritic",
           "url": "https://opencritic.com/news/29064/gta-6-online-will-launch-sooner-than-expected-leaker-claims"
         }
-      ]
+      ],
+      "detail": "Algunos informes van en sentido contrario y sitúan el modo online más adelante, ya en 2027. Con GTA V y Red Dead Redemption 2 el multijugador llegó semanas después del juego.",
+      "why": "El modo online es lo que mantiene vivo un GTA durante años."
     },
     {
       "title": "Un póster de la edición coleccionista revelaría lugares del mapa",
@@ -303,7 +345,9 @@
           "name": "PC Games",
           "url": "https://www.pcgames.de/GTA-6-Spiel-55239/News/Offizielle-Karte-von-Leonida-geleakt-1560002/"
         }
-      ]
+      ],
+      "detail": "Las fotos proceden de un expositor de la edición coleccionista en los grandes almacenes Selfridges. Los nombres no se han podido comprobar con ninguna fuente oficial.",
+      "why": "Daría las primeras pistas del tamaño y las zonas del mapa antes del estreno."
     }
   ]
 }

@@ -54,3 +54,9 @@ Una tarea programada de Claude se ejecuta cada mañana: busca las noticias de GT
 - `more` (opcional): noticias extra del día, mismo formato que `stories` (`tag`, `title`, `change`, `plain`, `sources`).
 - `rumors` (opcional): solo los rumores más comentados y siempre con fuente con nombre. Cada uno lleva `title`, `change`, `plain`, `sources`, `who` (quién lo dice) y `reliability`: `alta` (insider con buen historial y verificado por un medio), `media` (medio fiable con fuentes anónimas) o `baja` (filtrador sin historial o dataminers).
 - En el bloque `en`, `more` y `rumors` van en el mismo orden con `title`, `change`, `plain` (y `tag` / `who`).
+
+## Secciones y páginas de detalle
+
+- Menú: Hoy (`/`), Noticias (`/noticias/`), Rumores (`/rumores/`), Guía y Archivo; en inglés bajo `/en/`.
+- Cada noticia (`stories` + `more`) y cada rumor tiene página propia, generada sola a partir del título. No cambies un título ya publicado: cambiaría su dirección.
+- Campos opcionales por noticia o rumor para esa página: `detail` (2–3 frases con los detalles, redacción propia, nunca texto copiado del medio) y `why` (una frase: por qué importa). También en el bloque `en`.
