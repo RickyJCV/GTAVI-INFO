@@ -157,6 +157,7 @@ const layout = ({ title, description, pathName, body, active, type = "website", 
 <link rel="canonical" href="${canonical}">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <meta name="theme-color" content="#0e0722">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="color-scheme" content="dark">
 <meta property="og:site_name" content="${esc(cfg.name)}">
 <meta property="og:locale" content="${cfg.locale}">
