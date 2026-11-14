@@ -168,6 +168,142 @@
         "title": "GTA VI: The Festival, November 21 in Miami",
         "text": "Rockstar and PlayStation are throwing a festival at Mana Wynwood with Travis Scott, Cardi B, Metro Boomin and Justice. Tickets by lottery."
       }
+    ],
+    "more": [
+      {
+        "tag": "Studio",
+        "title": "Rockstar's UK staff vote on recognizing a union",
+        "change": "Around 1,600 workers vote from November 12 to 26 on recognizing the IWGB union, right across launch week. A yes would make it the biggest recognized union in the UK games industry.",
+        "plain": "While the game launches, the people who made it decide whether to join a union."
+      },
+      {
+        "tag": "Gameplay",
+        "title": "Rob Nelson: for the first time, a GTA encourages empathy",
+        "change": "Rockstar North's co-studio head says GTA VI includes mechanics that let you play \"the good guy\" if you want, something new for the series.",
+        "plain": "You'll be able to choose to do the right thing in many situations, not just cause chaos."
+      }
+    ],
+    "rumors": [
+      {
+        "title": "Reviews reportedly drop November 18, a day early",
+        "change": "NateTheHate posted that Rockstar has sent review copies with an embargo on the 18th, and Insider Gaming says it verified this independently. Rockstar hasn't confirmed it.",
+        "plain": "You may be able to read the first review scores on Wednesday the 18th.",
+        "who": "NateTheHate · Insider Gaming"
+      },
+      {
+        "title": "The PC version would arrive in Q1 2027",
+        "change": "GamesBeat, citing four anonymous industry sources, points to January–March 2027. Take-Two hasn't confirmed it, and its revenue outlook reportedly doesn't include PC before March.",
+        "plain": "If you play on PC, you may have to wait a few months.",
+        "who": "GamesBeat (4 anonymous sources)"
+      },
+      {
+        "title": "The new GTA Online won't be there on the 19th, but may come soon",
+        "change": "A look at the game files found references to the online mode, and a leaker talks about a debut within a month of launch. The only sure thing: it won't be available on the 19th.",
+        "plain": "Multiplayer would arrive a few weeks after the game.",
+        "who": "Dataminers · leaker with no verified track record"
+      },
+      {
+        "title": "A collector's edition poster may reveal map locations",
+        "change": "Photos of a display at Selfridges in London show Leonida area names such as Lummox County and Goose Key. Rockstar hasn't confirmed anything.",
+        "plain": "Some new places on the map may already be known before you play.",
+        "who": "Display photos · PC Games"
+      }
     ]
-  }
+  },
+  "more": [
+    {
+      "tag": "Estudio",
+      "title": "La plantilla de Rockstar en Reino Unido vota si reconoce un sindicato",
+      "change": "Unos 1.600 trabajadores votan del 12 al 26 de noviembre si reconocen al sindicato IWGB, justo durante el lanzamiento. Si gana el sí, sería el mayor sindicato reconocido del sector en Reino Unido.",
+      "plain": "Mientras sale el juego, la gente que lo ha hecho decide si se une en un sindicato.",
+      "sources": [
+        {
+          "name": "PC Gamer",
+          "url": "https://www.pcgamer.com/games/grand-theft-auto/rockstar-will-hold-union-vote-right-on-top-of-grand-theft-auto-6-release/"
+        },
+        {
+          "name": "Insider Gaming",
+          "url": "https://insider-gaming.com/rockstar-uk-union-vote-1600-workers/"
+        }
+      ]
+    },
+    {
+      "tag": "Jugabilidad",
+      "title": "Rob Nelson: por primera vez un GTA anima a ser empático",
+      "change": "El codirector de Rockstar North explica que GTA VI incluye mecánicas que permiten jugar «como el bueno» si quieres, algo nuevo en la saga.",
+      "plain": "Podrás elegir portarte bien en muchas situaciones, no solo hacer el gamberro.",
+      "sources": [
+        {
+          "name": "Insider Gaming",
+          "url": "https://insider-gaming.com/gta-6-empathy-first-time-rockstar-history"
+        }
+      ]
+    }
+  ],
+  "rumors": [
+    {
+      "title": "Las reseñas saldrían el 18 de noviembre, un día antes",
+      "change": "NateTheHate publicó que Rockstar ya envió copias a la prensa con embargo el día 18, e Insider Gaming dice haberlo verificado por su cuenta. Rockstar no lo ha confirmado.",
+      "plain": "Puede que el miércoles 18 ya leas las primeras notas del juego.",
+      "reliability": "alta",
+      "who": "NateTheHate · Insider Gaming",
+      "sources": [
+        {
+          "name": "Insider Gaming",
+          "url": "https://insider-gaming.com/grand-theft-auto-6-review-embargo/"
+        },
+        {
+          "name": "Beebom",
+          "url": "https://beebom.com/gta-6-review-embargo-date-revealed/"
+        }
+      ]
+    },
+    {
+      "title": "La versión de PC llegaría en el primer trimestre de 2027",
+      "change": "GamesBeat, citando a cuatro fuentes anónimas del sector, apunta a enero–marzo de 2027. Take-Two no lo confirma y su previsión de ingresos no incluiría PC antes de marzo.",
+      "plain": "Si juegas en ordenador, quizá tengas que esperar unos meses.",
+      "reliability": "media",
+      "who": "GamesBeat (4 fuentes anónimas)",
+      "sources": [
+        {
+          "name": "TechSpot",
+          "url": "https://techspot.com/news/114187-gta-6-reportedly-coming-pc-q1-2027-months.html"
+        },
+        {
+          "name": "MP1st",
+          "url": "https://mp1st.com/news/rumor-gta-6-pc-release-planned-q1-2027"
+        }
+      ]
+    },
+    {
+      "title": "El nuevo GTA Online no estará el día 19, pero llegaría pronto",
+      "change": "Un análisis de archivos del juego encontró referencias al modo online, y un filtrador habla de un estreno en el mes siguiente al lanzamiento. Lo único claro: no estará disponible el 19.",
+      "plain": "El modo multijugador vendría unas semanas después del juego.",
+      "reliability": "baja",
+      "who": "Dataminers · filtrador sin historial verificado",
+      "sources": [
+        {
+          "name": "Notebookcheck",
+          "url": "https://notebookcheck.net/Leaked-GTA-6-release-date-build-hints-online-multiplayer-could-launch-soon.1445605.0.html"
+        },
+        {
+          "name": "OpenCritic",
+          "url": "https://opencritic.com/news/29064/gta-6-online-will-launch-sooner-than-expected-leaker-claims"
+        }
+      ]
+    },
+    {
+      "title": "Un póster de la edición coleccionista revelaría lugares del mapa",
+      "change": "Imágenes de un expositor en Selfridges (Londres) muestran nombres de zonas de Leonida como Lummox County o Goose Key. No hay confirmación de Rockstar.",
+      "plain": "Puede que ya se conozcan algunos sitios nuevos del mapa antes de jugar.",
+      "reliability": "media",
+      "who": "Fotos del expositor · PC Games",
+      "sources": [
+        {
+          "name": "PC Games",
+          "url": "https://www.pcgames.de/GTA-6-Spiel-55239/News/Offizielle-Karte-von-Leonida-geleakt-1560002/"
+        }
+      ]
+    }
+  ]
 }

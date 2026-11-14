@@ -43,12 +43,12 @@
   --footer-bg: #07030f;
   --page-head-bg: linear-gradient(180deg, #2a0b52, #4a1060 70%, var(--bg));
   --hero-sky: linear-gradient(180deg, #0d0626 0%, #2a0b52 38%, #6b1466 66%, #c2266f 84%, #ff7a59 100%);
-  --hero-sun-opacity: 0.55;
+  --hero-sun-opacity: 0.95;
   --hero-sea: linear-gradient(180deg, #2a0a4c, #0b0618);
   --hero-sea-line: #26f0f1;
   --palm: #07030f;
-  --hero-veil: linear-gradient(90deg, rgba(11, 6, 24, 0.85), rgba(11, 6, 24, 0.35) 55%, rgba(11, 6, 24, 0.2));
-  --hero-veil-m: linear-gradient(180deg, rgba(11, 6, 24, 0.55), rgba(11, 6, 24, 0.75) 60%, rgba(11, 6, 24, 0.5));
+  --hero-veil: linear-gradient(90deg, rgba(11, 6, 24, 0.8) 0%, rgba(11, 6, 24, 0.5) 34%, rgba(11, 6, 24, 0) 54%);
+  --hero-veil-m: linear-gradient(180deg, rgba(11, 6, 24, 0.7) 0%, rgba(11, 6, 24, 0.55) 46%, rgba(11, 6, 24, 0) 62%);
   --hero-title: #fbf6ff;
   --hero-title-shadow: 0 2px 0 rgba(0, 0, 0, 0.35), 0 0 30px rgba(255, 47, 163, 0.45);
   --hero-lead: #f0e6ff;
@@ -206,8 +206,8 @@ p { margin: 0 0 1em; }
 }
 .pill-count .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--pink); box-shadow: 0 0 0 0 rgba(255, 47, 163, 0.7); animation: pulse 2s infinite; }
 @keyframes pulse { 70% { box-shadow: 0 0 0 8px rgba(255, 47, 163, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 47, 163, 0); } }
-@media (min-width: 860px) { .nav { order: 0; width: auto; } }
-@media (max-width: 859px) {
+@media (min-width: 1140px) { .nav { order: 0; width: auto; } }
+@media (max-width: 1139px) {
   .site-header { position: static; }
   .site-header__inner { gap: 6px 12px; padding-top: 10px; padding-bottom: 6px; }
   .brand .mark { width: 38px; height: 38px; }
@@ -227,7 +227,7 @@ p { margin: 0 0 1em; }
 .hero__sun {
   position: absolute; left: 50%; bottom: 16%; width: min(78vw, 560px); aspect-ratio: 1; transform: translateX(-50%);
   border-radius: 50%;
-  background: linear-gradient(180deg, var(--yellow) 0%, var(--orange) 38%, var(--pink) 72%, var(--purple) 100%);
+  background: linear-gradient(180deg, #ffe873 0%, #ffb03b 30%, #ff5f7a 58%, #ff2fa3 78%, #b026ff 100%);
   -webkit-mask: linear-gradient(#000 0 52%, transparent 52% 55%, #000 55% 62%, transparent 62% 66%, #000 66% 72%, transparent 72% 77%, #000 77% 82%, transparent 82% 88%, #000 88%);
           mask: linear-gradient(#000 0 52%, transparent 52% 55%, #000 55% 62%, transparent 62% 66%, #000 66% 72%, transparent 72% 77%, #000 77% 82%, transparent 82% 88%, #000 88%);
   opacity: var(--hero-sun-opacity); filter: blur(0.3px);
@@ -470,7 +470,7 @@ html[data-reader="nuevos"] .aud[data-aud="fans"] { display: none; }
 .theme-toggle .i-sun { display: none; }
 :root[data-theme-now="dark"] .theme-toggle .i-sun { display: block; }
 :root[data-theme-now="dark"] .theme-toggle .i-moon { display: none; }
-@media (max-width: 859px) {
+@media (max-width: 1139px) {
   .site-header__inner { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; grid-template-areas: "brand pill theme" "nav nav nav"; align-items: center; }
   .brand { grid-area: brand; min-width: 0; }
   .pill-count { grid-area: pill; }
@@ -482,7 +482,7 @@ html[data-reader="nuevos"] .aud[data-aud="fans"] { display: none; }
   .brand .mark { width: 32px; height: 32px; }
   .brand__name { font-size: 1.15rem; }
 }
-@media (max-width: 339px) { .pill-count { display: none; } }
+
 
 /* ---------- selector de idioma ---------- */
 .lang { display: inline-flex; align-items: center; gap: 2px; padding: 3px 4px 3px 9px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line-2); color: var(--muted); }
@@ -494,9 +494,79 @@ html[data-reader="nuevos"] .aud[data-aud="fans"] { display: none; }
 .lang-hint__inner { display: flex; align-items: center; gap: 10px 14px; flex-wrap: wrap; padding-top: 9px; padding-bottom: 9px; }
 .lang-hint a { font-weight: 800; color: var(--pink-ink); text-decoration: none; }
 .lang-hint button { margin-left: auto; background: none; border: 0; color: var(--muted); font-size: 1.4rem; line-height: 1; cursor: pointer; padding: 0 4px; }
-@media (max-width: 859px) {
+@media (max-width: 1139px) {
   .site-header__inner { grid-template-columns: minmax(0, 1fr) auto auto; grid-template-areas: "brand pill theme" "nav nav lang"; }
   .lang { grid-area: lang; }
   .lang svg { display: none; }
   .lang { padding: 3px; }
 }
+
+
+/* ---------- toques Miami Vice ---------- */
+.block__head h2 {
+  background:
+    linear-gradient(var(--pink), var(--pink)) left calc(100% - 5px) / 72px 3px no-repeat,
+    linear-gradient(var(--cyan), var(--cyan)) 14px 100% / 72px 3px no-repeat;
+  padding-bottom: 12px;
+}
+.eyebrow { display: inline-block; padding: 5px 12px; border-radius: 999px; border: 1px solid rgba(38, 240, 241, 0.45); background: rgba(11, 6, 24, 0.35); }
+:root[data-theme-now="light"] .eyebrow { background: rgba(255, 255, 255, 0.6); }
+.hero__title { letter-spacing: 0.015em; }
+
+/* ---------- accesos rápidos a secciones ---------- */
+.jumps { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 26px; }
+.jumps a {
+  font-size: 0.82rem; font-weight: 700; text-decoration: none; color: var(--text); padding: 7px 13px; border-radius: 999px;
+  background: var(--surface); border: 1px solid var(--line-2); transition: border-color 0.2s, box-shadow 0.2s, color 0.2s;
+}
+.jumps a:hover { border-color: var(--pink); box-shadow: 0 0 14px rgba(255, 47, 163, 0.3); color: var(--text); }
+.jumps a:first-child { border-color: rgba(255, 47, 163, 0.6); }
+
+/* ---------- más noticias y rumores ---------- */
+.briefs-grid { display: grid; gap: 14px; }
+@media (min-width: 640px) { .briefs-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.mini-story {
+  display: flex; flex-direction: column; min-width: 0; background: var(--card-bg); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 16px;
+  border-top: 3px solid var(--cyan);
+}
+.mini-story .story__title { font-size: 1.06rem; }
+.mini-story .story__text { font-size: 0.95rem; flex: 1; }
+.rumor { border-top-color: var(--orange); background: linear-gradient(180deg, rgba(255, 154, 60, 0.08), transparent 40%), var(--card-bg); }
+.rumor-note { border-left: 3px solid var(--orange); padding: 8px 12px; border-radius: 0 10px 10px 0; background: rgba(255, 154, 60, 0.08); color: var(--text-soft); }
+.tag--rumor { background: rgba(255, 154, 60, 0.14); color: var(--orange-ink); border-color: rgba(255, 154, 60, 0.45); }
+.rel { display: inline-flex; align-items: center; gap: 6px; font-size: 0.72rem; font-weight: 700; color: var(--muted); }
+.rel__bars { display: inline-flex; gap: 2px; align-items: flex-end; }
+.rel__bars i { width: 4px; border-radius: 2px; background: var(--line-2); }
+.rel__bars i:nth-child(1) { height: 6px; } .rel__bars i:nth-child(2) { height: 9px; } .rel__bars i:nth-child(3) { height: 12px; }
+.rumor--alta .rel__bars i.on { background: #2bd47d; }
+.rumor--media .rel__bars i.on { background: var(--orange); }
+.rumor--baja .rel__bars i.on { background: var(--pink); }
+.rumor__who { color: var(--muted); margin-bottom: 10px; }
+.rumor__who strong { color: var(--text-soft); }
+
+/* ---------- móviles muy estrechos ---------- */
+@media (max-width: 400px) {
+  .nav { margin: 0 -4px; }
+  .nav a { padding: 6px 8px; font-size: 0.86rem; }
+  .lang a { padding: 4px 7px; font-size: 0.74rem; }
+  .jumps a { padding: 6px 11px; font-size: 0.78rem; }
+}
+
+@media (max-width: 359px) {
+  .site-header__inner { grid-template-areas: "brand lang theme" "nav nav nav"; }
+  .pill-count { display: none; }
+}
+
+/* Sol: a la derecha en escritorio (detrás del contador) y abajo en móvil, fuera del oscurecido del texto */
+@media (min-width: 960px) {
+  .hero__sun { left: 73%; width: min(38vw, 520px); bottom: 16%; }
+}
+@media (max-width: 959px) {
+  .hero__sun { width: min(66vw, 420px); bottom: 12%; }
+}
+@media (max-width: 639px) {
+  .eyebrow { display: block; padding: 0; border: 0; background: none; }
+  :root[data-theme-now="light"] .eyebrow { background: none; }
+}
+.mini-story .story__title { text-wrap: pretty; }
+@media (max-width: 400px) { .eyebrow__extra { display: none; } }

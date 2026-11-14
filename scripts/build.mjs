@@ -59,6 +59,13 @@ const validate = (b, where) => {
     if (!s.sources?.length) fail(`${where}: historia ${i + 1} sin fuente (regla: nada sin fuente)`);
     s.sources.forEach((src) => /^https?:\/\//.test(src.url) || fail(`${where}: URL inválida ${src.url}`));
   });
+  for (const [k, list] of [["more", b.more || []], ["rumors", b.rumors || []]]) {
+    list.forEach((s, i) => {
+      if (!s.title || !s.change) fail(`${where}: ${k} ${i + 1} sin title/change`);
+      if (!s.sources?.length) fail(`${where}: ${k} ${i + 1} sin fuente (regla: nada sin fuente con nombre)`);
+      if (k === "rumors" && !["alta", "media", "baja"].includes(s.reliability)) fail(`${where}: rumor ${i + 1} sin reliability (alta|media|baja)`);
+    });
+  }
 };
 
 // Versión de un resumen en un idioma: español = campos principales; otro idioma = bloque `<código>`
@@ -75,6 +82,8 @@ const localize = (b, code) => {
     stories: b.stories.map((s, i) => ({ ...s, ...(tr.stories?.[i] || {}), sources: s.sources })),
     posts: tr.posts || [],
     context: (b.context || []).map((c, i) => ({ ...c, ...(tr.context?.[i] || {}), sources: c.sources, date: c.date })),
+    more: (b.more || []).map((s, i) => ({ ...s, ...(tr.more?.[i] || {}), sources: s.sources })),
+    rumors: (b.rumors || []).map((s, i) => ({ ...s, ...(tr.rumors?.[i] || {}), sources: s.sources, reliability: s.reliability })),
   };
   if (tr.stories && tr.stories.length !== b.stories.length) fail(`content/briefs/${b.date}.json: «${code}.stories» no tiene las mismas historias`);
   return out;
@@ -330,6 +339,57 @@ const briefBody = (L, b) => {
     )
     .join("");
 
+  const moreHtml = (b.more || []).length
+    ? `
+      <section class="block" aria-labelledby="more">
+        <div class="block__head"><h2 id="more">${esc(L.t.moreTitle)}</h2></div>
+        <p class="muted small">${esc(L.t.moreIntro)}</p>
+        <div class="briefs-grid">${b.more
+          .map(
+            (s) => `
+          <article class="mini-story">
+            <div class="story__meta"><span class="tag">${esc(s.tag || L.t.news)}</span></div>
+            <h3 class="story__title">${esc(s.title)}</h3>
+            <p class="story__text aud" data-aud="fans">${esc(s.change)}</p>
+            <p class="story__text aud" data-aud="nuevos">${esc(s.plain || s.change)}</p>
+            ${sourcesHtml(L, s.sources)}
+          </article>`
+          )
+          .join("")}</div>
+      </section>`
+    : "";
+
+  const relLevel = { alta: 3, media: 2, baja: 1 };
+  const rumorsHtml = (b.rumors || []).length
+    ? `
+      <section class="block" aria-labelledby="rumors">
+        <div class="block__head"><h2 id="rumors">${esc(L.t.rumorsTitle)}</h2></div>
+        <p class="rumor-note small">${esc(L.t.rumorsIntro)}</p>
+        <div class="briefs-grid">${b.rumors
+          .map(
+            (s) => `
+          <article class="mini-story rumor rumor--${s.reliability}">
+            <div class="story__meta"><span class="tag tag--rumor">${esc(L.t.rumor)}</span>
+              <span class="rel" title="${esc(L.t.reliability[s.reliability])}"><span class="rel__bars" aria-hidden="true">${[1, 2, 3].map((n) => `<i${n <= relLevel[s.reliability] ? ' class="on"' : ""}></i>`).join("")}</span>${esc(L.t.reliability[s.reliability])}</span></div>
+            <h3 class="story__title">${esc(s.title)}</h3>
+            <p class="story__text aud" data-aud="fans">${esc(s.change)}</p>
+            <p class="story__text aud" data-aud="nuevos">${esc(s.plain || s.change)}</p>
+            ${s.who ? `<p class="rumor__who small"><strong>${esc(L.t.who)}</strong> ${esc(s.who)}</p>` : ""}
+            ${sourcesHtml(L, s.sources)}
+          </article>`
+          )
+          .join("")}</div>
+      </section>`
+    : "";
+
+  const jumps = [
+    ["top5", L.t.jumpTop],
+    ...((b.more || []).length ? [["more", L.t.moreTitle]] : []),
+    ...((b.rumors || []).length ? [["rumors", L.t.rumorsTitle]] : []),
+    ...((b.posts || []).length ? [["posts", L.t.postsTitle]] : []),
+    ...((b.context || []).length ? [["ctx", L.t.ctxTitle]] : []),
+  ];
+
   const posts = (b.posts || [])
     .map(
       (p, i) => `
@@ -372,7 +432,7 @@ const briefBody = (L, b) => {
     <div class="hero__sky" aria-hidden="true"><div class="hero__sun"></div><div class="hero__sea"></div>${palmSvg("hero__palm--l")}${palmSvg("hero__palm--r")}<div class="hero__veil"></div></div>
     <div class="wrap hero__inner">
       <div class="hero__copy">
-        <p class="eyebrow"><time datetime="${b.date}">${esc(fmtDate(L, b.date))}</time> · ${esc(L.t.morning)}</p>
+        <p class="eyebrow"><time datetime="${b.date}">${esc(fmtDate(L, b.date))}</time><span class="eyebrow__extra"> · ${esc(L.t.morning)}</span></p>
         <h1 class="hero__title">${esc(b.title)}</h1>
         <p class="hero__lead">${esc(b.lead || b.summary)}</p>
         <div class="hero__actions">
@@ -389,6 +449,7 @@ const briefBody = (L, b) => {
 
   <div class="wrap layout">
     <div class="col-main">
+      <nav class="jumps" aria-label="${esc(L.t.jumpsLabel)}">${jumps.map(([id, label]) => `<a href="#${id}">${esc(label)}</a>`).join("")}</nav>
       <section class="block" aria-labelledby="top5">
         <div class="block__head">
           <h2 id="top5">${esc(L.t.top5)}</h2>
@@ -403,7 +464,7 @@ const briefBody = (L, b) => {
         <p class="rules muted small"><span class="aud" data-aud="fans">${esc(L.t.showingFans)}</span><span class="aud" data-aud="nuevos">${esc(L.t.showingNew)}</span> ${esc(L.t.rules)}</p>
         <div class="stories">${stories}</div>
       </section>
-
+${moreHtml}${rumorsHtml}
       ${
         posts
           ? `<section class="block" aria-labelledby="posts">

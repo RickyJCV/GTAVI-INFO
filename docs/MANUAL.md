@@ -48,3 +48,9 @@ Una tarea programada de Claude se ejecuta cada mañana: busca las noticias de GT
 - La guía en inglés está en `content/guide.en.json` (misma estructura que `content/guide.json`).
 - Textos de la interfaz: `scripts/i18n.mjs`. Para añadir otro idioma basta con otro bloque ahí, su guía y su bloque en cada resumen.
 - La tarea diaria escribe los dos idiomas en el mismo paso.
+
+## Más noticias y rumores
+
+- `more` (opcional): noticias extra del día, mismo formato que `stories` (`tag`, `title`, `change`, `plain`, `sources`).
+- `rumors` (opcional): solo los rumores más comentados y siempre con fuente con nombre. Cada uno lleva `title`, `change`, `plain`, `sources`, `who` (quién lo dice) y `reliability`: `alta` (insider con buen historial y verificado por un medio), `media` (medio fiable con fuentes anónimas) o `baja` (filtrador sin historial o dataminers).
+- En el bloque `en`, `more` y `rumors` van en el mismo orden con `title`, `change`, `plain` (y `tag` / `who`).

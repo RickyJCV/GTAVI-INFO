@@ -46,7 +46,7 @@ export const LOCALES = {
       nuevos: "🌴 Soy nuevo",
       showingFans: "Mostrando el detalle para fans.",
       showingNew: "Mostrando la explicación sencilla.",
-      rules: "Solo historias de las últimas 24 horas · nada de rumores sin fuente con nombre · enlace bajo cada noticia.",
+      rules: "Solo historias de las últimas 24 horas · los rumores van aparte y siempre con fuente con nombre · enlace bajo cada noticia.",
       news: "Noticia",
       biggest: "La más grande",
       whatChanged: "Qué cambió:",
@@ -57,6 +57,15 @@ export const LOCALES = {
       chars: "caracteres",
       copy: "Copiar",
       copied: "¡Copiado!",
+      moreTitle: "Más noticias",
+      moreIntro: "Otras historias del día que también conviene conocer.",
+      rumorsTitle: "Rumores fiables",
+      rumorsIntro: "Lo más comentado que aún no está confirmado. Solo con fuente con nombre y con su nivel de fiabilidad: tómalo con pinzas.",
+      rumor: "Rumor",
+      reliability: { alta: "Fiabilidad alta", media: "Fiabilidad media", baja: "Fiabilidad baja" },
+      who: "Quién lo dice:",
+      jumpTop: "Las 5 de hoy",
+      jumpsLabel: "Secciones",
       ctxTitle: "Contexto de la semana",
       ctxIntro: "Noticias de días anteriores que siguen marcando la conversación.",
       otherDays: "Otros días",
@@ -91,7 +100,7 @@ export const LOCALES = {
     <h2>Nuestras normas</h2>
     <ul>
       <li><strong>Últimas 24 horas.</strong> El resumen del día solo incluye historias recientes. Lo anterior va en «Contexto de la semana», con su fecha.</li>
-      <li><strong>Nada de rumores sin fuente con nombre.</strong> Si nadie identificable lo publica, no sale aquí.</li>
+      <li><strong>Los rumores, aparte y etiquetados.</strong> Solo los más comentados, con quién lo dice y su nivel de fiabilidad. Si nadie identificable lo publica, no sale aquí.</li>
       <li><strong>Enlace bajo cada historia.</strong> Siempre puedes leer el original.</li>
       <li><strong>Las estimaciones se marcan como estimaciones.</strong> Las cifras de terceros nunca se presentan como oficiales.</li>
     </ul>
@@ -167,7 +176,7 @@ export const LOCALES = {
       nuevos: "🌴 I'm new here",
       showingFans: "Showing the detail for fans.",
       showingNew: "Showing the simple explanation.",
-      rules: "Only stories from the last 24 hours · no rumors without a named source · a link under every story.",
+      rules: "Only stories from the last 24 hours · rumors go in their own section, always with a named source · a link under every story.",
       news: "News",
       biggest: "Biggest story",
       whatChanged: "What changed:",
@@ -178,6 +187,15 @@ export const LOCALES = {
       chars: "characters",
       copy: "Copy",
       copied: "Copied!",
+      moreTitle: "More news",
+      moreIntro: "Other stories from today that are worth knowing.",
+      rumorsTitle: "Reliable rumors",
+      rumorsIntro: "The most talked-about things that aren't confirmed yet. Only with a named source and a reliability rating — take them with a pinch of salt.",
+      rumor: "Rumor",
+      reliability: { alta: "High reliability", media: "Medium reliability", baja: "Low reliability" },
+      who: "Who says it:",
+      jumpTop: "Today's 5",
+      jumpsLabel: "Sections",
       ctxTitle: "This week's context",
       ctxIntro: "Stories from earlier days that are still driving the conversation.",
       otherDays: "Other days",
@@ -212,7 +230,7 @@ export const LOCALES = {
     <h2>Our standards</h2>
     <ul>
       <li><strong>Last 24 hours.</strong> The daily briefing only includes recent stories. Older ones go in "This week's context", with their date.</li>
-      <li><strong>No rumors without a named source.</strong> If nobody identifiable publishes it, it doesn't appear here.</li>
+      <li><strong>Rumors kept separate and labeled.</strong> Only the most talked-about ones, with who says it and how reliable it is. If nobody identifiable publishes it, it doesn't appear here.</li>
       <li><strong>A link under every story.</strong> You can always read the original.</li>
       <li><strong>Estimates are labeled as estimates.</strong> Third-party figures are never presented as official.</li>
     </ul>
