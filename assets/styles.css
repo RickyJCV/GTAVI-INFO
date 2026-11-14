@@ -483,3 +483,20 @@ html[data-reader="nuevos"] .aud[data-aud="fans"] { display: none; }
   .brand__name { font-size: 1.15rem; }
 }
 @media (max-width: 339px) { .pill-count { display: none; } }
+
+/* ---------- selector de idioma ---------- */
+.lang { display: inline-flex; align-items: center; gap: 2px; padding: 3px 4px 3px 9px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line-2); color: var(--muted); }
+.lang svg { width: 15px; height: 15px; margin-right: 3px; }
+.lang a { font-size: 0.78rem; font-weight: 800; letter-spacing: 0.06em; text-decoration: none; color: var(--muted); padding: 5px 8px; border-radius: 999px; transition: color 0.2s, background 0.2s; }
+.lang a:hover { color: var(--text); }
+.lang a[aria-current="true"] { background: var(--sunset); color: #1a0730; }
+.lang-hint { background: linear-gradient(90deg, rgba(255, 47, 163, 0.18), rgba(38, 240, 241, 0.14)); border-bottom: 1px solid var(--line-2); font-size: 0.9rem; }
+.lang-hint__inner { display: flex; align-items: center; gap: 10px 14px; flex-wrap: wrap; padding-top: 9px; padding-bottom: 9px; }
+.lang-hint a { font-weight: 800; color: var(--pink-ink); text-decoration: none; }
+.lang-hint button { margin-left: auto; background: none; border: 0; color: var(--muted); font-size: 1.4rem; line-height: 1; cursor: pointer; padding: 0 4px; }
+@media (max-width: 859px) {
+  .site-header__inner { grid-template-columns: minmax(0, 1fr) auto auto; grid-template-areas: "brand pill theme" "nav nav lang"; }
+  .lang { grid-area: lang; }
+  .lang svg { display: none; }
+  .lang { padding: 3px; }
+}

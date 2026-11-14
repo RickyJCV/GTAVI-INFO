@@ -40,3 +40,11 @@ Una tarea programada de Claude se ejecuta cada mañana: busca las noticias de GT
 - [ ] Esperar la aprobación de AdSense y activar «Anuncios automáticos».
 - [ ] Search Console: añadir la propiedad `https://leonidahoy.github.io/` (etiqueta HTML, el código ya está en la web) y enviar `sitemap.xml`.
 - [ ] AdSense: añadir el sitio `leonidahoy.github.io` en «Sitios» y solicitar revisión.
+
+## Inglés
+
+- La web se publica en español (`/`) y en inglés (`/en/`), enlazadas entre sí con `hreflang` para que Google muestre a cada visitante su idioma.
+- Cada resumen diario lleva un bloque `"en"` con la traducción de `title`, `summary`, `lead`, `stories` (mismo número y orden: `tag`, `title`, `change`, `plain`), `posts` y `context` (`title`, `text`). Las fuentes y fechas no se repiten: se toman del original.
+- La guía en inglés está en `content/guide.en.json` (misma estructura que `content/guide.json`).
+- Textos de la interfaz: `scripts/i18n.mjs`. Para añadir otro idioma basta con otro bloque ahí, su guía y su bloque en cada resumen.
+- La tarea diaria escribe los dos idiomas en el mismo paso.

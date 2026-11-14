@@ -31,7 +31,7 @@
       var diff = new Date(el.getAttribute("data-countdown-mini")).getTime() - now;
       var t = el.querySelector("[data-mini]");
       var pre = el.querySelector("[data-mini-pre]");
-      if (diff <= 0) { if (pre) pre.textContent = "GTA VI ·"; t.textContent = "¡Ya disponible!"; return; }
+      if (diff <= 0) { if (pre) pre.textContent = "GTA VI ·"; t.textContent = el.getAttribute("data-done") || "✓"; return; }
       var s = Math.floor(diff / 1000);
       t.textContent = Math.floor(s / 86400) + "d " + pad(Math.floor((s % 86400) / 3600)) + "h " + pad(Math.floor((s % 3600) / 60)) + "m";
     });
@@ -51,7 +51,7 @@
     var now = effectiveTheme();
     root.setAttribute("data-theme-now", now);
     if (themeMeta) themeMeta.setAttribute("content", now === "light" ? "#fff6fb" : "#0b0618");
-    themeBtns.forEach(function (b) { b.setAttribute("aria-label", now === "dark" ? "Cambiar a modo claro" : "Cambiar a modo oscuro"); });
+    themeBtns.forEach(function (b) { var l = b.getAttribute(now === "dark" ? "data-to-light" : "data-to-dark"); if (l) b.setAttribute("aria-label", l); });
   }
   themeBtns.forEach(function (b) {
     b.addEventListener("click", function () {
@@ -86,9 +86,10 @@
       if (!src) return;
       var text = src.textContent.trim();
       var label = btn.querySelector("span");
+      var original = label ? label.textContent : "";
       var done = function () {
-        btn.classList.add("is-done"); if (label) label.textContent = "¡Copiado!";
-        setTimeout(function () { btn.classList.remove("is-done"); if (label) label.textContent = "Copiar"; }, 1800);
+        btn.classList.add("is-done"); if (label) label.textContent = btn.getAttribute("data-copied") || "✓";
+        setTimeout(function () { btn.classList.remove("is-done"); if (label) label.textContent = original; }, 1800);
       };
       var settled = false;
       var finish = function (okFn) { if (!settled) { settled = true; okFn(); } };
@@ -113,6 +114,22 @@
       navigator.share({ title: btn.getAttribute("data-title"), url: btn.getAttribute("data-url") }).catch(function () {});
     });
   });
+
+  // Idioma: recordar la elección y sugerir el otro idioma si el navegador lo prefiere
+  document.querySelectorAll("a[data-lang]").forEach(function (a) {
+    a.addEventListener("click", function () { store.set("lh-lang", a.getAttribute("data-lang")); });
+  });
+  var hint = document.querySelector("[data-lang-hint]");
+  if (hint) {
+    var target = hint.getAttribute("data-lang-hint");
+    var pageLang = document.documentElement.lang;
+    var pref = store.get("lh-lang");
+    var nav = (navigator.languages && navigator.languages[0]) || navigator.language || "";
+    var wants = pref ? pref === target : nav.slice(0, 2).toLowerCase() === target;
+    if (wants && pref !== pageLang && store.get("lh-hint-off") !== "1") hint.hidden = false;
+    var close = hint.querySelector("[data-lang-hint-close]");
+    if (close) close.addEventListener("click", function () { hint.hidden = true; store.set("lh-hint-off", "1"); });
+  }
 
   // Botón «volver arriba»
   var top = document.querySelector("[data-to-top]");

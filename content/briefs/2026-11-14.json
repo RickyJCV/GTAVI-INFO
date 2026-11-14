@@ -10,8 +10,14 @@
       "change": "Rockstar publicó el 13 de noviembre la primera actualización: unos 1,07 GB en PS5 y 2,18 GB en Xbox Series. Es obligatoria para jugar el día 19 y no tiene notas del parche. Se desplegó por fases y a las 23:00 UTC ya estaba para todos.",
       "plain": "Antes de jugar tendrás que descargar una pequeña actualización. Si ya precargaste el juego, enciende la consola y déjala bajando.",
       "sources": [
-        { "name": "tbreak", "url": "https://tbreak.com/gta-6-update-1-002-000/" },
-        { "name": "ComicBook.com", "url": "https://comicbook.com/gaming/news/gta-6-update-patch-notes-1002000/" }
+        {
+          "name": "tbreak",
+          "url": "https://tbreak.com/gta-6-update-1-002-000/"
+        },
+        {
+          "name": "ComicBook.com",
+          "url": "https://comicbook.com/gaming/news/gta-6-update-patch-notes-1002000/"
+        }
       ]
     },
     {
@@ -20,8 +26,14 @@
       "change": "Arranca el 19 de noviembre a las 00:00 hora del Este de EE. UU. (06:00 en España peninsular), con un pre-show de RDCWorld la noche anterior. Más de 30 creadores jugarán en directo y el cierre será desde Miami.",
       "plain": "Si aún no tienes el juego, podrás verlo en directo gratis en YouTube durante todo el día de lanzamiento.",
       "sources": [
-        { "name": "KeenGamer", "url": "https://www.keengamer.com/articles/news/gta-6-announces-24-hour-youtube-livestream-event-for-launch-day/" },
-        { "name": "Notebookcheck", "url": "https://www.notebookcheck.net/YouTube-to-host-24-hour-GTA-6-release-date-livestream-with-launch-day-gameplay.1449040.0.html" }
+        {
+          "name": "KeenGamer",
+          "url": "https://www.keengamer.com/articles/news/gta-6-announces-24-hour-youtube-livestream-event-for-launch-day/"
+        },
+        {
+          "name": "Notebookcheck",
+          "url": "https://www.notebookcheck.net/YouTube-to-host-24-hour-GTA-6-release-date-livestream-with-launch-day-gameplay.1449040.0.html"
+        }
       ]
     },
     {
@@ -30,7 +42,10 @@
       "change": "Según Kotaku, la versión japonesa pesa unos 1,2 GB menos y la de Australia y Nueva Zelanda no incluye un archivo de unos 704 KB. Hay miedo a censura, pero Rockstar no ha confirmado ningún recorte.",
       "plain": "En algunos países el juego ocupa un poco menos. Nadie sabe aún si falta contenido; de momento solo hay sospechas.",
       "sources": [
-        { "name": "Kotaku", "url": "https://kotaku.com/gta-6-smaller-in-australia-japan-censorship-concerns-rockstar-2000755882" }
+        {
+          "name": "Kotaku",
+          "url": "https://kotaku.com/gta-6-smaller-in-australia-japan-censorship-concerns-rockstar-2000755882"
+        }
       ]
     },
     {
@@ -39,7 +54,10 @@
       "change": "VideoCardz recoge que en ciertas ediciones físicas (que son un código dentro de una caja) el código de descarga se puede leer sin abrirla. Las pruebas con copias de EE. UU. y Reino Unido fallaron; algunas europeas podrían no estar igual de protegidas.",
       "plain": "Si compras la edición en caja, hazlo en una tienda de confianza y comprueba que el código funciona nada más abrirla.",
       "sources": [
-        { "name": "VideoCardz", "url": "https://videocardz.com/newz/some-gta-6-physical-copies-may-expose-download-codes-without-opening-the-box-fans-discover-flashlight-trick" }
+        {
+          "name": "VideoCardz",
+          "url": "https://videocardz.com/newz/some-gta-6-physical-copies-may-expose-download-codes-without-opening-the-box-fans-discover-flashlight-trick"
+        }
       ]
     },
     {
@@ -48,7 +66,10 @@
       "change": "CNBC analiza cómo el lanzamiento del día 19 podría disparar los pedidos de comida a domicilio, los días de vacaciones pedidos y hasta el turismo en Miami.",
       "plain": "El juego es tan grande que hasta los economistas esperan que mucha gente se quede en casa esa semana.",
       "sources": [
-        { "name": "CNBC", "url": "https://www.cnbc.com/2026/11/14/gta-6-grand-theft-auto-launch.html" }
+        {
+          "name": "CNBC",
+          "url": "https://www.cnbc.com/2026/11/14/gta-6-grand-theft-auto-launch.html"
+        }
       ]
     }
   ],
@@ -64,7 +85,10 @@
       "text": "The Washington Post, citando a Sensor Tower, habla de más de 10 millones de reservas en PS5 y Xbox. Es una estimación externa, no una cifra oficial.",
       "date": "2026-11-11",
       "sources": [
-        { "name": "The Washington Post", "url": "https://www.washingtonpost.com/entertainment/video-games/2026/11/11/grand-theft-auto-vi-reportedly-passes-1b-sales-week-before-release/" }
+        {
+          "name": "The Washington Post",
+          "url": "https://www.washingtonpost.com/entertainment/video-games/2026/11/11/grand-theft-auto-vi-reportedly-passes-1b-sales-week-before-release/"
+        }
       ]
     },
     {
@@ -72,7 +96,10 @@
       "text": "Strauss Zelnick lo dijo en la presentación de resultados, sin dar cifras. La previsión anual se mantiene en 8.000–8.200 millones de dólares.",
       "date": "2026-11-10",
       "sources": [
-        { "name": "GamesHub", "url": "https://www.gameshub.com/news/article/gta-6-pre-orders-zelnick-earnings-call-2929876/" }
+        {
+          "name": "GamesHub",
+          "url": "https://www.gameshub.com/news/article/gta-6-pre-orders-zelnick-earnings-call-2929876/"
+        }
       ]
     },
     {
@@ -80,8 +107,67 @@
       "text": "Rockstar y PlayStation montan un festival en Mana Wynwood con Travis Scott, Cardi B, Metro Boomin y Justice. Entradas por sorteo.",
       "date": "2026-11-09",
       "sources": [
-        { "name": "The FADER", "url": "https://www.thefader.com/2026/11/09/gta-vi-festival-miami-lineup-tickets" }
+        {
+          "name": "The FADER",
+          "url": "https://www.thefader.com/2026/11/09/gta-vi-festival-miami-lineup-tickets"
+        }
       ]
     }
-  ]
+  ],
+  "en": {
+    "title": "GTA VI gets its first mandatory patch five days before launch",
+    "summary": "Mandatory patch 1.002.000, a 24-hour YouTube marathon, lighter versions in Japan and Australia, codes visible through some boxes and the GTA VI effect on the economy.",
+    "lead": "Five days to go. Rockstar has made its move with a patch everyone will need to download, and YouTube is preparing the biggest video game launch night in its history.",
+    "stories": [
+      {
+        "tag": "Update",
+        "title": "Patch 1.002.000 is here and it's mandatory",
+        "change": "Rockstar released the first update on November 13: about 1.07 GB on PS5 and 2.18 GB on Xbox Series. It's required to play on the 19th and has no patch notes. It rolled out in stages and reached everyone by 23:00 UTC.",
+        "plain": "You'll need to download a small update before you can play. If you already preloaded the game, switch your console on and let it download."
+      },
+      {
+        "tag": "Event",
+        "title": "YouTube will stream 24 straight hours of GTA VI on launch day",
+        "change": "It starts November 19 at 12:00 a.m. ET (6:00 a.m. in Spain), with an RDCWorld pre-show the night before. More than 30 creators will play live and it wraps up from Miami.",
+        "plain": "If you don't have the game yet, you can watch it live for free on YouTube all launch day."
+      },
+      {
+        "tag": "Controversy",
+        "title": "The preload is smaller in Japan and Australia",
+        "change": "According to Kotaku, the Japanese version is about 1.2 GB smaller and the Australia and New Zealand version is missing a file of roughly 704 KB. People fear censorship, but Rockstar hasn't confirmed any cuts.",
+        "plain": "In some countries the game takes up a bit less space. Nobody knows yet if content is missing; so far it's just suspicion."
+      },
+      {
+        "tag": "Heads-up",
+        "title": "Some physical boxes reveal the code with a flashlight",
+        "change": "VideoCardz reports that on certain physical editions (which are a code in a box) the download code can be read without opening it. Tests on US and UK copies failed; some European ones may be less protected.",
+        "plain": "If you buy the boxed edition, get it from a store you trust and check the code works as soon as you open it."
+      },
+      {
+        "tag": "Impact",
+        "title": "CNBC: GTA VI may show up in food delivery, tourism and time off",
+        "change": "CNBC looks at how the launch on the 19th could boost food delivery orders, vacation days taken and even tourism in Miami.",
+        "plain": "The game is so big that even economists expect lots of people to stay home that week."
+      }
+    ],
+    "posts": [
+      "GTA VI just got its first patch: about 1 GB on PS5 and 2 GB on Xbox. It's mandatory. Download it before the 19th and jump straight in. 🎮",
+      "Preloaded GTA VI? Check your console: update 1.002.000 is waiting. Without it you can't play on November 19. It only takes a few minutes. ✅",
+      "Rockstar dropped a GTA VI patch without saying what it changes. The only sure thing: it's mandatory and out for everyone now. Leave your console on tonight. 🌴"
+    ],
+    "context": [
+      {
+        "title": "Preorders pass $1 billion (estimate)",
+        "text": "The Washington Post, citing Sensor Tower, reports more than 10 million preorders on PS5 and Xbox. It's an outside estimate, not an official figure."
+      },
+      {
+        "title": "Take-Two: preorders are running \"far above\" expectations",
+        "text": "Strauss Zelnick said so on the earnings call without giving numbers. The full-year outlook stays at $8.0–8.2 billion."
+      },
+      {
+        "title": "GTA VI: The Festival, November 21 in Miami",
+        "text": "Rockstar and PlayStation are throwing a festival at Mana Wynwood with Travis Scott, Cardi B, Metro Boomin and Justice. Tickets by lottery."
+      }
+    ]
+  }
 }
