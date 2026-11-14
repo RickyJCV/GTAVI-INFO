@@ -30,12 +30,40 @@
     minis.forEach(function (el) {
       var diff = new Date(el.getAttribute("data-countdown-mini")).getTime() - now;
       var t = el.querySelector("[data-mini]");
-      if (diff <= 0) { t.textContent = "GTA VI · ¡Ya disponible!"; return; }
+      var pre = el.querySelector("[data-mini-pre]");
+      if (diff <= 0) { if (pre) pre.textContent = "GTA VI ·"; t.textContent = "¡Ya disponible!"; return; }
       var s = Math.floor(diff / 1000);
-      t.textContent = "GTA VI en " + Math.floor(s / 86400) + "d " + pad(Math.floor((s % 86400) / 3600)) + "h " + pad(Math.floor((s % 3600) / 60)) + "m";
+      t.textContent = Math.floor(s / 86400) + "d " + pad(Math.floor((s % 86400) / 3600)) + "h " + pad(Math.floor((s % 3600) / 60)) + "m";
     });
   }
   if (boxes.length || minis.length) { tick(); setInterval(tick, 1000); }
+
+  // Modo claro / oscuro (por defecto sigue al sistema; la elección se recuerda)
+  var root = document.documentElement;
+  var mq = window.matchMedia ? window.matchMedia("(prefers-color-scheme: light)") : null;
+  var themeBtns = document.querySelectorAll("[data-theme-toggle]");
+  var themeMeta = document.querySelector("[data-theme-color]");
+  function effectiveTheme() {
+    var t = root.getAttribute("data-theme");
+    return t === "light" || t === "dark" ? t : (mq && mq.matches ? "light" : "dark");
+  }
+  function syncTheme() {
+    var now = effectiveTheme();
+    root.setAttribute("data-theme-now", now);
+    if (themeMeta) themeMeta.setAttribute("content", now === "light" ? "#fff6fb" : "#0b0618");
+    themeBtns.forEach(function (b) { b.setAttribute("aria-label", now === "dark" ? "Cambiar a modo claro" : "Cambiar a modo oscuro"); });
+  }
+  themeBtns.forEach(function (b) {
+    b.addEventListener("click", function () {
+      var next = effectiveTheme() === "dark" ? "light" : "dark";
+      root.setAttribute("data-theme", next); store.set("lh-theme", next); syncTheme();
+    });
+  });
+  if (mq) {
+    var onSys = function () { if (!root.getAttribute("data-theme")) syncTheme(); };
+    if (mq.addEventListener) mq.addEventListener("change", onSys); else if (mq.addListener) mq.addListener(onSys);
+  }
+  syncTheme();
 
   // Selector de audiencia
   var btns = document.querySelectorAll("[data-aud-btn]");

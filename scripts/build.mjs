@@ -127,7 +127,11 @@ const header = (active) => {
       <nav class="nav" aria-label="Principal">
         ${nav.map(([href, label, key]) => `<a href="${u(href)}"${key === active ? ' aria-current="page"' : ""}>${label}</a>`).join("")}
       </nav>
-      <div class="pill-count" data-countdown-mini="${esc(cfg.launchDate)}" aria-hidden="true"><span class="dot"></span><span data-mini>GTA VI · 19 nov</span></div>
+      <div class="pill-count" data-countdown-mini="${esc(cfg.launchDate)}" aria-hidden="true"><span class="dot"></span><span class="pill-pre" data-mini-pre>GTA VI en</span><span data-mini>19 nov</span></div>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Cambiar modo claro u oscuro" title="Modo claro / oscuro">
+        <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></g></svg>
+        <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.4 14.6A8.5 8.5 0 0 1 9.4 3.6a.6.6 0 0 0-.8-.7 9.6 9.6 0 1 0 12.5 12.5.6.6 0 0 0-.7-.8Z"/></svg>
+      </button>
     </div>
   </header>`;
 };
@@ -165,10 +169,10 @@ const layout = ({ title, description, pathName, body, active, type = "website", 
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${canonical}">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
-<meta name="theme-color" content="#0e0722">
+<meta name="theme-color" content="#0b0618" data-theme-color>
 <meta name="referrer" content="strict-origin-when-cross-origin">
 ${cfg.googleSiteVerification ? `<meta name="google-site-verification" content="${esc(cfg.googleSiteVerification)}">` : ""}
-<meta name="color-scheme" content="dark">
+<meta name="color-scheme" content="dark light">
 <meta property="og:site_name" content="${esc(cfg.name)}">
 <meta property="og:locale" content="${cfg.locale}">
 <meta property="og:type" content="${type}">
@@ -191,7 +195,7 @@ ${published ? `<meta property="article:published_time" content="${published}">` 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Yellowtail&family=Inter:wght@400;500;600;700;800&display=swap">
-<script>try{if(localStorage.getItem("lh-aud")==="nuevos")document.documentElement.setAttribute("data-reader","nuevos")}catch(e){}</script>
+<script>(function(){var r=document.documentElement,t=null;try{if(localStorage.getItem("lh-aud")==="nuevos")r.setAttribute("data-reader","nuevos");t=localStorage.getItem("lh-theme")}catch(e){}if(t==="light"||t==="dark")r.setAttribute("data-theme",t);var n=t==="light"||t==="dark"?t:(window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches?"light":"dark");r.setAttribute("data-theme-now",n);var m=document.querySelector("[data-theme-color]");if(m)m.setAttribute("content",n==="light"?"#fff6fb":"#0b0618")})()</script>
 <link rel="stylesheet" href="${u("/assets/styles.css")}?v=${CSS_V}">
 ${ADS ? `<meta name="google-adsense-account" content="${esc(ADS)}">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${esc(ADS)}" crossorigin="anonymous"></script>` : ""}
