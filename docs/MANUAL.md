@@ -33,3 +33,9 @@
 ## Resumen automático
 
 Una tarea programada de Claude se ejecuta cada mañana: busca las noticias de GTA VI de las últimas 24 horas, crea `content/briefs/<fecha>.json`, comprueba que la web se construye y lo sube a `main`.
+
+## Pendiente
+
+- [ ] AdSense → Privacidad y mensajes → Normativa europea (RGPD): crear y publicar el mensaje de consentimiento (política: `https://rickyjcv.github.io/GTAVI-INFO/privacidad/`; opciones Consentir, Gestionar opciones y No consentir).
+- [ ] Esperar la aprobación de AdSense y activar «Anuncios automáticos».
+- [ ] Comprobar en Search Console que el sitemap pasa a «Correcto».
