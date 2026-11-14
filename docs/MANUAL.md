@@ -19,7 +19,7 @@
 
 ## Monetizar con Google AdSense
 
-1. **Dominio propio (muy recomendable).** AdSense aprueba sitios por dominio y necesita `ads.txt` en la raíz. En `rickyjcv.github.io/GTAVI-INFO/` el `ads.txt` no queda en la raíz, así que la aprobación es difícil. Compra un dominio (p. ej. `leonidahoy.com`, ~10 €/año), configúralo en **Settings → Pages → Custom domain** y cambia `siteUrl` en `site.config.json`.
+1. La web está en la raíz de `leonidahoy.github.io`, así que `ads.txt` se publica en `https://leonidahoy.github.io/ads.txt`. Si algún día usas dominio propio, configúralo en **Settings → Pages → Custom domain** y cambia `siteUrl` en `site.config.json`.
 2. Solicita AdSense con ese dominio. Cuando te den tu ID (`ca-pub-XXXXXXXXXXXXXXXX`), ponlo en `site.config.json → adsense.client` (o como variable del repo `ADSENSE_CLIENT`). Eso añade el script, la meta de verificación y genera `ads.txt`.
 3. Activa **Auto ads** en el panel de AdSense. Si además creas bloques manuales, pega sus IDs en `adsense.slots` (`top`, `inFeed`, `sidebar`, `bottom`); los huecos ya están colocados y reservan espacio para no mover el diseño.
 4. Para visitantes de la UE/Reino Unido, activa el mensaje de consentimiento en **AdSense → Privacidad y mensajes → RGPD** (es obligatorio un CMP certificado; el de Google es gratis).
@@ -28,7 +28,7 @@
 ## Buscadores
 
 - **Bing, Yandex y otros (IndexNow):** automático. Cada publicación avisa de todas las URLs del sitemap.
-- **Google Search Console:** añade una propiedad «Prefijo de la URL» con `https://rickyjcv.github.io/GTAVI-INFO/`, elige verificación «Etiqueta HTML», copia el valor de `content="…"` en `googleSiteVerification` de `site.config.json`, publica, pulsa «Verificar» y envía `sitemap.xml` en «Sitemaps».
+- **Google Search Console:** añade una propiedad «Prefijo de la URL» con `https://leonidahoy.github.io/`, elige verificación «Etiqueta HTML», copia el valor de `content="…"` en `googleSiteVerification` de `site.config.json`, publica, pulsa «Verificar» y envía `sitemap.xml` en «Sitemaps».
 
 ## Resumen automático
 
@@ -36,6 +36,7 @@ Una tarea programada de Claude se ejecuta cada mañana: busca las noticias de GT
 
 ## Pendiente
 
-- [ ] AdSense → Privacidad y mensajes → Normativa europea (RGPD): crear y publicar el mensaje de consentimiento (política: `https://rickyjcv.github.io/GTAVI-INFO/privacidad/`; opciones Consentir, Gestionar opciones y No consentir).
+- [ ] AdSense → Privacidad y mensajes → Normativa europea (RGPD): crear y publicar el mensaje de consentimiento (política: `https://leonidahoy.github.io/privacidad/`; opciones Consentir, Gestionar opciones y No consentir).
 - [ ] Esperar la aprobación de AdSense y activar «Anuncios automáticos».
-- [ ] Comprobar en Search Console que el sitemap pasa a «Correcto».
+- [ ] Search Console: añadir la propiedad `https://leonidahoy.github.io/` (etiqueta HTML, el código ya está en la web) y enviar `sitemap.xml`.
+- [ ] AdSense: añadir el sitio `leonidahoy.github.io` en «Sitios» y solicitar revisión.

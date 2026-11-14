@@ -1,1 +1,1 @@
-https://rickyjcv.github.io/GTAVI-INFO/
+https://leonidahoy.github.io/

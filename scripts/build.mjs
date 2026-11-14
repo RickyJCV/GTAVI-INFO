@@ -511,7 +511,7 @@ write(
     <h2>Dos niveles de lectura</h2>
     <p>Usa el selector «Sigo cada update / Soy nuevo»: los fans ven el detalle técnico y quien acaba de llegar ve la explicación en palabras simples.</p>
     <h2>Contacto y correcciones</h2>
-    <p>¿Ves un error o tienes una pista con fuente? Abre una incidencia en el <a href="https://github.com/RickyJCV/GTAVI-INFO/issues" rel="noopener" target="_blank">repositorio del proyecto</a>. Corregimos rápido y lo indicamos.</p>
+    <p>¿Ves un error o tienes una pista con fuente? Abre una incidencia en el <a href="https://github.com/leonidahoy/leonidahoy.github.io/issues" rel="noopener" target="_blank">repositorio del proyecto</a>. Corregimos rápido y lo indicamos.</p>
     <h2>Aviso</h2>
     <p>Leonida Hoy es una web de fans independiente. No está afiliada, patrocinada ni aprobada por Rockstar Games ni Take-Two Interactive.</p>
   </div>`,
