@@ -297,7 +297,7 @@ ${published ? `<meta property="article:published_time" content="${published}">` 
 <link rel="preload" href="${u("/assets/fonts/inter-latin.woff2")}" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="${u("/assets/fonts/anton-latin.woff2")}" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="${u("/assets/fonts.css")}?v=${FONTS_V}">
-<script>(function(){var r=document.documentElement,t=null;try{if(localStorage.getItem("lh-aud")==="nuevos")r.setAttribute("data-reader","nuevos");t=localStorage.getItem("lh-theme")}catch(e){}if(t==="light"||t==="dark")r.setAttribute("data-theme",t);var n=t==="light"||t==="dark"?t:(window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches?"light":"dark");r.setAttribute("data-theme-now",n);var m=document.querySelector("[data-theme-color]");if(m)m.setAttribute("content",n==="light"?"#fff6fb":"#0b0618")})()</script>
+<script>(function(){var r=document.documentElement,t=null;r.className+=" js";try{if(localStorage.getItem("lh-aud")==="nuevos")r.setAttribute("data-reader","nuevos");t=localStorage.getItem("lh-theme")}catch(e){}if(t==="light"||t==="dark")r.setAttribute("data-theme",t);var n=t==="light"||t==="dark"?t:(window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches?"light":"dark");r.setAttribute("data-theme-now",n);var m=document.querySelector("[data-theme-color]");if(m)m.setAttribute("content",n==="light"?"#fff6fb":"#0b0618")})()</script>
 <link rel="stylesheet" href="${u("/assets/styles.css")}?v=${CSS_V}">
 ${ADS ? `<meta name="google-adsense-account" content="${esc(ADS)}">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${esc(ADS)}" crossorigin="anonymous"></script>` : ""}
@@ -315,6 +315,7 @@ ${body}
 <button class="to-top" type="button" aria-label="${esc(L.t.toTop)}" data-to-top><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M6 15l6-6 6 6"/></svg></button>
 ${footer(L)}
 <script src="${u("/assets/app.js")}?v=${JS_V}" defer></script>
+<script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/*.xml"}}]},"eagerness":"moderate"}]}</script>
 </body>
 </html>
 `;

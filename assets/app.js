@@ -6,6 +6,8 @@
     set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} },
   };
 
+  var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
   // Cuenta atrás (hora local del visitante: GTA VI se desbloquea a las 00:00 locales)
   var pad = function (n) { return String(n).padStart(2, "0"); };
   var boxes = document.querySelectorAll("[data-countdown]");
@@ -24,7 +26,12 @@
       var v = { d: Math.floor(s / 86400), h: Math.floor((s % 86400) / 3600), m: Math.floor((s % 3600) / 60), s: s % 60 };
       Object.keys(v).forEach(function (k) {
         var b = el.querySelector('[data-unit="' + k + '"]');
-        if (b) b.textContent = k === "d" ? v[k] : pad(v[k]);
+        var txt = String(k === "d" ? v[k] : pad(v[k]));
+        if (b && b.textContent !== txt) {
+          var first = b.textContent === "–";
+          b.textContent = txt;
+          if (!first && !reduced) { b.classList.remove("tick"); void b.offsetWidth; b.classList.add("tick"); }
+        }
       });
     });
     minis.forEach(function (el) {
@@ -56,7 +63,15 @@
   themeBtns.forEach(function (b) {
     b.addEventListener("click", function () {
       var next = effectiveTheme() === "dark" ? "light" : "dark";
-      root.setAttribute("data-theme", next); store.set("lh-theme", next); syncTheme();
+      var apply = function () { root.setAttribute("data-theme", next); store.set("lh-theme", next); syncTheme(); };
+      if (document.startViewTransition && !reduced) {
+        var r = b.getBoundingClientRect();
+        root.style.setProperty("--tx", r.left + r.width / 2 + "px");
+        root.style.setProperty("--ty", r.top + r.height / 2 + "px");
+        root.classList.add("theme-vt");
+        var done = function () { root.classList.remove("theme-vt"); };
+        try { document.startViewTransition(apply).finished.then(done, done); } catch (e) { done(); apply(); }
+      } else apply();
     });
   });
   if (mq) {
@@ -147,6 +162,43 @@
       });
     });
   });
+
+  // Aparición suave al hacer scroll
+  if ("IntersectionObserver" in window && !reduced) {
+    var targets = document.querySelectorAll(".story, .mini-story, .post, .col-side .card, .hub__tile, .block__head, .ctx, .faq details, .archive li, .fact-grid li, .legend, .plainbox, .rumor-banner, .day__title");
+    var vh = window.innerHeight;
+    var io = new IntersectionObserver(function (entries) {
+      var n = 0;
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var el = e.target; io.unobserve(el);
+        el.style.setProperty("--d", Math.min(n++, 6) * 70 + "ms");
+        el.classList.add("in");
+        setTimeout(function () { el.classList.remove("rv", "in"); el.style.removeProperty("--d"); }, 1300);
+      });
+    }, { rootMargin: "0px 0px -8% 0px" });
+    targets.forEach(function (el) {
+      if (el.getBoundingClientRect().top < vh * 0.9) return; // lo que ya se ve no se oculta
+      el.classList.add("rv"); io.observe(el);
+    });
+  }
+
+  // Brillo que sigue al cursor en las tarjetas
+  if (window.matchMedia && window.matchMedia("(hover: hover)").matches) {
+    var raf = 0, last = null;
+    document.addEventListener("pointermove", function (ev) {
+      last = ev;
+      if (raf) return;
+      raf = requestAnimationFrame(function () {
+        raf = 0;
+        var card = last.target && last.target.closest ? last.target.closest(".item") : null;
+        if (!card) return;
+        var r = card.getBoundingClientRect();
+        card.style.setProperty("--mx", last.clientX - r.left + "px");
+        card.style.setProperty("--my", last.clientY - r.top + "px");
+      });
+    }, { passive: true });
+  }
 
   // Botón «volver arriba»
   var top = document.querySelector("[data-to-top]");
