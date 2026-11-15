@@ -67,10 +67,10 @@ else if (d.stories.length < 5) W(`stories: solo ${d.stories.length}; lo ideal so
 (d.stories || []).forEach((s, i) => item(s, `stories[${i}]`, "news"));
 if (!Number.isInteger(d.biggest) || d.biggest < 0 || d.biggest >= (d.stories?.length || 0)) E(`biggest: debe ser el índice (0–${(d.stories?.length || 1) - 1}) de la historia más grande`);
 if (d.more !== undefined && !Array.isArray(d.more)) E("more: debe ser una lista");
-if ((d.more || []).length > 4) E(`more: máximo 4 (tiene ${d.more.length})`);
+if ((d.more || []).length > 8) E(`more: máximo 8 en el día (tiene ${d.more.length})`);
 (d.more || []).forEach((s, i) => item(s, `more[${i}]`, "news"));
 if (d.rumors !== undefined && !Array.isArray(d.rumors)) E("rumors: debe ser una lista");
-if ((d.rumors || []).length > 4) E(`rumors: máximo 4 (tiene ${d.rumors.length})`);
+if ((d.rumors || []).length > 6) E(`rumors: máximo 6 en el día (tiene ${d.rumors.length})`);
 (d.rumors || []).forEach((s, i) => item(s, `rumors[${i}]`, "rumor"));
 if (!Array.isArray(d.posts) || d.posts.length !== 3) E(`posts: deben ser exactamente 3 (hay ${d.posts?.length ?? 0})`);
 (d.posts || []).forEach((p, i) => str(p, `posts[${i}]`, 220));

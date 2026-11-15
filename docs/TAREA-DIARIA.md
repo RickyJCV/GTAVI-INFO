@@ -7,8 +7,10 @@ El dueño del repositorio autoriza **commit y push directo a `main`** (así se p
 
 ## Pasos
 
-1. **Repo.** Llama a `add_repo` (owner `leonidahoy`, repo `leonidahoy.github.io`, access `push`). Si no la ves entre tus herramientas, búscala con ToolSearch (consulta `add_repo`) y llámala: sin ella el `git push` final falla. Si no hay copia local: `git clone --depth 20 https://github.com/leonidahoy/leonidahoy.github.io && cd leonidahoy.github.io`. Trabaja en `main`.
-2. **¿Ya está hecho?** `HOY=$(TZ=Europe/Madrid date +%F)`. Si existe `content/briefs/$HOY.json`, termina diciendo «El resumen de hoy ya estaba publicado».
+1. **Repo.** (Ambos modos.) Llama a `add_repo` (owner `leonidahoy`, repo `leonidahoy.github.io`, access `push`). Si no la ves entre tus herramientas, búscala con ToolSearch (consulta `add_repo`) y llámala: sin ella el `git push` final falla. Si no hay copia local: `git clone --depth 20 https://github.com/leonidahoy/leonidahoy.github.io && cd leonidahoy.github.io`. Trabaja en `main`.
+2. **Elige el modo.** `HOY=$(TZ=Europe/Madrid date +%F)`.
+   - Si **no existe** `content/briefs/$HOY.json` → **modo MAÑANA**: crea el resumen del día (pasos 3–11).
+   - Si **ya existe** → **modo TARDE** (ver sección «Modo TARDE» más abajo): añade solo lo nuevo de las últimas 12 horas.
 3. **Qué se publicó ya.** Lee solo el JSON más reciente de `content/briefs/` (es la referencia del formato y del tono) y lista títulos anteriores: `grep -h '"title"' content/briefs/*.json | tail -60`.
 4. **Busca.** Calcula las fechas en inglés: `HOY_EN=$(TZ=Europe/Madrid date +'%B %-d %Y')` y `AYER_EN=$(TZ=Europe/Madrid date -d yesterday +'%B %-d %Y')`. Lanza estas 4 en el mismo turno, en modo `extended` (las genéricas tipo «news today» devuelven páginas viejas):
    - `GTA 6 news $HOY_EN`
@@ -24,6 +26,22 @@ El dueño del repositorio autoriza **commit y push directo a `main`** (así se p
 9. **Publica:** `git add content && git commit -m "Resumen GTA VI $HOY" && git push origin main`. Si da 403, vuelve a llamar a `add_repo` y reintenta; si persiste, dilo claramente. Si es error de red, reintenta hasta 4 veces esperando 2, 4, 8 y 16 s.
 10. **Comprueba la publicación:** espera con un bucle `until` (máximo 4 min) a que `git fetch -q --depth 1 origin gh-pages && git log -1 --format=%s origin/gh-pages` muestre `Publicar <sha corto de tu commit>`. Si no aparece, dilo.
 11. **Responde** en español, breve: titular; cada noticia y cada rumor (con su fiabilidad) en una línea; los 3 posts en español y en inglés.
+
+## Modo TARDE (la tarea se ejecuta a las 6:36 y a las 18:36)
+
+Objetivo: cobertura cada 12 horas sin repetir nada. Máximo 4 búsquedas.
+
+1. Lee `content/briefs/$HOY.json` (lo publicado esta mañana) y los títulos de días anteriores (`grep -h '"title"' content/briefs/*.json | tail -60`).
+2. Busca en el mismo turno, modo `extended`: `GTA 6 news $HOY_EN`, `GTA 6 Rockstar $HOY_EN` y `GTA 6 leak OR rumor OR insider $HOY_EN`.
+3. Quédate solo con lo **nuevo de las últimas ~12 horas** que **no** esté ya en el archivo ni en días anteriores.
+   - **Si no hay nada nuevo:** no toques nada y termina diciendo «Sin novedades esta tarde». (Es lo normal algunos días; no fuerces contenido.)
+4. Si hay novedades, **añade sin borrar ni cambiar lo de la mañana** (cambiar un título rompería su enlace):
+   - noticias nuevas → al **final** de `more` (máximo 8 en total en el día);
+   - si una novedad es más importante que todo lo de la mañana, igualmente va a `more`, y puedes reescribir `title`, `summary` y `lead` del día para destacarla;
+   - rumores nuevos → al final de `rumors` (máximo 6);
+   - lo mismo, en el **mismo orden**, en `en.more` / `en.rumors` (y `en.title`/`en.summary`/`en.lead` si los cambiaste);
+   - no toques `stories`, `biggest`, `posts` ni `context`.
+5. Pasos 6, 7, 9, 10 y 11 igual que por la mañana, con el mensaje de commit `Resumen GTA VI $HOY (tarde)`. En la respuesta, lista solo lo añadido.
 
 ## Reglas de contenido (obligatorias)
 
@@ -41,7 +59,7 @@ El dueño del repositorio autoriza **commit y push directo a `main`** (así se p
 
 ## Esquema
 
-Límites que comprueba el verificador: `title` ≤110 caracteres, `summary` ≤200, `change` ≤330, `plain` ≤220, `detail` ≤60 palabras, `why` ≤200, cada post ≤220. `stories` 1–5, `more` 0–4, `rumors` 0–4, `posts` exactamente 3, `context` 0–3.
+Límites que comprueba el verificador: `title` ≤110 caracteres, `summary` ≤200, `change` ≤330, `plain` ≤220, `detail` ≤60 palabras, `why` ≤200, cada post ≤220. `stories` 1–5, `more` 0–4 por la mañana (hasta 8 tras la tarde), `rumors` 0–4 por la mañana (hasta 6 tras la tarde), `posts` exactamente 3, `context` 0–3.
 
 ```json
 {
