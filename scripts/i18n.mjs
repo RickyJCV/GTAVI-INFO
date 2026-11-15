@@ -51,7 +51,7 @@ export const LOCALES = {
       nuevos: "🌴 Soy nuevo",
       showingFans: "Mostrando el detalle para fans.",
       showingNew: "Mostrando la explicación sencilla.",
-      rules: "Solo historias de las últimas 24 horas · los rumores van aparte y siempre con fuente con nombre · enlace bajo cada noticia.",
+      rules: "Solo lo que aún no habíamos contado, priorizando lo más reciente · los rumores van aparte y siempre con fuente con nombre · enlace bajo cada noticia.",
       news: "Noticia",
       biggest: "La más grande",
       whatChanged: "Qué cambió:",
@@ -140,7 +140,7 @@ export const LOCALES = {
     <p>Cada mañana leemos la actualidad de GTA VI y nos quedamos con las cinco historias que de verdad importan. Una línea por noticia, qué cambió y un enlace a la fuente original. Sin relleno.</p>
     <h2>Nuestras normas</h2>
     <ul>
-      <li><strong>Últimas 24 horas.</strong> El resumen del día solo incluye historias recientes. Lo anterior va en «Contexto de la semana», con su fecha.</li>
+      <li><strong>Lo nuevo, primero.</strong> Cada resumen trae lo que aún no habíamos contado, priorizando lo más reciente; si algo se anunció antes, lo indicamos.</li>
       <li><strong>Los rumores, aparte y etiquetados.</strong> Solo los más comentados, con quién lo dice y su nivel de fiabilidad. Si nadie identificable lo publica, no sale aquí.</li>
       <li><strong>Enlace bajo cada historia.</strong> Siempre puedes leer el original.</li>
       <li><strong>Las estimaciones se marcan como estimaciones.</strong> Las cifras de terceros nunca se presentan como oficiales.</li>
@@ -241,7 +241,7 @@ export const LOCALES = {
       nuevos: "🌴 I'm new here",
       showingFans: "Showing the detail for fans.",
       showingNew: "Showing the simple explanation.",
-      rules: "Only stories from the last 24 hours · rumors go in their own section, always with a named source · a link under every story.",
+      rules: "Only things we hadn't covered yet, most recent first · rumors go in their own section, always with a named source · a link under every story.",
       news: "News",
       biggest: "Biggest story",
       whatChanged: "What changed:",
@@ -330,7 +330,7 @@ export const LOCALES = {
     <p>Every morning we read the GTA VI news and keep the five stories that really matter. One line per story, what changed and a link to the original source. No filler.</p>
     <h2>Our standards</h2>
     <ul>
-      <li><strong>Last 24 hours.</strong> The daily briefing only includes recent stories. Older ones go in "This week's context", with their date.</li>
+      <li><strong>What's new comes first.</strong> Each briefing brings what we hadn't covered yet, most recent first; if something was announced earlier, we say so.</li>
       <li><strong>Rumors kept separate and labeled.</strong> Only the most talked-about ones, with who says it and how reliable it is. If nobody identifiable publishes it, it doesn't appear here.</li>
       <li><strong>A link under every story.</strong> You can always read the original.</li>
       <li><strong>Estimates are labeled as estimates.</strong> Third-party figures are never presented as official.</li>

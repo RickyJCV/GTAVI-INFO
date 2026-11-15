@@ -17,8 +17,8 @@ El dueño del repositorio autoriza **commit y push directo a `main`** (así se p
    - `GTA 6 news $AYER_EN`
    - `GTA 6 Rockstar update OR announcement OR trailer $AYER_EN`
    - `GTA 6 leak OR rumor OR insider November` (rumores)
-   Con lo que encuentres, como mucho 2 búsquedas más (`standard`) para confirmar datos del tema más fuerte. Fuentes que suelen tener la actualidad con fecha: Insider Gaming, VGC, IGN, GameSpot, Kotaku, Eurogamer, PC Gamer, Dexerto, VideoCardz, VGTimes, GamePro (directo), 3DJuegos, Vandal, Rockstar Newswire.
-   **Si salen menos de 3 noticias nuevas de 24 h,** amplía a 48 h (sin repetir lo ya publicado). Si aun así no hay ninguna noticia nueva, no publiques: responde explicando qué buscaste.
+   Con lo que encuentres, como mucho 2 búsquedas más (`standard`): una para confirmar el tema más fuerte y otra de rumores en español (`GTA 6 rumores filtración`). Fuentes que suelen tener la actualidad con fecha: Insider Gaming, VGC, IGN, GameSpot, Kotaku, Eurogamer, PC Gamer, Dexerto, VideoCardz, VGTimes, GamePro (directo), 3DJuegos, Vandal, Rockstar Newswire.
+   **Objetivo: que la web tenga movimiento cada día.** Publica siempre que tengas al menos 1 noticia o 1 rumor nuevos para la web (ver «Qué cuenta como nuevo»). Solo si de verdad no hay nada nuevo, no publiques y explica qué buscaste.
 5. **Escribe** `content/briefs/$HOY.json` siguiendo el esquema de abajo.
 6. **Verifica:** `node scripts/check-brief.mjs content/briefs/$HOY.json`. Si da errores, corrige exactamente lo que dice y repite hasta que diga «✓ … listo». Los avisos «⚠» no bloquean, pero léelos.
 7. **Construye:** `node scripts/build.mjs`. Debe decir `idiomas: es, en` y no `sin inglés`.
@@ -45,7 +45,13 @@ Objetivo: cobertura cada 12 horas sin repetir nada. Máximo 4 búsquedas.
 
 ## Reglas de contenido (obligatorias)
 
-- **Solo hechos de las últimas 24 horas** en `stories` y `more`. Lo anterior que siga siendo relevante va en `context` (con su fecha).
+### Qué cuenta como nuevo
+
+Lo importante es que **no esté ya publicado en la web** (compáralo con los títulos de días anteriores), no que sea de hace pocas horas:
+- **Noticias** (`stories` y `more`): lo publicado por los medios en los **últimos 3 días**, priorizando lo más reciente. También vale **información útil y todavía vigente** que no hayamos contado aunque se anunciara antes (horarios de desbloqueo, juego en la nube, ediciones, códigos, tamaño, precios, eventos): en ese caso di en `detail` cuándo se anunció.
+- **Rumores** (`rumors`): los más comentados de las **últimas 2 semanas** que no tengamos, siempre con fuente con nombre y su fiabilidad. Busca rumores en **cada** ejecución: dan vida a la web.
+- **No hace falta una fecha exacta**: basta con que los resultados indiquen que es reciente o que sigue vigente. Si dudas de la fecha de una noticia, no la descartes: pásala a `more` y deja claro en `detail` lo que se sabe.
+- Prioridad en `stories`: lo confirmado más reciente e importante. Si hay menos de 5 noticias, pon las que haya (mínimo 1).
 - **Nunca inventes** datos, cifras, citas ni URLs. Cada `url` debe ser una dirección que hayas visto en los resultados de búsqueda y que apunte al **artículo concreto** (no a buscadores, acortadores ni portadas). **No hace falta abrir la página:** basta con que el dato y la URL aparezcan en los resultados de búsqueda y el resultado indique que es reciente. Si una web no carga, no la descartes por eso.
 - **Redacción propia.** Resume con tus palabras. Nunca copies frases del medio (como mucho, una cita muy breve entre comillas y atribuida). Esto es lo que hace legal la web.
 - **No repitas** noticias ni rumores ya publicados. Si hay novedad real sobre un tema anterior, escribe un título nuevo que cuente esa novedad.
