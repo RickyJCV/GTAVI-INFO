@@ -210,6 +210,7 @@ const header = (L, active, alts) => {
         <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.4 14.6A8.5 8.5 0 0 1 9.4 3.6a.6.6 0 0 0-.8-.7 9.6 9.6 0 1 0 12.5 12.5.6.6 0 0 0-.7-.8Z"/></svg>
       </button>
     </div>
+    <div class="progress" aria-hidden="true"><span data-progress></span></div>
   </header>`;
 };
 
@@ -312,7 +313,7 @@ ${langHint(L, alts)}
 <main id="main">
 ${body}
 </main>
-<button class="to-top" type="button" aria-label="${esc(L.t.toTop)}" data-to-top><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M6 15l6-6 6 6"/></svg></button>
+<button class="to-top" type="button" aria-label="${esc(L.t.toTop)}" data-to-top><svg class="to-top__ring" viewBox="0 0 48 48" aria-hidden="true"><circle class="track" cx="24" cy="24" r="22" pathLength="100"/><circle class="bar" cx="24" cy="24" r="22" pathLength="100" data-progress-ring/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M6 15l6-6 6 6"/></svg></button>
 ${footer(L)}
 <script src="${u("/assets/app.js")}?v=${JS_V}" defer></script>
 <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/*.xml"}}]},"eagerness":"moderate"}]}</script>

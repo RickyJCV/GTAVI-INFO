@@ -693,15 +693,6 @@ html[data-reader="nuevos"] .aud[data-aud="fans"] { display: none; }
 .theme-vt::view-transition-old(root) { animation: none; }
 .theme-vt::view-transition-new(root) { animation: lh-reveal 0.65s cubic-bezier(0.4, 0, 0.2, 1) both; }
 
-/* barra de progreso de lectura */
-@supports (animation-timeline: scroll()) {
-  @keyframes lh-progress { to { transform: scaleX(1); } }
-  body::before {
-    content: ""; position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 60; pointer-events: none;
-    background: var(--sunset); transform-origin: 0 50%; transform: scaleX(0);
-    animation: lh-progress linear both; animation-timeline: scroll(root);
-  }
-}
 
 /* portada: amanece el sol, se mecen las palmeras, entra el texto */
 @keyframes lh-sunrise { from { transform: translateX(-50%) translateY(22%); opacity: 0; } }
@@ -769,3 +760,24 @@ html[data-reader="nuevos"] .aud[data-aud="fans"] { display: none; }
 .aud-toggle button:active, .filter button:active { transform: scale(0.95); }
 .to-top { transition: opacity 0.3s, transform 0.3s var(--ease); }
 .to-top:hover { transform: translateY(-3px); }
+
+/* ---------- progreso de lectura ---------- */
+/* Escritorio: línea de neón en el borde inferior de la cabecera fija */
+.progress { display: none; }
+@media (min-width: 1140px) {
+  .progress {
+    display: block; position: absolute; left: 0; right: 0; bottom: -2px; height: 3px; pointer-events: none;
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .progress.on { opacity: 1; }
+  .progress span {
+    display: block; height: 100%; background: var(--sunset); transform-origin: 0 50%; transform: scaleX(0);
+    box-shadow: 0 0 10px rgba(255, 47, 163, 0.65); border-radius: 0 3px 3px 0; will-change: transform;
+  }
+}
+/* Todas las pantallas: anillo de progreso alrededor del botón «volver arriba» */
+.to-top { overflow: visible; }
+.to-top__ring { position: absolute; inset: -4px; width: calc(100% + 8px); height: calc(100% + 8px); transform: rotate(-90deg); pointer-events: none; }
+.to-top__ring circle { fill: none; stroke-width: 3; stroke-linecap: round; }
+.to-top__ring .track { stroke: var(--line-2); }
+.to-top__ring .bar { stroke: var(--pink); stroke-dasharray: 100; stroke-dashoffset: 100; filter: drop-shadow(0 0 4px rgba(255, 47, 163, 0.7)); }

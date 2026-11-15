@@ -200,13 +200,30 @@
     }, { passive: true });
   }
 
-  // Botón «volver arriba»
+  // Botón «volver arriba» + progreso de lectura (una sola lectura de scroll por fotograma)
   var top = document.querySelector("[data-to-top]");
-  if (top) {
-    var onScroll = function () { top.classList.toggle("is-visible", window.scrollY > 700); };
-    window.addEventListener("scroll", onScroll, { passive: true }); onScroll();
-    top.addEventListener("click", function () { window.scrollTo({ top: 0, behavior: "smooth" }); });
+  var bar = document.querySelector("[data-progress]");
+  var barWrap = bar ? bar.parentNode : null;
+  var ring = document.querySelector("[data-progress-ring]");
+  var maxScroll = 1, ticking = false;
+  function measure() { maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight); }
+  function paint() {
+    ticking = false;
+    var y = window.scrollY || window.pageYOffset || 0;
+    var p = Math.min(1, Math.max(0, y / maxScroll));
+    var long = maxScroll > window.innerHeight * 0.6; // solo en páginas con recorrido
+    if (bar) { bar.style.transform = "scaleX(" + p.toFixed(4) + ")"; barWrap.classList.toggle("on", long && y > 8); }
+    if (ring) ring.style.strokeDashoffset = (100 - p * 100).toFixed(2);
+    if (top) top.classList.toggle("is-visible", y > 600);
   }
+  function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(paint); } }
+  measure(); paint();
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", function () { measure(); onScroll(); }, { passive: true });
+  window.addEventListener("load", function () { measure(); onScroll(); });
+  if ("ResizeObserver" in window) new ResizeObserver(function () { measure(); onScroll(); }).observe(document.body);
+  document.querySelectorAll("details").forEach(function (d) { d.addEventListener("toggle", function () { measure(); onScroll(); }); });
+  if (top) top.addEventListener("click", function () { window.scrollTo({ top: 0, behavior: reduced ? "auto" : "smooth" }); });
 
   // AdSense: activa cada bloque manual presente en la página
   var ads = document.querySelectorAll("ins.adsbygoogle");
