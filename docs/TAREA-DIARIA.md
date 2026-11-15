@@ -7,7 +7,7 @@ El dueño del repositorio autoriza **commit y push directo a `main`** (así se p
 
 ## Pasos
 
-1. **Repo.** (Ambos modos.) Llama a `add_repo` (owner `leonidahoy`, repo `leonidahoy.github.io`, access `push`). Si no la ves entre tus herramientas, búscala con ToolSearch (consulta `add_repo`) y llámala: sin ella el `git push` final falla. Si no hay copia local: `git clone --depth 20 https://github.com/leonidahoy/leonidahoy.github.io && cd leonidahoy.github.io`. Trabaja en `main`.
+1. **Repo.** (Ambos modos.) Si ya tienes el repo en tu directorio de trabajo (la sesión dedicada lo trae), usa esa copia: `git checkout main && git pull --ff-only origin main`. Si no, llama a `add_repo` (owner `leonidahoy`, repo `leonidahoy.github.io`, access `push`). Si no la ves entre tus herramientas, búscala con ToolSearch (consulta `add_repo`) y llámala: sin ella el `git push` final falla. Si no hay copia local: `git clone --depth 20 https://github.com/leonidahoy/leonidahoy.github.io && cd leonidahoy.github.io`. Trabaja en `main`.
 2. **Elige el modo.** `HOY=$(TZ=Europe/Madrid date +%F)`.
    - Si **no existe** `content/briefs/$HOY.json` → **modo MAÑANA**: crea el resumen del día (pasos 3–11).
    - Si **ya existe** → **modo TARDE** (ver sección «Modo TARDE» más abajo): añade solo lo nuevo de las últimas 12 horas.
@@ -46,7 +46,7 @@ Objetivo: cobertura cada 12 horas sin repetir nada. Máximo 4 búsquedas.
 ## Reglas de contenido (obligatorias)
 
 - **Solo hechos de las últimas 24 horas** en `stories` y `more`. Lo anterior que siga siendo relevante va en `context` (con su fecha).
-- **Nunca inventes** datos, cifras, citas ni URLs. Cada `url` debe ser una dirección que hayas visto en los resultados de búsqueda y que apunte al **artículo concreto** (no a buscadores, acortadores ni portadas).
+- **Nunca inventes** datos, cifras, citas ni URLs. Cada `url` debe ser una dirección que hayas visto en los resultados de búsqueda y que apunte al **artículo concreto** (no a buscadores, acortadores ni portadas). **No hace falta abrir la página:** basta con que el dato y la URL aparezcan en los resultados de búsqueda y el resultado indique que es reciente. Si una web no carga, no la descartes por eso.
 - **Redacción propia.** Resume con tus palabras. Nunca copies frases del medio (como mucho, una cita muy breve entre comillas y atribuida). Esto es lo que hace legal la web.
 - **No repitas** noticias ni rumores ya publicados. Si hay novedad real sobre un tema anterior, escribe un título nuevo que cuente esa novedad.
 - **Estimaciones** de terceros (ventas, reservas, presupuestos) siempre marcadas como estimaciones.
