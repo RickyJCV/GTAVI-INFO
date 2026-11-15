@@ -1,4 +1,4 @@
-// Generador estático de Leonida Hoy. Sin dependencias: `node scripts/build.mjs`.
+// Generador estático de Leónida Hoy. Sin dependencias: `node scripts/build.mjs`.
 // Lee site.config.json + content/ y escribe la web completa (español + inglés) en _site/.
 import fs from "node:fs";
 import path from "node:path";
@@ -198,7 +198,7 @@ const header = (L, active, alts) => {
     <div class="wrap site-header__inner">
       <a class="brand" href="${u(P.home)}" aria-label="${esc(cfg.name)}, ${esc(L.t.home)}">
         ${markSvg}
-        <span class="brand__text"><span class="brand__name">LEONIDA<em>Hoy</em></span><span class="brand__tag">${esc(L.t.tagline)}</span></span>
+        <span class="brand__text"><span class="brand__name">LEÓNIDA<em>Hoy</em></span><span class="brand__tag">${esc(L.t.tagline)}</span></span>
       </a>
       <nav class="nav" aria-label="${esc(L.t.mainNav)}">
         ${nav.map(([href, label, key]) => `<a href="${u(href)}"${key === active ? ' aria-current="page"' : ""}>${esc(label)}</a>`).join("")}
@@ -233,7 +233,7 @@ const footer = (L) => {
   <footer class="site-footer">
     <div class="wrap site-footer__inner">
       <div>
-        <a class="brand brand--sm" href="${u(P.home)}">${markSvg}<span class="brand__name">LEONIDA<em>Hoy</em></span></a>
+        <a class="brand brand--sm" href="${u(P.home)}">${markSvg}<span class="brand__name">LEÓNIDA<em>Hoy</em></span></a>
         <p class="muted small">${esc(L.t.footerNote)}</p>
       </div>
       <nav class="footer-nav" aria-label="${esc(L.t.footerNav)}">
@@ -827,7 +827,7 @@ for (const code of ACTIVE) {
       key: "about",
       active: "about",
       body: `
-  <section class="page-head"><div class="wrap"><p class="eyebrow">${esc(L.t.aboutEyebrow)}</p><h1>Leonida Hoy</h1><p class="muted">${esc(L.t.description)}</p></div></section>
+  <section class="page-head"><div class="wrap"><p class="eyebrow">${esc(L.t.aboutEyebrow)}</p><h1>Leónida Hoy</h1><p class="muted">${esc(L.t.description)}</p></div></section>
   <div class="wrap narrow prose">${L.t.aboutBody(ISSUES_URL)}
   </div>`,
     })
@@ -908,7 +908,7 @@ ${briefs
     key: "home",
     active: "",
     noindex: true,
-    body: `<section class="page-head"><div class="wrap narrow"><p class="eyebrow">Error 404</p><h1>Te has salido del mapa</h1><p class="muted">Esta página no existe en Leonida. <span lang="en">· You've left the map: this page doesn't exist.</span></p><p class="hero__actions"><a class="btn btn--primary" href="${u("/")}">Volver al resumen de hoy</a> <a class="btn btn--ghost" href="${u(LOCALES.en.paths.home)}" lang="en">Today's briefing in English</a></p></div></section>`,
+    body: `<section class="page-head"><div class="wrap narrow"><p class="eyebrow">Error 404</p><h1>Te has salido del mapa</h1><p class="muted">Esta página no existe en Leónida. <span lang="en">· You've left the map: this page doesn't exist.</span></p><p class="hero__actions"><a class="btn btn--primary" href="${u("/")}">Volver al resumen de hoy</a> <a class="btn btn--ghost" href="${u(LOCALES.en.paths.home)}" lang="en">Today's briefing in English</a></p></div></section>`,
   }).replace(/<link rel="canonical"[^>]*>\n/, "").replace(/<link rel="alternate" hreflang[^>]*>\n/g, "");
   write("404.html", html);
 }

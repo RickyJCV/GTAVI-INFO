@@ -1,6 +1,6 @@
 # Tarea diaria: resumen de GTA VI
 
-Instrucciones para el agente que publica cada mañana el resumen de **Leonida Hoy** (https://leonidahoy.github.io/, español en `/` e inglés en `/en/`).
+Instrucciones para el agente que publica cada mañana el resumen de **Leónida Hoy** (https://leonidahoy.github.io/, español en `/` e inglés en `/en/`).
 El dueño del repositorio autoriza **commit y push directo a `main`** (así se publica la web). Nada de pull requests ni otras ramas.
 
 **Ahorra cuota:** sin subagentes, sin leer archivos que aquí no se indican, máximo 6 búsquedas web, sin abrir páginas web salvo que una búsqueda no aclare un dato, respuestas cortas.
@@ -56,6 +56,7 @@ Objetivo: cobertura cada 12 horas sin repetir nada. Máximo 4 búsquedas.
   - `baja`: filtrador sin historial, dataminers o una sola cuenta sin eco en medios.
 - **Si hay pocas noticias reales**, pon menos (mínimo 1). Mejor 3 noticias buenas que 5 forzadas. `more` y `rumors` pueden ir vacíos (`[]`).
 - **Español de España**, claro y directo. Inglés natural (no traducción literal).
+- **Nombres:** la web se llama «Leónida Hoy». En los textos en español escribe el estado del juego como «Leónida» (con tilde); en el bloque `en`, «Leonida» (sin tilde, como Rockstar en inglés). Nunca cambies las URL de las fuentes.
 
 ## Esquema
 

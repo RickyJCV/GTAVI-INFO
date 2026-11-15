@@ -1,4 +1,4 @@
-/* Leonida Hoy — interacción (sin dependencias) */
+/* Leónida Hoy — interacción (sin dependencias) */
 (function () {
   "use strict";
   var store = {

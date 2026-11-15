@@ -51,7 +51,7 @@ for (const [file, kicker, tagline] of [
   <div class="sky"></div><div class="sun"></div><div class="sea"></div>
   ${palm(980, 330, 1)}${palm(760, 220, -1)}
   <div class="veil"></div>
-  <div class="copy"><div class="kicker">${kicker}</div><h1>LEONIDA</h1><div class="hoy">Hoy</div><p>${tagline}</p></div>`);
+  <div class="copy"><div class="kicker">${kicker}</div><h1>LEÓNIDA</h1><div class="hoy">Hoy</div><p>${tagline}</p></div>`);
   await page.evaluate(() => document.fonts.ready);
   await page.screenshot({ path: A(file) });
 }

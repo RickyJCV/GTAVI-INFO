@@ -1,4 +1,4 @@
-# Manual de Leonida Hoy
+# Manual de Leónida Hoy
 
 ## Rutina diaria (5 minutos)
 
