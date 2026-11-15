@@ -43,6 +43,25 @@ Objetivo: cobertura cada 12 horas sin repetir nada. Máximo 4 búsquedas.
    - no toques `stories`, `biggest`, `posts` ni `context`.
 5. Pasos 6, 7, 9, 10 y 11 igual que por la mañana, con el mensaje de commit `Resumen GTA VI $HOY (tarde)`. En la respuesta, lista solo lo añadido.
 
+## Reglas legales y de AdSense (obligatorias, por encima de todo lo demás)
+
+La web vive de la publicidad de Google AdSense y debe ser 100 % legal. Si una noticia o rumor no puede contarse cumpliendo esto, **no lo publiques**.
+
+**Derechos de autor**
+- Escribe **siempre con tus propias palabras**. Nunca copies ni parafrasees frase a frase un artículo. Como mucho una cita literal **muy breve** (≤20 palabras), entre comillas y atribuida a quien la dijo.
+- **No uses ni enlaces imágenes, vídeos, capturas, logotipos, música ni arte** de Rockstar, Take-Two ni de otros medios. La web no lleva imágenes de terceros.
+- **No enlaces material filtrado** (vídeos, capturas o archivos del juego filtrados), ni descargas, torrents, cracks, mods que salten protecciones, ROMs o cuentas compartidas. De una filtración solo puedes contar *que existe* y qué ha dicho un medio identificable, enlazando al **medio**, no al material.
+- Las fuentes se enlazan a la **noticia del medio**, nunca a webs que copian contenido ajeno.
+
+**Políticas de AdSense**
+- Nada de contenido sexual, violencia gráfica, odio, acoso, drogas o armas. Habla del juego como producto (fechas, precios, novedades), sin recrearte en su violencia.
+- Nada que facilite actividades ilegales o engaños: no expliques cómo leer códigos ajenos, saltarse protecciones, conseguir el juego gratis, trucos para estafar, etc. Si una noticia trata de eso, cuéntala solo como aviso al consumidor.
+- **Titulares honestos**: sin clickbait, sin exagerar, sin afirmar como hecho lo que es rumor. Nada de «gratis», «filtrado completo», «descarga» en titulares.
+- Nada de información personal de nadie (direcciones, cuentas privadas), ni ataques a personas concretas (incluidos filtradores o trabajadores de Rockstar).
+- Marcas: «GTA», «Rockstar» y nombres del juego solo para identificar de qué se habla. Nunca sugieras que la web es oficial.
+
+El verificador (`check-brief.mjs`) bloquea enlaces y palabras de riesgo y citas largas; si te avisa, reescribe o quita ese elemento.
+
 ## Reglas de contenido (obligatorias)
 
 ### Qué cuenta como nuevo

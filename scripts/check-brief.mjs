@@ -83,6 +83,30 @@ if ((d.context || []).length > 3) E("context: máximo 3");
   sources(c?.sources, `context[${i}]`);
 });
 
+// --- legal y AdSense: enlaces, palabras de riesgo y citas largas ---
+const riskyHost = /(^|\.)(mega\.nz|mediafire\.com|gofile\.io|pastebin\.com|4chan\.org|4channel\.org|thepiratebay\.[a-z]+|1337x\.[a-z]+|rutracker\.org|nyaa\.si|anonfiles\.com|dropbox\.com|drive\.google\.com|discord\.gg|t\.me|archive\.org|archive\.ph|archive\.today)$/i;
+const riskyWords = /\b(torrent|crack(?:ed|eado)?|warez|keygen|descarga(?:r)? gratis|free download|gratis para siempre|pirat(?:a|ear|ería|ed|e)|cuentas? compartidas?|account sharing|serial key|bypass drm)\b/i;
+const walk = (o, where) => {
+  if (typeof o === "string") {
+    if (riskyWords.test(o)) E(`${where}: contiene una palabra de riesgo legal/AdSense («${o.match(riskyWords)[0]}»). Cuéntalo solo como aviso, sin esos términos, o quítalo.`);
+    for (const m of o.matchAll(/[«"“]([^»"”]{1,600})[»"”]/g)) {
+      if (words(m[1]) > 20) E(`${where}: cita literal de ${words(m[1])} palabras. Máximo 20: resume con tus palabras.`);
+    }
+    return;
+  }
+  if (Array.isArray(o)) return o.forEach((x, i) => walk(x, `${where}[${i}]`));
+  if (o && typeof o === "object") for (const [k, v] of Object.entries(o)) if (k !== "url" && k !== "date") walk(v, where ? `${where}.${k}` : k);
+};
+walk(d, "");
+const allSources = [...(d.stories || []), ...(d.more || []), ...(d.rumors || []), ...(d.context || [])].flatMap((x) => x?.sources || []);
+for (const s of allSources) {
+  try {
+    const h = new URL(s.url).hostname;
+    if (riskyHost.test(h)) E(`fuente ${s.url}: ${h} no está permitido (descargas, foros de filtraciones o copias). Enlaza al medio que informa.`);
+    if (/\.(mp4|webm|mov|zip|rar|7z|iso|exe|apk|jpg|jpeg|png|gif)(\?|$)/i.test(new URL(s.url).pathname)) E(`fuente ${s.url}: enlaza a un archivo, no a un artículo.`);
+  } catch {}
+}
+
 // --- títulos repetidos (mismo día o días anteriores) ---
 const all = [...(d.stories || []), ...(d.more || []), ...(d.rumors || [])];
 const seen = new Set();
