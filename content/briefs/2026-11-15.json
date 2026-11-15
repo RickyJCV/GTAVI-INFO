@@ -60,7 +60,22 @@
     }
   ],
   "biggest": 0,
-  "more": [],
+  "more": [
+    {
+      "tag": "Lanzamiento",
+      "title": "Take-Two confirma que GTA VI ya es «gold»: la versión de lanzamiento está cerrada",
+      "change": "Según GameRant, Take-Two ha confirmado que GTA VI ha entrado en fase «gold», es decir, que el desarrollo de la versión de lanzamiento está terminado a cuatro días del estreno.",
+      "plain": "El juego que saldrá el 19 ya está acabado; lo que queda son ajustes y parches posteriores.",
+      "sources": [
+        {
+          "name": "GameRant",
+          "url": "https://gamerant.com/gta-6-gone-gold-meaning"
+        }
+      ],
+      "detail": "Los resultados no precisan cuándo se anunció, pero la información sigue vigente y no la habíamos contado. «Gold» no impide que lleguen parches, como el 1.002.000 del día 13, que es obligatorio para jugar.",
+      "why": "Reduce el riesgo de un nuevo retraso antes del estreno."
+    }
+  ],
   "rumors": [
     {
       "title": "Entradas en una base de datos de PlayStation apuntan a modo multijugador",
@@ -114,6 +129,25 @@
       ],
       "detail": "Solo hay una persona detrás del rumor y ningún medio de referencia lo ha comprobado. Es habitual que los estudios marquen las copias de prensa para localizar filtraciones, pero este caso concreto no está confirmado.",
       "why": "Si fuera cierto, explicaría por qué ha habido tan pocas filtraciones desde la prensa."
+    },
+    {
+      "title": "Un listado apunta a Dua Lipa, Jennie y Lana Del Rey en el álbum de GTA VI",
+      "change": "Insider Gaming y GamesRadar cuentan que un listado aparecido en la red de «GTA VI: The Album» menciona 34 canciones y artistas como Dua Lipa, Jennie y Lana Del Rey. Rockstar no ha confirmado la lista.",
+      "plain": "Puede que ya se sepa parte de los artistas del álbum, pero no es oficial.",
+      "reliability": "baja",
+      "who": "Listado de un vinilo · Insider Gaming y GamesRadar",
+      "sources": [
+        {
+          "name": "Insider Gaming",
+          "url": "https://insider-gaming.com/gta-6-album-leak-lists-dua-lipa-jennie-and-lana-del-rey"
+        },
+        {
+          "name": "GamesRadar",
+          "url": "https://gamesradar.com/games/grand-theft-auto/gta-6-the-album-seemingly-leaks-with-dua-lipa-and-lana-del-rey-as-part-of-the-full-34-song-tracklist"
+        }
+      ],
+      "detail": "Los medios lo describen como una filtración aparente y no enlazamos el material original. El álbum, de 34 temas, está anunciado para el 19 de noviembre, el día del estreno.",
+      "why": "Si es real, anticiparía parte de la música con la que sonará Leónida."
     }
   ],
   "posts": [
@@ -164,7 +198,16 @@
         "why": "It saves you from buying a code you can't use on your account."
       }
     ],
-    "more": [],
+    "more": [
+      {
+        "tag": "Launch",
+        "title": "Take-Two confirms GTA VI has gone gold: the launch build is locked",
+        "change": "According to GameRant, Take-Two has confirmed GTA VI has entered the \"gold\" phase, meaning development of the launch version is finished four days before release.",
+        "plain": "The game that ships on the 19th is done; what remains is tweaks and later patches.",
+        "detail": "The results don't say when it was announced, but the information is still current and we hadn't covered it. \"Gold\" doesn't stop patches, like the 1.002.000 one on the 13th, which is required to play.",
+        "why": "It lowers the risk of another delay before launch."
+      }
+    ],
     "rumors": [
       {
         "title": "Entries in a PlayStation database point to a multiplayer mode",
@@ -189,6 +232,14 @@
         "detail": "Just one person is behind the rumor and no major outlet has checked it. Studios often mark press copies to trace leaks, but this specific case isn't confirmed.",
         "why": "If true, it would explain why so little has leaked from the press side.",
         "who": "Alleged insider \"Jeremy\" · relayed by Tech Insider"
+      },
+      {
+        "title": "A listing points to Dua Lipa, Jennie and Lana Del Rey on the GTA VI album",
+        "change": "Insider Gaming and GamesRadar report that a listing that surfaced online for \"GTA VI: The Album\" mentions 34 songs and artists such as Dua Lipa, Jennie and Lana Del Rey. Rockstar hasn't confirmed the list.",
+        "plain": "Part of the album's artists may already be known, but it isn't official.",
+        "detail": "Outlets describe it as an apparent leak and we don't link the original material. The 34-track album is announced for November 19, launch day.",
+        "why": "If real, it would preview part of the music Leonida will sound like.",
+        "who": "Vinyl listing · Insider Gaming and GamesRadar"
       }
     ],
     "posts": [
