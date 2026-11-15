@@ -74,6 +74,34 @@
       ],
       "detail": "Los resultados no precisan cuándo se anunció, pero la información sigue vigente y no la habíamos contado. «Gold» no impide que lleguen parches, como el 1.002.000 del día 13, que es obligatorio para jugar.",
       "why": "Reduce el riesgo de un nuevo retraso antes del estreno."
+    },
+    {
+      "tag": "Aviso",
+      "title": "Precios en EE. UU.: 79,99 dólares la edición estándar y 99,99 la Ultimate",
+      "change": "Variety recuerda que GTA VI sale el 19 de noviembre en PS5 y Xbox Series X|S con la edición estándar a 79,99 dólares y la Ultimate a 99,99. En España los precios en euros pueden variar según la tienda.",
+      "plain": "Antes de comprar, compara el precio en tu tienda y comprueba qué incluye cada edición.",
+      "sources": [
+        {
+          "name": "Variety",
+          "url": "https://variety.com/2026/gaming/news/gta-6-preorders-expectations-launch-1236943278/"
+        }
+      ],
+      "detail": "Es información vigente que no habíamos contado y los resultados no precisan cuándo se anunciaron los precios. Variety añade que Take-Two dice que las reservas superan lo esperado, pero Rockstar no ha confirmado cifras exactas.",
+      "why": "Ayuda a decidir qué edición comprar en los días previos al estreno."
+    },
+    {
+      "tag": "Jugabilidad",
+      "title": "Rockstar detalla una mejora de PS5 Pro: sombras con trazado de rayos",
+      "change": "Según GameRant, Rockstar ha explicado que la versión de PS5 Pro añade sombras con trazado de rayos, algo que no ofrecen ni la PS5 normal ni las Xbox Series X|S.",
+      "plain": "Si tienes una PS5 Pro, verás sombras algo más realistas que en el resto de consolas.",
+      "sources": [
+        {
+          "name": "GameRant",
+          "url": "https://gamerant.com/gta-6-ps5-pro-framerate-features/"
+        }
+      ],
+      "detail": "Los resultados no precisan la fecha de la declaración, pero la información sigue vigente. El título corre a 30 fps en PS5 y Xbox, según Rockstar, y no se han dado más detalles sobre qué aporta Pro en rendimiento.",
+      "why": "Es la primera diferencia técnica concreta entre las versiones de consola."
     }
   ],
   "rumors": [
@@ -148,6 +176,21 @@
       ],
       "detail": "Los medios lo describen como una filtración aparente y no enlazamos el material original. El álbum, de 34 temas, está anunciado para el 19 de noviembre, el día del estreno.",
       "why": "Si es real, anticiparía parte de la música con la que sonará Leónida."
+    },
+    {
+      "title": "La historia durará unas 50 horas y el platino de PS5 unas 200, según una filtración",
+      "change": "Notebookcheck recoge que Tom Henderson habla de una historia de unas 50 horas y de unas 200 para el trofeo de platino de PS5. Se basa en impresiones de personas con acceso previo y Rockstar no lo ha confirmado.",
+      "plain": "Podría ser un juego largo, pero son cifras de segunda mano.",
+      "reliability": "media",
+      "who": "Tom Henderson · recogido por Notebookcheck",
+      "sources": [
+        {
+          "name": "Notebookcheck",
+          "url": "https://www.notebookcheck.net/Leak-says-GTA-6-story-takes-50-hours-to-complete-and-PS5-platinum-trophy-200-hours.1450952.0.html"
+        }
+      ],
+      "detail": "Henderson cuenta con buen historial en filtraciones del sector, pero aquí transmite impresiones de otros y no datos propios. No hay una duración oficial. Con las reseñas del día 18, podrían confirmarse o desmentirse.",
+      "why": "Da una idea de cuánto juego hay antes de decidir la compra."
     }
   ],
   "posts": [
@@ -206,6 +249,22 @@
         "plain": "The game that ships on the 19th is done; what remains is tweaks and later patches.",
         "detail": "The results don't say when it was announced, but the information is still current and we hadn't covered it. \"Gold\" doesn't stop patches, like the 1.002.000 one on the 13th, which is required to play.",
         "why": "It lowers the risk of another delay before launch."
+      },
+      {
+        "tag": "Heads-up",
+        "title": "US prices: $79.99 for the standard edition and $99.99 for Ultimate",
+        "change": "Variety notes GTA VI launches November 19 on PS5 and Xbox Series X|S with the standard edition at $79.99 and the Ultimate at $99.99. Euro prices in Spain may vary by store.",
+        "plain": "Before you buy, compare the price at your store and check what each edition includes.",
+        "detail": "This is current information we hadn't covered, and the results don't say when the prices were announced. Variety adds that Take-Two says preorders beat expectations, but Rockstar hasn't confirmed exact figures.",
+        "why": "It helps you pick an edition in the days before launch."
+      },
+      {
+        "tag": "Gameplay",
+        "title": "Rockstar details a PS5 Pro upgrade: ray-traced shadows",
+        "change": "According to GameRant, Rockstar has explained that the PS5 Pro version adds ray-traced shadows, which neither the standard PS5 nor the Xbox Series X|S offer.",
+        "plain": "If you have a PS5 Pro, you'll see slightly more realistic shadows than on other consoles.",
+        "detail": "The results don't give the statement's date, but the information is still current. The game runs at 30 fps on PS5 and Xbox, per Rockstar, and no further detail has been given on what Pro adds to performance.",
+        "why": "It's the first concrete technical difference between console versions."
       }
     ],
     "rumors": [
@@ -240,6 +299,14 @@
         "detail": "Outlets describe it as an apparent leak and we don't link the original material. The 34-track album is announced for November 19, launch day.",
         "why": "If real, it would preview part of the music Leonida will sound like.",
         "who": "Vinyl listing · Insider Gaming and GamesRadar"
+      },
+      {
+        "title": "The story would take about 50 hours and the PS5 platinum about 200, per a leak",
+        "change": "Notebookcheck reports that Tom Henderson mentions a story of about 50 hours and about 200 for the PS5 platinum trophy. It's based on impressions from people with early access and Rockstar hasn't confirmed it.",
+        "plain": "It could be a long game, but these are secondhand numbers.",
+        "detail": "Henderson has a good track record on industry leaks, but here he relays others' impressions, not his own data. There's no official length. With the reviews on the 18th, the figures could be confirmed or disproved.",
+        "why": "It gives an idea of how much game there is before deciding to buy.",
+        "who": "Tom Henderson · relayed by Notebookcheck"
       }
     ],
     "posts": [
