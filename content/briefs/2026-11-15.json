@@ -1,0 +1,206 @@
+{
+  "date": "2026-11-15",
+  "title": "GTA VI se podrá jugar en la nube de Xbox desde las 07:00 del día 19",
+  "summary": "Juego en la nube de Xbox con condiciones, avisos sobre los códigos de las cajas y los de PS5, y tres rumores sin confirmar sobre multijugador, presupuesto y reseñas.",
+  "lead": "A cuatro días del estreno, conviene repasar cómo y cuándo se podrá jugar, y qué cuidado hay que tener con los códigos de la edición en caja. Rockstar sigue sin comentar los avisos de los compradores.",
+  "stories": [
+    {
+      "tag": "Lanzamiento",
+      "title": "GTA VI llegará a la nube de Xbox a la 1:00 ET del 19 de noviembre",
+      "change": "Microsoft indica que el juego se podrá jugar por streaming en Xbox One y Xbox Series X|S desde la 1:00 ET del día 19 (07:00 en España). Se emitirá con ajustes de Xbox Series S y, al estreno, no está previsto en PC, móviles ni televisores.",
+      "plain": "Si no tienes consola nueva, podrás jugar por internet desde una Xbox, siempre que tu mercado tenga el servicio.",
+      "sources": [
+        {
+          "name": "Windows Central",
+          "url": "https://www.windowscentral.com/gaming/xbox/grand-theft-auto-6-will-be-playable-on-xbox-cloud-gaming-but-there-are-a-few-catches"
+        },
+        {
+          "name": "Notebookcheck",
+          "url": "https://notebookcheck.net/GTA-6-comes-to-Xbox-One-via-cloud-gaming-but-PC-players-are-left-out.1447209.0.html"
+        }
+      ],
+      "detail": "La información se conoce desde principios de octubre, pero sigue vigente y no la habíamos contado. En mercados compatibles se puede comprar tiempo de juego en la nube sin Game Pass. Sigue sin aclararse si el límite mensual de streaming de Game Pass Ultimate se aplicará a este juego.",
+      "why": "Es la vía para jugar el primer día sin comprar una consola nueva."
+    },
+    {
+      "tag": "Aviso",
+      "title": "Compradores de la edición en caja dicen que su código falta o ya estaba canjeado",
+      "change": "Según VGTimes, algunos compradores de la edición física aseguran que su caja trae un código ya canjeado o ninguno. Como no hay disco, sin código no se puede instalar. Rockstar no había comentado hasta ese informe.",
+      "plain": "Si compras la caja, abre y canjea el código cuanto antes. Si falla, guarda ticket y caja y contacta con la tienda y con el soporte.",
+      "sources": [
+        {
+          "name": "VGTimes",
+          "url": "https://vgtimes.com/gaming-news/174651-gta-6-physical-copies-reportedly-have-missing-download-codes.html"
+        },
+        {
+          "name": "tbreak",
+          "url": "https://tbreak.com/gta-6-physical-copies-no-disc/"
+        }
+      ],
+      "detail": "La edición física de GTA VI no incluye disco, solo un código para la tienda de PlayStation o de Microsoft. Son casos que cuentan los propios compradores y no hay cifras. Los medios no han encontrado un proceso oficial de reposición para códigos ausentes o usados.",
+      "why": "Un código que no funciona deja sin juego al comprador en pleno estreno."
+    },
+    {
+      "tag": "Aviso",
+      "title": "Los códigos de PS5 están atados a la región y los de Japón caducan",
+      "change": "Los códigos físicos de PS5 solo funcionan en una cuenta de PlayStation Network de la misma región en que se vendieron. Según Dexerto, los códigos de Japón caducan 170 días después del lanzamiento; Insider Gaming dice que en Xbox no hay bloqueo regional.",
+      "plain": "Compra el juego en la región de tu cuenta y canjea el código pronto, sobre todo si lo compras en Japón.",
+      "sources": [
+        {
+          "name": "Insider Gaming",
+          "url": "https://insider-gaming.com/gta-6-ps5-codes-are-region-locked-but-xbox-version-isnt/"
+        },
+        {
+          "name": "Dexerto",
+          "url": "https://www.dexerto.com/gta/gta-6-digital-codes-have-an-expiration-date-in-this-one-country-3391005/"
+        }
+      ],
+      "detail": "Es información práctica y todavía vigente, publicada antes de hoy. Un código que no se deja canjear puede deberse a una diferencia de región y no a un fallo de la caja. Rockstar no ha publicado una guía propia sobre estos casos.",
+      "why": "Evita comprar un código que luego no se pueda usar en tu cuenta."
+    }
+  ],
+  "biggest": 0,
+  "more": [],
+  "rumors": [
+    {
+      "title": "Entradas en una base de datos de PlayStation apuntan a modo multijugador",
+      "change": "Una cuenta que sigue los datos de PlayStation vio tres entradas llamadas joinSession, launchActivity y launchMultiplayerActivity. Eso solo indica que el sistema reconoce esos tipos de actividad. Ni Sony ni Rockstar han confirmado nada.",
+      "plain": "Hay pistas de que el juego prepara partidas online, pero nada confirma que estén listas.",
+      "reliability": "baja",
+      "who": "Cuenta de seguimiento de datos de PlayStation · medios que lo recogen",
+      "sources": [
+        {
+          "name": "HotHardware",
+          "url": "https://hothardware.com/news/playstation-files-gta-6-multiplayer"
+        },
+        {
+          "name": "Insider Gaming",
+          "url": "https://insider-gaming.com/gta-6-datamine-reveals-multiplayer-references/"
+        }
+      ],
+      "detail": "Algunos titulares atribuyen la filtración a Sony, pero ese papel no está probado: solo se sabe dónde aparecieron los datos. El listado oficial de PlayStation habla de juego sin conexión para un jugador. Otros informes sitúan el modo online en 2027.",
+      "why": "Si se confirma, indicaría que el online está más avanzado de lo que Rockstar ha dicho."
+    },
+    {
+      "title": "Un presupuesto de 2.000 millones de dólares, sin confirmar",
+      "change": "Circula que GTA VI sería el producto de entretenimiento más caro jamás hecho, con un coste de hasta 2.000 millones de dólares. Es una estimación de terceros: Rockstar y Take-Two no han dado cifras oficiales.",
+      "plain": "Se dice que es el juego más caro de la historia, pero nadie lo ha confirmado.",
+      "reliability": "baja",
+      "who": "Medios que recogen estimaciones · sin fuente oficial",
+      "sources": [
+        {
+          "name": "Xataka México",
+          "url": "https://www.xataka.com.mx/videojuegos/gta-6-tendra-presupuesto-2-000-millones-dolares-para-ser-producto-entretenimiento-caro-historia-reporte"
+        },
+        {
+          "name": "Tech Insider",
+          "url": "https://tech-insider.org/gta-vi-latest-leak-most-expensive-game-claim-unconfirmed-2026/"
+        }
+      ],
+      "detail": "Las cifras varían entre 1.000 y 2.000 millones según el medio. Una tabla de rumores atribuye a Rockstar un desmentido sobre una cifra superior a 1.500 millones, pero es un resumen secundario y no hemos podido comprobar el original.",
+      "why": "Marca la presión comercial que tendría que soportar el juego."
+    },
+    {
+      "title": "Un supuesto insider dice que las copias para reseñas muestran el nombre del periodista",
+      "change": "Un supuesto insider llamado «Jeremy», recogido por algunos medios, afirma que las copias de prensa enseñan en pantalla el nombre completo de cada periodista. No hay pruebas ni confirmación de Rockstar.",
+      "plain": "Se cuenta que Rockstar podría identificar quién filtra algo, pero es un único testimonio sin pruebas.",
+      "reliability": "baja",
+      "who": "Supuesto insider «Jeremy» · relatado por Tech Insider",
+      "sources": [
+        {
+          "name": "Tech Insider",
+          "url": "https://tech-insider.org/gta-vi-reviewer-trap-rumor-one-insider-zero-proof-2026/"
+        }
+      ],
+      "detail": "Solo hay una persona detrás del rumor y ningún medio de referencia lo ha comprobado. Es habitual que los estudios marquen las copias de prensa para localizar filtraciones, pero este caso concreto no está confirmado.",
+      "why": "Si fuera cierto, explicaría por qué ha habido tan pocas filtraciones desde la prensa."
+    }
+  ],
+  "posts": [
+    "GTA VI se podrá jugar en la nube de Xbox desde la 1:00 ET del 19 (07:00 en España), con ajustes de Series S y solo en Xbox, según Microsoft. Mira si tu mercado lo tiene. ☁️",
+    "Si compras GTA VI en caja, ojo: no trae disco, solo un código. Canjéalo en cuanto lo tengas y guarda ticket y caja por si falla. En PS5, el código depende de tu región. 🧾",
+    "Rumores de hoy, todos sin confirmar: pistas de multijugador en datos de PlayStation, un presupuesto de 2.000 millones y un cuento sobre copias de prensa marcadas. Fiabilidad: baja. 🕵️"
+  ],
+  "context": [
+    {
+      "title": "Llegó el parche 1.002.000, obligatorio para jugar el día 19",
+      "text": "Rockstar lo publicó el 13 de noviembre: unos 1,07 GB en PS5 y 2,18 GB en Xbox Series. No trae notas del parche.",
+      "date": "2026-11-13",
+      "sources": [
+        {
+          "name": "tbreak",
+          "url": "https://tbreak.com/gta-6-update-1-002-000/"
+        }
+      ]
+    }
+  ],
+  "en": {
+    "title": "GTA VI will be playable on Xbox cloud from 7 a.m. Spain time on the 19th",
+    "summary": "Xbox cloud play with limits, warnings about boxed-edition and PS5 codes, and three unconfirmed rumors about multiplayer, budget and review copies.",
+    "lead": "Four days before launch, it's worth going over how and when you'll be able to play, and what to watch for with boxed-edition codes. Rockstar still hasn't commented on buyers' reports.",
+    "stories": [
+      {
+        "tag": "Launch",
+        "title": "GTA VI reaches Xbox cloud at 1:00 a.m. ET on November 19",
+        "change": "Microsoft says the game will be playable by streaming on Xbox One and Xbox Series X|S from 1:00 a.m. ET on the 19th (7:00 a.m. in Spain). It runs at Xbox Series S settings and isn't planned for PC, phones or TVs at launch.",
+        "plain": "If you don't have a new console, you'll be able to play over the internet from an Xbox, as long as your market has the service.",
+        "detail": "This has been known since early October, but it's still current and we hadn't covered it. In supported markets you can buy cloud playtime without Game Pass. It's still unclear whether the Game Pass Ultimate monthly streaming cap will apply to this game.",
+        "why": "It's the route to playing on day one without buying a new console."
+      },
+      {
+        "tag": "Heads-up",
+        "title": "Boxed-edition buyers say their code is missing or already redeemed",
+        "change": "According to VGTimes, some physical-edition buyers say their box has an already redeemed code or none at all. With no disc, no code means no install. Rockstar hadn't commented as of that report.",
+        "plain": "If you buy the box, open it and redeem the code right away. If it fails, keep your receipt and box and contact the store and support.",
+        "detail": "GTA VI's physical edition has no disc, just a code for the PlayStation or Microsoft store. These are cases told by buyers themselves, with no numbers. Outlets haven't found an official replacement process for missing or used codes.",
+        "why": "A code that doesn't work leaves the buyer without the game at launch."
+      },
+      {
+        "tag": "Heads-up",
+        "title": "PS5 codes are region-locked and Japanese ones expire",
+        "change": "Physical PS5 codes only work on a PlayStation Network account from the same region they were sold in. According to Dexerto, Japanese codes expire 170 days after launch; Insider Gaming says Xbox isn't region-locked.",
+        "plain": "Buy the game in your account's region and redeem the code early, especially if you buy in Japan.",
+        "detail": "This is practical information that's still current, published before today. A code that won't redeem may be a region mismatch rather than a faulty box. Rockstar hasn't published its own guide on these cases.",
+        "why": "It saves you from buying a code you can't use on your account."
+      }
+    ],
+    "more": [],
+    "rumors": [
+      {
+        "title": "Entries in a PlayStation database point to a multiplayer mode",
+        "change": "An account that tracks PlayStation data spotted three entries named joinSession, launchActivity and launchMultiplayerActivity. That only shows the system recognizes those activity types. Neither Sony nor Rockstar has confirmed anything.",
+        "plain": "There are hints the game is preparing online play, but nothing confirms it's ready.",
+        "detail": "Some headlines credit Sony with the leak, but that role is unproven: all we know is where the data showed up. The official PlayStation listing mentions offline play for one player. Other reports place the online mode in 2027.",
+        "why": "If confirmed, it would mean online is further along than Rockstar has said.",
+        "who": "PlayStation data-tracking account · outlets reporting it"
+      },
+      {
+        "title": "A $2 billion budget, unconfirmed",
+        "change": "It's being said GTA VI would be the most expensive entertainment product ever made, costing up to $2 billion. It's an outside estimate: Rockstar and Take-Two haven't given official figures.",
+        "plain": "People say it's the most expensive game ever made, but nobody has confirmed it.",
+        "detail": "Figures range from $1 billion to $2 billion depending on the outlet. A rumor table attributes to Rockstar a denial of a figure above $1.5 billion, but it's a secondary summary and we couldn't check the original.",
+        "why": "It shows the commercial pressure the game would have to carry.",
+        "who": "Outlets repeating estimates · no official source"
+      },
+      {
+        "title": "An alleged insider says review copies show the journalist's name",
+        "change": "An alleged insider called \"Jeremy,\" relayed by some outlets, claims press copies show each journalist's full name on screen. There's no proof and no confirmation from Rockstar.",
+        "plain": "The story is that Rockstar could trace who leaks something, but it's one unproven account.",
+        "detail": "Just one person is behind the rumor and no major outlet has checked it. Studios often mark press copies to trace leaks, but this specific case isn't confirmed.",
+        "why": "If true, it would explain why so little has leaked from the press side.",
+        "who": "Alleged insider \"Jeremy\" · relayed by Tech Insider"
+      }
+    ],
+    "posts": [
+      "GTA VI will be playable on Xbox cloud from 1:00 a.m. ET on the 19th (7:00 a.m. in Spain), at Series S settings and only on Xbox, per Microsoft. Check whether your market has it. ☁️",
+      "Buying GTA VI in a box? No disc, just a code. Redeem it as soon as you have it and keep your receipt and box in case it fails. On PS5, the code depends on your region. 🧾",
+      "Today's rumors, all unconfirmed: multiplayer hints in PlayStation data, a $2 billion budget and a tale of marked press copies. Reliability: low. 🕵️"
+    ],
+    "context": [
+      {
+        "title": "Patch 1.002.000 arrived and is mandatory to play on the 19th",
+        "text": "Rockstar released it on November 13: about 1.07 GB on PS5 and 2.18 GB on Xbox Series. It has no patch notes."
+      }
+    ]
+  }
+}
