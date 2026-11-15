@@ -7,12 +7,16 @@ El dueño del repositorio autoriza **commit y push directo a `main`** (así se p
 
 ## Pasos
 
-1. **Repo.** Llama a `add_repo` (owner `leonidahoy`, repo `leonidahoy.github.io`, access `push`). Si no hay copia local: `git clone --depth 20 https://github.com/leonidahoy/leonidahoy.github.io && cd leonidahoy.github.io`. Trabaja en `main`.
+1. **Repo.** Llama a `add_repo` (owner `leonidahoy`, repo `leonidahoy.github.io`, access `push`). Si no la ves entre tus herramientas, búscala con ToolSearch (consulta `add_repo`) y llámala: sin ella el `git push` final falla. Si no hay copia local: `git clone --depth 20 https://github.com/leonidahoy/leonidahoy.github.io && cd leonidahoy.github.io`. Trabaja en `main`.
 2. **¿Ya está hecho?** `HOY=$(TZ=Europe/Madrid date +%F)`. Si existe `content/briefs/$HOY.json`, termina diciendo «El resumen de hoy ya estaba publicado».
 3. **Qué se publicó ya.** Lee solo el JSON más reciente de `content/briefs/` (es la referencia del formato y del tono) y lista títulos anteriores: `grep -h '"title"' content/briefs/*.json | tail -60`.
-4. **Busca** (todas las búsquedas en el mismo turno, modo `standard`; `extended` solo si salen pobres). Sugeridas:
-   - `GTA 6 news today` · `GTA VI Rockstar announcement` · `GTA 6 leak rumor insider` · `GTA 6 noticias hoy`
-   - y, si hace falta, una sobre el tema más fuerte del día para confirmar datos.
+4. **Busca.** Calcula las fechas en inglés: `HOY_EN=$(TZ=Europe/Madrid date +'%B %-d %Y')` y `AYER_EN=$(TZ=Europe/Madrid date -d yesterday +'%B %-d %Y')`. Lanza estas 4 en el mismo turno, en modo `extended` (las genéricas tipo «news today» devuelven páginas viejas):
+   - `GTA 6 news $HOY_EN`
+   - `GTA 6 news $AYER_EN`
+   - `GTA 6 Rockstar update OR announcement OR trailer $AYER_EN`
+   - `GTA 6 leak OR rumor OR insider November` (rumores)
+   Con lo que encuentres, como mucho 2 búsquedas más (`standard`) para confirmar datos del tema más fuerte. Fuentes que suelen tener la actualidad con fecha: Insider Gaming, VGC, IGN, GameSpot, Kotaku, Eurogamer, PC Gamer, Dexerto, VideoCardz, VGTimes, GamePro (directo), 3DJuegos, Vandal, Rockstar Newswire.
+   **Si salen menos de 3 noticias nuevas de 24 h,** amplía a 48 h (sin repetir lo ya publicado). Si aun así no hay ninguna noticia nueva, no publiques: responde explicando qué buscaste.
 5. **Escribe** `content/briefs/$HOY.json` siguiendo el esquema de abajo.
 6. **Verifica:** `node scripts/check-brief.mjs content/briefs/$HOY.json`. Si da errores, corrige exactamente lo que dice y repite hasta que diga «✓ … listo». Los avisos «⚠» no bloquean, pero léelos.
 7. **Construye:** `node scripts/build.mjs`. Debe decir `idiomas: es, en` y no `sin inglés`.
