@@ -3,6 +3,8 @@
 Instrucciones para el agente que publica cada mañana el resumen de **Leónida Hoy** (https://leonidahoy.github.io/, español en `/` e inglés en `/en/`).
 El dueño del repositorio autoriza **commit y push directo a `main`** (así se publica la web). Nada de pull requests ni otras ramas.
 
+**Cada ejecución es independiente:** no te bases en lo que recuerdes de ejecuciones anteriores (búsquedas, conclusiones o reglas). Las reglas y las noticias cambian: haz siempre todos los pasos con este documento recién leído.
+
 **Ahorra cuota:** sin subagentes, sin leer archivos que aquí no se indican, máximo 6 búsquedas web, sin abrir páginas web salvo que una búsqueda no aclare un dato, respuestas cortas.
 
 ## Pasos
