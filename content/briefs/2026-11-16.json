@@ -1,0 +1,118 @@
+{
+  "date": "2026-11-16",
+  "title": "GTA VI apuntaría a 30 fps en consolas, incluida la PS5 Pro, a tres días del estreno",
+  "summary": "Varios medios coinciden en que el juego irá a 30 fps también en PS5 Pro, y la precarga abierta desde el 10 de noviembre llegó con un teaser con un tema de Tove Lo.",
+  "lead": "Quedan tres días para el lanzamiento. La duda técnica del momento es si habrá un modo de 60 fps: las pistas apuntan a que no, al menos el primer día.",
+  "stories": [
+    {
+      "tag": "Jugabilidad",
+      "title": "GTA VI apuntaría a 30 fps en consolas, también en PS5 Pro",
+      "change": "Varios medios cuentan que Rockstar apunta a 30 fps estables en consolas, PS5 Pro incluida. TweakTown añade que su equipo técnico aún duda de un modo de 60 fps. No hemos podido comprobar la declaración original de Rockstar.",
+      "plain": "Es probable que el juego vaya a 30 imágenes por segundo, como GTA V y Red Dead Redemption 2 en su estreno. Un modo más fluido, si llega, sería posterior.",
+      "sources": [
+        {
+          "name": "TweakTown",
+          "url": "https://www.tweaktown.com/news/113337/rockstar-says-gta-6-will-run-at-30-fps-and-its-tech-team-is-still-unsure-about-a-60-fps-mode/index.html"
+        },
+        {
+          "name": "Giga",
+          "url": "https://www.giga.de/games/fuer-gta-6-gute-nachrichten-fuer-alle-die-auf-die-ps5-pro-verzichtet-haben--01M731MEPMP7V2B005JB2BD6PJ"
+        },
+        {
+          "name": "TechRadar",
+          "url": "https://techradar.com/gaming/60fps-feels-like-a-bridge-too-far-gta-6-is-likely-to-only-run-at-30fps-on-ps5-consoles-due-to-cpu-limitations-tech-analysts-say-but-theres-hope-that-a-40fps-mode-would-be-a-good-option-if-60-is-off-the-table"
+        }
+      ],
+      "detail": "Analistas como Digital Foundry creen que el límite es la CPU, que es la misma en PS5 y PS5 Pro, y no la GPU. Por eso un modo de 60 fps sería muy exigente. Algunos medios hablan de un posible modo intermedio de 40 fps, pero es solo una esperanza.",
+      "why": "Si juegas en PS5 Pro, no esperes más imágenes por segundo, sino mejoras visuales como las sombras."
+    }
+  ],
+  "biggest": 0,
+  "more": [
+    {
+      "tag": "Tráiler",
+      "title": "La precarga llegó con un nuevo teaser con una canción de Tove Lo",
+      "change": "Según Yahoo Tech, Rockstar abrió la precarga digital el 10 de noviembre y publicó a la vez un teaser con un tema de Tove Lo. El juego se desbloquea a medianoche local del día 19.",
+      "plain": "Si ya lo tienes precargado, solo falta esperar a la medianoche de tu zona horaria.",
+      "sources": [
+        {
+          "name": "Yahoo Tech",
+          "url": "https://tech.yahoo.com/gaming/articles/gta-vi-pre-loading-begins-151317413.html"
+        }
+      ],
+      "detail": "Es información de hace unos días, pero sigue vigente mientras la precarga siga abierta y no la habíamos contado. El teaser no enseña novedades importantes del juego según los resultados; el foco estuvo en la música.",
+      "why": "Te recuerda cuándo podrás jugar y que la precarga ya está abierta."
+    }
+  ],
+  "rumors": [],
+  "posts": [
+    "A 3 días: según varios medios, GTA VI apunta a 30 fps en consolas, también en PS5 Pro. Digital Foundry cree que el límite es la CPU. Rockstar no ha dado más detalles técnicos. 🎮",
+    "¿Precargaste? El juego se desbloquea a medianoche local del 19 de noviembre. Deja la consola encendida y con el parche 1.002.000 instalado. ⏰",
+    "Cuenta atrás: la precarga llegó con un teaser con un tema de Tove Lo. Nube de Xbox desde las 07:00 (España) del 19 y precios de 79,99 y 99,99 dólares en EE. UU. 🌴"
+  ],
+  "context": [
+    {
+      "title": "GTA VI llegará a la nube de Xbox a la 1:00 ET del día 19",
+      "text": "Microsoft indica que se podrá jugar por streaming en Xbox One y Series X|S desde la 1:00 ET (07:00 en España), con ajustes de Series S y sin PC al estreno.",
+      "date": "2026-11-15",
+      "sources": [
+        {
+          "name": "Windows Central",
+          "url": "https://www.windowscentral.com/gaming/xbox/grand-theft-auto-6-will-be-playable-on-xbox-cloud-gaming-but-there-are-a-few-catches"
+        }
+      ]
+    },
+    {
+      "title": "Precios en EE. UU.: 79,99 dólares la edición estándar y 99,99 la Ultimate",
+      "text": "Según Variety, PS5 y Xbox Series X|S. Take-Two dice que las reservas superan lo esperado, sin cifras oficiales.",
+      "date": "2026-11-15",
+      "sources": [
+        {
+          "name": "Variety",
+          "url": "https://variety.com/2026/gaming/news/gta-6-preorders-expectations-launch-1236943278/"
+        }
+      ]
+    }
+  ],
+  "en": {
+    "title": "GTA VI reportedly targets 30 fps on consoles, PS5 Pro included, three days before launch",
+    "summary": "Several outlets agree the game will run at 30 fps even on PS5 Pro, and the preload open since November 10 came with a teaser featuring a Tove Lo track.",
+    "lead": "Three days to go. The technical question of the moment is whether there will be a 60 fps mode: the signs point to no, at least on day one.",
+    "stories": [
+      {
+        "tag": "Gameplay",
+        "title": "GTA VI reportedly targets 30 fps on consoles, PS5 Pro included",
+        "change": "Several outlets say Rockstar is aiming for a stable 30 fps on consoles, PS5 Pro included. TweakTown adds that its tech team is still unsure about a 60 fps mode. We couldn't check Rockstar's original statement.",
+        "plain": "The game will likely run at 30 frames per second, like GTA V and Red Dead Redemption 2 at launch. A smoother mode, if it comes, would arrive later.",
+        "detail": "Analysts such as Digital Foundry think the limit is the CPU, which is the same on PS5 and PS5 Pro, not the GPU. That would make a 60 fps mode very demanding. Some outlets mention a possible 40 fps middle mode, but that's only a hope.",
+        "why": "If you play on PS5 Pro, don't expect more frames per second, but visual upgrades like shadows."
+      }
+    ],
+    "more": [
+      {
+        "tag": "Trailer",
+        "title": "The preload came with a new teaser featuring a Tove Lo song",
+        "change": "According to Yahoo Tech, Rockstar opened digital preload on November 10 and released a teaser with a Tove Lo track at the same time. The game unlocks at local midnight on the 19th.",
+        "plain": "If you've already preloaded it, all that's left is waiting for midnight in your time zone.",
+        "detail": "This is a few days old, but it's still current while preload remains open and we hadn't covered it. According to the results, the teaser doesn't show major new gameplay; the focus was the music.",
+        "why": "It reminds you when you can play and that preload is already open."
+      }
+    ],
+    "rumors": [],
+    "posts": [
+      "Three days out: several outlets say GTA VI targets 30 fps on consoles, PS5 Pro included. Digital Foundry thinks the CPU is the limit. Rockstar hasn't shared more technical detail. 🎮",
+      "Preloaded? The game unlocks at local midnight on November 19. Leave your console on with patch 1.002.000 installed. ⏰",
+      "Countdown: preload arrived with a teaser featuring a Tove Lo track. Xbox cloud from 7 a.m. Spain time on the 19th, and US prices of $79.99 and $99.99. 🌴"
+    ],
+    "context": [
+      {
+        "title": "GTA VI reaches Xbox cloud at 1:00 a.m. ET on the 19th",
+        "text": "Microsoft says it will stream on Xbox One and Series X|S from 1:00 a.m. ET (7:00 a.m. in Spain), at Series S settings and with no PC at launch."
+      },
+      {
+        "title": "US prices: $79.99 for the standard edition and $99.99 for Ultimate",
+        "text": "According to Variety, on PS5 and Xbox Series X|S. Take-Two says preorders beat expectations, with no official figures."
+      }
+    ]
+  }
+}
