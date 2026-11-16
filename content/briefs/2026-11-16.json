@@ -42,9 +42,47 @@
       ],
       "detail": "Es información de hace unos días, pero sigue vigente mientras la precarga siga abierta y no la habíamos contado. El teaser no enseña novedades importantes del juego según los resultados; el foco estuvo en la música.",
       "why": "Te recuerda cuándo podrás jugar y que la precarga ya está abierta."
+    },
+    {
+      "tag": "Estudio",
+      "title": "El autor de la filtración de 2022 se declara culpable a tres días del estreno",
+      "change": "El responsable de la filtración de 2022, que difundió unos 60 minutos de imágenes en desarrollo, se declaró culpable el 16 de noviembre. Forbes habla de extorsión a Rockstar y GamesRadar cifra el coste en unos 5 millones de dólares, según informes.",
+      "plain": "La persona que robó y publicó material del juego en 2022 ha admitido los cargos. La sentencia llegará más adelante.",
+      "sources": [
+        {
+          "name": "Forbes",
+          "url": "https://forbes.com/sites/paultassi/2026/11/16/caught-gta-6-leaker-pleads-guilty-to-extorting-rockstar-games"
+        },
+        {
+          "name": "GamesRadar",
+          "url": "https://www.gamesradar.com/games/grand-theft-auto/gta-6-hacker-who-reportedly-cost-rockstar-usd5-million-pleads-guilty-to-everything/"
+        },
+        {
+          "name": "Destructoid",
+          "url": "https://destructoid.com/gta-6-hacker-original-2022-leaks-guilty-ahead-launch"
+        }
+      ],
+      "detail": "Los medios lo sitúan ante un tribunal de Londres, donde también respondió por otros ataques informáticos. La cifra de 5 millones es un cálculo de la prensa, no un dato oficial de Rockstar. La fecha de la sentencia aún no se ha publicado.",
+      "why": "Cierra, al menos en lo judicial, uno de los episodios más graves de la historia del juego."
     }
   ],
-  "rumors": [],
+  "rumors": [
+    {
+      "title": "Casi 100 misiones de historia en cinco capítulos, según un insider",
+      "change": "Tom Henderson, de Insider Gaming, dijo el 15 de noviembre que la campaña tendría casi 100 misiones repartidas en cinco capítulos, y repitió la cifra de unas 50 horas de historia. Rockstar no ha confirmado nada.",
+      "plain": "Se habla de una campaña muy larga y dividida en cinco bloques, pero son datos sin confirmar.",
+      "reliability": "media",
+      "who": "Tom Henderson · Insider Gaming",
+      "sources": [
+        {
+          "name": "GameRant",
+          "url": "https://gamerant.com/gta-6-story-length-mission-count-how-long-to-platinum-leak"
+        }
+      ],
+      "detail": "Es la ampliación del rumor de duración que ya contamos ayer, con el número de misiones y capítulos como dato nuevo. Henderson tiene buen historial, pero Rockstar no ha dicho cuántos capítulos o misiones tiene el juego.",
+      "why": "Si es cierto, dibuja una campaña más larga y estructurada que la de GTA V."
+    }
+  ],
   "posts": [
     "A 3 días: según varios medios, GTA VI apunta a 30 fps en consolas, también en PS5 Pro. Digital Foundry cree que el límite es la CPU. Rockstar no ha dado más detalles técnicos. 🎮",
     "¿Precargaste? El juego se desbloquea a medianoche local del 19 de noviembre. Deja la consola encendida y con el parche 1.002.000 instalado. ⏰",
@@ -96,9 +134,26 @@
         "plain": "If you've already preloaded it, all that's left is waiting for midnight in your time zone.",
         "detail": "This is a few days old, but it's still current while preload remains open and we hadn't covered it. According to the results, the teaser doesn't show major new gameplay; the focus was the music.",
         "why": "It reminds you when you can play and that preload is already open."
+      },
+      {
+        "tag": "Studio",
+        "title": "The 2022 leak's author pleads guilty three days before launch",
+        "change": "The person behind the 2022 leak, which spread about 60 minutes of in-development footage, pleaded guilty on November 16. Forbes mentions extortion of Rockstar and GamesRadar puts the cost at about $5 million, according to reports.",
+        "plain": "The person who stole and published game material in 2022 has admitted the charges. Sentencing will come later.",
+        "detail": "Outlets place the case in a London court, where the person also answered for other hacks. The $5 million figure is a press estimate, not an official Rockstar number. No sentencing date has been published yet.",
+        "why": "It closes, at least legally, one of the most serious episodes in the game's history."
       }
     ],
-    "rumors": [],
+    "rumors": [
+      {
+        "title": "Nearly 100 story missions across five chapters, per an insider",
+        "change": "Insider Gaming's Tom Henderson said on November 15 that the campaign has nearly 100 missions split into five chapters, repeating the roughly 50-hour story figure. Rockstar hasn't confirmed anything.",
+        "plain": "A very long campaign divided into five blocks is being described, but it's unconfirmed.",
+        "detail": "This extends the length rumor we covered yesterday, with the mission and chapter counts as the new detail. Henderson has a good track record, but Rockstar hasn't said how many chapters or missions the game has.",
+        "why": "If true, it paints a longer, more structured campaign than GTA V's.",
+        "who": "Tom Henderson · Insider Gaming"
+      }
+    ],
     "posts": [
       "Three days out: several outlets say GTA VI targets 30 fps on consoles, PS5 Pro included. Digital Foundry thinks the CPU is the limit. Rockstar hasn't shared more technical detail. 🎮",
       "Preloaded? The game unlocks at local midnight on November 19. Leave your console on with patch 1.002.000 installed. ⏰",
