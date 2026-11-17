@@ -786,3 +786,6 @@ html[data-reader="nuevos"] .aud[data-aud="fans"] { display: none; }
   .to-top__ring .track { stroke: var(--line-2); }
   .to-top__ring .bar { stroke: var(--pink); stroke-linecap: round; stroke-dasharray: 100; stroke-dashoffset: 100; filter: drop-shadow(0 0 3px rgba(255, 47, 163, 0.75)); }
 }
+
+/* Si AdSense muestra un anuncio anclado abajo, el botón «volver arriba» se coloca encima */
+.to-top { bottom: calc(16px + var(--anchor-h, 0px)); transition: opacity 0.3s, transform 0.3s var(--ease), bottom 0.3s var(--ease); }

@@ -225,6 +225,23 @@
   document.querySelectorAll("details").forEach(function (d) { d.addEventListener("toggle", function () { measure(); onScroll(); }); });
   if (top) top.addEventListener("click", function () { window.scrollTo({ top: 0, behavior: reduced ? "auto" : "smooth" }); });
 
+  // Anuncio anclado inferior de AdSense: subir el botón «volver arriba» para que no lo tape
+  (function () {
+    var rootEl = document.documentElement, pending = false;
+    function fit() {
+      pending = false;
+      var h = 0;
+      document.querySelectorAll('ins.adsbygoogle[data-anchor-status="displayed"], ins.adsbygoogle[data-anchor-shown="true"]').forEach(function (el) {
+        var r = el.getBoundingClientRect();
+        if (r.height > 0 && r.bottom >= window.innerHeight - 2) h = Math.max(h, r.height);
+      });
+      rootEl.style.setProperty("--anchor-h", h ? Math.round(h) + "px" : "0px");
+    }
+    function schedule() { if (!pending) { pending = true; requestAnimationFrame(fit); } }
+    if ("MutationObserver" in window) new MutationObserver(schedule).observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ["data-anchor-status", "data-anchor-shown", "style"] });
+    window.addEventListener("resize", schedule, { passive: true });
+  })();
+
   // AdSense: activa cada bloque manual presente en la página
   var ads = document.querySelectorAll("ins.adsbygoogle");
   if (ads.length) {
