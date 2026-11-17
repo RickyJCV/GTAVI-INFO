@@ -34,6 +34,52 @@
       ],
       "detail": "Los resultados no dicen cuándo se publicó la nota, pero la previsión sigue vigente y no la habíamos contado. Son unidades vendidas, no reservas. Take-Two ha dicho que las reservas van muy por encima de lo esperado, sin dar cifras.",
       "why": "Da la escala comercial que se espera para el lanzamiento."
+    },
+    {
+      "tag": "Actualización",
+      "title": "Rockstar publica una segunda actualización antes del estreno, otra vez sin notas",
+      "change": "Según ComicBook, Rockstar ha lanzado una segunda actualización para PS5 y Xbox, tres días después de la primera, la del 13 de noviembre. Tampoco hay notas del parche.",
+      "plain": "Antes del jueves, enciende la consola y comprueba que todo está al día.",
+      "sources": [
+        {
+          "name": "ComicBook.com",
+          "url": "https://comicbook.com/gaming/news/gta-6-grand-theft-auto-vi-rockstar-games-update-1-002-today-ps5-xbox/"
+        }
+      ],
+      "detail": "Los resultados no indican el tamaño ni el número de versión de esta segunda actualización, ni si es obligatoria para jugar. Rockstar tampoco ha explicado qué cambia. Conviene dejar la consola conectada para que se instale sola.",
+      "why": "Evita sorpresas con descargas pendientes en el momento del desbloqueo."
+    },
+    {
+      "tag": "Jugabilidad",
+      "title": "Rockstar enseña el clima de Leónida con seis imágenes junto a The Weather Channel",
+      "change": "Según AllKeyShop y Keyforsteam, Rockstar se ha aliado con The Weather Channel para mostrar seis capturas del sistema de clima: tormentas tropicales, niebla marina y lluvia fuerte, con condiciones locales y persistentes.",
+      "plain": "El tiempo cambiará de una zona a otra de Leónida y afectará a lo que ves al conducir.",
+      "sources": [
+        {
+          "name": "AllKeyShop",
+          "url": "https://allkeyshop.com/blog/rockstar-weather-channel-gta-6-system-news-r"
+        },
+        {
+          "name": "Keyforsteam",
+          "url": "https://keyforsteam.de/rockstar-weather-channel-gta-6-wettersystem-news-r"
+        }
+      ],
+      "detail": "Según las fuentes, el clima influye en la visibilidad y en el manejo de los vehículos. Los resultados no precisan el día exacto de la presentación. No enlazamos las imágenes, que son material de Rockstar.",
+      "why": "Es la mejor pista hasta ahora de cómo se sentirá el mundo del juego."
+    },
+    {
+      "tag": "Estudio",
+      "title": "El jefe de publishing de Rockstar: habrían seguido trabajando en el juego",
+      "change": "Según EGW, que recoge una entrevista de The Guardian, el responsable de publishing de Rockstar dijo que el equipo habría seguido puliendo GTA VI si la decisión hubiera sido solo suya.",
+      "plain": "Rockstar admite que podría haber seguido retocando el juego, pero el lanzamiento llega ya.",
+      "sources": [
+        {
+          "name": "EGW",
+          "url": "https://egw.news/gaming/news/38525/gta-6-development-could-have-run-longer-rockstar-s-LlSampQc3"
+        }
+      ],
+      "detail": "Los resultados no dan la fecha de la entrevista, pero la declaración sigue vigente a dos días del estreno. No incluimos citas literales y no hay detalles sobre qué se habría cambiado.",
+      "why": "Ayuda a entender por qué el juego se ha retrasado dos veces antes de salir."
     }
   ],
   "rumors": [],
@@ -88,6 +134,30 @@
         "plain": "A bank calculates the game will sell a huge amount in a few months, but it's only a prediction.",
         "detail": "The results don't say when the note was published, but the forecast is still current and we hadn't covered it. These are units sold, not preorders. Take-Two has said preorders are running far above expectations, without giving numbers.",
         "why": "It gives the commercial scale expected for the launch."
+      },
+      {
+        "tag": "Update",
+        "title": "Rockstar releases a second update before launch, again with no notes",
+        "change": "According to ComicBook, Rockstar has released a second update for PS5 and Xbox, three days after the first one on November 13. There are no patch notes this time either.",
+        "plain": "Before Thursday, switch your console on and check everything is up to date.",
+        "detail": "The results don't give the size or version number of this second update, or whether it's mandatory to play. Rockstar hasn't explained what changes either. It's worth leaving your console connected so it installs itself.",
+        "why": "It avoids surprises with pending downloads at unlock time."
+      },
+      {
+        "tag": "Gameplay",
+        "title": "Rockstar shows Leonida's weather with six images alongside The Weather Channel",
+        "change": "According to AllKeyShop and Keyforsteam, Rockstar has teamed up with The Weather Channel to show six screenshots of the weather system: tropical storms, sea fog and heavy rain, with local and persistent conditions.",
+        "plain": "Weather will vary from one part of Leonida to another and affect what you see when driving.",
+        "detail": "According to the sources, weather affects visibility and vehicle handling. The results don't give the exact day of the reveal. We don't link the images, which are Rockstar material.",
+        "why": "It's the best hint so far of how the game's world will feel."
+      },
+      {
+        "tag": "Studio",
+        "title": "Rockstar's head of publishing: they would have kept working on the game",
+        "change": "According to EGW, relaying a Guardian interview, Rockstar's head of publishing said the team would have kept polishing GTA VI if the decision had been solely theirs.",
+        "plain": "Rockstar admits it could have kept tweaking the game, but launch is here.",
+        "detail": "The results don't give the interview date, but the statement is still current two days before launch. We include no direct quotes and there's no detail on what would have been changed.",
+        "why": "It helps explain why the game was delayed twice before release."
       }
     ],
     "rumors": [],
