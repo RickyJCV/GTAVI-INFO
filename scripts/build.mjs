@@ -112,6 +112,21 @@ for (const code of Object.keys(LOCALES)) {
   DATA[code] = { briefs, guide, dates: new Set(briefs.map((b) => b.date)), items, byKey: new Map(items.map((i) => [i.key, i])) };
 }
 const ACTIVE = Object.keys(LOCALES).filter((c) => DATA[c].briefs.length && DATA[c].guide);
+const LEONIDA = JSON.parse(fs.readFileSync(path.join(ROOT, "content/leonida.json"), "utf8"));
+const REVIEWS = JSON.parse(fs.readFileSync(path.join(ROOT, "content/reviews.json"), "utf8"));
+(REVIEWS.reviews || []).forEach((r, i) => {
+  const w = `content/reviews.json: reviews[${i}]`;
+  if (!r.outlet || typeof r.score !== "number" || typeof r.max !== "number" || r.max <= 0 || r.score < 0 || r.score > r.max) fail(`${w}: necesita outlet, score y max (número, score ≤ max)`);
+  if (!/^https?:\/\//.test(r.url || "")) fail(`${w}: url inválida`);
+});
+const reviewList = (REVIEWS.reviews || []).map((r) => ({ ...r, pct: Math.round((r.score / r.max) * 100) })).sort((a, b) => b.pct - a.pct);
+const reviewAvg = reviewList.length ? Math.round(reviewList.reduce((t, r) => t + r.pct, 0) / reviewList.length) : null;
+const LAUNCH_UTC_CLOUD = "2026-11-19T06:00:00Z"; // 1:00 ET del 19 (Xbox Cloud, según Microsoft)
+const crumbsLd = (items) => ({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: items.map(([name, p], i) => ({ "@type": "ListItem", position: i + 1, name, item: abs(p) })),
+});
 
 // Equivalencias entre idiomas: clave de página → ruta en cada idioma (si existe)
 const counterparts = (key) => {
@@ -310,6 +325,12 @@ ${jsonLd.map((j) => `<script type="application/ld+json">${JSON.stringify(j).repl
 <a class="skip" href="#main">${esc(L.t.skip)}</a>
 ${header(L, active, alts)}
 ${langHint(L, alts)}
+<div class="launch-bar" data-launch-bar data-launch="${esc(cfg.launchDate)}">
+  <div class="wrap launch-bar__inner">
+    <span data-lb="pre">🗓️ ${esc(L.t.launchBarPre(""))} <a href="${u(L.paths.release)}">${esc(L.t.launchBarPreCta)}</a></span>
+    <span data-lb="out" hidden>🎮 ${esc(L.t.launchBarOut)} <a href="${u(L.paths.reviews)}">${esc(L.t.launchBarOutCta)}</a></span>
+  </div>
+</div>
 <main id="main">
 ${body}
 </main>
@@ -371,10 +392,18 @@ const itemCard = (L, it, { num, variant = "mini" } = {}) => {
       </article>`;
 };
 
+const guidesCard = (L) => {
+  const P = L.paths;
+  const link = (href, emoji, [name, sub]) => `<li><a href="${u(href)}"><span aria-hidden="true">${emoji}</span><span><b>${esc(name)}</b><small>${esc(sub)}</small></span></a></li>`;
+  return `<div class="card"><h2 class="card__title">${esc(L.t.nav.guide)}</h2><ul class="guide-links">
+    ${link(P.release, "⏰", L.t.tiles.release)}${link(P.reviews, "⭐", L.t.tiles.reviews)}${link(P.leonida, "🌴", L.t.tiles.leonida)}${link(P.guide, "🧭", [L.t.nav.guide, L.t.hubGuideSub])}
+  </ul></div>`;
+};
 const sideCards = (L, { facts = true } = {}) => {
   const { guide } = DATA[L.code];
   const P = L.paths;
   return `
+      ${guidesCard(L)}
       <div class="card">${countdown(L, "sm")}</div>
       ${adUnit(L, "sidebar", "ad--sticky")}
       ${
@@ -460,8 +489,10 @@ const briefBody = (L, b) => {
     <nav class="hub" aria-label="${esc(L.t.jumpsLabel)}">
       ${tile("news", P.news, "📰", L.t.nav.news, L.t.hubNewsSub(top.length + more.length))}
       ${tile("rumors", P.rumors, "🕵️", L.t.nav.rumors, L.t.hubRumorsSub(rumors.length))}
+      ${tile("reviews", P.reviews, "⭐", L.t.tiles.reviews[0], reviewAvg !== null ? `${L.t.reviewsAvg}: ${reviewAvg} · ${L.t.reviewsCount(reviewList.length)}` : L.t.tiles.reviews[1])}
+      ${tile("release", P.release, "⏰", L.t.tiles.release[0], L.t.tiles.release[1])}
+      ${tile("leonida", P.leonida, "🌴", L.t.tiles.leonida[0], L.t.tiles.leonida[1])}
       ${tile("guide", P.guide, "🧭", L.t.nav.guide, L.t.hubGuideSub)}
-      ${tile("archive", P.archive, "🗓️", L.t.nav.archive, L.t.hubArchiveSub)}
     </nav>
     ${adUnit(L, "top")}
   </div>
@@ -682,8 +713,8 @@ for (const code of ACTIVE) {
   write(
     P.home,
     layout(L, {
-      title: cfg.name,
-      description: `${latest.summary} ${L.t.description}`.slice(0, 300),
+      title: L.t.homeTitle,
+      description: L.t.homeDesc,
       key: "home",
       active: "home",
       body: briefBody(L, latest),
@@ -746,11 +777,130 @@ for (const code of ACTIVE) {
             publisher,
             citation: it.sources.map((x) => x.url),
           },
+          crumbsLd([[L.t.crumbHome, P.home], [rumor ? L.t.nav.rumors : L.t.nav.news, rumor ? P.rumors : P.news], [it.title, it.path]]),
         ],
       })
     );
     sitemap.push([it.key, it.path, it.date, "monthly", "0.7"]);
   }
+
+  // ¿A qué hora sale? (búsqueda clave de la semana de lanzamiento)
+  {
+    const zones = code === "es"
+      ? [["España (peninsular)", "Europe/Madrid"], ["Canarias", "Atlantic/Canary"], ["México (centro)", "America/Mexico_City"], ["Colombia", "America/Bogota"], ["Perú", "America/Lima"], ["Venezuela", "America/Caracas"], ["Chile", "America/Santiago"], ["Argentina", "America/Argentina/Buenos_Aires"], ["EE. UU. (Este)", "America/New_York"], ["EE. UU. (Pacífico)", "America/Los_Angeles"]]
+      : [["US (Eastern)", "America/New_York"], ["US (Central)", "America/Chicago"], ["US (Mountain)", "America/Denver"], ["US (Pacific)", "America/Los_Angeles"], ["Canada (Toronto)", "America/Toronto"], ["UK", "Europe/London"], ["Spain", "Europe/Madrid"], ["Mexico (Central)", "America/Mexico_City"], ["Australia (Sydney)", "Australia/Sydney"]];
+    const cloudFmt = (tz) => new Intl.DateTimeFormat(L.intl, { timeZone: tz, weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }).format(new Date(LAUNCH_UTC_CLOUD));
+    write(
+      P.release,
+      layout(L, {
+        title: L.t.releaseTitle,
+        description: L.t.releaseDesc,
+        key: "release",
+        active: "guide",
+        type: "article",
+        jsonLd: [
+          { "@context": "https://schema.org", "@type": "FAQPage", inLanguage: code, mainEntity: L.t.releaseFaq.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) },
+          crumbsLd([[L.t.crumbHome, P.home], [L.t.nav.guide, P.guide], [L.t.releaseH1, P.release]]),
+        ],
+        body: `
+  <section class="page-head page-head--release"><div class="wrap">
+    <p class="eyebrow">${esc(L.t.releaseEyebrow)}</p><h1>${esc(L.t.releaseH1)}</h1><p class="lead-text">${esc(L.t.releaseLead)}</p>
+    <div class="release-cd">${countdown(L, "lg")}</div>
+    <p class="your-tz muted small" data-your-tz="${esc(L.t.releaseYourTz("{tz}"))}"></p>
+  </div></section>
+  <div class="wrap layout">
+    <div class="col-main">
+      <section class="block" aria-labelledby="by-country"><div class="block__head"><h2 id="by-country">${esc(L.t.releaseTable)}</h2></div>
+        <div class="table-wrap"><table class="tz-table">
+          <thead><tr><th scope="col">${esc(L.t.releaseCountry)}</th><th scope="col">${esc(L.t.releaseConsole)}</th><th scope="col">${esc(L.t.releaseCloud)}</th></tr></thead>
+          <tbody>${zones.map(([n, tz]) => `<tr><th scope="row">${esc(n)}</th><td>${esc(L.t.releaseMidnight)}</td><td>${esc(cloudFmt(tz))}</td></tr>`).join("")}</tbody>
+        </table></div>
+        <p class="muted small">${esc(L.t.releaseCloudNote)}</p>
+      </section>
+      ${adUnit(L, "top")}
+      <section class="block" aria-labelledby="before"><div class="block__head"><h2 id="before">${esc(L.t.releaseBefore)}</h2></div>
+        <ul class="checklist">${L.t.releaseChecklist.map((c) => `<li>${esc(c)}</li>`).join("")}</ul>
+      </section>
+      <section class="block" aria-labelledby="faq"><div class="block__head"><h2 id="faq">${esc(L.t.faq)}</h2></div>
+        <div class="faq">${L.t.releaseFaq.map(([q, a], i) => `<details${i < 2 ? " open" : ""}><summary>${esc(q)}</summary><div class="faq__a"><p>${esc(a)}</p></div></details>`).join("")}</div>
+        ${sourcesHtml(L, [
+          { name: "Variety", url: "https://variety.com/2026/gaming/news/gta-6-preorders-expectations-launch-1236943278/" },
+          { name: "Windows Central", url: "https://www.windowscentral.com/gaming/xbox/grand-theft-auto-6-will-be-playable-on-xbox-cloud-gaming-but-there-are-a-few-catches" },
+          { name: "tbreak", url: "https://tbreak.com/gta-6-update-1-002-000/" },
+        ])}
+      </section>
+      ${adUnit(L, "bottom")}
+    </div>
+    <aside class="col-side">${sideCards(L)}</aside>
+  </div>`,
+      })
+    );
+    sitemap.push(["release", P.release, latest.date, "daily", "0.9"]);
+  }
+
+  // Leonida: mapa y personajes (búsquedas «Leonida», «mapa GTA 6», «personajes GTA 6»)
+  write(
+    P.leonida,
+    layout(L, {
+      title: L.t.leonidaTitle,
+      description: L.t.leonidaDesc,
+      key: "leonida",
+      active: "guide",
+      type: "article",
+      jsonLd: [
+        { "@context": "https://schema.org", "@type": "Article", headline: L.t.leonidaTitle, description: L.t.leonidaDesc, inLanguage: code, dateModified: LEONIDA.updated, mainEntityOfPage: abs(P.leonida), author: { "@type": "Organization", name: cfg.name }, publisher, about: { "@type": "VideoGame", name: "Grand Theft Auto VI" }, image: [abs(code === "es" ? "/assets/og.png" : `/assets/og-${code}.png`)] },
+        crumbsLd([[L.t.crumbHome, P.home], [L.t.nav.guide, P.guide], [L.t.leonidaH1, P.leonida]]),
+      ],
+      body: `
+  <section class="page-head page-head--leonida"><div class="wrap"><p class="eyebrow">${esc(L.t.leonidaEyebrow)}</p><h1>${esc(L.t.leonidaH1)}</h1><p class="lead-text">${esc(L.t.leonidaLead)}</p></div></section>
+  <div class="wrap layout">
+    <div class="col-main">
+      <section class="block" aria-labelledby="regions"><div class="block__head"><h2 id="regions">${esc(L.t.leonidaRegions)}</h2></div>
+        <div class="region-grid">${LEONIDA.regions.map((r, i) => `<article class="region"><span class="region__n">${String(i + 1).padStart(2, "0")}</span><span class="region__icon" aria-hidden="true">${r.icon}</span><h3>${esc(r.name)}</h3><p>${esc(r[code] || r.es)}</p></article>`).join("")}</div>
+      </section>
+      ${adUnit(L, "top")}
+      <section class="block" aria-labelledby="chars"><div class="block__head"><h2 id="chars">${esc(L.t.leonidaCharacters)}</h2></div>
+        <div class="char-grid">${LEONIDA.characters.map((c) => `<article class="char"><span class="char__av" aria-hidden="true">${esc(c.name.split(/\s+/).map((w) => w[0]).join("").slice(0, 2))}</span><div><h3>${esc(c.name)}</h3><span class="tag">${esc(c["role_" + code] || c.role_es)}</span><p>${esc(c[code] || c.es)}</p></div></article>`).join("")}</div>
+      </section>
+      <p class="callout"><span>⚠ ${esc(L.t.leonidaRumor)}</span> <a href="${u(P.rumors)}">${esc(L.t.leonidaRumorCta)}</a></p>
+      ${sourcesHtml(L, LEONIDA.sources)}
+      ${adUnit(L, "bottom")}
+    </div>
+    <aside class="col-side">${sideCards(L)}</aside>
+  </div>`,
+    })
+  );
+  sitemap.push(["leonida", P.leonida, LEONIDA.updated, "weekly", "0.9"]);
+
+  // Notas de la prensa
+  write(
+    P.reviews,
+    layout(L, {
+      title: L.t.reviewsTitle,
+      description: L.t.reviewsDesc,
+      key: "reviews",
+      active: "guide",
+      type: "article",
+      jsonLd: [crumbsLd([[L.t.crumbHome, P.home], [L.t.nav.guide, P.guide], [L.t.reviewsH1, P.reviews]])],
+      body: `
+  <section class="page-head page-head--reviews"><div class="wrap"><p class="eyebrow">${esc(L.t.reviewsEyebrow)}</p><h1>${esc(L.t.reviewsH1)}</h1><p class="lead-text">${esc(L.t.reviewsLead)}</p></div></section>
+  <div class="wrap layout">
+    <div class="col-main">
+      ${
+        reviewList.length
+          ? `<div class="score-hero"><div class="score-ring" style="--p:${reviewAvg}"><b>${reviewAvg}</b><small>/100</small></div><div><h2>${esc(L.t.reviewsAvg)}</h2><p class="muted">${esc(L.t.reviewsCount(reviewList.length))}</p></div></div>
+      <div class="table-wrap"><table class="tz-table score-table"><thead><tr><th scope="col">${esc(L.t.reviewsOutlet)}</th><th scope="col">${esc(L.t.reviewsScore)}</th><th scope="col"></th></tr></thead>
+        <tbody>${reviewList.map((r) => `<tr><th scope="row">${esc(r.outlet)}</th><td><span class="score score--${r.pct >= 90 ? "hi" : r.pct >= 75 ? "mid" : "lo"}">${esc(String(r.score))}${r.max !== 100 ? `/${esc(String(r.max))}` : ""}</span></td><td><a href="${esc(r.url)}" target="_blank" rel="noopener nofollow">${esc(L.t.reviewsRead)} ↗</a></td></tr>`).join("")}</tbody></table></div>`
+          : `<div class="empty-state"><span aria-hidden="true">⏳</span><p>${esc(L.t.reviewsEmpty)}</p><div class="release-cd">${countdown(L, "sm")}</div></div>`
+      }
+      <p class="muted small">${esc(L.t.reviewsNote)}</p>
+      ${adUnit(L, "bottom")}
+    </div>
+    <aside class="col-side">${sideCards(L)}</aside>
+  </div>`,
+    })
+  );
+  sitemap.push(["reviews", P.reviews, REVIEWS.updated, "daily", "0.9"]);
 
   // Archivo
   write(
@@ -810,6 +960,7 @@ for (const code of ACTIVE) {
     </div>
     <aside class="col-side">
       <div class="card">${countdown(L, "sm")}</div>
+      ${guidesCard(L)}
       ${adUnit(L, "sidebar", "ad--sticky")}
       <div class="card card--cta"><h2 class="card__title">${esc(L.t.latest)}</h2><p class="small">${esc(latest.title)}</p><a class="btn btn--primary btn--block" href="${u(P.home)}">${esc(L.t.readToday)}</a></div>
     </aside>
@@ -933,7 +1084,24 @@ ${sitemap
 `
 );
 
-write("robots.txt", `User-agent: *\nAllow: /\n\nSitemap: ${abs("/sitemap.xml")}\n`);
+// Sitemap de Google Noticias: artículos de los últimos 2 días
+{
+  const newest = rawBriefs[0].date;
+  const cutoff = new Date(new Date(newest + "T12:00:00Z").getTime() - 2 * 864e5).toISOString().slice(0, 10);
+  const entries = [];
+  for (const code of ACTIVE) for (const it of DATA[code].items) if (it.date >= cutoff) entries.push([code, it]);
+  write(
+    "news-sitemap.xml",
+    `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+${entries
+  .map(([code, it]) => `  <url><loc>${abs(it.path)}</loc><news:news><news:publication><news:name>${esc(cfg.name)}</news:name><news:language>${code}</news:language></news:publication><news:publication_date>${it.date}T07:00:00+01:00</news:publication_date><news:title>${esc(it.title)}</news:title></news:news></url>`)
+  .join("\n")}
+</urlset>
+`
+  );
+}
+write("robots.txt", `User-agent: *\nAllow: /\n\nSitemap: ${abs("/sitemap.xml")}\nSitemap: ${abs("/news-sitemap.xml")}\n`);
 if (ADS) write("ads.txt", `google.com, ${ADS.replace(/^ca-/, "")}, DIRECT, f08c47fec0942fa0\n`);
 write(
   "manifest.webmanifest",

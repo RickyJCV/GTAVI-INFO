@@ -1,0 +1,117 @@
+{
+  "updated": "2026-11-17",
+  "sources": [
+    {
+      "name": "Rockstar Games (web oficial)",
+      "url": "https://www.rockstargames.com/VI"
+    },
+    {
+      "name": "PC Gamer",
+      "url": "https://www.pcgamer.com/games/grand-theft-auto/gta6-map"
+    },
+    {
+      "name": "GamesRadar+",
+      "url": "https://www.gamesradar.com/games/grand-theft-auto/gta-6-locations"
+    },
+    {
+      "name": "VGC",
+      "url": "https://www.videogameschronicle.com/news/gta-6s-cast-of-characters-revealed-including-a-conspiracy-theorist-and-strip-club-gangster"
+    }
+  ],
+  "regions": [
+    {
+      "name": "Vice City",
+      "icon": "🌆",
+      "es": "La gran ciudad, inspirada en Miami: playas, rascacielos, vida nocturna, tiendas y un puerto con mucho movimiento.",
+      "en": "The big city, inspired by Miami: beaches, skyscrapers, nightlife, shopping and a busy port."
+    },
+    {
+      "name": "Leonida Keys",
+      "icon": "🏝️",
+      "es": "Cadena de islas tropicales unidas por puentes. Aquí el barco es casi tan importante como el coche.",
+      "en": "A chain of tropical islands linked by bridges, where boats matter almost as much as cars."
+    },
+    {
+      "name": "Grassrivers",
+      "icon": "🐊",
+      "es": "Humedales al estilo de los Everglades: pantanos, manglares, caimanes y canales escondidos.",
+      "en": "Everglades-style wetlands: swamps, mangroves, alligators and hidden waterways."
+    },
+    {
+      "name": "Port Gellhorn",
+      "icon": "🎡",
+      "es": "Antiguo destino turístico de costa que ha ido a menos con los años.",
+      "en": "A former seaside tourist spot that has seen better days."
+    },
+    {
+      "name": "Ambrosia",
+      "icon": "🏭",
+      "es": "Zona industrial y agrícola, marcada por la gran refinería de azúcar Allied Crystal.",
+      "en": "An industrial and farming area, dominated by the huge Allied Crystal sugar refinery."
+    },
+    {
+      "name": "Mount Kalaga National Park",
+      "icon": "⛰️",
+      "es": "El norte salvaje del estado: bosques, montaña y naturaleza para explorar.",
+      "en": "The state's wild north: forests, mountains and nature to explore."
+    }
+  ],
+  "characters": [
+    {
+      "name": "Lucia Caminos",
+      "role_es": "Protagonista",
+      "role_en": "Protagonist",
+      "es": "Primera mujer protagonista jugable de la saga principal. Sale de la cárcel decidida a cambiar su vida.",
+      "en": "The first playable female lead in the main series. She leaves prison determined to change her life."
+    },
+    {
+      "name": "Jason Duval",
+      "role_es": "Protagonista",
+      "role_en": "Protagonist",
+      "es": "Exmilitar que acaba trabajando para traficantes en los Cayos y busca una vida más tranquila.",
+      "en": "An army veteran who ends up working for smugglers in the Keys and wants a quieter life."
+    },
+    {
+      "name": "Cal Hampton",
+      "role_es": "Amigo de Jason",
+      "role_en": "Jason's friend",
+      "es": "Prefiere quedarse en casa escuchando las comunicaciones de la Guardia Costera.",
+      "en": "Prefers staying at home, listening in on Coast Guard radio."
+    },
+    {
+      "name": "Boobie Ike",
+      "role_es": "Empresario",
+      "role_en": "Businessman",
+      "es": "Figura local de Vice City con varios negocios en la ciudad.",
+      "en": "A Vice City local figure with several businesses in town."
+    },
+    {
+      "name": "Dre'Quan Priest",
+      "role_es": "Magnate musical",
+      "role_en": "Music mogul",
+      "es": "Productor que quiere convertir su sello en un imperio.",
+      "en": "A producer who wants to turn his label into an empire."
+    },
+    {
+      "name": "Real Dimez",
+      "role_es": "Dúo de rap",
+      "role_en": "Rap duo",
+      "es": "Dúo de rap convertido en fenómeno de las redes sociales.",
+      "en": "A rap duo turned social media sensation."
+    },
+    {
+      "name": "Raul Bautista",
+      "role_es": "Atracador",
+      "role_en": "Bank robber",
+      "es": "Veterano atracador de bancos, siempre en busca del siguiente golpe.",
+      "en": "A veteran bank robber always looking for the next score."
+    },
+    {
+      "name": "Brian Heder",
+      "role_es": "Traficante veterano",
+      "role_en": "Veteran smuggler",
+      "es": "Viejo traficante de los Cayos que deja vivir a Jason sin pagar alquiler.",
+      "en": "An old-school smuggler from the Keys who lets Jason live rent-free."
+    }
+  ]
+}

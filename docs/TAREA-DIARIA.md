@@ -45,6 +45,19 @@ Objetivo: cobertura cada 12 horas sin repetir nada. Máximo 4 búsquedas.
    - no toques `stories`, `biggest`, `posts` ni `context`.
 5. Pasos 6, 7, 9, 10 y 11 igual que por la mañana, con el mensaje de commit `Resumen GTA VI $HOY (tarde)`. En la respuesta, lista solo lo añadido.
 
+## Notas de la prensa (`content/reviews.json`)
+
+Desde que se levante el embargo de análisis (previsto el 18 de noviembre de 2026) y durante unas semanas, en **cada** ejecución:
+1. Busca (dentro de tu límite de búsquedas) `GTA 6 review score` y `GTA 6 análisis nota`.
+2. Añade a `content/reviews.json` cada análisis **nuevo** de un medio reconocido: `{"outlet": "IGN", "score": 10, "max": 10, "url": "https://…análisis concreto…", "date": "AAAA-MM-DD"}`. `score` y `max` son números (por ejemplo 9.5 sobre 10, o 92 sobre 100). Actualiza `updated` con la fecha de hoy.
+3. Solo la puntuación y el enlace: **nunca copies texto del análisis**. Nada de notas filtradas, de usuarios o de webs sin nombre. No repitas medios que ya estén.
+4. `node scripts/build.mjs` valida el archivo. Incluye `content/reviews.json` en el commit (`git add content`).
+5. Si es la noticia del día (por ejemplo, «GTA VI arrasa en la prensa»), cuéntala también en el resumen como noticia, con las fuentes.
+
+## Semana de lanzamiento: prioridades
+
+Del 17 al 22 de noviembre la gente busca sobre todo: **a qué hora sale**, **las notas**, **problemas de descarga o servidores**, **tamaño y parches**, **ediciones y códigos**, **mapa y personajes**. Prioriza esas noticias (si son nuevas y con fuente). Escribe los títulos con «GTA VI» o «GTA 6» y el dato clave al principio (ejemplo: «GTA VI ya tiene nota media: 97 en la prensa»).
+
 ## Reglas legales y de AdSense (obligatorias, por encima de todo lo demás)
 
 La web vive de la publicidad de Google AdSense y debe ser 100 % legal. Si una noticia o rumor no puede contarse cumpliendo esto, **no lo publiques**.

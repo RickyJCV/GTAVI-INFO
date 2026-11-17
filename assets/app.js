@@ -225,6 +225,25 @@
   document.querySelectorAll("details").forEach(function (d) { d.addEventListener("toggle", function () { measure(); onScroll(); }); });
   if (top) top.addEventListener("click", function () { window.scrollTo({ top: 0, behavior: reduced ? "auto" : "smooth" }); });
 
+  // Barra de lanzamiento: antes del día, «¿a qué hora?»; desde el día, «ya disponible»; se oculta 10 días después
+  document.querySelectorAll("[data-launch-bar]").forEach(function (bar) {
+    var t = new Date(bar.getAttribute("data-launch")).getTime();
+    if (isNaN(t)) return;
+    var now = Date.now();
+    var out = now >= t;
+    if (now > t + 10 * 864e5) { bar.hidden = true; return; }
+    bar.querySelector('[data-lb="pre"]').hidden = out;
+    bar.querySelector('[data-lb="out"]').hidden = !out;
+  });
+
+  // Página «¿A qué hora sale?»: mostrar la zona horaria del visitante
+  document.querySelectorAll("[data-your-tz]").forEach(function (el) {
+    try {
+      var tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      if (tz) el.textContent = el.getAttribute("data-your-tz").replace("{tz}", tz.replace(/_/g, " "));
+    } catch (e) {}
+  });
+
   // Anuncio anclado inferior de AdSense: subir el botón «volver arriba» para que no lo tape
   (function () {
     var rootEl = document.documentElement, pending = false;
