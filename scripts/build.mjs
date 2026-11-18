@@ -362,7 +362,7 @@ ${published ? `<meta property="article:published_time" content="${published}">` 
 <link rel="preload" href="${u("/assets/fonts/inter-latin.woff2")}" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="${u("/assets/fonts/anton-latin.woff2")}" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="${u("/assets/fonts.css")}?v=${FONTS_V}">
-<script>(function(){var r=document.documentElement,t=null;r.className+=" js";try{var d=sessionStorage.getItem("lh-vt");if(d){r.className+=" vt-"+d;sessionStorage.removeItem("lh-vt")}}catch(e){}try{if(Date.now()>=new Date("${esc(cfg.launchDate)}").getTime())r.className+=" launched"}catch(e){}try{if(localStorage.getItem("lh-aud")==="nuevos")r.setAttribute("data-reader","nuevos");localStorage.removeItem("lh-theme");t=localStorage.getItem("lh-tema")}catch(e){}var y=window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";if(t!=="light"&&t!=="dark"||t===y){if(t)try{localStorage.removeItem("lh-tema")}catch(e){}t=null}if(t)r.setAttribute("data-theme",t);var n=t||y;r.setAttribute("data-theme-now",n);var m=document.querySelector("[data-theme-color]");if(m)m.setAttribute("content",n==="light"?"#fff6fb":"#0b0618")})()</script>
+<script>(function(){var r=document.documentElement,t=null;r.className+=" js";try{var d=sessionStorage.getItem("lh-vt");if(d){r.className+=" vt-"+d;sessionStorage.removeItem("lh-vt")}}catch(e){}try{if(Date.now()>=new Date("${esc(cfg.launchDate)}").getTime())r.className+=" launched"}catch(e){}try{if(localStorage.getItem("lh-aud")==="nuevos")r.setAttribute("data-reader","nuevos");localStorage.removeItem("lh-theme");t=localStorage.getItem("lh-tema")}catch(e){}var y=window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";if(t!=="light"&&t!=="dark"||t===y){if(t)try{localStorage.removeItem("lh-tema")}catch(e){}t=null}if(t)r.setAttribute("data-theme",t);var n=t||y;r.setAttribute("data-theme-now",n);var m=document.querySelector("[data-theme-color]");if(m)m.setAttribute("content",n==="light"?"#fff6fb":"#0b0618");try{if(sessionStorage.getItem("lh-seen"))r.className+=" warm";sessionStorage.setItem("lh-seen","1")}catch(e){}addEventListener("pagereveal",function(e){var v=e.viewTransition;if(!v)return;try{var a=window.navigation&&navigation.activation;if(a&&a.navigationType==="traverse"&&a.from&&a.entry&&!/vt-/.test(r.className))r.classList.add(a.from.index>a.entry.index?"vt-prev":"vt-next")}catch(x){}v.finished.finally(function(){r.classList.remove("vt-next","vt-prev")})})})()</script>
 <link rel="stylesheet" href="${u("/assets/styles.css")}?v=${CSS_V}">
 ${ADS ? `<meta name="google-adsense-account" content="${esc(ADS)}">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${esc(ADS)}" crossorigin="anonymous"></script>` : ""}
@@ -388,7 +388,7 @@ ${installSheet(L)}
 <button class="to-top" type="button" aria-label="${esc(L.t.toTop)}" data-to-top><svg class="to-top__ring" viewBox="0 0 48 48" aria-hidden="true"><circle class="track" cx="24" cy="24" r="22.5" pathLength="100"/><circle class="bar" cx="24" cy="24" r="22.5" pathLength="100" data-progress-ring/></svg><svg class="to-top__arrow" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M6 15l6-6 6 6"/></svg></button>
 ${footer(L)}
 <script src="${u("/assets/app.js")}?v=${JS_V}" defer></script>
-<script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/*.xml"}}]},"eagerness":"moderate"}]}</script>
+<script type="speculationrules">{"prerender":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/*.(xml|json|txt|png|svg|webmanifest)"}},{"not":{"selector_matches":"[target],[download],[rel~=nofollow]"}}]},"eagerness":"moderate"}],"prefetch":[{"where":{"selector_matches":".tabbar a:not([aria-current]),.nav a:not([aria-current])"},"eagerness":"eager"}]}</script>
 </body>
 </html>
 `;
@@ -1282,8 +1282,33 @@ const trim = async (name, max) => {
   const keys = await c.keys();
   for (let i = 0; i < keys.length - max; i++) await c.delete(keys[i]);
 };
+// Páginas precargadas al tocar un enlace (Safari/Firefox): se sirven al instante si tienen menos de 90 s
+const WARM = "lh-warm";
+const warmPut = async (req) => {
+  const res = await fetch(new Request(req.url, { cache: "no-cache", credentials: "same-origin" }));
+  if (res && res.ok && res.type === "basic") {
+    const h = new Headers(res.headers); h.set("x-lh-at", String(Date.now()));
+    const body = await res.clone().blob();
+    const c = await caches.open(WARM);
+    await c.put(req.url, new Response(body, { status: res.status, statusText: res.statusText, headers: h }));
+    caches.open(PAGES).then((p) => p.put(req.url, res)).then(() => trim(PAGES, 60));
+    trim(WARM, 12);
+  }
+  return new Response(null, { status: 204 });
+};
+const warmTake = async (url) => {
+  const c = await caches.open(WARM);
+  const hit = await c.match(url);
+  if (!hit) return null;
+  c.delete(url);
+  return Date.now() - Number(hit.headers.get("x-lh-at") || 0) < 90000 ? hit : null;
+};
 const pageFirst = async (event) => {
   const req = event.request;
+  if (req.mode === "navigate") {
+    const w = await warmTake(req.url);
+    if (w) { if (event.preloadResponse) event.waitUntil(event.preloadResponse.catch(() => {})); return w; }
+  }
   try {
     const preload = event.preloadResponse ? await event.preloadResponse : null;
     const res = preload || (await fetch(new Request(req.url, { cache: "no-cache", credentials: "same-origin" })));
@@ -1313,6 +1338,7 @@ self.addEventListener("fetch", (e) => {
   const url = new URL(req.url);
   if (url.origin !== self.location.origin) return;
   if (url.pathname.endsWith("/version.json") || url.pathname.endsWith("/sw.js")) return;
+  if (req.headers.get("x-lh-warm") === "1") { e.respondWith(warmPut(req).catch(() => new Response(null, { status: 204 }))); return; }
   if (req.mode === "navigate" || (req.headers.get("accept") || "").includes("text/html")) {
     e.respondWith(pageFirst(e));
     return;

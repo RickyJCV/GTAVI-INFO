@@ -46,6 +46,14 @@
   }
   if (boxes.length || minis.length) { tick(); setInterval(tick, 1000); }
 
+  // Animación suave solo cuando el contenido cambia por un toque (no al cargar cada página)
+  var swapT = 0;
+  function swapAnim() {
+    if (reduced) return;
+    document.documentElement.classList.add("swap");
+    clearTimeout(swapT); swapT = setTimeout(function () { document.documentElement.classList.remove("swap"); }, 500);
+  }
+
   // Modo claro / oscuro: por defecto, el del sistema (móvil u ordenador).
   // El botón lo cambia; si eliges el mismo que tiene el sistema, o el sistema cambia
   // (p. ej. modo oscuro automático al anochecer), la web vuelve a seguir al sistema.
@@ -107,7 +115,7 @@
   btns.forEach(function (b) {
     b.addEventListener("click", function () {
       var a = b.getAttribute("data-aud-btn");
-      setAud(a); store.set("lh-aud", a);
+      swapAnim(); setAud(a); store.set("lh-aud", a);
     });
   });
 
@@ -168,6 +176,7 @@
   relBtns.forEach(function (b) {
     b.addEventListener("click", function () {
       var want = b.getAttribute("data-rel-filter");
+      swapAnim();
       relBtns.forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
       document.querySelectorAll("[data-day]").forEach(function (day) {
         var shown = 0;
@@ -493,12 +502,17 @@
   window.addEventListener("appinstalled", function () { store.set("lh-installed", "1"); deferred = null; syncInstallBtns(); closeSheet(false); });
   syncInstallBtns();
 
+  // Páginas preparadas de antemano (precarga): los avisos esperan a que se vean de verdad
+  var whenShown = function (fn) {
+    if (document.prerendering) document.addEventListener("prerenderingchange", fn, { once: true }); else fn();
+  };
+
   // Ofrecerla sola al entrar desde el móvil (una vez cada 14 días como mucho, nunca dentro de la app)
   var pv = 0;
-  try { pv = (+sessionStorage.getItem("lh-pv") || 0) + 1; sessionStorage.setItem("lh-pv", String(pv)); } catch (e) {}
   var snoozed = +(store.get("lh-inst-until") || 0) > Date.now();
   var autoSheet = sheet && !installed() && !snoozed && !isAppPage && isPhone() && device !== "desktop" && !document.querySelector(".offline-page");
-  if (autoSheet) {
+  if (autoSheet) whenShown(function () {
+    try { pv = (+sessionStorage.getItem("lh-pv") || 0) + 1; sessionStorage.setItem("lh-pv", String(pv)); } catch (e) {}
     var tries = 0;
     var tryOpen = function () {
       // no interrumpir mientras se lee un aviso o se está escribiendo
@@ -507,7 +521,7 @@
       openSheet(false);
     };
     setTimeout(tryOpen, pv >= 2 ? 2500 : 7000);
-  }
+  });
 
   // --- Página /app/: destacar la guía de tu dispositivo ---
   if (isAppPage) {
@@ -550,7 +564,35 @@
     });
   });
   // La clase de dirección solo sirve para la transición de entrada; luego se quita
-  setTimeout(function () { root.classList.remove("vt-next", "vt-prev"); }, 900);
+  // (la quita el evento «pagereveal» al acabar; esto es la red de seguridad)
+  setTimeout(function () { root.classList.remove("vt-next", "vt-prev"); }, 1500);
+
+  // --- Navegación instantánea: precargar la página antes de que el dedo se levante ---
+  // Chrome/Edge/Android lo hacen con «speculationrules»; esto cubre Safari (iPhone), Firefox y el modo app.
+  var specOK = !!(window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports("speculationrules"));
+  var conn = navigator.connection || {};
+  var saveData = conn.saveData || /(^|-)2g$/.test(conn.effectiveType || "");
+  var warmed = {};
+  function warm(href) {
+    // Chrome no aprovecha su precarga en páginas servidas por el service worker: ahí también precargamos nosotros
+    var swOn = !!(navigator.serviceWorker && navigator.serviceWorker.controller);
+    if ((specOK && !swOn) || saveData || !href || warmed[href]) return;
+    var url;
+    try { url = new URL(href, location.href); } catch (e) { return; }
+    if (url.origin !== location.origin || url.pathname === location.pathname || /\.(xml|json|png|jpe?g|svg|webmanifest|txt)$/.test(url.pathname)) return;
+    url.hash = "";
+    warmed[href] = 1;
+    try { fetch(url.href, { credentials: "same-origin", headers: { "x-lh-warm": "1" } }).catch(function () {}); } catch (e) {}
+  }
+  var warmFrom = function (e) { var a = e.target.closest && e.target.closest("a[href]"); if (a && !a.target && !a.hasAttribute("download")) warm(a.href); };
+  document.addEventListener("touchstart", warmFrom, { passive: true, capture: true });
+  document.addEventListener("mouseover", warmFrom, { passive: true });
+  document.addEventListener("focusin", warmFrom, { passive: true });
+  // En las secciones, dejar listas las pestañas vecinas para que deslizar sea instantáneo
+  if (onSection) {
+    var idle = window.requestIdleCallback || function (f) { return setTimeout(f, 1200); };
+    window.addEventListener("load", function () { idle(function () { [cur - 1, cur + 1].forEach(function (i) { if (tabs[i]) warm(tabs[i].href); }); }); });
+  }
 
   var main = document.querySelector("main");
   if (onSection && main && touch) {
@@ -622,13 +664,13 @@
     window.addEventListener("pageshow", function (e) { if (e.persisted) { main.style.opacity = ""; reset(false); root.classList.remove("vt-next", "vt-prev"); } });
 
     // Un consejo, una sola vez, para descubrir el gesto
-    if (!store.get("lh-swiped") && !store.get("lh-swipe-tip") && isPhone()) {
+    if (!store.get("lh-swiped") && !store.get("lh-swipe-tip") && isPhone()) whenShown(function () {
       setTimeout(function () {
         if (sheetOpen || store.get("lh-swiped") || document.hidden) return;
         store.set("lh-swipe-tip", "1");
         toast("👆 " + (T.swipe || ""), null, null, false);
       }, autoSheet ? 2600 : 3000);
-    }
+    });
   }
 
   // AdSense: activa cada bloque manual presente en la página

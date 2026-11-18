@@ -681,10 +681,14 @@ html[data-reader="nuevos"] .aud[data-aud="fans"] { display: none; }
 
 /* transición entre páginas (navegadores compatibles) */
 @view-transition { navigation: auto; }
-@keyframes lh-out { to { opacity: 0; transform: scale(0.985); } }
-@keyframes lh-in { from { opacity: 0; transform: translateY(16px); } }
-::view-transition-old(root) { animation: lh-out 0.2s ease both; }
-::view-transition-new(root) { animation: lh-in 0.42s var(--ease) both; }
+@keyframes lh-out { to { opacity: 0; transform: scale(0.99); } }
+@keyframes lh-in { from { opacity: 0; transform: translateY(10px); } }
+::view-transition-old(root) { animation: lh-out 0.16s cubic-bezier(0.4, 0, 1, 1) both; }
+::view-transition-new(root) { animation: lh-in 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) 0.04s both; }
+/* la cabecera y las pestañas no se mueven entre páginas: solo cambia el contenido */
+::view-transition-group(lh-header), ::view-transition-group(lh-tabbar) { animation-duration: 0.3s; }
+::view-transition-old(lh-header), ::view-transition-new(lh-header), ::view-transition-old(lh-tabbar), ::view-transition-new(lh-tabbar) { animation: none; mix-blend-mode: normal; }
+::view-transition-old(lh-header), ::view-transition-old(lh-tabbar) { display: none; }
 .site-header { view-transition-name: lh-header; }
 
 /* cambio de modo claro/oscuro: círculo que se abre desde el botón */
@@ -753,9 +757,9 @@ html[data-reader="nuevos"] .aud[data-aud="fans"] { display: none; }
 
 /* cambios de contenido: modo de lectura, preguntas, filtro */
 @keyframes lh-swap { from { opacity: 0; transform: translateY(6px); } }
-.aud { animation: lh-swap 0.35s var(--ease); }
+.swap .aud { animation: lh-swap 0.35s var(--ease); }
 .faq details[open] .faq__a { animation: lh-rise 0.4s var(--ease); }
-[data-rel] { animation: lh-swap 0.4s var(--ease); }
+.swap [data-rel] { animation: lh-swap 0.4s var(--ease); }
 .aud-toggle button, .filter button, .lang a { transition: background 0.3s, color 0.3s, box-shadow 0.3s, transform 0.15s; }
 .aud-toggle button:active, .filter button:active { transform: scale(0.95); }
 .to-top { transition: opacity 0.3s, transform 0.3s var(--ease); }
@@ -963,10 +967,10 @@ main.is-swiping { will-change: transform; }
 @keyframes lh-in-left { from { transform: translateX(-28%); opacity: 0; } }
 @keyframes lh-out-left { to { transform: translateX(-22%); opacity: 0; } }
 @keyframes lh-out-right { to { transform: translateX(22%); opacity: 0; } }
-html.vt-next::view-transition-new(root) { animation: lh-in-right 0.34s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
-html.vt-next::view-transition-old(root) { animation: lh-out-left 0.24s ease both; }
-html.vt-prev::view-transition-new(root) { animation: lh-in-left 0.34s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
-html.vt-prev::view-transition-old(root) { animation: lh-out-right 0.24s ease both; }
+html.vt-next::view-transition-new(root) { animation: lh-in-right 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+html.vt-next::view-transition-old(root) { animation: lh-out-left 0.22s cubic-bezier(0.4, 0, 1, 1) both; }
+html.vt-prev::view-transition-new(root) { animation: lh-in-left 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+html.vt-prev::view-transition-old(root) { animation: lh-out-right 0.22s cubic-bezier(0.4, 0, 1, 1) both; }
 
 /* Hoja de instalación */
 .sheet { position: fixed; inset: 0; z-index: 120; display: flex; align-items: flex-end; justify-content: center; }
@@ -1038,3 +1042,20 @@ html.standalone, html.standalone body { overscroll-behavior-y: none; }
 }
 /* El texto no cambia de tamaño al girar el móvil */
 html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+/* ================= fluidez ================= */
+/* Al navegar dentro de la web, la transición ya anima la entrada: sin animaciones de portada encima
+   (solo en la primera página de la visita), así no se pisan y todo va a 60 fps */
+.warm .hero__sun, .warm .hero__copy > *, .warm .hero .countdown, .warm .page-head .wrap > * { animation: none; }
+/* Las tarjetas que ya se ven al llegar no esperan a aparecer */
+.warm.js .rv { transition-duration: 0.45s; }
+/* Respuesta inmediata al tocar (como en una app) */
+@media (pointer: coarse) {
+  a, button, summary { -webkit-tap-highlight-color: transparent; }
+  .mini-story, .story, .hub__tile, .card, .post { transition: transform 0.18s var(--ease), box-shadow 0.3s var(--ease); }
+  .mini-story:active, .story:active { transform: scale(0.985); }
+}
+/* Las capas que se mueven van a la GPU solo mientras se mueven */
+.sheet.is-open .sheet__panel, .app-toast.is-on { will-change: transform; }
+/* Pintar más tarde lo que está muy abajo (carga y transición más rápidas) */
+.site-footer { content-visibility: auto; contain-intrinsic-size: auto 420px; }
