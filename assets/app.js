@@ -369,24 +369,250 @@
     }, { passive: true });
   }
 
-  // Invitar a instalar: botón en Android/Chrome; instrucciones en iPhone (Safari no tiene botón)
-  var installBtns = document.querySelectorAll("[data-install]");
-  var deferred = null;
-  window.addEventListener("beforeinstallprompt", function (e) {
-    e.preventDefault(); deferred = e;
-    installBtns.forEach(function (b) { b.hidden = false; });
-  });
-  installBtns.forEach(function (b) {
-    b.addEventListener("click", function () {
-      if (!deferred) return;
-      deferred.prompt();
-      deferred.userChoice.then(function () { deferred = null; installBtns.forEach(function (x) { x.hidden = true; }); });
-    });
-  });
-  window.addEventListener("appinstalled", function () { installBtns.forEach(function (x) { x.hidden = true; }); });
+  // ================= Experiencia de app nativa en el móvil =================
   var ua = navigator.userAgent || "";
   var isIOS = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-  if (isIOS && !standalone) document.querySelectorAll("[data-ios-tip]").forEach(function (el) { el.hidden = false; });
+  var isAndroid = /Android/i.test(ua);
+  var inApp = /Instagram|FBAN|FBAV|FB_IAB|FBIOS|musical_ly|Bytedance|TikTok|\bLine\/|Snapchat|LinkedInApp|Pinterest|Twitter for/i.test(ua);
+  var touch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
+  var mqm = function (q) { return !!(window.matchMedia && window.matchMedia(q).matches); };
+  var isPhone = function () { return touch && (mqm("(pointer: coarse)") || isIOS || isAndroid) && window.innerWidth < 900; };
+  // ¿Qué instrucciones le sirven a este dispositivo?
+  var device = inApp ? "inapp" : isIOS ? (/CriOS|FxiOS|EdgiOS|OPiOS/.test(ua) ? "iosChrome" : "ios") : isAndroid ? "android" : "desktop";
+  var buzz = function () { try { if (navigator.vibrate) navigator.vibrate(8); } catch (e) {} };
+  var path = location.pathname.replace(/index\.html$/, "");
+
+  // --- Hoja «Instala la app» ---
+  var sheet = document.querySelector("[data-install-sheet]");
+  var installBtns = document.querySelectorAll("[data-install]");
+  var deferred = null, sheetOpen = false;
+  var isAppPage = !!document.querySelector("[data-app-guides]");
+  var installed = function () { return standalone || store.get("lh-installed") === "1"; };
+  function showVariant(v) {
+    if (!sheet) return;
+    sheet.querySelectorAll("[data-variant]").forEach(function (el) {
+      el.hidden = !(el.getAttribute("data-variant") === v || (v === "inapp-ios" && el.getAttribute("data-variant") === "inapp"));
+    });
+  }
+  function variantNow() {
+    if (device === "inapp") return "inapp";
+    if (deferred) return "prompt";
+    if (device === "desktop") return isAndroid ? "android" : null;
+    return device;
+  }
+  var lastFocus = null;
+  function openSheet(manual) {
+    if (!sheet || sheetOpen || standalone) return false;
+    var v = variantNow();
+    if (!v) return false;
+    showVariant(v);
+    sheetOpen = true;
+    if (toastEl) toastEl.classList.remove("is-on");
+    lastFocus = document.activeElement;
+    sheet.hidden = false;
+    root.classList.add("sheet-lock");
+    requestAnimationFrame(function () { requestAnimationFrame(function () { sheet.classList.add("is-open"); }); });
+    setTimeout(function () { try { sheet.querySelector(".sheet__panel").focus({ preventScroll: true }); } catch (e) {} }, 60);
+    if (!manual) store.set("lh-inst-seen", String(Date.now()));
+    return true;
+  }
+  function closeSheet(snooze) {
+    if (!sheet || !sheetOpen) return;
+    sheetOpen = false;
+    sheet.classList.remove("is-open");
+    root.classList.remove("sheet-lock");
+    var panel = sheet.querySelector(".sheet__panel"); if (panel) panel.style.transform = "";
+    if (snooze) store.set("lh-inst-until", String(Date.now() + 14 * 864e5));
+    setTimeout(function () { if (!sheetOpen) sheet.hidden = true; }, 420);
+    try { if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true }); } catch (e) {}
+  }
+  function promptInstall() {
+    if (!deferred) return openSheet(true);
+    var d = deferred;
+    d.prompt();
+    d.userChoice.then(function (c) {
+      deferred = null;
+      if (c && c.outcome === "accepted") { store.set("lh-installed", "1"); closeSheet(false); }
+      else { closeSheet(true); }
+      syncInstallBtns();
+    }).catch(function () {});
+  }
+  function syncInstallBtns() {
+    // En móvil siempre se ofrece (abre la guía adecuada); en ordenador, solo si el navegador lo permite
+    var show = !installed() && (!!deferred || (isPhone() && device !== "desktop"));
+    installBtns.forEach(function (b) { b.hidden = !show; });
+  }
+  if (sheet) {
+    sheet.addEventListener("click", function (e) {
+      var t = e.target;
+      if (t.closest("[data-install-go]")) { buzz(); promptInstall(); }
+      else if (t.closest("[data-sheet-later]") || t.closest("[data-sheet-close]")) closeSheet(true);
+    });
+    document.addEventListener("keydown", function (e) {
+      if (!sheetOpen) return;
+      if (e.key === "Escape") closeSheet(true);
+      if (e.key === "Tab") { // el foco no se escapa del panel
+        var f = Array.prototype.filter.call(sheet.querySelectorAll("a[href],button"), function (x) { return x.offsetParent !== null; });
+        if (!f.length) return;
+        var first = f[0], last = f[f.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    });
+    // Arrastrar el panel hacia abajo para cerrarlo, como en una app
+    var panel = sheet.querySelector(".sheet__panel"), sy = 0, sdy = 0, sdrag = false;
+    panel.addEventListener("touchstart", function (e) { if (panel.scrollTop > 0 || e.touches.length !== 1) return; sdrag = true; sy = e.touches[0].clientY; sdy = 0; panel.style.transition = "none"; }, { passive: true });
+    panel.addEventListener("touchmove", function (e) { if (!sdrag) return; sdy = Math.max(0, e.touches[0].clientY - sy); panel.style.transform = "translateY(" + sdy + "px)"; }, { passive: true });
+    var sEnd = function () { if (!sdrag) return; sdrag = false; panel.style.transition = ""; if (sdy > 90) closeSheet(true); else panel.style.transform = ""; };
+    panel.addEventListener("touchend", sEnd, { passive: true });
+    panel.addEventListener("touchcancel", sEnd, { passive: true });
+  }
+  window.addEventListener("beforeinstallprompt", function (e) {
+    e.preventDefault(); deferred = e;
+    syncInstallBtns();
+    if (sheetOpen) showVariant("prompt");
+  });
+  installBtns.forEach(function (b) { b.addEventListener("click", function () { buzz(); promptInstall(); }); });
+  window.addEventListener("appinstalled", function () { store.set("lh-installed", "1"); deferred = null; syncInstallBtns(); closeSheet(false); });
+  syncInstallBtns();
+
+  // Ofrecerla sola al entrar desde el móvil (una vez cada 14 días como mucho, nunca dentro de la app)
+  var pv = 0;
+  try { pv = (+sessionStorage.getItem("lh-pv") || 0) + 1; sessionStorage.setItem("lh-pv", String(pv)); } catch (e) {}
+  var snoozed = +(store.get("lh-inst-until") || 0) > Date.now();
+  var autoSheet = sheet && !installed() && !snoozed && !isAppPage && isPhone() && device !== "desktop" && !document.querySelector(".offline-page");
+  if (autoSheet) {
+    var tries = 0;
+    var tryOpen = function () {
+      // no interrumpir mientras se lee un aviso o se está escribiendo
+      var a = document.activeElement;
+      if ((a && /INPUT|TEXTAREA|SELECT/.test(a.tagName)) || document.hidden) { if (++tries < 6) setTimeout(tryOpen, 4000); return; }
+      openSheet(false);
+    };
+    setTimeout(tryOpen, pv >= 2 ? 2500 : 7000);
+  }
+
+  // --- Página /app/: destacar la guía de tu dispositivo ---
+  if (isAppPage) {
+    var gid = { ios: "iphone", iosChrome: "iphone-chrome", android: "android", desktop: "desktop" }[device] || (isIOS ? "iphone" : isAndroid ? "android" : "desktop");
+    var mine = document.querySelector('[data-guide="' + gid + '"]');
+    if (mine) {
+      mine.classList.add("is-yours");
+      var h = mine.querySelector("h2"), badge = document.createElement("span");
+      badge.className = "yours-badge"; badge.textContent = mine.getAttribute("data-yours") || "";
+      if (h) h.appendChild(badge);
+      mine.parentNode.insertBefore(mine, mine.parentNode.firstChild);
+    }
+    if (device === "inapp" && sheet) { var note = sheet.querySelector('[data-variant="inapp"]'); if (note) { var c = note.cloneNode(true); c.hidden = false; c.removeAttribute("data-variant"); document.querySelector("[data-app-guides]").before(c); } }
+  }
+
+  // --- Barra de pestañas y deslizar entre secciones ---
+  var tabs = Array.prototype.slice.call(document.querySelectorAll(".tabbar a[data-tab]"));
+  var cur = -1;
+  tabs.forEach(function (a, i) { if (a.getAttribute("aria-current") === "page") cur = i; });
+  var samePath = function (a) { try { return new URL(a.href, location.href).pathname.replace(/index\.html$/, "") === path; } catch (e) { return false; } };
+  var onSection = cur >= 0 && samePath(tabs[cur]);
+  function goTab(i, dir) {
+    var a = tabs[i];
+    if (!a) return;
+    try { sessionStorage.setItem("lh-vt", dir); } catch (e) {}
+    root.classList.remove("vt-next", "vt-prev");
+    root.classList.add("vt-" + dir);
+    location.href = a.href;
+  }
+  tabs.forEach(function (a, i) {
+    a.addEventListener("click", function (e) {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button > 0) return;
+      buzz();
+      if (i === cur && onSection) { // tocar la pestaña activa = volver arriba
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: mqm("(prefers-reduced-motion: reduce)") ? "auto" : "smooth" });
+        return;
+      }
+      if (cur >= 0 && i !== cur) { e.preventDefault(); goTab(i, i > cur ? "next" : "prev"); }
+    });
+  });
+  // La clase de dirección solo sirve para la transición de entrada; luego se quita
+  setTimeout(function () { root.classList.remove("vt-next", "vt-prev"); }, 900);
+
+  var main = document.querySelector("main");
+  if (onSection && main && touch) {
+    var chip = document.createElement("div");
+    chip.className = "swipe-chip"; chip.setAttribute("aria-hidden", "true");
+    body.appendChild(chip);
+    var sx = 0, sy2 = 0, st = 0, dx = 0, lock = 0, active = false, swTo = -1, reduce = mqm("(prefers-reduced-motion: reduce)");
+    var EDGE = 24, TRIGGER = 70;
+    var scrollsX = function (el) {
+      for (; el && el !== body && el !== document.documentElement; el = el.parentElement) {
+        if (el.matches && el.matches("input,textarea,select,[contenteditable],.table-wrap,.filter,.aud-toggle,.sheet,[data-no-swipe]")) return true;
+        if (el.scrollWidth > el.clientWidth + 2) { var ox = getComputedStyle(el).overflowX; if (ox === "auto" || ox === "scroll") return true; }
+      }
+      return false;
+    };
+    var reset = function (animate) {
+      main.style.transition = animate && !reduce ? "transform .3s cubic-bezier(.2,.8,.2,1)" : "";
+      main.style.transform = "";
+      chip.classList.remove("is-on");
+      setTimeout(function () { main.style.transition = ""; main.classList.remove("is-swiping"); }, 320);
+    };
+    window.addEventListener("touchstart", function (e) {
+      active = false; lock = 0; dx = 0;
+      if (e.touches.length !== 1 || sheetOpen || window.innerWidth >= 860) return;
+      var t = e.touches[0];
+      if (t.clientX < EDGE || t.clientX > window.innerWidth - EDGE) return; // bordes: gesto «atrás» del sistema
+      if (scrollsX(e.target)) return;
+      var sel = window.getSelection && window.getSelection();
+      if (sel && String(sel).length) return;
+      sx = t.clientX; sy2 = t.clientY; st = Date.now(); active = true;
+    }, { passive: true });
+    window.addEventListener("touchmove", function (e) {
+      if (!active) return;
+      var t = e.touches[0], mx = t.clientX - sx, my = t.clientY - sy2;
+      if (!lock) {
+        if (Math.abs(mx) < 10 && Math.abs(my) < 10) return;
+        lock = Math.abs(mx) > Math.abs(my) * 1.5 ? 1 : -1;
+        if (lock === 1) main.classList.add("is-swiping");
+      }
+      if (lock !== 1) { active = false; return; }
+      if (e.cancelable) e.preventDefault(); // gesto horizontal: que la página no se mueva en vertical
+      dx = mx;
+      swTo = cur + (dx < 0 ? 1 : -1);
+      var ok = swTo >= 0 && swTo < tabs.length;
+      var shift = ok ? dx * 0.35 : dx * 0.08; // sin pestaña a ese lado: resistencia elástica
+      if (!reduce) main.style.transform = "translate3d(" + Math.round(shift) + "px,0,0)";
+      if (ok) {
+        chip.textContent = (dx < 0 ? "" : "‹ ") + (tabs[swTo].textContent || "").trim() + (dx < 0 ? " ›" : "");
+        chip.classList.toggle("is-left", dx > 0); chip.classList.toggle("is-right", dx < 0);
+        chip.classList.toggle("is-on", Math.abs(dx) > 24);
+        chip.classList.toggle("is-ready", Math.abs(dx) > TRIGGER);
+      } else chip.classList.remove("is-on");
+    }, { passive: false });
+    var end = function () {
+      if (!active || lock !== 1) { active = false; return; }
+      active = false;
+      var v = Math.abs(dx) / Math.max(1, Date.now() - st);
+      var ok = swTo >= 0 && swTo < tabs.length;
+      if (ok && (Math.abs(dx) > TRIGGER || (Math.abs(dx) > 35 && v > 0.45))) {
+        buzz(); store.set("lh-swiped", "1");
+        if (!reduce) { main.style.transition = "transform .18s ease-out, opacity .18s"; main.style.transform = "translate3d(" + (dx < 0 ? -18 : 18) + "%,0,0)"; main.style.opacity = ".35"; }
+        chip.classList.remove("is-on");
+        goTab(swTo, dx < 0 ? "next" : "prev");
+      } else reset(true);
+    };
+    window.addEventListener("touchend", end, { passive: true });
+    window.addEventListener("touchcancel", function () { active = false; reset(true); }, { passive: true });
+    // Volver con «atrás» (caché del navegador): dejar la página en su sitio
+    window.addEventListener("pageshow", function (e) { if (e.persisted) { main.style.opacity = ""; reset(false); root.classList.remove("vt-next", "vt-prev"); } });
+
+    // Un consejo, una sola vez, para descubrir el gesto
+    if (!store.get("lh-swiped") && !store.get("lh-swipe-tip") && isPhone()) {
+      setTimeout(function () {
+        if (sheetOpen || store.get("lh-swiped") || document.hidden) return;
+        store.set("lh-swipe-tip", "1");
+        toast("👆 " + (T.swipe || ""), null, null, false);
+      }, autoSheet ? 2600 : 3000);
+    }
+  }
 
   // AdSense: activa cada bloque manual presente en la página
   var ads = document.querySelectorAll("ins.adsbygoogle");

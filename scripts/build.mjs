@@ -158,6 +158,43 @@ const icon = {
   rss: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M5 17a2 2 0 1 1 0 4 2 2 0 0 1 0-4ZM3 10a11 11 0 0 1 11 11h-3a8 8 0 0 0-8-8v-3Zm0-6a17 17 0 0 1 17 17h-3A14 14 0 0 0 3 7V4Z"/></svg>',
   globe: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.8 3.8 5.8 3.8 9s-1.2 6.2-3.8 9c-2.6-2.8-3.8-5.8-3.8-9S9.4 5.8 12 3Z"/></g></svg>',
 };
+const tabIcon = {
+  home: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>',
+  news: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h13v14a2 2 0 0 0 2 2H6a2 2 0 0 1-2-2z"/><path d="M17 9h3v10a2 2 0 0 1-2 2M8 9h5M8 13h5M8 17h3"/></g></svg>',
+  rumors: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2.5 20h19z"/><path d="M12 10v4.5M12 17.5v.01"/></g></svg>',
+  reviews: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg>',
+  guide: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></g></svg>',
+  share: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3M8 7l4-4 4 4"/><path d="M6 11H5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1h-1"/></g></svg>',
+  add: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><path d="M12 8v8M8 12h8"/></g></svg>',
+  dots: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></g></svg>',
+  check: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="m5 12.5 4.5 4.5L19 7.5"/></svg>',
+};
+const stepIcons = { ios: ["share", "add", "check"], iosChrome: ["share", "add", "check"], android: ["dots", "add", "check"] };
+const stepsHtml = (L, variant) =>
+  `<ol class="steps">${L.t.inst[variant].map((t, i) => `<li><span class="steps__n">${i + 1}</span><span class="steps__ic">${tabIcon[stepIcons[variant][i]]}</span><span class="steps__t">${t}</span></li>`).join("")}</ol>`;
+const TAB_ORDER = ["home", "news", "rumors", "reviews", "guide"];
+const tabbar = (L, active) => `
+<nav class="tabbar" aria-label="${esc(L.t.tabsLabel)}">
+  ${TAB_ORDER.map((k, i) => `<a href="${u(L.paths[k])}" data-tab="${i}"${k === active ? ' aria-current="page"' : ""}>${tabIcon[k]}<span>${esc(L.t.tabs[k])}</span></a>`).join("")}
+</nav>`;
+const installSheet = (L) => `
+<div class="sheet" data-install-sheet hidden>
+  <div class="sheet__backdrop" data-sheet-close></div>
+  <div class="sheet__panel" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+    <span class="sheet__grip" aria-hidden="true"></span>
+    <div class="sheet__head">
+      <img src="${u("/assets/icon-maskable-192.png")}" alt="" width="56" height="56">
+      <div><h2 id="sheet-title">${esc(L.t.inst.title)}</h2><p>${esc(L.t.inst.sub)}</p></div>
+      <button type="button" class="sheet__x" data-sheet-close aria-label="${esc(L.t.app.close)}">×</button>
+    </div>
+    <div data-variant="prompt" hidden><button type="button" class="btn btn--primary btn--block btn--big" data-install-go>${esc(L.t.appCta)}</button></div>
+    <div data-variant="ios" hidden>${stepsHtml(L, "ios")}</div>
+    <div data-variant="iosChrome" hidden>${stepsHtml(L, "iosChrome")}</div>
+    <div data-variant="android" hidden>${stepsHtml(L, "android")}</div>
+    <p class="sheet__inapp" data-variant="inapp" hidden>${L.t.inst.inapp}</p>
+    <div class="sheet__foot"><a href="${u(L.paths.app)}">${esc(L.t.inst.how)} →</a><button type="button" class="btn btn--ghost" data-sheet-later>${esc(L.t.inst.later)}</button></div>
+  </div>
+</div>`;
 const markSvg = fs
   .readFileSync(path.join(ROOT, "assets/logo-mark.svg"), "utf8")
   .replace(/ id="lh-/g, ' id="m-lh-')
@@ -209,8 +246,8 @@ const header = (L, active, alts) => {
     [P.home, L.t.nav.home, "home"],
     [P.news, L.t.nav.news, "news"],
     [P.rumors, L.t.nav.rumors, "rumors"],
+    [P.reviews, L.t.tabs.reviews, "reviews"],
     [P.guide, L.t.nav.guide, "guide"],
-    [P.archive, L.t.nav.archive, "archive"],
   ];
   return `
   <header class="site-header">
@@ -264,6 +301,7 @@ const footer = (L) => {
         <a href="${u(P.privacy)}">${esc(L.t.footerLinks.privacy)}</a>
         <a href="${u(P.legal)}">${esc(L.t.footerLinks.legal)}</a>
         <a href="${u(P.feed)}" class="rss">${icon.rss} RSS</a>
+        <a href="${u(P.app)}">📲 App</a>
         <button class="footer-install" type="button" data-install hidden>${esc(L.t.app.install)}</button>
         ${soc.map(([k, v]) => `<a href="${esc(v)}" rel="me noopener" target="_blank">${esc(k === "x" ? "X" : k.charAt(0).toUpperCase() + k.slice(1))}</a>`).join("")}
       </nav>
@@ -324,7 +362,7 @@ ${published ? `<meta property="article:published_time" content="${published}">` 
 <link rel="preload" href="${u("/assets/fonts/inter-latin.woff2")}" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="${u("/assets/fonts/anton-latin.woff2")}" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="${u("/assets/fonts.css")}?v=${FONTS_V}">
-<script>(function(){var r=document.documentElement,t=null;r.className+=" js";try{if(Date.now()>=new Date("${esc(cfg.launchDate)}").getTime())r.className+=" launched"}catch(e){}try{if(localStorage.getItem("lh-aud")==="nuevos")r.setAttribute("data-reader","nuevos");t=localStorage.getItem("lh-theme")}catch(e){}if(t==="light"||t==="dark")r.setAttribute("data-theme",t);var n=t==="light"||t==="dark"?t:(window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches?"light":"dark");r.setAttribute("data-theme-now",n);var m=document.querySelector("[data-theme-color]");if(m)m.setAttribute("content",n==="light"?"#fff6fb":"#0b0618")})()</script>
+<script>(function(){var r=document.documentElement,t=null;r.className+=" js";try{var d=sessionStorage.getItem("lh-vt");if(d){r.className+=" vt-"+d;sessionStorage.removeItem("lh-vt")}}catch(e){}try{if(Date.now()>=new Date("${esc(cfg.launchDate)}").getTime())r.className+=" launched"}catch(e){}try{if(localStorage.getItem("lh-aud")==="nuevos")r.setAttribute("data-reader","nuevos");t=localStorage.getItem("lh-theme")}catch(e){}if(t==="light"||t==="dark")r.setAttribute("data-theme",t);var n=t==="light"||t==="dark"?t:(window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches?"light":"dark");r.setAttribute("data-theme-now",n);var m=document.querySelector("[data-theme-color]");if(m)m.setAttribute("content",n==="light"?"#fff6fb":"#0b0618")})()</script>
 <link rel="stylesheet" href="${u("/assets/styles.css")}?v=${CSS_V}">
 ${ADS ? `<meta name="google-adsense-account" content="${esc(ADS)}">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${esc(ADS)}" crossorigin="anonymous"></script>` : ""}
@@ -332,7 +370,7 @@ ${GA ? `<script async src="https://www.googletagmanager.com/gtag/js?id=${esc(GA)
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${esc(GA)}');</script>` : ""}
 ${jsonLd.map((j) => `<script type="application/ld+json">${JSON.stringify(j).replace(/</g, "\\u003c")}</script>`).join("\n")}
 </head>
-<body data-base="${BASE}" data-app='${esc(JSON.stringify(L.t.app))}'>
+<body data-base="${BASE}" data-app='${esc(JSON.stringify({ ...L.t.app, swipe: L.t.inst.swipe }))}'>
 <a class="skip" href="#main">${esc(L.t.skip)}</a>
 ${header(L, active, alts)}
 ${langHint(L, alts)}
@@ -345,6 +383,8 @@ ${langHint(L, alts)}
 <main id="main">
 ${body}
 </main>
+${tabbar(L, active)}
+${installSheet(L)}
 <button class="to-top" type="button" aria-label="${esc(L.t.toTop)}" data-to-top><svg class="to-top__ring" viewBox="0 0 48 48" aria-hidden="true"><circle class="track" cx="24" cy="24" r="22.5" pathLength="100"/><circle class="bar" cx="24" cy="24" r="22.5" pathLength="100" data-progress-ring/></svg><svg class="to-top__arrow" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M6 15l6-6 6 6"/></svg></button>
 ${footer(L)}
 <script src="${u("/assets/app.js")}?v=${JS_V}" defer></script>
@@ -893,7 +933,7 @@ for (const code of ACTIVE) {
       title: L.t.reviewsTitle,
       description: L.t.reviewsDesc,
       key: "reviews",
-      active: "guide",
+      active: "reviews",
       type: "article",
       jsonLd: [crumbsLd([[L.t.crumbHome, P.home], [L.t.nav.guide, P.guide], [L.t.reviewsH1, P.reviews]])],
       body: `
@@ -916,6 +956,44 @@ for (const code of ACTIVE) {
     })
   );
   sitemap.push(["reviews", P.reviews, REVIEWS.updated, "daily", "0.9"]);
+
+  // App: cómo instalar en cada dispositivo (y qué se puede hacer)
+  write(
+    P.app,
+    layout(L, {
+      title: L.t.appTitle,
+      description: L.t.appDesc,
+      key: "app",
+      active: "",
+      type: "article",
+      jsonLd: [
+        { "@context": "https://schema.org", "@type": "FAQPage", inLanguage: code, mainEntity: L.t.appFaq.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) },
+        crumbsLd([[L.t.crumbHome, P.home], [L.t.appH1, P.app]]),
+      ],
+      body: `
+  <section class="page-head page-head--app"><div class="wrap app-head">
+    <img class="app-head__icon" src="${u("/assets/icon-maskable-192.png")}" alt="" width="96" height="96">
+    <div><p class="eyebrow">${esc(L.t.appEyebrow)}</p><h1>${esc(L.t.appH1)}</h1><p class="lead-text">${esc(L.t.appLead)}</p>
+    <button type="button" class="btn btn--primary btn--big" data-install hidden>${esc(L.t.appCta)}</button></div>
+  </div></section>
+  <div class="wrap layout">
+    <div class="col-main">
+      <div class="app-guides" data-app-guides>
+        ${L.t.appGuides.map(([id, title, variant]) => `<section class="app-guide" data-guide="${id}" data-yours="${esc(L.t.inst.yours)}"><h2>${esc(title)}</h2>${stepsHtml(L, variant)}</section>`).join("")}
+        <section class="app-guide" data-guide="desktop" data-yours="${esc(L.t.inst.yours)}"><h2>${esc(L.t.appDesktop[0])}</h2><p>${esc(L.t.appDesktop[1])}</p></section>
+      </div>
+      <section class="block" aria-labelledby="feat"><div class="block__head"><h2 id="feat">${esc(L.t.appFeatures)}</h2></div>
+        <ul class="feat-grid">${L.t.appFeatureList.map(([ic, t, d]) => `<li><span aria-hidden="true">${ic}</span><div><b>${esc(t)}</b> ${esc(d)}</div></li>`).join("")}</ul>
+      </section>
+      <section class="block" aria-labelledby="faq"><div class="block__head"><h2 id="faq">${esc(L.t.faq)}</h2></div>
+        <div class="faq">${L.t.appFaq.map(([q, a], i) => `<details${i < 1 ? " open" : ""}><summary>${esc(q)}</summary><div class="faq__a"><p>${esc(a)}</p></div></details>`).join("")}</div>
+      </section>
+    </div>
+    <aside class="col-side">${sideCards(L)}</aside>
+  </div>`,
+    })
+  );
+  sitemap.push(["app", P.app, latest.date, "monthly", "0.6"]);
 
   // Archivo
   write(

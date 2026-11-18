@@ -60,3 +60,10 @@ Una tarea programada de Claude se ejecuta cada mañana: busca las noticias de GT
 - Menú: Hoy (`/`), Noticias (`/noticias/`), Rumores (`/rumores/`), Guía y Archivo; en inglés bajo `/en/`.
 - Cada noticia (`stories` + `more`) y cada rumor tiene página propia, generada sola a partir del título. No cambies un título ya publicado: cambiaría su dirección.
 - Campos opcionales por noticia o rumor para esa página: `detail` (2–3 frases con los detalles, redacción propia, nunca texto copiado del medio) y `why` (una frase: por qué importa). También en el bloque `en`.
+
+## App en el móvil (iPhone y Android)
+- La web se instala como app desde el navegador (no hace falta App Store ni Google Play). Guía para la gente: `/app/` y `/en/app/`.
+- En el móvil hay una **barra de pestañas abajo** (Hoy, Noticias, Rumores, Notas, Guía). En las secciones se puede **deslizar a izquierda o derecha** para cambiar de pestaña; tocar la pestaña activa sube arriba del todo.
+- Al entrar desde un móvil, a los pocos segundos (o en la segunda página vista) sale un panel **«Instala Leónida Hoy»** con los pasos de **su** dispositivo: iPhone con Safari, iPhone con Chrome/Firefox/Edge, Android (botón de instalar directo si el navegador lo permite) o aviso de «ábrelo en el navegador» si viene de Instagram, TikTok, Facebook…
+- Si alguien pulsa «Ahora no», no vuelve a salir en 14 días. Nunca sale en ordenador, dentro de la app ya instalada ni en la página `/app/`.
+- Dentro de la app: deslizar hacia abajo arriba del todo para actualizar, aviso cuando hay noticias nuevas y lectura sin conexión.
