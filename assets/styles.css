@@ -681,10 +681,14 @@ html[data-reader="nuevos"] .aud[data-aud="fans"] { display: none; }
 
 /* transición entre páginas (navegadores compatibles) */
 @view-transition { navigation: auto; }
-@keyframes lh-out { to { opacity: 0; transform: scale(0.99); } }
-@keyframes lh-in { from { opacity: 0; transform: translateY(10px); } }
-::view-transition-old(root) { animation: lh-out 0.16s cubic-bezier(0.4, 0, 1, 1) both; }
-::view-transition-new(root) { animation: lh-in 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) 0.04s both; }
+@keyframes lh-out { to { opacity: 0; } }
+@keyframes lh-in { from { opacity: 0; transform: translateY(8px); } }
+::view-transition-image-pair(root) { isolation: auto; }
+/* detrás de la transición, el color del tema (nunca un destello blanco o negro) */
+::view-transition { background: var(--bg); }
+::view-transition-old(root), ::view-transition-new(root) { mix-blend-mode: normal; }
+::view-transition-old(root) { animation: lh-out 0.1s linear both; }
+::view-transition-new(root) { animation: lh-in 0.24s cubic-bezier(0.2, 0.8, 0.2, 1) 0.08s both; }
 /* la cabecera y las pestañas no se mueven entre páginas: solo cambia el contenido */
 ::view-transition-group(lh-header), ::view-transition-group(lh-tabbar) { animation-duration: 0.3s; }
 ::view-transition-old(lh-header), ::view-transition-new(lh-header), ::view-transition-old(lh-tabbar), ::view-transition-new(lh-tabbar) { animation: none; mix-blend-mode: normal; }
@@ -693,7 +697,7 @@ html[data-reader="nuevos"] .aud[data-aud="fans"] { display: none; }
 
 /* cambio de modo claro/oscuro: círculo que se abre desde el botón */
 @keyframes lh-reveal { from { clip-path: circle(0 at var(--tx, 50%) var(--ty, 0)); } to { clip-path: circle(150vmax at var(--tx, 50%) var(--ty, 0)); } }
-.theme-vt .site-header { view-transition-name: none; }
+.theme-vt .site-header, .theme-vt .tabbar { view-transition-name: none; }
 .theme-vt::view-transition-old(root) { animation: none; }
 .theme-vt::view-transition-new(root) { animation: lh-reveal 0.65s cubic-bezier(0.4, 0, 0.2, 1) both; }
 
@@ -886,7 +890,7 @@ html.launched .pre-only { display: none !important; }
 .site-footer { padding-bottom: calc(48px + env(safe-area-inset-bottom)); }
 .to-top { bottom: calc(16px + var(--anchor-h, 0px) + env(safe-area-inset-bottom)); right: max(16px, env(safe-area-inset-right)); }
 /* En la app, la franja bajo la barra de estado siempre oscura para que la hora y la batería se lean */
-html.standalone body::after { content: ""; position: fixed; top: 0; left: 0; right: 0; height: env(safe-area-inset-top); background: #0b0618; z-index: 100; pointer-events: none; }
+html.standalone .site-header::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: env(safe-area-inset-top); background: #0b0618; pointer-events: none; }
 html.standalone { -webkit-tap-highlight-color: transparent; }
 html.standalone .nav a, html.standalone .btn, html.standalone .hub__tile, html.standalone .lang a { -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; }
 html.standalone .site-header { position: sticky; top: 0; }
@@ -944,6 +948,7 @@ html { touch-action: manipulation; }
   .tabbar a[aria-current="page"] svg { transform: translateY(-1px) scale(1.08); filter: drop-shadow(0 0 6px rgba(255, 47, 163, 0.6)); }
   .tabbar a[aria-current="page"]::before { content: ""; position: absolute; top: -6px; left: 30%; right: 30%; height: 3px; border-radius: 0 0 3px 3px; background: var(--sunset); box-shadow: 0 0 10px rgba(255, 47, 163, 0.7); }
   .site-footer { padding-bottom: calc(40px + var(--tabbar-h) + var(--anchor-h, 0px)); }
+  html { scroll-padding-bottom: calc(var(--tabbar-h) + var(--anchor-h, 0px) + 8px); }
   .to-top { bottom: calc(14px + var(--tabbar-h) + var(--anchor-h, 0px)); }
   .app-toast { bottom: calc(12px + var(--tabbar-h) + var(--anchor-h, 0px)); }
 }
@@ -963,14 +968,16 @@ html { touch-action: manipulation; }
 main.is-swiping { will-change: transform; }
 
 /* Transiciones laterales al cambiar de pestaña (las páginas siguientes / anteriores) */
-@keyframes lh-in-right { from { transform: translateX(28%); opacity: 0; } }
-@keyframes lh-in-left { from { transform: translateX(-28%); opacity: 0; } }
-@keyframes lh-out-left { to { transform: translateX(-22%); opacity: 0; } }
-@keyframes lh-out-right { to { transform: translateX(22%); opacity: 0; } }
-html.vt-next::view-transition-new(root) { animation: lh-in-right 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
-html.vt-next::view-transition-old(root) { animation: lh-out-left 0.22s cubic-bezier(0.4, 0, 1, 1) both; }
-html.vt-prev::view-transition-new(root) { animation: lh-in-left 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
-html.vt-prev::view-transition-old(root) { animation: lh-out-right 0.22s cubic-bezier(0.4, 0, 1, 1) both; }
+@keyframes lh-in-right { from { transform: translateX(100%); } }
+@keyframes lh-out-left { to { transform: translateX(-28%); filter: brightness(0.6); } }
+@keyframes lh-in-left { from { transform: translateX(-28%); filter: brightness(0.6); } }
+@keyframes lh-out-right { to { transform: translateX(100%); } }
+html.vt-next::view-transition-old(root), html.vt-next::view-transition-new(root),
+html.vt-prev::view-transition-old(root), html.vt-prev::view-transition-new(root) { mix-blend-mode: normal; opacity: 1; animation-duration: 0.36s; animation-delay: 0s; animation-timing-function: cubic-bezier(0.32, 0.72, 0, 1); animation-fill-mode: both; }
+html.vt-next::view-transition-new(root) { animation-name: lh-in-right; z-index: 2; box-shadow: -14px 0 32px rgba(0, 0, 0, 0.35); }
+html.vt-next::view-transition-old(root) { animation-name: lh-out-left; z-index: 1; }
+html.vt-prev::view-transition-old(root) { animation-name: lh-out-right; z-index: 2; box-shadow: -14px 0 32px rgba(0, 0, 0, 0.35); }
+html.vt-prev::view-transition-new(root) { animation-name: lh-in-left; z-index: 1; }
 
 /* Hoja de instalación */
 .sheet { position: fixed; inset: 0; z-index: 120; display: flex; align-items: flex-end; justify-content: center; }
@@ -1029,7 +1036,7 @@ html.sheet-lock, html.sheet-lock body { overflow: hidden; }
 /* ================= pantallas con notch, isla dinámica y barra de gestos ================= */
 /* App instalada en iPhone: el reloj y la batería van en blanco, así que la franja de arriba es siempre oscura
    (en modo claro, con el degradado de la marca para que no parezca un corte) */
-html.standalone[data-theme-now="light"] body::after { background: linear-gradient(90deg, #1b0840, #4a0f5c 50%, #1b0840); }
+html.standalone[data-theme-now="light"] .site-header::before { background: linear-gradient(90deg, #1b0840, #4a0f5c 50%, #1b0840); }
 /* Que nada rebote ni deje ver el fondo al tirar más allá del final (sensación de app) */
 html.standalone, html.standalone body { overscroll-behavior-y: none; }
 /* Móvil en horizontal: la isla o el notch quedan a un lado */

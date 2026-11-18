@@ -565,7 +565,7 @@
   });
   // La clase de dirección solo sirve para la transición de entrada; luego se quita
   // (la quita el evento «pagereveal» al acabar; esto es la red de seguridad)
-  setTimeout(function () { root.classList.remove("vt-next", "vt-prev"); }, 1500);
+  if (!("onpagereveal" in window)) setTimeout(function () { root.classList.remove("vt-next", "vt-prev"); }, 1500);
 
   // --- Navegación instantánea: precargar la página antes de que el dedo se levante ---
   // Chrome/Edge/Android lo hacen con «speculationrules»; esto cubre Safari (iPhone), Firefox y el modo app.
@@ -601,6 +601,7 @@
     body.appendChild(chip);
     var sx = 0, sy2 = 0, st = 0, dx = 0, lock = 0, active = false, swTo = -1, reduce = mqm("(prefers-reduced-motion: reduce)");
     var EDGE = 24, TRIGGER = 70;
+    var vtOK = !!(window.CSS && CSS.supports && CSS.supports("view-transition-name: a"));
     var scrollsX = function (el) {
       for (; el && el !== body && el !== document.documentElement; el = el.parentElement) {
         if (el.matches && el.matches("input,textarea,select,[contenteditable],.table-wrap,.filter,.aud-toggle,.sheet,[data-no-swipe]")) return true;
@@ -653,7 +654,8 @@
       var ok = swTo >= 0 && swTo < tabs.length;
       if (ok && (Math.abs(dx) > TRIGGER || (Math.abs(dx) > 35 && v > 0.45))) {
         buzz(); store.set("lh-swiped", "1");
-        if (!reduce) { main.style.transition = "transform .18s ease-out, opacity .18s"; main.style.transform = "translate3d(" + (dx < 0 ? -18 : 18) + "%,0,0)"; main.style.opacity = ".35"; }
+        // sin transición de página (navegador antiguo): el contenido acompaña el gesto hasta que llega la nueva
+        if (!reduce && !vtOK) { main.style.transition = "transform .2s ease-out"; main.style.transform = "translate3d(" + (dx < 0 ? -30 : 30) + "%,0,0)"; }
         chip.classList.remove("is-on");
         goTab(swTo, dx < 0 ? "next" : "prev");
       } else reset(true);
@@ -661,7 +663,7 @@
     window.addEventListener("touchend", end, { passive: true });
     window.addEventListener("touchcancel", function () { active = false; reset(true); }, { passive: true });
     // Volver con «atrás» (caché del navegador): dejar la página en su sitio
-    window.addEventListener("pageshow", function (e) { if (e.persisted) { main.style.opacity = ""; reset(false); root.classList.remove("vt-next", "vt-prev"); } });
+    window.addEventListener("pageshow", function (e) { if (e.persisted) { reset(false); root.classList.remove("vt-next", "vt-prev"); } });
 
     // Un consejo, una sola vez, para descubrir el gesto
     if (!store.get("lh-swiped") && !store.get("lh-swipe-tip") && isPhone()) whenShown(function () {
