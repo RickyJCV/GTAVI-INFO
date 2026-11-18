@@ -261,6 +261,133 @@
     window.addEventListener("resize", schedule, { passive: true });
   })();
 
+  // ================= Modo app (pantalla de inicio en iPhone y Android) =================
+  var body = document.body;
+  var T = {};
+  try { T = JSON.parse(body.getAttribute("data-app") || "{}"); } catch (e) {}
+  var BASE = body.getAttribute("data-base") || "";
+  var standalone = (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) || window.navigator.standalone === true;
+  if (standalone) root.classList.add("standalone");
+
+  // Al abrir la app en «/», respetar el idioma elegido
+  var langGo = false;
+  try { langGo = !sessionStorage.getItem("lh-langgo"); sessionStorage.setItem("lh-langgo", "1"); } catch (e) {}
+  if (standalone && langGo && location.pathname === BASE + "/" && store.get("lh-lang") === "en") location.replace(BASE + "/en/");
+
+  // Aviso flotante reutilizable
+  var toastEl = null;
+  function toast(text, actionLabel, action, sticky) {
+    if (!toastEl) {
+      toastEl = document.createElement("div");
+      toastEl.className = "app-toast";
+      toastEl.setAttribute("role", "status");
+      body.appendChild(toastEl);
+    }
+    toastEl.innerHTML = "";
+    var span = document.createElement("span"); span.textContent = text; toastEl.appendChild(span);
+    if (actionLabel) {
+      var b = document.createElement("button"); b.type = "button"; b.textContent = actionLabel;
+      b.addEventListener("click", action); toastEl.appendChild(b);
+    }
+    var x = document.createElement("button"); x.type = "button"; x.className = "app-toast__x"; x.setAttribute("aria-label", T.close || "×"); x.textContent = "×";
+    x.addEventListener("click", function () { toastEl.classList.remove("is-on"); }); toastEl.appendChild(x);
+    requestAnimationFrame(function () { toastEl.classList.add("is-on"); });
+    clearTimeout(toastEl._t);
+    if (!sticky) toastEl._t = setTimeout(function () { toastEl.classList.remove("is-on"); }, 6000);
+  }
+  function hardRefresh() { location.reload(); }
+
+  // Service worker: lectura sin conexión y cargas instantáneas
+  if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
+    window.addEventListener("load", function () {
+      navigator.serviceWorker.register(BASE + "/sw.js").catch(function () {});
+    });
+  }
+
+  // ¿Hay una versión más nueva publicada? (al volver a la app, y cada 10 min si está abierta)
+  var myBuild = (document.querySelector('meta[name="build-id"]') || {}).content;
+  var checking = false, lastCheck = Date.now(), hiddenAt = 0;
+  function checkFresh() {
+    if (checking || !myBuild || !navigator.onLine) return;
+    checking = true; lastCheck = Date.now();
+    fetch(BASE + "/version.json?t=" + Date.now(), { cache: "no-store" })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (v) { if (v && v.build && v.build !== myBuild) toast(T.fresh || "", T.update || "↻", hardRefresh, true); })
+      .catch(function () {})
+      .then(function () { checking = false; });
+  }
+  document.addEventListener("visibilitychange", function () {
+    if (document.hidden) { hiddenAt = Date.now(); return; }
+    if (hiddenAt && Date.now() - hiddenAt > 60 * 1000) checkFresh();
+  });
+  setInterval(function () { if (!document.hidden && Date.now() - lastCheck > 10 * 60 * 1000) checkFresh(); }, 60 * 1000);
+  window.addEventListener("offline", function () { toast(T.offline || "", null, null, false); });
+  window.addEventListener("online", function () { checkFresh(); });
+
+  // Deslizar hacia abajo para actualizar (solo en modo app: el navegador ya trae el suyo)
+  if (standalone && "ontouchstart" in window) {
+    var ptr = document.createElement("div");
+    ptr.className = "ptr"; ptr.setAttribute("aria-hidden", "true");
+    ptr.innerHTML = '<span class="ptr__icon"><svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M20 12a8 8 0 1 1-2.34-5.66M20 4v5h-5"/></svg></span><span class="ptr__label"></span>';
+    body.appendChild(ptr);
+    var label = ptr.querySelector(".ptr__label");
+    var startY = 0, startX = 0, pulling = false, dist = 0, busy = false;
+    var LIMIT = 72;
+    var setPull = function (d) {
+      dist = d;
+      var p = Math.min(1, d / LIMIT);
+      ptr.style.transform = "translate(-50%," + Math.round(Math.min(d, 110) - 70) + "px)";
+      ptr.style.opacity = String(Math.min(1, d / 30));
+      ptr.querySelector(".ptr__icon").style.transform = "rotate(" + Math.round(p * 270) + "deg)";
+      ptr.classList.toggle("is-ready", d >= LIMIT);
+      label.textContent = d >= LIMIT ? (T.ptrRelease || "") : (T.ptrPull || "");
+    };
+    window.addEventListener("touchstart", function (e) {
+      if (busy || e.touches.length !== 1 || (window.scrollY || document.documentElement.scrollTop) > 0) { pulling = false; return; }
+      startY = e.touches[0].clientY; startX = e.touches[0].clientX; pulling = true; dist = 0;
+    }, { passive: true });
+    window.addEventListener("touchmove", function (e) {
+      if (!pulling) return;
+      var dy = e.touches[0].clientY - startY, dx = Math.abs(e.touches[0].clientX - startX);
+      if (dy <= 0 || dx > dy) { if (dist) setPull(0); return; }
+      if ((window.scrollY || document.documentElement.scrollTop) > 0) { pulling = false; setPull(0); return; }
+      setPull(dy * 0.55);
+    }, { passive: true });
+    window.addEventListener("touchend", function () {
+      if (!pulling) return;
+      pulling = false;
+      if (dist >= LIMIT) {
+        busy = true;
+        ptr.classList.add("is-busy");
+        label.textContent = T.ptrLoading || "";
+        ptr.style.transform = "translate(-50%,12px)";
+        setTimeout(hardRefresh, 350);
+      } else {
+        ptr.style.transition = "transform .25s, opacity .25s"; setPull(0);
+        setTimeout(function () { ptr.style.transition = ""; }, 260);
+      }
+    }, { passive: true });
+  }
+
+  // Invitar a instalar: botón en Android/Chrome; instrucciones en iPhone (Safari no tiene botón)
+  var installBtns = document.querySelectorAll("[data-install]");
+  var deferred = null;
+  window.addEventListener("beforeinstallprompt", function (e) {
+    e.preventDefault(); deferred = e;
+    installBtns.forEach(function (b) { b.hidden = false; });
+  });
+  installBtns.forEach(function (b) {
+    b.addEventListener("click", function () {
+      if (!deferred) return;
+      deferred.prompt();
+      deferred.userChoice.then(function () { deferred = null; installBtns.forEach(function (x) { x.hidden = true; }); });
+    });
+  });
+  window.addEventListener("appinstalled", function () { installBtns.forEach(function (x) { x.hidden = true; }); });
+  var ua = navigator.userAgent || "";
+  var isIOS = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  if (isIOS && !standalone) document.querySelectorAll("[data-ios-tip]").forEach(function (el) { el.hidden = false; });
+
   // AdSense: activa cada bloque manual presente en la página
   var ads = document.querySelectorAll("ins.adsbygoogle");
   if (ads.length) {

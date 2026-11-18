@@ -18,9 +18,16 @@ const palm = (x, h, flip) =>
 const browser = await chromium.launch();
 const page = await browser.newPage();
 
-for (const [file, size] of [["icon-512.png", 512], ["icon-192.png", 192], ["apple-touch-icon.png", 180]]) {
+for (const [file, size] of [["icon-512.png", 512], ["icon-192.png", 192]]) {
   await page.setViewportSize({ width: size, height: size });
-  await page.setContent(`<style>html,body{margin:0;background:#0e0722}svg{width:${size}px;height:${size}px;display:block}</style>${mark}`);
+  await page.setContent(`<style>html,body{margin:0;background:#0b0618}svg{width:${size}px;height:${size}px;display:block}</style>${mark}`);
+  await page.screenshot({ path: A(file) });
+}
+// Iconos «a sangre» para pantalla de inicio: el sistema (iOS / Android) recorta las esquinas.
+// apple-touch-icon: el logo ocupa casi todo; maskable: el logo dentro de la zona segura (80 %).
+for (const [file, size, scale] of [["apple-touch-icon.png", 180, 0.9], ["icon-maskable-512.png", 512, 0.76], ["icon-maskable-192.png", 192, 0.76]]) {
+  await page.setViewportSize({ width: size, height: size });
+  await page.setContent(`<style>html,body{margin:0;width:${size}px;height:${size}px;background:radial-gradient(circle at 50% 40%,#3a0b55,#1b0840 55%,#0b0618)}div{position:absolute;inset:0;display:grid;place-items:center}svg{width:${Math.round(size * scale)}px;height:${Math.round(size * scale)}px;display:block}</style><div>${mark}</div>`);
   await page.screenshot({ path: A(file) });
 }
 

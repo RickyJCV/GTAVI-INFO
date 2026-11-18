@@ -873,3 +873,45 @@ html.launched .pre-only { display: none !important; }
 .score-hero h3 { font-size: 1.15rem; margin-bottom: 4px; }
 .score-hero--agg .score-ring { width: 92px; height: 92px; }
 .score-hero--agg .score-ring b { font-size: 2rem; }
+
+/* ================= modo app (pantalla de inicio) ================= */
+/* Zonas seguras (muesca, isla dinámica, barra de gestos) */
+.wrap { padding-left: max(16px, env(safe-area-inset-left)); padding-right: max(16px, env(safe-area-inset-right)); }
+@media (min-width: 720px) { .wrap { padding-left: max(28px, env(safe-area-inset-left)); padding-right: max(28px, env(safe-area-inset-right)); } }
+.site-header { padding-top: env(safe-area-inset-top); }
+.site-footer { padding-bottom: calc(48px + env(safe-area-inset-bottom)); }
+.to-top { bottom: calc(16px + var(--anchor-h, 0px) + env(safe-area-inset-bottom)); right: max(16px, env(safe-area-inset-right)); }
+/* En la app, la franja bajo la barra de estado siempre oscura para que la hora y la batería se lean */
+html.standalone body::after { content: ""; position: fixed; top: 0; left: 0; right: 0; height: env(safe-area-inset-top); background: #0b0618; z-index: 100; pointer-events: none; }
+html.standalone { -webkit-tap-highlight-color: transparent; }
+html.standalone .nav a, html.standalone .btn, html.standalone .hub__tile, html.standalone .lang a { -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; }
+html.standalone .site-header { position: sticky; top: 0; }
+
+/* Deslizar para actualizar */
+.ptr {
+  position: fixed; left: 50%; top: calc(env(safe-area-inset-top) + 6px); z-index: 90; transform: translate(-50%, -70px); opacity: 0; pointer-events: none;
+  display: flex; align-items: center; gap: 8px; padding: 8px 14px 8px 8px; border-radius: 999px; font: 700 0.82rem var(--font);
+  color: var(--text); background: var(--surface-2); border: 1px solid rgba(255, 47, 163, 0.55); box-shadow: 0 8px 26px -8px rgba(0, 0, 0, 0.7), 0 0 18px rgba(255, 47, 163, 0.3);
+}
+.ptr__icon { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: var(--sunset); color: #1a0730; }
+.ptr__icon svg { width: 16px; height: 16px; }
+.ptr.is-ready { border-color: var(--cyan); box-shadow: 0 8px 26px -8px rgba(0, 0, 0, 0.7), 0 0 18px rgba(38, 240, 241, 0.45); }
+.ptr.is-busy .ptr__icon { animation: lh-spin 0.8s linear infinite; }
+@keyframes lh-spin { to { transform: rotate(360deg); } }
+
+/* Aviso flotante (noticias nuevas, sin conexión) */
+.app-toast {
+  position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom) + var(--anchor-h, 0px)); z-index: 95; width: min(92vw, 460px);
+  display: flex; align-items: center; gap: 10px; padding: 10px 10px 10px 16px; border-radius: 16px; font-weight: 600; font-size: 0.92rem;
+  color: var(--text); background: var(--surface-2); border: 1px solid rgba(38, 240, 241, 0.5); box-shadow: 0 16px 40px -14px rgba(0, 0, 0, 0.8), 0 0 22px rgba(38, 240, 241, 0.25);
+  transform: translate(-50%, 140%); opacity: 0; transition: transform 0.4s var(--ease), opacity 0.3s;
+}
+.app-toast.is-on { transform: translate(-50%, 0); opacity: 1; }
+.app-toast span { flex: 1; }
+.app-toast button { font: 800 0.85rem var(--font); border: 0; border-radius: 10px; padding: 9px 14px; cursor: pointer; background: var(--sunset); color: #1a0730; }
+.app-toast .app-toast__x { background: transparent; color: var(--muted); padding: 6px 8px; font-size: 1.2rem; line-height: 1; }
+
+/* Instalar */
+.ios-tip { margin: 14px 0 0; padding: 10px 12px; border-radius: 12px; background: var(--surface); border: 1px dashed var(--line-2); color: var(--text-soft); }
+.footer-install { font: 700 0.92rem var(--font); background: none; border: 1px solid var(--line-2); color: var(--text); border-radius: 999px; padding: 6px 12px; cursor: pointer; }
+html.standalone [data-install], html.standalone [data-ios-tip] { display: none !important; }

@@ -17,6 +17,7 @@ const BASE = new URL(SITE + "/").pathname.replace(/\/$/, "");
 const ADS = cfg.adsense?.client?.trim() || "";
 const GA = cfg.analytics?.ga4?.trim() || "";
 const BUILD_TIME = new Date().toISOString();
+const BUILD_ID = crypto.createHash("sha1").update(BUILD_TIME).digest("hex").slice(0, 10);
 const ISSUES_URL = "https://github.com/leonidahoy/leonidahoy.github.io/issues";
 // Versión de CSS/JS según su contenido: cada cambio obliga al navegador a descargarlos de nuevo.
 const assetVer = (f) => crypto.createHash("sha1").update(fs.readFileSync(path.join(ROOT, "assets", f))).digest("hex").slice(0, 8);
@@ -263,6 +264,7 @@ const footer = (L) => {
         <a href="${u(P.privacy)}">${esc(L.t.footerLinks.privacy)}</a>
         <a href="${u(P.legal)}">${esc(L.t.footerLinks.legal)}</a>
         <a href="${u(P.feed)}" class="rss">${icon.rss} RSS</a>
+        <button class="footer-install" type="button" data-install hidden>${esc(L.t.app.install)}</button>
         ${soc.map(([k, v]) => `<a href="${esc(v)}" rel="me noopener" target="_blank">${esc(k === "x" ? "X" : k.charAt(0).toUpperCase() + k.slice(1))}</a>`).join("")}
       </nav>
     </div>
@@ -283,7 +285,13 @@ const layout = (L, { title, description, key, body, active, type = "website", js
 <html lang="${L.code}">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="build-id" content="${BUILD_ID}">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="${esc(cfg.name)}">
+<meta name="application-name" content="${esc(cfg.name)}">
 <title>${esc(fullTitle)}</title>
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${canonical}">
@@ -311,7 +319,7 @@ ${published ? `<meta property="article:published_time" content="${published}">` 
 <link rel="icon" href="${u("/assets/favicon.svg")}" type="image/svg+xml">
 <link rel="icon" href="${u("/assets/icon-192.png")}" sizes="192x192" type="image/png">
 <link rel="apple-touch-icon" href="${u("/assets/apple-touch-icon.png")}">
-<link rel="manifest" href="${u("/manifest.webmanifest")}">
+<link rel="manifest" href="${u(L.code === "es" ? "/manifest.webmanifest" : `/manifest-${L.code}.webmanifest`)}">
 <link rel="alternate" type="application/rss+xml" title="${esc(cfg.name)} (${L.label})" href="${u(L.paths.feed)}">
 <link rel="preload" href="${u("/assets/fonts/inter-latin.woff2")}" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="${u("/assets/fonts/anton-latin.woff2")}" as="font" type="font/woff2" crossorigin>
@@ -324,7 +332,7 @@ ${GA ? `<script async src="https://www.googletagmanager.com/gtag/js?id=${esc(GA)
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${esc(GA)}');</script>` : ""}
 ${jsonLd.map((j) => `<script type="application/ld+json">${JSON.stringify(j).replace(/</g, "\\u003c")}</script>`).join("\n")}
 </head>
-<body>
+<body data-base="${BASE}" data-app='${esc(JSON.stringify(L.t.app))}'>
 <a class="skip" href="#main">${esc(L.t.skip)}</a>
 ${header(L, active, alts)}
 ${langHint(L, alts)}
@@ -568,6 +576,8 @@ const briefBody = (L, b) => {
         <h2 class="card__title">${esc(L.t.ctaTitle)}</h2>
         <p class="small">${esc(L.t.ctaText)}</p>
         <a class="btn btn--ghost btn--block" href="${u(P.feed)}">${icon.rss} ${esc(L.t.rss)}</a>
+        <button class="btn btn--primary btn--block" type="button" data-install hidden>${esc(L.t.app.install)}</button>
+        <p class="ios-tip small" data-ios-tip hidden><b>${esc(L.t.app.iosTitle)}</b><br>${esc(L.t.app.iosSteps)}</p>
       </div>
     </aside>
   </div>`;
@@ -1108,28 +1118,132 @@ ${entries
 }
 write("robots.txt", `User-agent: *\nAllow: /\n\nSitemap: ${abs("/sitemap.xml")}\nSitemap: ${abs("/news-sitemap.xml")}\n`);
 if (ADS) write("ads.txt", `google.com, ${ADS.replace(/^ca-/, "")}, DIRECT, f08c47fec0942fa0\n`);
+// ---------- app instalable (PWA) ----------
+for (const code of ACTIVE) {
+  const L = LOCALES[code];
+  const P = L.paths;
+  const sc = (name, short, url) => ({ name, short_name: short, url: u(url), icons: [{ src: u("/assets/icon-192.png"), sizes: "192x192", type: "image/png" }] });
+  write(
+    code === "es" ? "manifest.webmanifest" : `manifest-${code}.webmanifest`,
+    JSON.stringify(
+      {
+        id: u(P.home),
+        name: `${cfg.name} · ${L.t.tagline}`,
+        short_name: cfg.name,
+        description: L.t.description,
+        lang: code,
+        dir: "ltr",
+        start_url: u(P.home),
+        scope: u("/"),
+        display: "standalone",
+        display_override: ["standalone", "minimal-ui"],
+        orientation: "portrait",
+        background_color: "#0b0618",
+        theme_color: "#0b0618",
+        categories: ["news", "entertainment", "games"],
+        icons: [
+          { src: u("/assets/icon-192.png"), sizes: "192x192", type: "image/png", purpose: "any" },
+          { src: u("/assets/icon-512.png"), sizes: "512x512", type: "image/png", purpose: "any" },
+          { src: u("/assets/icon-maskable-192.png"), sizes: "192x192", type: "image/png", purpose: "maskable" },
+          { src: u("/assets/icon-maskable-512.png"), sizes: "512x512", type: "image/png", purpose: "maskable" },
+        ],
+        shortcuts: [
+          sc(L.t.nav.news, L.t.nav.news, P.news),
+          sc(L.t.nav.rumors, L.t.nav.rumors, P.rumors),
+          sc(L.t.tiles.reviews[0], L.t.tiles.reviews[0], P.reviews),
+          sc(L.t.tiles.leonida[0], L.t.tiles.leonida[0], P.leonida),
+        ],
+      },
+      null,
+      2
+    )
+  );
+}
+
+// Página «Sin conexión» (bilingüe) para cuando no hay red y la página no está guardada
 write(
-  "manifest.webmanifest",
-  JSON.stringify(
-    {
-      name: `${cfg.name} · ${LOCALES.es.t.tagline}`,
-      short_name: cfg.name,
-      lang: "es",
-      start_url: u("/"),
-      scope: u("/"),
-      display: "standalone",
-      background_color: "#0b0618",
-      theme_color: "#0b0618",
-      icons: [
-        { src: u("/assets/icon-192.png"), sizes: "192x192", type: "image/png" },
-        { src: u("/assets/icon-512.png"), sizes: "512x512", type: "image/png" },
-        { src: u("/assets/favicon.svg"), sizes: "any", type: "image/svg+xml" },
-      ],
-    },
-    null,
-    2
-  )
+  "offline.html",
+  `<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="robots" content="noindex"><meta name="theme-color" content="#0b0618"><title>${esc(LOCALES.es.t.offlineTitle)} · ${esc(cfg.name)}</title><link rel="icon" href="${u("/assets/favicon.svg")}" type="image/svg+xml">
+<style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:radial-gradient(circle at 50% 30%,#3a0b55,#0b0618 70%);color:#fbf6ff;font:16px/1.6 system-ui,-apple-system,sans-serif;padding:24px;text-align:center}main{max-width:440px}img{width:96px;height:96px;border-radius:22px}h1{font-size:1.6rem;margin:16px 0 6px}p{color:#bfb0e0;margin:0 0 10px}button{margin-top:14px;font:700 1rem system-ui;padding:12px 22px;border:0;border-radius:12px;color:#1a0730;background:linear-gradient(100deg,#ffe066,#ff9a3c 35%,#ff2fa3 72%,#b026ff);cursor:pointer}a{color:#26f0f1}</style></head>
+<body><main><img src="${u("/assets/icon-maskable-192.png")}" alt=""><h1>${esc(LOCALES.es.t.offlineTitle)}</h1><p>${esc(LOCALES.es.t.offlineText)}</p><p lang="en">${esc(LOCALES.en.t.offlineText)}</p><button onclick="location.reload()">${esc(LOCALES.es.t.offlineRetry)} · ${esc(LOCALES.en.t.offlineRetry)}</button><p><a href="${u("/")}">${esc(cfg.name)}</a></p></main></body></html>
+`
 );
+
+// Versión publicada: la app la consulta para avisar de que hay noticias nuevas
+write("version.json", JSON.stringify({ build: BUILD_ID, time: BUILD_TIME }) + "\n");
+
+// Service worker: páginas «red primero» (siempre frescas, y guardadas para leer sin conexión);
+// CSS, JS, fuentes e imágenes desde caché (llevan versión en la URL). No toca nada de otros dominios (AdSense).
+{
+  const core = [
+    u("/"), ...ACTIVE.filter((c) => c !== "es").map((c) => u(LOCALES[c].paths.home)), u("/offline.html"),
+    `${u("/assets/styles.css")}?v=${CSS_V}`, `${u("/assets/app.js")}?v=${JS_V}`, `${u("/assets/fonts.css")}?v=${FONTS_V}`,
+    u("/assets/fonts/inter-latin.woff2"), u("/assets/fonts/anton-latin.woff2"), u("/assets/fonts/yellowtail-latin.woff2"),
+    u("/assets/favicon.svg"), u("/assets/icon-192.png"), u("/assets/icon-maskable-192.png"),
+  ];
+  write(
+    "sw.js",
+    `/* Leónida Hoy · service worker ${BUILD_ID} */
+const STATIC = "lh-static-${BUILD_ID}";
+const PAGES = "lh-pages";
+const CORE = ${JSON.stringify(core)};
+const OFFLINE = ${JSON.stringify(u("/offline.html"))};
+self.addEventListener("install", (e) => {
+  e.waitUntil(caches.open(STATIC).then((c) => c.addAll(CORE)).then(() => self.skipWaiting()));
+});
+self.addEventListener("activate", (e) => {
+  e.waitUntil(
+    caches.keys()
+      .then((keys) => Promise.all(keys.filter((k) => k.startsWith("lh-static-") && k !== STATIC).map((k) => caches.delete(k))))
+      .then(() => (self.registration.navigationPreload ? self.registration.navigationPreload.enable() : null))
+      .then(() => self.clients.claim())
+  );
+});
+const trim = async (name, max) => {
+  const c = await caches.open(name);
+  const keys = await c.keys();
+  for (let i = 0; i < keys.length - max; i++) await c.delete(keys[i]);
+};
+const pageFirst = async (event) => {
+  const req = event.request;
+  try {
+    const preload = event.preloadResponse ? await event.preloadResponse : null;
+    const res = preload || (await fetch(new Request(req.url, { cache: "no-cache", credentials: "same-origin" })));
+    if (res && res.ok && res.type === "basic") {
+      const copy = res.clone();
+      caches.open(PAGES).then((c) => c.put(req.url, copy)).then(() => trim(PAGES, 60));
+    }
+    return res;
+  } catch (err) {
+    const cached = (await caches.match(req.url, { ignoreSearch: true })) || (await caches.match(OFFLINE));
+    return cached || Response.error();
+  }
+};
+const assetCache = async (req) => {
+  const cached = await caches.match(req);
+  if (cached) return cached;
+  const res = await fetch(req);
+  if (res && res.ok && res.type === "basic") {
+    const copy = res.clone();
+    caches.open(STATIC).then((c) => c.put(req, copy));
+  }
+  return res;
+};
+self.addEventListener("fetch", (e) => {
+  const req = e.request;
+  if (req.method !== "GET") return;
+  const url = new URL(req.url);
+  if (url.origin !== self.location.origin) return;
+  if (url.pathname.endsWith("/version.json") || url.pathname.endsWith("/sw.js")) return;
+  if (req.mode === "navigate" || (req.headers.get("accept") || "").includes("text/html")) {
+    e.respondWith(pageFirst(e));
+    return;
+  }
+  if (/\\.(css|js|woff2|png|svg|webmanifest)$/.test(url.pathname)) e.respondWith(assetCache(req));
+});
+`
+  );
+}
 write(".nojekyll", "");
 if (cfg.indexNowKey) write(`${cfg.indexNowKey}.txt`, cfg.indexNowKey);
 
