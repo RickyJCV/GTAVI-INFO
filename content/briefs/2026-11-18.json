@@ -1,8 +1,8 @@
 {
   "date": "2026-11-18",
-  "title": "Notas de GTA 6: el embargo se espera hoy y las puntuaciones de las tiendas no valen",
-  "summary": "Las primeras reseñas podrían salir hoy, según varios medios, y una carta falsa de Rockstar sobre un retraso a 2027 ha sido desmentida. Mañana a medianoche local sale el juego.",
-  "lead": "Es la víspera del lanzamiento y la pregunta es qué dirá la prensa. Rockstar no ha publicado calendario de reseñas, así que de momento todo es información no confirmada.",
+  "title": "GTA VI ya tiene nota: 99 en Metacritic y 98 en OpenCritic a horas del estreno",
+  "summary": "Las primeras reseñas son excelentes: 99 en Metacritic y 98 en OpenCritic. Además, una carta falsa sobre un retraso a 2027 queda desmentida y el autor de la filtración de 2022 será sentenciado el 23.",
+  "lead": "Se levantó el embargo y la prensa ha puesto a GTA VI en lo más alto. Las puntuaciones pueden moverse a medida que salgan más análisis y el juego se desbloquea a medianoche local.",
   "stories": [
     {
       "tag": "Impacto",
@@ -56,9 +56,55 @@
       ],
       "detail": "Es el dato nuevo respecto a lo que contamos el 16. Medios como Notebookcheck sitúan el caso en un tribunal de Londres. No sabemos aún qué pena pedirá la fiscalía ni qué decidirá el juez.",
       "why": "Cierra el capítulo judicial de la filtración más grave de la historia del juego."
+    },
+    {
+      "tag": "Impacto",
+      "title": "GTA 6 ya tiene nota en la prensa: 99 en Metacritic, la más alta de Rockstar",
+      "change": "Las primeras reseñas dan a GTA VI un 99 en Metacritic, la nota más alta de un juego de Rockstar y un empate con el récord histórico de la plataforma, según Notebookcheck y Forbes. IGN y GameSpot le dan 10/10, según Tom's Guide. Las cifras pueden cambiar.",
+      "plain": "La prensa especializada ha recibido el juego con puntuaciones casi perfectas.",
+      "sources": [
+        {
+          "name": "Insider Gaming",
+          "url": "https://insider-gaming.com/gta-6-gets-a-99-in-early-metacritic-review-scores/"
+        },
+        {
+          "name": "Forbes",
+          "url": "https://www.forbes.com/sites/paultassi/2026/11/18/the-gta-6-metacritic-review-score-is-in-and-ties-an-all-time-record/"
+        },
+        {
+          "name": "Notebookcheck",
+          "url": "https://www.notebookcheck.net/GTA-6-reviews-award-99-Metacritic-score-topping-GTA-4-to-become-Rockstar-s-top-rated.1453363.0.html"
+        },
+        {
+          "name": "Tom's Guide",
+          "url": "https://www.tomsguide.com/news/live/gta-6-review-roundup-live-updates"
+        }
+      ],
+      "detail": "OpenCritic marcaba 98 con 62 críticos y todos lo recomendaban. Los medios no coinciden en cuántas puntuaciones perfectas hay: Vice habla de 101 y Forbes de 80 sobre 109 reseñas. La nota media seguirá moviéndose mientras salgan análisis.",
+      "why": "Es la señal más clara de que el juego cumple antes de decidir comprarlo."
     }
   ],
-  "rumors": [],
+  "rumors": [
+    {
+      "title": "Seis capturas que circulan vendrían del servidor de una web de análisis",
+      "change": "El dataminer Tez dijo que seis capturas aparecidas en redes salieron del servidor de una web de reseñas, según Insider Gaming, que lo conoció por una conversación en Discord. Rockstar no ha confirmado nada.",
+      "plain": "Han circulado imágenes antes de tiempo, pero su origen no está comprobado.",
+      "reliability": "baja",
+      "who": "Tez (dataminer) · Insider Gaming",
+      "sources": [
+        {
+          "name": "Insider Gaming",
+          "url": "https://insider-gaming.com/gta-6-screenshots-surface-social-media/"
+        },
+        {
+          "name": "Notebookcheck",
+          "url": "https://www.notebookcheck.net/GTA-6-Six-new-screenshots-leaked-revealing-interesting-details.1453240.0.html"
+        }
+      ],
+      "detail": "No enlazamos las imágenes, que son material de Rockstar, y solo contamos que existen y lo que dicen los medios. La procedencia se basa en la palabra de una sola persona y no se ha podido verificar.",
+      "why": "Con el juego a punto de salir, cualquier imagen previa pierde importancia rápido."
+    }
+  ],
   "posts": [
     "Las primeras reseñas de GTA 6 podrían salir hoy (embargo del 18, no confirmado por Rockstar). Las notas de las tiendas de consola no son análisis de la prensa: espera a Metacritic y OpenCritic. 📝",
     "Ojo con los bulos: circula una carta falsa de Rockstar que habla de un retraso a 2027. Lead Stories no halló nada así en la web de Rockstar. La fecha sigue siendo el 19 de noviembre. ⚠️",
@@ -89,9 +135,9 @@
     }
   ],
   "en": {
-    "title": "GTA 6 review scores: embargo expected today, and store ratings don't count",
-    "summary": "The first reviews could land today, according to several outlets, and a fake Rockstar letter about a delay to 2027 has been debunked. Tomorrow at local midnight the game goes live.",
-    "lead": "It's launch eve and the question is what the press will say. Rockstar hasn't published a review schedule, so for now everything is unconfirmed.",
+    "title": "GTA 6 now has a score: 99 on Metacritic and 98 on OpenCritic hours before launch",
+    "summary": "First reviews are excellent: 99 on Metacritic and 98 on OpenCritic. A fake letter about a delay to 2027 is also debunked and the 2022 leak's author will be sentenced on the 23rd.",
+    "lead": "The embargo lifted and the press has put GTA VI at the very top. Scores may move as more reviews arrive, and the game unlocks at local midnight.",
     "stories": [
       {
         "tag": "Impact",
@@ -118,9 +164,26 @@
         "plain": "Four days after launch, the sentence for the 2022 leak will be known.",
         "detail": "This is the new detail compared with what we covered on the 16th. Outlets like Notebookcheck place the case in a London court. We don't yet know what penalty prosecutors will seek or what the judge will decide.",
         "why": "It closes the legal chapter of the most serious leak in the game's history."
+      },
+      {
+        "tag": "Impact",
+        "title": "GTA 6 now has a press score: 99 on Metacritic, Rockstar's highest",
+        "change": "First reviews give GTA VI a 99 on Metacritic, the highest score for a Rockstar game and a tie with the platform's all-time record, per Notebookcheck and Forbes. IGN and GameSpot give it 10/10, per Tom's Guide. Figures may change.",
+        "plain": "Specialist press has received the game with near-perfect scores.",
+        "detail": "OpenCritic showed 98 from 62 critics, all recommending it. Outlets disagree on how many perfect scores there are: Vice says 101 and Forbes says 80 out of 109 reviews. The average will keep moving as more reviews land.",
+        "why": "It's the clearest sign the game delivers before you decide to buy."
       }
     ],
-    "rumors": [],
+    "rumors": [
+      {
+        "title": "Six screenshots going around reportedly came from a review site's server",
+        "change": "Dataminer Tez said six screenshots that surfaced on social media came from a review site's server, per Insider Gaming, which learned of it through a Discord conversation. Rockstar hasn't confirmed anything.",
+        "plain": "Images have circulated early, but their origin isn't verified.",
+        "detail": "We don't link the images, which are Rockstar material, and only report that they exist and what outlets say. The origin rests on one person's word and couldn't be verified.",
+        "why": "With the game about to launch, any earlier image loses importance fast.",
+        "who": "Tez (dataminer) · Insider Gaming"
+      }
+    ],
     "posts": [
       "The first GTA 6 reviews could land today (embargo on the 18th, not confirmed by Rockstar). Console store ratings aren't press reviews: wait for Metacritic and OpenCritic. 📝",
       "Watch out for hoaxes: a fake Rockstar letter about a delay to 2027 is going around. Lead Stories found nothing like it on Rockstar's site. The date is still November 19. ⚠️",
