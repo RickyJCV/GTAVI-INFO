@@ -1,11 +1,15 @@
 {
-  "updated": "2026-11-14",
+  "updated": "2026-11-18",
   "title": "GTA VI quick guide: release date, price, platforms and size",
   "description": "Everything confirmed about GTA VI on one page: when it comes out, at what time, how much it costs, which consoles, how big it is and whether it's coming to PC.",
   "facts": [
     {
       "label": "Release",
       "value": "November 19, 2026"
+    },
+    {
+      "label": "Critics",
+      "value": "99 on Metacritic"
     },
     {
       "label": "Time",
@@ -36,6 +40,30 @@
         {
           "name": "Variety",
           "url": "https://variety.com/2026/gaming/news/gta-6-preorders-expectations-launch-1236943278/"
+        }
+      ]
+    },
+    {
+      "q": "How long is GTA 6?",
+      "a": "According to MeriStation's review, finishing the main story (five chapters and 95 missions) took about 70 hours. Doing everything can take much longer.",
+      "sources": [
+        {
+          "name": "El Demócrata",
+          "url": "https://www.democrata.es/cultura/gta-vi-nota-10-analisis-cuanto-dura-historia/"
+        }
+      ]
+    },
+    {
+      "q": "What score did GTA 6 get?",
+      "a": "GTA VI has a 99 on Metacritic, tied with Zelda: Ocarina of Time for the highest average in the site's history, and a 98 on OpenCritic. Outlets like IGN and GameSpot gave it a perfect score.",
+      "sources": [
+        {
+          "name": "Bloomberg",
+          "url": "https://www.bloomberg.com/news/articles/2026-11-18/-grand-theft-auto-vi-becomes-the-best-reviewed-video-game-ever"
+        },
+        {
+          "name": "Variety",
+          "url": "https://variety.com/2026/gaming/news/gta-6-reviews-highest-rated-video-game-1236951803"
         }
       ]
     },

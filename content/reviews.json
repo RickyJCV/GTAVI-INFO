@@ -1,4 +1,67 @@
 {
-  "updated": "2026-11-17",
-  "reviews": []
+  "updated": "2026-11-18",
+  "aggregates": [
+    {
+      "name": "Metacritic",
+      "score": 99,
+      "max": 100,
+      "url": "https://www.bloomberg.com/news/articles/2026-11-18/-grand-theft-auto-vi-becomes-the-best-reviewed-video-game-ever",
+      "source": "Bloomberg"
+    },
+    {
+      "name": "OpenCritic",
+      "score": 98,
+      "max": 100,
+      "url": "https://www.bloomberg.com/news/articles/2026-11-18/-grand-theft-auto-vi-becomes-the-best-reviewed-video-game-ever",
+      "source": "Bloomberg"
+    }
+  ],
+  "reviews": [
+    {
+      "outlet": "GameSpot",
+      "score": 10,
+      "max": 10,
+      "url": "https://www.gamespot.com/reviews/grand-theft-auto-6-review/",
+      "date": "2026-11-18"
+    },
+    {
+      "outlet": "IGN",
+      "score": 10,
+      "max": 10,
+      "url": "https://www.tomsguide.com/news/live/gta-6-review-roundup-live-updates",
+      "via": "Tom's Guide",
+      "date": "2026-11-18"
+    },
+    {
+      "outlet": "Vandal",
+      "score": 10,
+      "max": 10,
+      "url": "https://playnius.com/noticias/6944/gta-6-99-metacritic-notas-analisis",
+      "via": "Playnius",
+      "date": "2026-11-18"
+    },
+    {
+      "outlet": "MeriStation",
+      "score": 10,
+      "max": 10,
+      "url": "https://www.democrata.es/cultura/gta-vi-nota-10-analisis-cuanto-dura-historia/",
+      "via": "El Demócrata",
+      "date": "2026-11-18"
+    },
+    {
+      "outlet": "Hobby Consolas",
+      "score": 100,
+      "max": 100,
+      "url": "https://movistaresports.com/analisis-de-gta-6-olimpo-metacritic/",
+      "via": "Movistar eSports",
+      "date": "2026-11-18"
+    },
+    {
+      "outlet": "3DJuegos",
+      "score": 9,
+      "max": 10,
+      "url": "https://www.3djuegos.com/juegos/grand-theft-auto-vi/analisis/analisis-gta-vi-videojuego-perfecto",
+      "date": "2026-11-18"
+    }
+  ]
 }

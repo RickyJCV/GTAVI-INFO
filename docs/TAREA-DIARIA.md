@@ -54,9 +54,14 @@ Desde que se levante el embargo de análisis (previsto el 18 de noviembre de 202
 4. `node scripts/build.mjs` valida el archivo. Incluye `content/reviews.json` en el commit (`git add content`).
 5. Si es la noticia del día (por ejemplo, «GTA VI arrasa en la prensa»), cuéntala también en el resumen como noticia, con las fuentes.
 
-## Semana de lanzamiento: prioridades
+## Después del lanzamiento (desde el 19 de noviembre de 2026): prioridades
 
-Del 17 al 22 de noviembre la gente busca sobre todo: **a qué hora sale**, **las notas**, **problemas de descarga o servidores**, **tamaño y parches**, **ediciones y códigos**, **mapa y personajes**. Prioriza esas noticias (si son nuevas y con fuente). Escribe los títulos con «GTA VI» o «GTA 6» y el dato clave al principio (ejemplo: «GTA VI ya tiene nota media: 97 en la prensa»).
+El juego ya está a la venta. Lo que más se busca ahora, por este orden: **problemas y parches** (servidores, descargas, errores, actualizaciones), **ventas y récords**, **GTA Online** (fecha y novedades), **versión de PC**, **contenido y secretos confirmados** (zonas, misiones, duración, coches, emisoras), **notas y opinión de la prensa**. Prioriza esas noticias si son nuevas y tienen fuente. Escribe los títulos con «GTA VI» o «GTA 6» y el dato clave al principio.
+
+- **Nada de spoilers de la historia** en titulares ni en `change`/`plain`. Si una noticia trata de la trama, cuéntala sin desvelar nada y avisa en `detail` («sin spoilers»).
+- **Trucos, códigos o guías**: solo si los publica un medio reconocido o Rockstar, contados con tus palabras y con la fuente. Nada de exploits que rompan las normas del juego ni de métodos para conseguir dinero o ventajas en el modo online saltándose las reglas.
+
+**Notas:** en cada ejecución revisa también `content/reviews.json` → añade análisis nuevos de medios reconocidos y, si cambian, actualiza los `aggregates` (Metacritic/OpenCritic) con la cifra y la fuente que la publica. Si no encuentras la URL del análisis concreto pero un medio fiable publica la nota, añade `"via": "Nombre del medio"` y su URL.
 
 ## Reglas legales y de AdSense (obligatorias, por encima de todo lo demás)
 

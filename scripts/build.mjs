@@ -119,6 +119,9 @@ const REVIEWS = JSON.parse(fs.readFileSync(path.join(ROOT, "content/reviews.json
   if (!r.outlet || typeof r.score !== "number" || typeof r.max !== "number" || r.max <= 0 || r.score < 0 || r.score > r.max) fail(`${w}: necesita outlet, score y max (número, score ≤ max)`);
   if (!/^https?:\/\//.test(r.url || "")) fail(`${w}: url inválida`);
 });
+(REVIEWS.aggregates || []).forEach((a, i) => {
+  if (!a.name || typeof a.score !== "number" || !/^https?:\/\//.test(a.url || "") || !a.source) fail(`content/reviews.json: aggregates[${i}] necesita name, score, url y source`);
+});
 const reviewList = (REVIEWS.reviews || []).map((r) => ({ ...r, pct: Math.round((r.score / r.max) * 100) })).sort((a, b) => b.pct - a.pct);
 const reviewAvg = reviewList.length ? Math.round(reviewList.reduce((t, r) => t + r.pct, 0) / reviewList.length) : null;
 const LAUNCH_UTC_CLOUD = "2026-11-19T06:00:00Z"; // 1:00 ET del 19 (Xbox Cloud, según Microsoft)
@@ -187,7 +190,7 @@ const countdown = (L, size = "lg") => `
     <div class="countdown__grid">
       ${["d", "h", "m", "s"].map((k, i) => `<div><b data-unit="${k}">–</b><span>${esc(L.t.cdUnits[i])}</span></div>`).join("")}
     </div>
-    <div class="countdown__done" hidden>${esc(L.t.cdDone)}</div>
+    <div class="countdown__done" hidden><span class="countdown__done-title">${esc(L.t.cdDone)}</span><small>${esc(L.t.cdDoneSub)}</small><span class="countdown__done-cta"><a class="btn btn--primary" href="${u(L.paths.reviews)}">${esc(L.t.cdDoneReviews)}</a><a class="btn btn--ghost" href="${u(L.paths.guide)}">${esc(L.t.cdDoneGuide)}</a></span></div>
   </div>`;
 
 const langSwitch = (L, alts) => `
@@ -313,7 +316,7 @@ ${published ? `<meta property="article:published_time" content="${published}">` 
 <link rel="preload" href="${u("/assets/fonts/inter-latin.woff2")}" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="${u("/assets/fonts/anton-latin.woff2")}" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="${u("/assets/fonts.css")}?v=${FONTS_V}">
-<script>(function(){var r=document.documentElement,t=null;r.className+=" js";try{if(localStorage.getItem("lh-aud")==="nuevos")r.setAttribute("data-reader","nuevos");t=localStorage.getItem("lh-theme")}catch(e){}if(t==="light"||t==="dark")r.setAttribute("data-theme",t);var n=t==="light"||t==="dark"?t:(window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches?"light":"dark");r.setAttribute("data-theme-now",n);var m=document.querySelector("[data-theme-color]");if(m)m.setAttribute("content",n==="light"?"#fff6fb":"#0b0618")})()</script>
+<script>(function(){var r=document.documentElement,t=null;r.className+=" js";try{if(Date.now()>=new Date("${esc(cfg.launchDate)}").getTime())r.className+=" launched"}catch(e){}try{if(localStorage.getItem("lh-aud")==="nuevos")r.setAttribute("data-reader","nuevos");t=localStorage.getItem("lh-theme")}catch(e){}if(t==="light"||t==="dark")r.setAttribute("data-theme",t);var n=t==="light"||t==="dark"?t:(window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches?"light":"dark");r.setAttribute("data-theme-now",n);var m=document.querySelector("[data-theme-color]");if(m)m.setAttribute("content",n==="light"?"#fff6fb":"#0b0618")})()</script>
 <link rel="stylesheet" href="${u("/assets/styles.css")}?v=${CSS_V}">
 ${ADS ? `<meta name="google-adsense-account" content="${esc(ADS)}">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${esc(ADS)}" crossorigin="anonymous"></script>` : ""}
@@ -489,7 +492,7 @@ const briefBody = (L, b) => {
     <nav class="hub" aria-label="${esc(L.t.jumpsLabel)}">
       ${tile("news", P.news, "📰", L.t.nav.news, L.t.hubNewsSub(top.length + more.length))}
       ${tile("rumors", P.rumors, "🕵️", L.t.nav.rumors, L.t.hubRumorsSub(rumors.length))}
-      ${tile("reviews", P.reviews, "⭐", L.t.tiles.reviews[0], reviewAvg !== null ? `${L.t.reviewsAvg}: ${reviewAvg} · ${L.t.reviewsCount(reviewList.length)}` : L.t.tiles.reviews[1])}
+      ${tile("reviews", P.reviews, "⭐", L.t.tiles.reviews[0], (REVIEWS.aggregates || [])[0] ? `${REVIEWS.aggregates[0].name} ${REVIEWS.aggregates[0].score} · ${L.t.reviewsCount(reviewList.length)}` : reviewAvg !== null ? `${L.t.reviewsAvg}: ${reviewAvg} · ${L.t.reviewsCount(reviewList.length)}` : L.t.tiles.reviews[1])}
       ${tile("release", P.release, "⏰", L.t.tiles.release[0], L.t.tiles.release[1])}
       ${tile("leonida", P.leonida, "🌴", L.t.tiles.leonida[0], L.t.tiles.leonida[1])}
       ${tile("guide", P.guide, "🧭", L.t.nav.guide, L.t.hubGuideSub)}
@@ -805,6 +808,7 @@ for (const code of ACTIVE) {
         body: `
   <section class="page-head page-head--release"><div class="wrap">
     <p class="eyebrow">${esc(L.t.releaseEyebrow)}</p><h1>${esc(L.t.releaseH1)}</h1><p class="lead-text">${esc(L.t.releaseLead)}</p>
+    <p class="post-only release-out">${esc(L.t.releaseOut)}</p>
     <div class="release-cd">${countdown(L, "lg")}</div>
     <p class="your-tz muted small" data-your-tz="${esc(L.t.releaseYourTz("{tz}"))}"></p>
   </div></section>
@@ -888,9 +892,10 @@ for (const code of ACTIVE) {
     <div class="col-main">
       ${
         reviewList.length
-          ? `<div class="score-hero"><div class="score-ring" style="--p:${reviewAvg}"><b>${reviewAvg}</b><small>/100</small></div><div><h2>${esc(L.t.reviewsAvg)}</h2><p class="muted">${esc(L.t.reviewsCount(reviewList.length))}</p></div></div>
+          ? `${(REVIEWS.aggregates || []).length ? `<h2 class="sub-title">${esc(L.t.reviewsAggTitle)}</h2><div class="agg-grid">${REVIEWS.aggregates.map((a) => `<div class="score-hero score-hero--agg"><div class="score-ring" style="--p:${Math.round((a.score / (a.max || 100)) * 100)}"><b>${esc(String(a.score))}</b><small>/${esc(String(a.max || 100))}</small></div><div><h3>${esc(a.name)}</h3><p class="muted small">${esc(L.t.reviewsAggNote(a.source))} <a href="${esc(a.url)}" target="_blank" rel="noopener nofollow">${esc(a.source)} ↗</a></p></div></div>`).join("")}</div>` : ""}
+      <div class="score-hero"><div class="score-ring" style="--p:${reviewAvg}"><b>${reviewAvg}</b><small>/100</small></div><div><h2>${esc(L.t.reviewsListAvg)}</h2><p class="muted">${esc(L.t.reviewsCount(reviewList.length))}</p></div></div>
       <div class="table-wrap"><table class="tz-table score-table"><thead><tr><th scope="col">${esc(L.t.reviewsOutlet)}</th><th scope="col">${esc(L.t.reviewsScore)}</th><th scope="col"></th></tr></thead>
-        <tbody>${reviewList.map((r) => `<tr><th scope="row">${esc(r.outlet)}</th><td><span class="score score--${r.pct >= 90 ? "hi" : r.pct >= 75 ? "mid" : "lo"}">${esc(String(r.score))}${r.max !== 100 ? `/${esc(String(r.max))}` : ""}</span></td><td><a href="${esc(r.url)}" target="_blank" rel="noopener nofollow">${esc(L.t.reviewsRead)} ↗</a></td></tr>`).join("")}</tbody></table></div>`
+        <tbody>${reviewList.map((r) => `<tr><th scope="row">${esc(r.outlet)}</th><td><span class="score score--${r.pct >= 90 ? "hi" : r.pct >= 75 ? "mid" : "lo"}">${esc(String(r.score))}${r.max !== 100 ? `/${esc(String(r.max))}` : ""}</span></td><td><a href="${esc(r.url)}" target="_blank" rel="noopener nofollow">${esc(r.via ? L.t.reviewsVia(r.via) : L.t.reviewsRead)} ↗</a></td></tr>`).join("")}</tbody></table></div>`
           : `<div class="empty-state"><span aria-hidden="true">⏳</span><p>${esc(L.t.reviewsEmpty)}</p><div class="release-cd">${countdown(L, "sm")}</div></div>`
       }
       <p class="muted small">${esc(L.t.reviewsNote)}</p>

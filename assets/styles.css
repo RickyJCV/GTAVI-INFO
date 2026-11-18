@@ -855,3 +855,21 @@ html[data-reader="nuevos"] .aud[data-aud="fans"] { display: none; }
 .empty-state { text-align: center; padding: 28px 18px; border-radius: 20px; border: 1px dashed var(--line-2); background: var(--bg-2); margin-bottom: 16px; }
 .empty-state > span { font-size: 2.4rem; display: block; margin-bottom: 8px; }
 .empty-state .release-cd { margin: 18px auto 0; }
+
+/* ================= después del lanzamiento ================= */
+.post-only { display: none !important; }
+html.launched .post-only { display: block !important; }
+html.launched .pre-only { display: none !important; }
+.release-out { margin-top: 18px; padding: 14px 16px; border-radius: 14px; border: 1px solid rgba(43, 212, 125, 0.55); background: rgba(43, 212, 125, 0.12); font-weight: 600; max-width: 62ch; }
+.countdown__done { display: grid; gap: 8px; font-family: var(--font); }
+.countdown__done[hidden] { display: none; }
+.countdown__done-title { font-family: var(--font-script); font-size: 2.2rem; line-height: 1.1; color: var(--script-color); text-shadow: var(--script-glow); }
+.countdown__done small { color: var(--muted); font-size: 0.92rem; }
+.countdown__done-cta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+.sub-title { font-size: 1.05rem; font-weight: 800; margin-bottom: 12px; }
+.agg-grid { display: grid; gap: 12px; margin-bottom: 18px; }
+@media (min-width: 640px) { .agg-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.score-hero--agg { margin-bottom: 0; }
+.score-hero h3 { font-size: 1.15rem; margin-bottom: 4px; }
+.score-hero--agg .score-ring { width: 92px; height: 92px; }
+.score-hero--agg .score-ring b { font-size: 2rem; }
