@@ -4,6 +4,7 @@
   var store = {
     get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
     set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} },
+    del: function (k) { try { localStorage.removeItem(k); } catch (e) {} },
   };
 
   var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -45,11 +46,14 @@
   }
   if (boxes.length || minis.length) { tick(); setInterval(tick, 1000); }
 
-  // Modo claro / oscuro (por defecto sigue al sistema; la elección se recuerda)
+  // Modo claro / oscuro: por defecto, el del sistema (móvil u ordenador).
+  // El botón lo cambia; si eliges el mismo que tiene el sistema, o el sistema cambia
+  // (p. ej. modo oscuro automático al anochecer), la web vuelve a seguir al sistema.
   var root = document.documentElement;
   var mq = window.matchMedia ? window.matchMedia("(prefers-color-scheme: light)") : null;
   var themeBtns = document.querySelectorAll("[data-theme-toggle]");
   var themeMeta = document.querySelector("[data-theme-color]");
+  function systemTheme() { return mq && mq.matches ? "light" : "dark"; }
   function effectiveTheme() {
     var t = root.getAttribute("data-theme");
     return t === "light" || t === "dark" ? t : (mq && mq.matches ? "light" : "dark");
@@ -63,7 +67,11 @@
   themeBtns.forEach(function (b) {
     b.addEventListener("click", function () {
       var next = effectiveTheme() === "dark" ? "light" : "dark";
-      var apply = function () { root.setAttribute("data-theme", next); store.set("lh-theme", next); syncTheme(); };
+      var apply = function () {
+        if (next === systemTheme()) { root.removeAttribute("data-theme"); store.del("lh-tema"); }
+        else { root.setAttribute("data-theme", next); store.set("lh-tema", next); }
+        syncTheme();
+      };
       if (document.startViewTransition && !reduced) {
         var r = b.getBoundingClientRect();
         root.style.setProperty("--tx", r.left + r.width / 2 + "px");
@@ -75,10 +83,19 @@
     });
   });
   if (mq) {
-    var onSys = function () { if (!root.getAttribute("data-theme")) syncTheme(); };
+    var onSys = function () { root.removeAttribute("data-theme"); store.del("lh-tema"); syncTheme(); };
     if (mq.addEventListener) mq.addEventListener("change", onSys); else if (mq.addListener) mq.addListener(onSys);
   }
   syncTheme();
+  // Al volver a la app (iPhone/Android) el sistema puede haber cambiado de modo mientras tanto
+  document.addEventListener("visibilitychange", function () { if (!document.hidden) syncTheme(); });
+  window.addEventListener("pageshow", syncTheme);
+  // Otra pestaña cambió el tema
+  window.addEventListener("storage", function (e) {
+    if (e.key !== "lh-tema") return;
+    if (e.newValue === "light" || e.newValue === "dark") root.setAttribute("data-theme", e.newValue); else root.removeAttribute("data-theme");
+    syncTheme();
+  });
 
   // Selector de audiencia
   var btns = document.querySelectorAll("[data-aud-btn]");

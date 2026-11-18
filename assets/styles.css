@@ -920,17 +920,17 @@ html.standalone [data-install], html.standalone [data-ios-tip] { display: none !
 html { touch-action: manipulation; }
 .tabbar { display: none; }
 @media (max-width: 859px) {
-  :root { --tabbar-h: calc(62px + env(safe-area-inset-bottom)); }
+  :root { --tabbar-h: calc(58px + env(safe-area-inset-bottom)); }
   .nav { display: none !important; }
   .site-header__inner { grid-template-areas: "brand pill lang theme" !important; grid-template-columns: minmax(0, 1fr) auto auto auto !important; }
   .tabbar {
     display: grid; grid-template-columns: repeat(5, 1fr); position: fixed; left: 0; right: 0; bottom: var(--anchor-h, 0px); z-index: 80;
-    height: var(--tabbar-h); padding: 6px max(6px, env(safe-area-inset-right)) env(safe-area-inset-bottom) max(6px, env(safe-area-inset-left));
+    height: var(--tabbar-h); padding: 4px max(6px, env(safe-area-inset-right)) env(safe-area-inset-bottom) max(6px, env(safe-area-inset-left));
     background: color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter: saturate(160%) blur(18px); -webkit-backdrop-filter: saturate(160%) blur(18px);
     border-top: 1px solid var(--line-2); view-transition-name: lh-tabbar;
   }
   .tabbar a {
-    position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; min-height: 50px;
+    position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; min-height: 48px;
     text-decoration: none; color: var(--muted); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.02em; border-radius: 14px;
     -webkit-tap-highlight-color: transparent; -webkit-touch-callout: none; user-select: none; transition: color 0.2s, transform 0.15s;
   }
@@ -954,7 +954,7 @@ html { touch-action: manipulation; }
   display: flex; align-items: center; gap: 6px; padding: 10px 14px; border-radius: 999px; font: 800 0.86rem var(--font);
   color: #1a0730; background: var(--sunset); box-shadow: 0 10px 30px -8px rgba(255, 47, 163, 0.7); transition: opacity 0.15s;
 }
-.swipe-chip.is-left { left: 10px; } .swipe-chip.is-right { right: 10px; }
+.swipe-chip.is-left { left: max(10px, env(safe-area-inset-left)); } .swipe-chip.is-right { right: max(10px, env(safe-area-inset-right)); }
 .swipe-chip.is-on { opacity: 1; }
 main.is-swiping { will-change: transform; }
 
@@ -973,7 +973,7 @@ html.vt-prev::view-transition-old(root) { animation: lh-out-right 0.24s ease bot
 .sheet[hidden] { display: none; }
 .sheet__backdrop { position: absolute; inset: 0; background: rgba(5, 2, 12, 0.55); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); opacity: 0; transition: opacity 0.3s; }
 .sheet__panel {
-  position: relative; width: min(100%, 520px); max-height: 88vh; overflow: auto; padding: 10px 18px calc(18px + env(safe-area-inset-bottom));
+  position: relative; width: min(100%, 520px); max-height: 88vh; max-height: calc(100dvh - env(safe-area-inset-top) - 24px); overflow: auto; overscroll-behavior: contain; padding: 10px max(18px, env(safe-area-inset-right)) calc(18px + env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-left));
   background: var(--bg-2); color: var(--text); border: 1px solid var(--line-2); border-bottom: 0; border-radius: 24px 24px 0 0;
   box-shadow: 0 -20px 60px -20px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 47, 163, 0.15); transform: translateY(105%); transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
@@ -1021,3 +1021,20 @@ html.sheet-lock, html.sheet-lock body { overflow: hidden; }
   html.vt-next::view-transition-new(root), html.vt-next::view-transition-old(root), html.vt-prev::view-transition-new(root), html.vt-prev::view-transition-old(root) { animation: none !important; }
 }
 .sheet__panel:focus { outline: none; }
+
+/* ================= pantallas con notch, isla dinámica y barra de gestos ================= */
+/* App instalada en iPhone: el reloj y la batería van en blanco, así que la franja de arriba es siempre oscura
+   (en modo claro, con el degradado de la marca para que no parezca un corte) */
+html.standalone[data-theme-now="light"] body::after { background: linear-gradient(90deg, #1b0840, #4a0f5c 50%, #1b0840); }
+/* Que nada rebote ni deje ver el fondo al tirar más allá del final (sensación de app) */
+html.standalone, html.standalone body { overscroll-behavior-y: none; }
+/* Móvil en horizontal: la isla o el notch quedan a un lado */
+.app-toast { max-width: calc(100vw - env(safe-area-inset-left) - env(safe-area-inset-right) - 24px); }
+/* Móvil apaisado (poca altura): cabecera más compacta y pestañas en una línea */
+@media (max-height: 500px) and (orientation: landscape) {
+  .site-header__inner { min-height: 52px; padding-top: 4px; padding-bottom: 4px; }
+  .tabbar a { flex-direction: row; gap: 6px; min-height: 40px; }
+  :root { --tabbar-h: calc(46px + env(safe-area-inset-bottom)); }
+}
+/* El texto no cambia de tamaño al girar el móvil */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
