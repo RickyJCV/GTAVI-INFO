@@ -1,0 +1,140 @@
+{
+  "date": "2026-11-18",
+  "title": "Notas de GTA 6: el embargo se espera hoy y las puntuaciones de las tiendas no valen",
+  "summary": "Las primeras reseñas podrían salir hoy, según varios medios, y una carta falsa de Rockstar sobre un retraso a 2027 ha sido desmentida. Mañana a medianoche local sale el juego.",
+  "lead": "Es la víspera del lanzamiento y la pregunta es qué dirá la prensa. Rockstar no ha publicado calendario de reseñas, así que de momento todo es información no confirmada.",
+  "stories": [
+    {
+      "tag": "Impacto",
+      "title": "Notas de GTA 6: el embargo se espera hoy y las puntuaciones de las tiendas no valen",
+      "change": "Varios medios apuntan a que hoy, 18 de noviembre, se levanta el embargo de las reseñas, un día antes del estreno. Rockstar no ha confirmado ningún calendario. Las puntuaciones que ya se ven en las tiendas de consola proceden de compradores y no son análisis de la prensa.",
+      "plain": "Hoy podrían salir las primeras notas. Hasta que las publique un medio reconocido, ignora las estrellas de las tiendas.",
+      "sources": [
+        {
+          "name": "Insider Gaming",
+          "url": "https://insider-gaming.com/grand-theft-auto-6-review-embargo/"
+        },
+        {
+          "name": "Notebookcheck",
+          "url": "https://www.notebookcheck.net/GTA-6-PS5-reviews-already-live-on-PlayStation-Store-before-embargo-and-release-date.1447176.0.html"
+        },
+        {
+          "name": "games.gg",
+          "url": "https://games.gg/grand-theft-auto-vi/guides/review-embargo-date/"
+        }
+      ],
+      "detail": "La fecha del 18 la adelantó el filtrador NateTheHate y la recogió Insider Gaming. Las valoraciones de las tiendas pueden dejarlas quienes han reservado el juego, por lo que no equivalen a una reseña. Cuando salgan análisis reales, los iremos recopilando en la página de notas.",
+      "why": "Te permite distinguir una reseña real de una puntuación de tienda antes de comprar."
+    },
+    {
+      "tag": "Aviso",
+      "title": "Es falsa la carta de Rockstar que habla de un retraso de GTA VI a 2027",
+      "change": "Una comprobación de datos de Lead Stories, recogida por Yahoo Tech, concluye que circula una carta falsa que dice que el juego se retrasa a 2027. No encontró ningún anuncio así en la web de Rockstar. La fecha sigue siendo el 19 de noviembre.",
+      "plain": "Si ves una carta de Rockstar anunciando otro retraso, es un bulo. El juego sale este jueves.",
+      "sources": [
+        {
+          "name": "Yahoo Tech",
+          "url": "https://tech.yahoo.com/gaming/articles/fact-check-fake-rockstar-games-032634165.html"
+        }
+      ],
+      "detail": "Los resultados no precisan la fecha de la comprobación, pero la información sigue vigente. Para confirmar cualquier cambio, hay que mirar los canales oficiales de Rockstar, no capturas ni cartas que circulan en redes.",
+      "why": "Evita compartir un bulo en la víspera del estreno."
+    }
+  ],
+  "biggest": 0,
+  "more": [
+    {
+      "tag": "Estudio",
+      "title": "El autor de la filtración de 2022 será sentenciado el 23 de noviembre",
+      "change": "Según Notebookcheck, la sentencia del responsable de la filtración de 2022, que se declaró culpable el 16 de noviembre, está fijada para el 23 de noviembre.",
+      "plain": "Cuatro días después del estreno se conocerá la condena por la filtración de 2022.",
+      "sources": [
+        {
+          "name": "Notebookcheck",
+          "url": "https://www.notebookcheck.net/GTA-6-leaker-pleads-guilty-to-Rockstar-hack-sentencing-set-for-November-23.1452228.0.html"
+        }
+      ],
+      "detail": "Es el dato nuevo respecto a lo que contamos el 16. Medios como Notebookcheck sitúan el caso en un tribunal de Londres. No sabemos aún qué pena pedirá la fiscalía ni qué decidirá el juez.",
+      "why": "Cierra el capítulo judicial de la filtración más grave de la historia del juego."
+    }
+  ],
+  "rumors": [],
+  "posts": [
+    "Las primeras reseñas de GTA 6 podrían salir hoy (embargo del 18, no confirmado por Rockstar). Las notas de las tiendas de consola no son análisis de la prensa: espera a Metacritic y OpenCritic. 📝",
+    "Ojo con los bulos: circula una carta falsa de Rockstar que habla de un retraso a 2027. Lead Stories no halló nada así en la web de Rockstar. La fecha sigue siendo el 19 de noviembre. ⚠️",
+    "Mañana jueves 19, a medianoche local, se puede jugar. Revisa que tengas los parches, espacio libre (hasta unos 212 GB) y la consola encendida. 🌴"
+  ],
+  "context": [
+    {
+      "title": "Casi el 90 % de las reservas serían de la edición Ultimate (estimación)",
+      "text": "Un informe recogido por Shacknews lo calcula; Rockstar y Take-Two no publican cifras de reservas.",
+      "date": "2026-11-17",
+      "sources": [
+        {
+          "name": "Shacknews",
+          "url": "https://www.shacknews.com/article/150356/grand-theft-auto-6-ultimate-preorder-percent"
+        }
+      ]
+    },
+    {
+      "title": "GTA VI llegará a la nube de Xbox a la 1:00 ET del 19",
+      "text": "Microsoft indica streaming en Xbox One y Series X|S desde las 07:00 en España.",
+      "date": "2026-11-15",
+      "sources": [
+        {
+          "name": "Windows Central",
+          "url": "https://www.windowscentral.com/gaming/xbox/grand-theft-auto-6-will-be-playable-on-xbox-cloud-gaming-but-there-are-a-few-catches"
+        }
+      ]
+    }
+  ],
+  "en": {
+    "title": "GTA 6 review scores: embargo expected today, and store ratings don't count",
+    "summary": "The first reviews could land today, according to several outlets, and a fake Rockstar letter about a delay to 2027 has been debunked. Tomorrow at local midnight the game goes live.",
+    "lead": "It's launch eve and the question is what the press will say. Rockstar hasn't published a review schedule, so for now everything is unconfirmed.",
+    "stories": [
+      {
+        "tag": "Impact",
+        "title": "GTA 6 review scores: embargo expected today, and store ratings don't count",
+        "change": "Several outlets point to the review embargo lifting today, November 18, a day before launch. Rockstar hasn't confirmed any schedule. The ratings already showing on console stores come from buyers and aren't press reviews.",
+        "plain": "The first scores could land today. Until a recognized outlet publishes one, ignore the stars on the stores.",
+        "detail": "The 18th date was floated by leaker NateTheHate and picked up by Insider Gaming. Store ratings can be left by people who preordered, so they aren't equivalent to a review. When real reviews come out, we'll collect them on the scores page.",
+        "why": "It helps you tell a real review from a store rating before you buy."
+      },
+      {
+        "tag": "Heads-up",
+        "title": "A Rockstar letter about a GTA VI delay to 2027 is fake",
+        "change": "A Lead Stories fact check, relayed by Yahoo Tech, concludes a circulating letter saying the game is delayed to 2027 is fake. It found no such announcement on Rockstar's website. The date is still November 19.",
+        "plain": "If you see a Rockstar letter announcing another delay, it's a hoax. The game comes out this Thursday.",
+        "detail": "The results don't give the date of the fact check, but the information is still current. To confirm any change, check Rockstar's official channels, not screenshots or letters circulating on social media.",
+        "why": "It keeps you from sharing a hoax on the eve of launch."
+      }
+    ],
+    "more": [
+      {
+        "tag": "Studio",
+        "title": "The 2022 leak's author will be sentenced on November 23",
+        "change": "According to Notebookcheck, sentencing for the person responsible for the 2022 leak, who pleaded guilty on November 16, is set for November 23.",
+        "plain": "Four days after launch, the sentence for the 2022 leak will be known.",
+        "detail": "This is the new detail compared with what we covered on the 16th. Outlets like Notebookcheck place the case in a London court. We don't yet know what penalty prosecutors will seek or what the judge will decide.",
+        "why": "It closes the legal chapter of the most serious leak in the game's history."
+      }
+    ],
+    "rumors": [],
+    "posts": [
+      "The first GTA 6 reviews could land today (embargo on the 18th, not confirmed by Rockstar). Console store ratings aren't press reviews: wait for Metacritic and OpenCritic. 📝",
+      "Watch out for hoaxes: a fake Rockstar letter about a delay to 2027 is going around. Lead Stories found nothing like it on Rockstar's site. The date is still November 19. ⚠️",
+      "Tomorrow, Thursday the 19th, at local midnight you can play. Check your patches, free space (up to about 212 GB) and keep your console on. 🌴"
+    ],
+    "context": [
+      {
+        "title": "Nearly 90% of preorders reportedly for the Ultimate edition (estimate)",
+        "text": "A report relayed by Shacknews calculates it; Rockstar and Take-Two don't publish preorder figures."
+      },
+      {
+        "title": "GTA VI reaches Xbox cloud at 1:00 a.m. ET on the 19th",
+        "text": "Microsoft says it will stream on Xbox One and Series X|S from 7:00 a.m. Spain time."
+      }
+    ]
+  }
+}
