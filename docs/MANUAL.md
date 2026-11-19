@@ -74,3 +74,8 @@ Una tarea programada de Claude se ejecuta cada mañana: busca las noticias de GT
 - La tarea programada busca trucos nuevos **cada lunes por la mañana** (instrucciones en `docs/TAREA-DIARIA.md`).
 - `node scripts/check-trucos.mjs` valida el archivo: formato, fuentes, y bloquea fallos, trucos online, mods o hacks. Se ejecuta también al publicar, así que un truco mal escrito nunca llega a la web.
 - En el móvil, **Trucos** ocupa la pestaña que antes era **Notas**. Notas sigue en la portada, en el menú de ordenador, en el pie y en la tarjeta «Guía».
+
+## Guías (`/guias/` y `/en/guides/`)
+- Páginas que no caducan, pensadas para Google: **consejos para empezar**, **cómo ganar dinero** (modo historia), **emisoras de radio** y **cuánto dura**. Más el índice de guías, que reúne también trucos, hora de salida, mapa, notas y lo básico.
+- Los textos están en `content/guias.json`, en español e inglés. Cada guía tiene una respuesta rápida, secciones con diseño propio (consejos numerados, línea de tiempo, emisoras, barras de horas), preguntas frecuentes, fuentes y enlaces a las demás guías.
+- La pestaña **Guía** del móvil y la del menú llevan ahora al índice de guías. La tarea diaria actualiza una guía cuando aparece un dato nuevo y confirmado.

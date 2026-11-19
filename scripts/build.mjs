@@ -117,6 +117,8 @@ const ACTIVE = Object.keys(LOCALES).filter((c) => DATA[c].briefs.length && DATA[
 const LEONIDA = JSON.parse(fs.readFileSync(path.join(ROOT, "content/leonida.json"), "utf8"));
 const REVIEWS = JSON.parse(fs.readFileSync(path.join(ROOT, "content/reviews.json"), "utf8"));
 const TRUCOS = JSON.parse(fs.readFileSync(path.join(ROOT, "content/trucos.json"), "utf8"));
+const GUIAS = JSON.parse(fs.readFileSync(path.join(ROOT, "content/guias.json"), "utf8")).guides;
+for (const g of GUIAS) for (const k of ["slug", "title", "desc", "h1", "lead", "quick"]) for (const c of ["es", "en"]) if (!g[k]?.[c]) throw new Error(`content/guias.json: a la guía «${g.id}» le falta ${k}.${c}`);
 (REVIEWS.reviews || []).forEach((r, i) => {
   const w = `content/reviews.json: reviews[${i}]`;
   if (!r.outlet || typeof r.score !== "number" || typeof r.max !== "number" || r.max <= 0 || r.score < 0 || r.score > r.max) fail(`${w}: necesita outlet, score y max (número, score ≤ max)`);
@@ -145,6 +147,9 @@ const counterparts = (key) => {
     } else if (key.startsWith("item:")) {
       const it = DATA[code].byKey.get(key);
       if (it) out[code] = it.path;
+    } else if (key.startsWith("g:")) {
+      const g = GUIAS.find((x) => x.id === key.slice(2));
+      if (g?.slug?.[code]) out[code] = P.guideItem(g.slug[code]);
     } else if (typeof P[key] === "string") out[code] = P[key];
   }
   return out;
@@ -187,6 +192,25 @@ const cheatIcon = {
   hold: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5c1.4-2.2 3.4-3.3 5.5-3.3h1.5M21 9.5c-1.4-2.2-3.4-3.3-5.5-3.3H14"/><rect x="2.5" y="11" width="7" height="6.5" rx="2"/><rect x="14.5" y="11" width="7" height="6.5" rx="2"/></g></svg>',
   lock: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="10.5" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></g></svg>',
 };
+const gIcon = {
+  ...cheatIcon,
+  save: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 4h12.5L20 7.5V20H4z"/><path d="M8 4v5h7V4M8 20v-6h8v6"/></g></svg>',
+  car: cheatIcon.vehicles,
+  fuel: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16M3 21h12M6.5 8h5"/><path d="M14 10h2a2 2 0 0 1 2 2v4a1.5 1.5 0 0 0 3 0V8l-3-3"/></g></svg>',
+  gym: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6.5 6.5v11M17.5 6.5v11M3.5 9v6M20.5 9v6M6.5 12h11"/></g></svg>',
+  focus: cheatIcon.player,
+  stealth: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12s3.5-6.5 9.5-6.5S21.5 12 21.5 12s-3.5 6.5-9.5 6.5S2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.8"/><path d="M4 20 20 4"/></g></svg>',
+  map: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 6.5 9 4l6 2.5L21 4v13.5L15 20l-6-2.5L3 20z"/><path d="M9 4v13.5M15 6.5V20"/></g></svg>',
+  trophy: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4M12 14v3M8.5 20.5h7M9.5 17h5v3.5h-5z"/></g></svg>',
+  store: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3.5 9 5 4h14l1.5 5a3 3 0 0 1-5.7 1.3A3 3 0 0 1 12 12a3 3 0 0 1-2.8-1.7A3 3 0 0 1 3.5 9z"/><path d="M5 12v8h14v-8M10 20v-5h4v5"/></g></svg>',
+  gem: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M6 3.5h12l3.5 5.5L12 21 2.5 9z"/><path d="M2.5 9h19M9 3.5 7.5 9 12 21l4.5-12L15 3.5"/></g></svg>',
+  vault: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3.5" width="18" height="16" rx="2.5"/><circle cx="12" cy="11.5" r="4"/><path d="M12 7.5v1.5M12 14v1.5M8 11.5h1.5M14.5 11.5H16M6 19.5V21M18 19.5V21"/></g></svg>',
+  cheat: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10a5 5 0 0 1 4.9 6l-.8 4a2.6 2.6 0 0 1-4.6 1.1L15 16H9l-1.5 2.1A2.6 2.6 0 0 1 2.9 17l-.8-4A5 5 0 0 1 7 7z"/><path d="M7 10.5v3M5.5 12h3"/></g></svg>',
+  radio: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="8" width="19" height="12.5" rx="2.5"/><path d="m7 8 9.5-4.5"/><circle cx="15.5" cy="14.2" r="3"/><path d="M6 12.5h3M6 16h3"/></g></svg>',
+  clock: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></g></svg>',
+  tips: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.4 1 1.1 1 1.9V16h5v-.2c0-.8.4-1.5 1-1.9A6 6 0 0 0 12 3z"/></g></svg>',
+  book: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 6.5C10 5 7 4.5 3.5 5v13.5c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5c-3.5-.5-6.5 0-8.5 1.5zM12 6.5V20"/></g></svg>',
+};
 // Flecha de la cruceta (una sola forma, girada)
 const dirRot = { U: 0, R: 90, D: 180, L: 270 };
 const dirKey = (L, d) =>
@@ -197,7 +221,7 @@ const stepsHtml = (L, variant) =>
 const TAB_ORDER = ["home", "news", "rumors", "cheats", "guide"];
 const tabbar = (L, active) => `
 <nav class="tabbar" aria-label="${esc(L.t.tabsLabel)}">
-  ${TAB_ORDER.map((k, i) => `<a href="${u(L.paths[k])}" data-tab="${i}"${k === active ? ' aria-current="page"' : ""}>${tabIcon[k]}<span>${esc(L.t.tabs[k])}</span></a>`).join("")}
+  ${TAB_ORDER.map((k, i) => `<a href="${u(k === "guide" ? L.paths.guides : L.paths[k])}" data-tab="${i}"${k === active ? ' aria-current="page"' : ""}>${tabIcon[k]}<span>${esc(L.t.tabs[k])}</span></a>`).join("")}
 </nav>`;
 const installSheet = (L) => `
 <div class="sheet" data-install-sheet hidden>
@@ -270,7 +294,7 @@ const header = (L, active, alts) => {
     [P.rumors, L.t.nav.rumors, "rumors"],
     [P.cheats, L.t.tabs.cheats, "cheats"],
     [P.reviews, L.t.tabs.reviews, "reviews"],
-    [P.guide, L.t.nav.guide, "guide"],
+    [P.guides, L.t.nav.guide, "guide"],
   ];
   return `
   <header class="site-header">
@@ -320,6 +344,7 @@ const footer = (L) => {
         <a href="${u(P.rumors)}">${esc(L.t.nav.rumors)}</a>
         <a href="${u(P.cheats)}">${esc(L.t.cheats.tile)}</a>
         <a href="${u(P.reviews)}">${esc(L.t.tabs.reviews)}</a>
+        <a href="${u(P.guides)}">${esc(L.t.gd.tile)}</a>
         <a href="${u(P.guide)}">${esc(L.t.footerLinks.guide)}</a>
         <a href="${u(P.archive)}">${esc(L.t.footerLinks.archive)}</a>
         <a href="${u(P.about)}">${esc(L.t.footerLinks.about)}</a>
@@ -474,7 +499,7 @@ const guidesCard = (L) => {
   const P = L.paths;
   const link = (href, emoji, [name, sub]) => `<li><a href="${u(href)}"><span aria-hidden="true">${emoji}</span><span><b>${esc(name)}</b><small>${esc(sub)}</small></span></a></li>`;
   return `<div class="card"><h2 class="card__title">${esc(L.t.nav.guide)}</h2><ul class="guide-links">
-    ${link(P.cheats, "🎮", [L.t.cheats.tile, L.t.cheats.tileSub(TRUCOS.cheats.filter((c) => c.seq).length)])}${link(P.release, "⏰", L.t.tiles.release)}${link(P.reviews, "⭐", L.t.tiles.reviews)}${link(P.leonida, "🌴", L.t.tiles.leonida)}${link(P.guide, "🧭", [L.t.nav.guide, L.t.hubGuideSub])}
+    ${GUIAS.slice(0, 2).map((g) => link(P.guideItem(g.slug[L.code]), g.icon === "money" ? "💰" : "💡", [g.h1[L.code], g.short[L.code]])).join("")}${link(P.cheats, "🎮", [L.t.cheats.tile, L.t.cheats.tileSub(TRUCOS.cheats.filter((c) => c.seq).length)])}${link(P.release, "⏰", L.t.tiles.release)}${link(P.reviews, "⭐", L.t.tiles.reviews)}${link(P.leonida, "🌴", L.t.tiles.leonida)}${link(P.guides, "🧭", [L.t.gd.indexH1, L.t.gd.tileSub])}
   </ul></div>`;
 };
 const sideCards = (L, { facts = true } = {}) => {
@@ -571,7 +596,7 @@ const briefBody = (L, b) => {
       ${tile("reviews", P.reviews, "⭐", L.t.tiles.reviews[0], (REVIEWS.aggregates || [])[0] ? `${REVIEWS.aggregates[0].name} ${REVIEWS.aggregates[0].score} · ${L.t.reviewsCount(reviewList.length)}` : reviewAvg !== null ? `${L.t.reviewsAvg}: ${reviewAvg} · ${L.t.reviewsCount(reviewList.length)}` : L.t.tiles.reviews[1])}
       ${tile("release", P.release, "⏰", L.t.tiles.release[0], L.t.tiles.release[1])}
       ${tile("leonida", P.leonida, "🌴", L.t.tiles.leonida[0], L.t.tiles.leonida[1])}
-      ${tile("guide", P.guide, "🧭", L.t.nav.guide, L.t.hubGuideSub)}
+      ${tile("guide", P.guides, "🧭", L.t.gd.tile, L.t.gd.tileSub)}
     </nav>
     ${adUnit(L, "top")}
   </div>
@@ -1050,6 +1075,90 @@ for (const code of ACTIVE) {
       })
     );
     sitemap.push(["cheats", P.cheats, TRUCOS.updated, "weekly", "0.9"]);
+  }
+
+  // Guías útiles (no caducan): consejos, dinero, radio, duración…
+  {
+    const G = L.t.gd;
+    const others = (id) => [
+      ...GUIAS.filter((x) => x.id !== id).map((x) => ({ href: P.guideItem(x.slug[code]), ic: gIcon[x.icon] || gIcon.book, t: x.h1[code], d: x.short[code] })),
+      { href: P.cheats, ic: gIcon.cheat, t: L.t.cheats.h1, d: L.t.cheats.tileSub(TRUCOS.cheats.filter((c) => c.seq).length) },
+      { href: P.guide, ic: gIcon.book, t: G.basics, d: G.basicsSub },
+    ];
+    const gcard = (x) => `<a class="gcard" href="${u(x.href)}"><span class="gcard__ic" aria-hidden="true">${x.ic}</span><span class="gcard__txt"><b>${esc(x.t)}</b><small>${esc(x.d)}</small></span><span class="gcard__go" aria-hidden="true">→</span></a>`;
+    const section = (sec) => {
+      const title = `<div class="block__head"><h2>${esc(sec.title[code])}</h2></div>`;
+      if (sec.type === "tips")
+        return `<section class="block">${title}<ol class="tips">${sec.items.map((it) => `<li class="tip"><span class="tip__ic" aria-hidden="true">${gIcon[it.ic] || gIcon.tips}</span><div><h3>${esc(it.t[code])}</h3><p>${esc(it.d[code])}</p>${it.link === "cheats" ? `<a class="tip__more" href="${u(P.cheats)}">${esc(G.seeCheats)}</a>` : ""}</div></li>`).join("")}</ol></section>`;
+      if (sec.type === "methods")
+        return `<section class="block">${title}<ol class="methods">${sec.items.map((it) => `<li class="method method--s${it.stage}"><span class="method__dot" aria-hidden="true">${gIcon[it.ic] || gIcon.money}</span><div class="method__body"><div class="method__top"><h3>${esc(it.t[code])}</h3><span class="method__pay">${esc(it.pay[code])}</span></div><p class="method__when"><span class="method__stage">${esc(G.stage[it.stage] || "")}</span> ${esc(it.when[code])}</p><p>${esc(it.d[code])}</p>${it.link === "cheats" ? `<a class="tip__more" href="${u(P.cheats)}">${esc(G.seeCheats)}</a>` : ""}</div></li>`).join("")}</ol></section>`;
+      if (sec.type === "stations")
+        return `<section class="block">${title}<div class="stations">${sec.items.map((it) => `<article class="station" style="--h:${Number(it.hue) || 0}"><span class="station__ic" aria-hidden="true">${gIcon.radio}</span><div><h3>${esc(it.name)}</h3><span class="station__genre">${esc(it.genre[code])}</span><p><b>${esc(G.hosts)}:</b> ${esc(it.hosts)}</p></div></article>`).join("")}</div></section>`;
+      if (sec.type === "bars")
+        return `<section class="block">${title}<ul class="hbars">${sec.items.map((it) => `<li class="${it.hl ? "is-hl" : ""}"><span class="hbars__t">${esc(it.t[code])}</span><span class="hbars__track"><span class="hbars__fill" style="--w:${Math.min(100, Math.round((it.v / (sec.max || 100)) * 100))}%"></span></span><b class="hbars__v">${esc(it.label[code])}</b></li>`).join("")}</ul></section>`;
+      return "";
+    };
+    for (const g of GUIAS) {
+      const href = P.guideItem(g.slug[code]);
+      const faq = g.faq?.[code] || [];
+      write(
+        href,
+        layout(L, {
+          title: g.title[code],
+          description: g.desc[code],
+          key: `g:${g.id}`,
+          active: "guide",
+          type: "article",
+          jsonLd: [
+            { "@context": "https://schema.org", "@type": "Article", inLanguage: code, headline: g.title[code], description: g.desc[code], dateModified: g.updated, author: { "@type": "Organization", name: cfg.name }, publisher: { "@type": "Organization", name: cfg.name } },
+            ...(faq.length ? [{ "@context": "https://schema.org", "@type": "FAQPage", inLanguage: code, mainEntity: faq.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) }] : []),
+            crumbsLd([[L.t.crumbHome, P.home], [G.indexH1, P.guides], [g.h1[code], href]]),
+          ],
+          body: `
+  <section class="page-head page-head--guide"><div class="wrap"><p class="eyebrow">${esc(G.indexEyebrow)}</p><h1>${esc(g.h1[code])}</h1><p class="lead-text">${esc(g.lead[code])}</p></div></section>
+  <div class="wrap layout">
+    <div class="col-main">
+      <div class="quick"><span class="quick__ic" aria-hidden="true">${gIcon[g.icon] || gIcon.tips}</span><div><b>${esc(G.quick)}</b><p>${esc(g.quick[code])}</p></div></div>
+      ${g.sections.map(section).join("")}
+      ${g.note ? `<aside class="callout callout--warn"><p>⚠ ${esc(g.note[code])}</p></aside>` : ""}
+      ${adUnit(L, "bottom")}
+      ${faq.length ? `<section class="block"><div class="block__head"><h2>${esc(G.faqTitle)}</h2></div><div class="faq">${faq.map(([q, a], i) => `<details${i < 1 ? " open" : ""}><summary>${esc(q)}</summary><div class="faq__a"><p>${esc(a)}</p></div></details>`).join("")}</div></section>` : ""}
+      <p class="muted small">${esc(G.updated(fmtDate(L, g.updated, { day: "numeric", month: "long", year: "numeric" })))}</p>
+      ${sourcesHtml(L, g.sources)}
+      <section class="block"><div class="block__head"><h2>${esc(G.related)}</h2></div><div class="gcards">${others(g.id).map(gcard).join("")}</div></section>
+    </div>
+    <aside class="col-side">${sideCards(L)}</aside>
+  </div>`,
+        })
+      );
+      sitemap.push([`g:${g.id}`, href, g.updated, "weekly", "0.9"]);
+    }
+    // Índice de guías
+    const all = [
+      ...GUIAS.map((x) => ({ href: P.guideItem(x.slug[code]), ic: gIcon[x.icon] || gIcon.book, t: x.h1[code], d: x.short[code] })),
+      { href: P.cheats, ic: gIcon.cheat, t: L.t.cheats.h1, d: L.t.cheats.tileSub(TRUCOS.cheats.filter((c) => c.seq).length) },
+      { href: P.release, ic: gIcon.clock, t: L.t.tiles.release[0], d: L.t.tiles.release[1] },
+      { href: P.leonida, ic: gIcon.map, t: L.t.tiles.leonida[0], d: L.t.tiles.leonida[1] },
+      { href: P.reviews, ic: gIcon.trophy, t: L.t.tiles.reviews[0], d: L.t.tiles.reviews[1] },
+      { href: P.guide, ic: gIcon.book, t: G.basics, d: G.basicsSub },
+    ];
+    write(
+      P.guides,
+      layout(L, {
+        title: G.indexTitle,
+        description: G.indexDesc,
+        key: "guides",
+        active: "guide",
+        jsonLd: [
+          { "@context": "https://schema.org", "@type": "ItemList", itemListElement: all.map((x, i) => ({ "@type": "ListItem", position: i + 1, url: abs(x.href), name: x.t })) },
+          crumbsLd([[L.t.crumbHome, P.home], [G.indexH1, P.guides]]),
+        ],
+        body: `
+  <section class="page-head page-head--guide"><div class="wrap"><p class="eyebrow">${esc(G.indexEyebrow)}</p><h1>${esc(G.indexH1)}</h1><p class="lead-text">${esc(G.indexLead)}</p></div></section>
+  <div class="wrap"><div class="gcards gcards--index">${all.map(gcard).join("")}</div></div>`,
+      })
+    );
+    sitemap.push(["guides", P.guides, GUIAS.map((g) => g.updated).sort().pop(), "weekly", "0.8"]);
   }
 
   // App: cómo instalar en cada dispositivo (y qué se puede hacer)

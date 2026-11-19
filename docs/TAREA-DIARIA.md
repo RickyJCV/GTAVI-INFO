@@ -78,6 +78,13 @@ El juego ya está a la venta. Lo que más se busca ahora, por este orden: **prob
 7. Verifica con `node scripts/check-trucos.mjs` hasta que diga «✓ trucos.json listo» y sigue con los pasos 7, 9 y 10 (incluye `content/trucos.json` en el commit con `git add content`). En la respuesta, di qué trucos has añadido o confirmado.
 8. Si hay trucos nuevos, también pueden ser noticia del día en el resumen (con sus fuentes), por ejemplo: «Descubren el truco de … en GTA 6».
 
+## Guías (`content/guias.json`): consejos, dinero, radio, duración…
+
+Son páginas que no caducan y atraen visitas de Google. **No hace falta buscar nada extra** para ellas:
+- Si en tus búsquedas del día aparece un **dato nuevo y confirmado** que afecta a una guía (por ejemplo, Rockstar confirma más emisoras, una cifra de duración oficial o un método de dinero nuevo del modo historia), actualiza esa guía en **español e inglés**, añade la fuente a su `sources` y pon `updated` con la fecha de hoy.
+- Escribe con tus palabras, sin spoilers de la historia (nada de nombres de misiones ni giros) y sin nada del modo online, glitches o mods.
+- No cambies los `slug` (romperían los enlaces). `node scripts/build.mjs` valida que no falte ningún texto en ningún idioma.
+
 ## Reglas legales y de AdSense (obligatorias, por encima de todo lo demás)
 
 La web vive de la publicidad de Google AdSense y debe ser 100 % legal. Si una noticia o rumor no puede contarse cumpliendo esto, **no lo publiques**.

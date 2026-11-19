@@ -1,0 +1,720 @@
+{
+  "guides": [
+    {
+      "id": "consejos",
+      "icon": "tips",
+      "updated": "2026-11-19",
+      "slug": {
+        "es": "consejos-gta-6",
+        "en": "gta-6-beginner-tips"
+      },
+      "title": {
+        "es": "Consejos para empezar en GTA 6: 10 cosas que conviene saber",
+        "en": "GTA 6 beginner tips: 10 things worth knowing"
+      },
+      "desc": {
+        "es": "Los mejores consejos para tus primeras horas en GTA 6: dónde guardar el dinero, cómo escapar de la policía, guardados, gimnasio y modo concentración. Sin spoilers.",
+        "en": "The best tips for your first hours in GTA 6: where to keep your money, how to lose the police, saving, the gym and Focus mode. No spoilers."
+      },
+      "h1": {
+        "es": "Consejos para empezar en GTA 6",
+        "en": "GTA 6 beginner tips"
+      },
+      "lead": {
+        "es": "Lo que más repiten las guías especializadas para no perder dinero ni tiempo en las primeras horas. Sin spoilers de la historia.",
+        "en": "What specialist guides repeat most so you don't waste money or time in your first hours. No story spoilers."
+      },
+      "quick": {
+        "es": "No lleves mucho dinero encima, guarda la partida a mano antes de las misiones importantes, cambia de ropa y de coche para despistar a la policía y entrena en el gimnasio para tener más vida y aguante.",
+        "en": "Don't carry much cash, save manually before big missions, change clothes and car to lose the police, and work out at the gym for more health and stamina."
+      },
+      "sections": [
+        {
+          "type": "tips",
+          "title": {
+            "es": "Los 10 consejos",
+            "en": "The 10 tips"
+          },
+          "items": [
+            {
+              "ic": "money",
+              "t": {
+                "es": "No lleves mucho dinero encima",
+                "en": "Don't carry much cash"
+              },
+              "d": {
+                "es": "Si te matan puedes perder una buena parte del dinero que llevas. Guárdalo en el escondite de tu casa o en el banco en cuanto se desbloquee.",
+                "en": "If you die you can lose a big chunk of the cash you carry. Keep it in your safehouse stash or in the bank as soon as it unlocks."
+              }
+            },
+            {
+              "ic": "save",
+              "t": {
+                "es": "Guarda a mano antes de las misiones grandes",
+                "en": "Save manually before big missions"
+              },
+              "d": {
+                "es": "Según las guías, no hay forma de repetir misiones ya jugadas. Un guardado manual antes de cada misión importante te deja volver atrás si algo sale mal.",
+                "en": "According to guides, there's no way to replay finished missions. A manual save before each big mission lets you go back if something goes wrong."
+              }
+            },
+            {
+              "ic": "police",
+              "t": {
+                "es": "Cambia de ropa y de coche para escapar",
+                "en": "Change clothes and car to escape"
+              },
+              "d": {
+                "es": "La policía se fija en tu ropa y en el vehículo. Cambiarte y dejar el coche ayuda mucho a perder el nivel de búsqueda.",
+                "en": "Police track your clothing and vehicle. Changing outfit and ditching the car helps a lot to lose your heat level."
+              }
+            },
+            {
+              "ic": "car",
+              "t": {
+                "es": "Ojo con los coches que robas",
+                "en": "Watch which cars you steal"
+              },
+              "d": {
+                "es": "Algunos coches llevan localizador. Si quieres venderlo o pasar desapercibido, elige uno sin él.",
+                "en": "Some cars carry trackers. If you want to sell one or stay unnoticed, pick a car without one."
+              }
+            },
+            {
+              "ic": "fuel",
+              "t": {
+                "es": "Vigila gasolina y motor",
+                "en": "Keep an eye on fuel and engine"
+              },
+              "d": {
+                "es": "Los vehículos tienen combustible y estado del motor. Repóstalo y repáralo antes de un viaje largo o de una huida.",
+                "en": "Vehicles have fuel and engine health. Refuel and repair before a long trip or a getaway."
+              }
+            },
+            {
+              "ic": "gym",
+              "t": {
+                "es": "Entrena en el gimnasio",
+                "en": "Work out at the gym"
+              },
+              "d": {
+                "es": "La fuerza sube tu vida máxima y el cardio tu aguante. Merece la pena dedicarle un rato pronto.",
+                "en": "Strength raises your max health and cardio your stamina. It's worth some time early on."
+              }
+            },
+            {
+              "ic": "focus",
+              "t": {
+                "es": "Usa el modo concentración",
+                "en": "Use Focus mode"
+              },
+              "d": {
+                "es": "Te ayuda a ver enemigos a través de las paredes y pistas escondidas, como combinaciones de cajas fuertes.",
+                "en": "It helps you spot enemies through walls and hidden clues, like safe combinations."
+              }
+            },
+            {
+              "ic": "stealth",
+              "t": {
+                "es": "Prueba el sigilo",
+                "en": "Try stealth"
+              },
+              "d": {
+                "es": "Muchas misiones y atracos se pueden hacer en silencio. Suele salir más barato que acabar a tiros con la policía.",
+                "en": "Many missions and robberies can be done quietly. It usually costs less than ending up in a shootout with the police."
+              }
+            },
+            {
+              "ic": "map",
+              "t": {
+                "es": "Explora Leónida por zonas",
+                "en": "Explore Leonida region by region"
+              },
+              "d": {
+                "es": "El mapa es enorme. Aprenderlo zona a zona hace que te orientes antes y no te pierdas actividades.",
+                "en": "The map is huge. Learning it one region at a time helps you get your bearings and not miss activities."
+              }
+            },
+            {
+              "ic": "trophy",
+              "t": {
+                "es": "Deja los trucos para el final",
+                "en": "Save cheats for later"
+              },
+              "d": {
+                "es": "Muchos trucos se desbloquean al terminar la historia o con retos, y según varias guías desactivan trofeos y guardado mientras están activos.",
+                "en": "Many cheats unlock after the story or through challenges, and several guides say they disable trophies and saving while active."
+              },
+              "link": "cheats"
+            }
+          ]
+        }
+      ],
+      "faq": {
+        "es": [
+          [
+            "¿Qué es lo primero que debo hacer en GTA 6?",
+            "Guardar la partida a mano después del prólogo, guardar tu dinero en un lugar seguro en cuanto puedas y pasar por el gimnasio para mejorar vida y aguante."
+          ],
+          [
+            "¿Cómo escapo de la policía en GTA 6?",
+            "Sal de su vista, cambia de vehículo y de ropa: la policía se fija en ambos."
+          ],
+          [
+            "¿Se pueden repetir misiones en GTA 6?",
+            "Según las guías publicadas, no. Por eso conviene guardar a mano antes de cada misión importante."
+          ]
+        ],
+        "en": [
+          [
+            "What should I do first in GTA 6?",
+            "Save manually after the prologue, keep your money somewhere safe as soon as you can and visit the gym to boost health and stamina."
+          ],
+          [
+            "How do I lose the police in GTA 6?",
+            "Break line of sight and change your vehicle and clothes: police track both."
+          ],
+          [
+            "Can you replay missions in GTA 6?",
+            "According to published guides, no. That's why it's worth saving manually before each big mission."
+          ]
+        ]
+      },
+      "sources": [
+        {
+          "name": "GameSpot",
+          "url": "https://www.gamespot.com/articles/gta-6-tips-everything-i-wish-i-knew-before-i-started-playing/"
+        },
+        {
+          "name": "Game8",
+          "url": "https://game8.co/games/GTA-6/archives/637017"
+        },
+        {
+          "name": "SVG",
+          "url": "https://www.svg.com/2316051/gta-6-tips-before-start-playing/"
+        },
+        {
+          "name": "Inven Global",
+          "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start"
+        },
+        {
+          "name": "TalkEsport",
+          "url": "https://www.talkesport.com/gta-6/best-gta-6-tips-tricks-beginners/"
+        }
+      ],
+      "short": {
+        "es": "10 cosas que conviene saber",
+        "en": "10 things worth knowing"
+      }
+    },
+    {
+      "id": "dinero",
+      "icon": "money",
+      "updated": "2026-11-19",
+      "slug": {
+        "es": "como-ganar-dinero-gta-6",
+        "en": "gta-6-money-guide"
+      },
+      "title": {
+        "es": "Cómo ganar dinero en GTA 6 (modo historia): los mejores métodos",
+        "en": "How to make money in GTA 6 (story mode): the best methods"
+      },
+      "desc": {
+        "es": "Las formas de ganar dinero en el modo historia de GTA 6 ordenadas de principio a fin: coches robados, atracos a joyerías, cámaras acorazadas y el truco de 250.000 $. Sin spoilers.",
+        "en": "Ways to make money in GTA 6 story mode, ordered from start to finish: stolen cars, jewelry store robberies, bank vaults and the $250,000 cheat. No spoilers."
+      },
+      "h1": {
+        "es": "Cómo ganar dinero en GTA 6",
+        "en": "How to make money in GTA 6"
+      },
+      "lead": {
+        "es": "Los métodos legítimos del modo historia, ordenados según cuándo se desbloquean. Las cantidades son aproximadas y salen de las guías publicadas.",
+        "en": "Legit story-mode methods, ordered by when they unlock. Amounts are approximate and come from published guides."
+      },
+      "quick": {
+        "es": "Al principio, vende coches robados sin localizador. A mitad de la historia, atraca joyerías. Más adelante, las cámaras acorazadas de los bancos son lo que más paga. Al terminar la historia tienes el truco de 250.000 $.",
+        "en": "Early on, sell stolen cars without trackers. Mid-story, rob jewelry stores. Later, bank vaults pay the most. After the story you get the $250,000 cheat."
+      },
+      "sections": [
+        {
+          "type": "methods",
+          "title": {
+            "es": "Métodos, de menos a más",
+            "en": "Methods, from least to most"
+          },
+          "items": [
+            {
+              "ic": "car",
+              "when": {
+                "es": "Desde el principio",
+                "en": "From the start"
+              },
+              "pay": {
+                "es": "~1.000 $ o más por coche",
+                "en": "~$1,000+ per car"
+              },
+              "stage": 1,
+              "t": {
+                "es": "Vender coches robados",
+                "en": "Sell stolen cars"
+              },
+              "d": {
+                "es": "Lleva coches al comprador de coches robados. Solo acepta los que no llevan localizador, así que fíjate antes de robarlo. Es lo más fácil de repetir al principio.",
+                "en": "Take cars to the stolen-car buyer. He only accepts cars without trackers, so check before you steal one. It's the easiest thing to repeat early on."
+              }
+            },
+            {
+              "ic": "store",
+              "when": {
+                "es": "Primeras horas",
+                "en": "First hours"
+              },
+              "pay": {
+                "es": "Variable",
+                "en": "Varies"
+              },
+              "stage": 1,
+              "t": {
+                "es": "Atracar tiendas",
+                "en": "Hold up stores"
+              },
+              "d": {
+                "es": "Rápido y siempre disponible, aunque paga poco y te gana nivel de búsqueda. Úsalo para salir de un apuro.",
+                "en": "Quick and always available, though it pays little and gets you wanted. Use it to get out of a pinch."
+              }
+            },
+            {
+              "ic": "gem",
+              "when": {
+                "es": "A mitad de la historia",
+                "en": "Mid-story"
+              },
+              "pay": {
+                "es": "~10.000–25.000 $ por tienda",
+                "en": "~$10,000–25,000 per store"
+              },
+              "stage": 2,
+              "t": {
+                "es": "Atracar joyerías",
+                "en": "Rob jewelry stores"
+              },
+              "d": {
+                "es": "Cuando se desbloquean, son un buen salto de dinero. Planifica la huida y cambia de coche y ropa después.",
+                "en": "Once unlocked they're a good cash jump. Plan your getaway and change car and clothes afterwards."
+              }
+            },
+            {
+              "ic": "vault",
+              "when": {
+                "es": "Avanzada la historia",
+                "en": "Later in the story"
+              },
+              "pay": {
+                "es": "~200.000 $ por golpe",
+                "en": "~$200,000 per hit"
+              },
+              "stage": 3,
+              "t": {
+                "es": "Cámaras acorazadas de los bancos",
+                "en": "Bank vaults"
+              },
+              "d": {
+                "es": "Según la mayoría de guías, es lo que más dinero da en poco tiempo, pero se desbloquea tarde mediante una misión secundaria.",
+                "en": "According to most guides, it's the biggest earner for the time spent, but it unlocks late through a side quest."
+              }
+            },
+            {
+              "ic": "cheat",
+              "when": {
+                "es": "Al terminar la historia",
+                "en": "After the story"
+              },
+              "pay": {
+                "es": "250.000 $",
+                "en": "$250,000"
+              },
+              "stage": 4,
+              "t": {
+                "es": "Truco de dinero",
+                "en": "Money cheat"
+              },
+              "d": {
+                "es": "Según varias guías, se desbloquea al acabar la historia principal. Mientras está activo se desactivan trofeos y guardado.",
+                "en": "According to several guides, it unlocks after the main story. While active, trophies and saving are disabled."
+              },
+              "link": "cheats"
+            }
+          ]
+        }
+      ],
+      "note": {
+        "es": "Solo modo historia. Los «glitches» de dinero o los métodos para el modo online van contra las normas de Rockstar y pueden suponer la suspensión de tu cuenta: aquí no los publicamos.",
+        "en": "Story mode only. Money glitches or online-mode methods break Rockstar's rules and can get your account suspended: we don't publish them here."
+      },
+      "faq": {
+        "es": [
+          [
+            "¿Cuál es la forma más rápida de ganar dinero en GTA 6?",
+            "Según las guías, las cámaras acorazadas de los bancos, que dan unos 200.000 $ por golpe, aunque se desbloquean avanzada la historia."
+          ],
+          [
+            "¿Cómo gano dinero al principio de GTA 6?",
+            "Vendiendo coches robados sin localizador y atracando tiendas. No conviene acumular mucho dinero encima: guárdalo en tu escondite o en el banco."
+          ],
+          [
+            "¿Hay truco de dinero en GTA 6?",
+            "Sí: según varias guías, da 250.000 $ y se desbloquea al terminar la historia principal."
+          ]
+        ],
+        "en": [
+          [
+            "What's the fastest way to make money in GTA 6?",
+            "According to guides, bank vaults, worth about $200,000 per hit, although they unlock later in the story."
+          ],
+          [
+            "How do I make money early in GTA 6?",
+            "Sell stolen cars without trackers and hold up stores. Don't carry a lot of cash: keep it in your stash or the bank."
+          ],
+          [
+            "Is there a money cheat in GTA 6?",
+            "Yes: according to several guides it gives $250,000 and unlocks after the main story."
+          ]
+        ]
+      },
+      "sources": [
+        {
+          "name": "PowerPyx",
+          "url": "https://www.powerpyx.com/gta-6-money-guide-how-to-get-money-fast/"
+        },
+        {
+          "name": "GamerFuzion",
+          "url": "https://www.gamerfuzion.com/gta-6-money-guide-how-to-make-money-fast/"
+        },
+        {
+          "name": "LibertyCity",
+          "url": "https://libertycity.net/guides/gta-6/10494-how-to-make-money-fast-in-gta-6-from.html"
+        },
+        {
+          "name": "Game8",
+          "url": "https://game8.co/games/GTA-6/archives/637017"
+        }
+      ],
+      "short": {
+        "es": "Del principio al final, sin glitches",
+        "en": "From start to finish, no glitches"
+      }
+    },
+    {
+      "id": "radio",
+      "icon": "radio",
+      "updated": "2026-11-19",
+      "slug": {
+        "es": "emisoras-radio-gta-6",
+        "en": "gta-6-radio-stations"
+      },
+      "title": {
+        "es": "Emisoras de radio de GTA 6: géneros y presentadores",
+        "en": "GTA 6 radio stations: genres and hosts"
+      },
+      "desc": {
+        "es": "Las emisoras de radio confirmadas de GTA 6, con su género y sus presentadores famosos: Bad Bunny, Lana Del Rey, Morgan Wallen, Burna Boy, Robyn y más.",
+        "en": "GTA 6's confirmed radio stations with their genre and famous hosts: Bad Bunny, Lana Del Rey, Morgan Wallen, Burna Boy, Robyn and more."
+      },
+      "h1": {
+        "es": "Emisoras de radio de GTA 6",
+        "en": "GTA 6 radio stations"
+      },
+      "lead": {
+        "es": "Las emisoras que Rockstar ha detallado, con su estilo y quién las presenta. Hay más emisoras en el juego: las iremos añadiendo cuando estén confirmadas.",
+        "en": "The stations Rockstar has detailed, with their style and who hosts them. There are more stations in the game: we'll add them as they're confirmed."
+      },
+      "quick": {
+        "es": "Rockstar ha detallado 6 emisoras con presentadores famosos: Cocoteo FM (latina), Back Country Radio (country), AfroBank FM (africana), The Chamber 106.6 (metal), Flash FM (pop) y Dirty South Classics (rap del sur).",
+        "en": "Rockstar has detailed 6 stations with famous hosts: Cocoteo FM (Latin), Back Country Radio (country), AfroBank FM (African), The Chamber 106.6 (metal), Flash FM (pop) and Dirty South Classics (Southern rap)."
+      },
+      "sections": [
+        {
+          "type": "stations",
+          "title": {
+            "es": "Emisoras confirmadas",
+            "en": "Confirmed stations"
+          },
+          "items": [
+            {
+              "name": "Cocoteo FM",
+              "genre": {
+                "es": "Música latina actual",
+                "en": "Modern Latin"
+              },
+              "hosts": "Bad Bunny, RaiNao",
+              "hue": 330
+            },
+            {
+              "name": "Back Country Radio",
+              "genre": {
+                "es": "Country",
+                "en": "Country"
+              },
+              "hosts": "Morgan Wallen, Lana Del Rey",
+              "hue": 30
+            },
+            {
+              "name": "AfroBank FM",
+              "genre": {
+                "es": "Música africana y amapiano",
+                "en": "African music and amapiano"
+              },
+              "hosts": "Burna Boy, Palms Trax",
+              "hue": 140
+            },
+            {
+              "name": "The Chamber 106.6",
+              "genre": {
+                "es": "Metal",
+                "en": "Metal"
+              },
+              "hosts": "Kerry King, Tom Araya",
+              "hue": 0
+            },
+            {
+              "name": "Flash FM",
+              "genre": {
+                "es": "Pop",
+                "en": "Pop"
+              },
+              "hosts": "Robyn, Alex Consani",
+              "hue": 290
+            },
+            {
+              "name": "Dirty South Classics",
+              "genre": {
+                "es": "Rap y hip-hop del sur",
+                "en": "Southern rap and hip-hop"
+              },
+              "hosts": "Trick Daddy, Trina",
+              "hue": 200
+            }
+          ]
+        }
+      ],
+      "faq": {
+        "es": [
+          [
+            "¿Cuántas emisoras de radio tiene GTA 6?",
+            "Rockstar ha detallado 6 emisoras con presentadores famosos y hay más en el juego. Las listas que circulan no coinciden todavía en el total."
+          ],
+          [
+            "¿Bad Bunny sale en GTA 6?",
+            "Sí: presenta Cocoteo FM, la emisora de música latina, junto a RaiNao."
+          ],
+          [
+            "¿Qué emisora presenta Lana Del Rey en GTA 6?",
+            "Back Country Radio, la emisora de country, junto a Morgan Wallen."
+          ]
+        ],
+        "en": [
+          [
+            "How many radio stations does GTA 6 have?",
+            "Rockstar has detailed 6 stations with famous hosts and there are more in the game. Lists going around don't agree on the total yet."
+          ],
+          [
+            "Is Bad Bunny in GTA 6?",
+            "Yes: he hosts Cocoteo FM, the Latin music station, with RaiNao."
+          ],
+          [
+            "Which station does Lana Del Rey host in GTA 6?",
+            "Back Country Radio, the country station, with Morgan Wallen."
+          ]
+        ]
+      },
+      "sources": [
+        {
+          "name": "Forbes",
+          "url": "https://www.forbes.com/sites/brianmazique/2026/10/08/lana-del-rey-learned-las-roads-from-gta---now-shes-a-radio-dj-in-gta-vi-alongside-bad-bunny-and-morgan-wallen/"
+        },
+        {
+          "name": "Insider Gaming",
+          "url": "https://insider-gaming.com/all-gta-6-radio-stations-songs-full-soundtrack/"
+        },
+        {
+          "name": "Man of Many",
+          "url": "https://manofmany.com/entertainment/gaming/gta-6-soundtrack-radio-stations-score"
+        }
+      ],
+      "short": {
+        "es": "Géneros y presentadores famosos",
+        "en": "Genres and famous hosts"
+      }
+    },
+    {
+      "id": "duracion",
+      "icon": "clock",
+      "updated": "2026-11-19",
+      "slug": {
+        "es": "cuanto-dura-gta-6",
+        "en": "how-long-is-gta-6"
+      },
+      "title": {
+        "es": "¿Cuánto dura GTA 6? Horas de la historia y para el 100 %",
+        "en": "How long is GTA 6? Story length and time to 100%"
+      },
+      "desc": {
+        "es": "Cuánto se tarda en terminar GTA 6: unas 50 horas la historia, unas 80 con misiones secundarias y cerca de 200 para el 100 %. Comparado con GTA V y Red Dead Redemption 2.",
+        "en": "How long it takes to beat GTA 6: about 50 hours for the story, around 80 with side content and close to 200 for 100%. Compared with GTA V and Red Dead Redemption 2."
+      },
+      "h1": {
+        "es": "¿Cuánto dura GTA 6?",
+        "en": "How long is GTA 6?"
+      },
+      "lead": {
+        "es": "Rockstar no ha dado una cifra oficial. Estas son las estimaciones que publica la prensa, comparadas con los juegos anteriores.",
+        "en": "Rockstar hasn't given an official figure. These are the estimates the press reports, compared with previous games."
+      },
+      "quick": {
+        "es": "Unas 50 horas solo la historia principal (unas 100 misiones), alrededor de 80 horas si haces también misiones secundarias y cerca de 200 horas para completarlo al 100 %.",
+        "en": "About 50 hours for the main story alone (around 100 missions), roughly 80 hours with side content and close to 200 hours for 100% completion."
+      },
+      "sections": [
+        {
+          "type": "bars",
+          "title": {
+            "es": "Horas estimadas",
+            "en": "Estimated hours"
+          },
+          "max": 200,
+          "items": [
+            {
+              "t": {
+                "es": "Solo historia",
+                "en": "Story only"
+              },
+              "v": 50,
+              "label": {
+                "es": "~50 h",
+                "en": "~50 h"
+              }
+            },
+            {
+              "t": {
+                "es": "Historia + secundarias",
+                "en": "Story + side content"
+              },
+              "v": 80,
+              "label": {
+                "es": "~80 h",
+                "en": "~80 h"
+              }
+            },
+            {
+              "t": {
+                "es": "100 %",
+                "en": "100%"
+              },
+              "v": 200,
+              "label": {
+                "es": "~200 h",
+                "en": "~200 h"
+              }
+            }
+          ]
+        },
+        {
+          "type": "bars",
+          "title": {
+            "es": "Comparado con otros juegos de Rockstar (solo historia)",
+            "en": "Compared with other Rockstar games (story only)"
+          },
+          "max": 60,
+          "items": [
+            {
+              "t": {
+                "es": "GTA V",
+                "en": "GTA V"
+              },
+              "v": 31,
+              "label": {
+                "es": "~31 h",
+                "en": "~31 h"
+              }
+            },
+            {
+              "t": {
+                "es": "Red Dead Redemption 2",
+                "en": "Red Dead Redemption 2"
+              },
+              "v": 50,
+              "label": {
+                "es": "~50 h",
+                "en": "~50 h"
+              }
+            },
+            {
+              "t": {
+                "es": "GTA VI",
+                "en": "GTA VI"
+              },
+              "v": 50,
+              "label": {
+                "es": "~50 h",
+                "en": "~50 h"
+              },
+              "hl": true
+            }
+          ]
+        }
+      ],
+      "faq": {
+        "es": [
+          [
+            "¿Cuántas horas dura la historia de GTA 6?",
+            "Según las estimaciones publicadas, unas 50 horas y alrededor de 100 misiones. Rockstar no ha dado una cifra oficial."
+          ],
+          [
+            "¿Cuánto se tarda en completar GTA 6 al 100 %?",
+            "Cerca de 200 horas, según las estimaciones de la prensa."
+          ],
+          [
+            "¿GTA 6 dura más que GTA V?",
+            "Sí: la historia de GTA V se suele terminar en unas 31 horas y la de GTA 6 ronda las 50."
+          ]
+        ],
+        "en": [
+          [
+            "How many hours is the GTA 6 story?",
+            "According to published estimates, about 50 hours and around 100 missions. Rockstar hasn't given an official figure."
+          ],
+          [
+            "How long does it take to 100% GTA 6?",
+            "Close to 200 hours, according to press estimates."
+          ],
+          [
+            "Is GTA 6 longer than GTA V?",
+            "Yes: GTA V's story usually takes about 31 hours and GTA 6's is around 50."
+          ]
+        ]
+      },
+      "sources": [
+        {
+          "name": "TweakTown",
+          "url": "https://www.tweaktown.com/news/114690/gta-6-reportedly-has-a-50-hour-story-matching-red-dead-redemption-2-despite-its-much-larger-map/index.html"
+        },
+        {
+          "name": "Dexerto",
+          "url": "https://www.dexerto.com/wikis/gta-6/time-to-beat/"
+        },
+        {
+          "name": "esports.gg",
+          "url": "https://esports.gg/guides/grand-theft-auto-6/how-long-does-it-take-to-beat-gta-6-story-length-explained/"
+        },
+        {
+          "name": "Sportskeeda",
+          "url": "https://www.sportskeeda.com/gta/gta-6-completionist-runtime-revealed"
+        }
+      ],
+      "short": {
+        "es": "Historia, secundarias y 100 %",
+        "en": "Story, side content and 100%"
+      }
+    }
+  ]
+}
