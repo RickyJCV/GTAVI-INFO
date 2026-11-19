@@ -63,6 +63,21 @@ El juego ya está a la venta. Lo que más se busca ahora, por este orden: **prob
 
 **Notas:** en cada ejecución revisa también `content/reviews.json` → añade análisis nuevos de medios reconocidos y, si cambian, actualiza los `aggregates` (Metacritic/OpenCritic) con la cifra y la fuente que la publica. Si no encuentras la URL del análisis concreto pero un medio fiable publica la nota, añade `"via": "Nombre del medio"` y su URL.
 
+## Trucos (`content/trucos.json`) — cada lunes por la mañana
+
+**Cuándo:** solo en **modo MAÑANA los lunes** (`[ "$(TZ=Europe/Madrid date +%u)" = 1 ]`), o cualquier día si una búsqueda del resumen saca por sí sola una noticia de trucos nuevos. Máximo **2 búsquedas extra** (`extended`): `GTA 6 cheat codes new` y `trucos GTA 6 nuevos códigos`.
+
+1. Lee `content/trucos.json` (lo ya publicado).
+2. **Truco nuevo con código:** solo si **al menos 2 medios o guías especializadas** (GameSpot, IGN, PC Gamer, Game Rant, Eurogamer, Vandal, 3DJuegos, VidaExtra, Polygon…) dan **exactamente la misma secuencia**. Añádelo al final de `cheats` con:
+   `{"id": "slug-corto", "status": "coincide", "cat": "money|player|armor|ammo|police|vehicles|world|combat", "added": "AAAA-MM-DD", "name": {"es": "…", "en": "…"}, "effect": {"es": "…", "en": "…"}, "unlock": {"es": "…", "en": "…"}, "seq": ["U","R","D","L",…]}`
+   `seq` usa U (arriba), D (abajo), L (izquierda) y R (derecha), en el orden de la cruceta. `unlock` es el requisito para desbloquearlo, contado con tus palabras.
+3. **Las guías no coinciden** o falta el código: añádelo con `"status": "pendiente"`, `"seq": null`, `"unlock": null` (sale en la web como «en comprobación»). Si un pendiente ya coincide en 2 fuentes, pásalo a `"coincide"` con su `seq` y su `unlock`.
+4. **Nunca cambies** `id` ni la secuencia de un truco ya publicado salvo que 2 fuentes digan que estaba mal (en ese caso corrígelo y dilo en la respuesta).
+5. Añade a `sources` los medios nuevos que hayas usado (URL de la guía concreta) y pon `updated` con la fecha de hoy.
+6. **Prohibido** (el verificador lo bloquea): fallos o «glitches», trucos o dinero para el modo online, mods, hacks, trainers o cualquier cosa que rompa las normas de Rockstar. Solo trucos oficiales del modo historia. Nada de spoilers en el nombre ni el requisito.
+7. Verifica con `node scripts/check-trucos.mjs` hasta que diga «✓ trucos.json listo» y sigue con los pasos 7, 9 y 10 (incluye `content/trucos.json` en el commit con `git add content`). En la respuesta, di qué trucos has añadido o confirmado.
+8. Si hay trucos nuevos, también pueden ser noticia del día en el resumen (con sus fuentes), por ejemplo: «Descubren el truco de … en GTA 6».
+
 ## Reglas legales y de AdSense (obligatorias, por encima de todo lo demás)
 
 La web vive de la publicidad de Google AdSense y debe ser 100 % legal. Si una noticia o rumor no puede contarse cumpliendo esto, **no lo publiques**.

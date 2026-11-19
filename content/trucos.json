@@ -1,0 +1,189 @@
+{
+  "updated": "2026-11-19",
+  "howTo": {
+    "es": [
+      "Pulsa <b>↑</b> en la cruceta para sacar el móvil.",
+      "Mantén pulsados <b>{L}</b> y <b>{R}</b>.",
+      "Sin soltarlos, pulsa la secuencia del truco en la <b>cruceta</b>."
+    ],
+    "en": [
+      "Press <b>↑</b> on the D-pad to take out your phone.",
+      "Hold <b>{L}</b> and <b>{R}</b>.",
+      "Keep holding them and press the cheat's sequence on the <b>D-pad</b>."
+    ]
+  },
+  "cheats": [
+    {
+      "id": "dinero",
+      "status": "coincide",
+      "cat": "money",
+      "added": "2026-11-19",
+      "name": {
+        "es": "250.000 $",
+        "en": "$250,000"
+      },
+      "effect": {
+        "es": "Te da 250.000 dólares al momento.",
+        "en": "Gives you $250,000 instantly."
+      },
+      "unlock": {
+        "es": "Terminar la historia principal.",
+        "en": "Finish the main story."
+      },
+      "seq": [
+        "U",
+        "R",
+        "D",
+        "L",
+        "U",
+        "L",
+        "D",
+        "R"
+      ]
+    },
+    {
+      "id": "concentracion",
+      "status": "coincide",
+      "cat": "player",
+      "added": "2026-11-19",
+      "name": {
+        "es": "Concentración ilimitada",
+        "en": "Unlimited Focus"
+      },
+      "effect": {
+        "es": "La habilidad de concentración no se agota.",
+        "en": "Your Focus ability never runs out."
+      },
+      "unlock": {
+        "es": "Terminar la historia principal.",
+        "en": "Finish the main story."
+      },
+      "seq": [
+        "D",
+        "U",
+        "U",
+        "D",
+        "U",
+        "D",
+        "U",
+        "D",
+        "U",
+        "R"
+      ]
+    },
+    {
+      "id": "chaleco",
+      "status": "coincide",
+      "cat": "armor",
+      "added": "2026-11-19",
+      "name": {
+        "es": "Chaleco antibalas",
+        "en": "Body Armor"
+      },
+      "effect": {
+        "es": "Te equipa con chaleco antibalas.",
+        "en": "Equips you with body armor."
+      },
+      "unlock": {
+        "es": "Completar 100 entrenamientos.",
+        "en": "Complete 100 workouts."
+      },
+      "seq": [
+        "D",
+        "U",
+        "L",
+        "U",
+        "U",
+        "U",
+        "U",
+        "U",
+        "D",
+        "D"
+      ]
+    },
+    {
+      "id": "municion",
+      "status": "coincide",
+      "cat": "ammo",
+      "added": "2026-11-19",
+      "name": {
+        "es": "Munición al máximo",
+        "en": "Max Ammo"
+      },
+      "effect": {
+        "es": "Llena la munición de todas tus armas.",
+        "en": "Fills the ammo for all your weapons."
+      },
+      "unlock": {
+        "es": "Ganar 25 medallas de bronce o mejores en los campos de tiro.",
+        "en": "Win 25 bronze medals or better at shooting ranges."
+      },
+      "seq": [
+        "D",
+        "U",
+        "R",
+        "D",
+        "L",
+        "L",
+        "U",
+        "U",
+        "D",
+        "L"
+      ]
+    },
+    {
+      "id": "sin-recarga",
+      "status": "pendiente",
+      "cat": "ammo",
+      "added": "2026-11-19",
+      "name": {
+        "es": "Sin recargar",
+        "en": "No Reload"
+      },
+      "effect": {
+        "es": "Disparas sin tener que recargar.",
+        "en": "Shoot without reloading."
+      },
+      "unlock": null,
+      "seq": null
+    },
+    {
+      "id": "subir-busqueda",
+      "status": "pendiente",
+      "cat": "police",
+      "added": "2026-11-19",
+      "name": {
+        "es": "Subir el nivel de búsqueda",
+        "en": "Raise Heat Level"
+      },
+      "effect": {
+        "es": "Aumenta el nivel de búsqueda de la policía.",
+        "en": "Raises your police heat level."
+      },
+      "unlock": null,
+      "seq": null
+    }
+  ],
+  "sources": [
+    {
+      "name": "GameSpot",
+      "url": "https://www.gamespot.com/articles/all-gta-6-cheats-and-how-to-unlock-them/"
+    },
+    {
+      "name": "PC Gamer",
+      "url": "https://www.pcgamer.com/games/grand-theft-auto/gta-6-cheats-list/"
+    },
+    {
+      "name": "Game Rant",
+      "url": "https://gamerant.com/all-grand-theft-auto-vi-gta-6-cheat-codes-list/"
+    },
+    {
+      "name": "GrandTheft.gg",
+      "url": "https://grandtheft.gg/gta-6-cheat-codes"
+    },
+    {
+      "name": "Gamer Tweak",
+      "url": "https://gamertweak.com/cheat-codes-gta-6/"
+    }
+  ]
+}

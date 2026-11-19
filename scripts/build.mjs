@@ -116,6 +116,7 @@ for (const code of Object.keys(LOCALES)) {
 const ACTIVE = Object.keys(LOCALES).filter((c) => DATA[c].briefs.length && DATA[c].guide);
 const LEONIDA = JSON.parse(fs.readFileSync(path.join(ROOT, "content/leonida.json"), "utf8"));
 const REVIEWS = JSON.parse(fs.readFileSync(path.join(ROOT, "content/reviews.json"), "utf8"));
+const TRUCOS = JSON.parse(fs.readFileSync(path.join(ROOT, "content/trucos.json"), "utf8"));
 (REVIEWS.reviews || []).forEach((r, i) => {
   const w = `content/reviews.json: reviews[${i}]`;
   if (!r.outlet || typeof r.score !== "number" || typeof r.max !== "number" || r.max <= 0 || r.score < 0 || r.score > r.max) fail(`${w}: necesita outlet, score y max (número, score ≤ max)`);
@@ -169,11 +170,31 @@ const tabIcon = {
   add: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><path d="M12 8v8M8 12h8"/></g></svg>',
   dots: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></g></svg>',
   check: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="m5 12.5 4.5 4.5L19 7.5"/></svg>',
+  cheats: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10a5 5 0 0 1 4.9 6l-.8 4a2.6 2.6 0 0 1-4.6 1.1L15 16H9l-1.5 2.1A2.6 2.6 0 0 1 2.9 17l-.8-4A5 5 0 0 1 7 7z"/><path d="M7 10.5v3M5.5 12h3"/></g><circle cx="16" cy="11" r="1.2" fill="currentColor"/><circle cx="18" cy="13.2" r="1.2" fill="currentColor"/></svg>',
 };
+// Iconos propios de la sección de trucos
+const cheatIcon = {
+  money: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6" width="19" height="12" rx="2.5"/><circle cx="12" cy="12" r="2.6"/><path d="M6 9.5v5M18 9.5v5"/></g></svg>',
+  player: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.2"/><path d="M12 1.5v4M12 18.5v4M1.5 12h4M18.5 12h4"/></g></svg>',
+  armor: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M12 2.5 4 5.5v6c0 5 3.4 8.6 8 10 4.6-1.4 8-5 8-10v-6z"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m8.5 12 2.5 2.5 4.5-5"/></svg>',
+  ammo: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M5 21V10c0-3 1.2-5.5 2.5-7 1.3 1.5 2.5 4 2.5 7v11z"/><path d="M14 21V10c0-3 1.2-5.5 2.5-7 1.3 1.5 2.5 4 2.5 7v11z"/><path d="M5 17h5M14 17h5"/></g></svg>',
+  police: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="m12 3 2.5 5.3 5.8.7-4.3 4 1.1 5.7L12 16l-5.1 2.7L8 13 3.7 9l5.8-.7z"/></svg>',
+  vehicles: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15v-3l2.2-4.6A2 2 0 0 1 7 6.3h10a2 2 0 0 1 1.8 1.1L21 12v3a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1zM3.5 12h17"/><circle cx="7.5" cy="16.5" r="1.8"/><circle cx="16.5" cy="16.5" r="1.8"/></g></svg>',
+  world: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></g></svg>',
+  combat: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 17.5 3 6V3h3l11.5 11.5M13 19l6-6M16 16l4 4M19 21l2-2"/></g></svg>',
+  dpad: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M9 2.5h6v6.5h6.5v6H15v6.5H9V15H2.5V9H9z"/><path fill="currentColor" d="m12 4.5 1.6 2.2h-3.2zM12 19.5l-1.6-2.2h3.2zM4.5 12l2.2-1.6v3.2zM19.5 12l-2.2 1.6v-3.2z"/></svg>',
+  phone: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5"/><path d="M10.5 18.5h3"/></g></svg>',
+  hold: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5c1.4-2.2 3.4-3.3 5.5-3.3h1.5M21 9.5c-1.4-2.2-3.4-3.3-5.5-3.3H14"/><rect x="2.5" y="11" width="7" height="6.5" rx="2"/><rect x="14.5" y="11" width="7" height="6.5" rx="2"/></g></svg>',
+  lock: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="10.5" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></g></svg>',
+};
+// Flecha de la cruceta (una sola forma, girada)
+const dirRot = { U: 0, R: 90, D: 180, L: 270 };
+const dirKey = (L, d) =>
+  `<li class="pad pad--${d}" title="${esc(L.t.cheats.dirs[d])}"><svg viewBox="0 0 24 24" aria-hidden="true" style="transform:rotate(${dirRot[d]}deg)"><path fill="currentColor" d="M12 4.5 19.5 15h-15z"/></svg><span class="sr-only">${esc(L.t.cheats.dirs[d])}</span></li>`;
 const stepIcons = { ios: ["share", "add", "check"], iosChrome: ["share", "add", "check"], android: ["dots", "add", "check"] };
 const stepsHtml = (L, variant) =>
   `<ol class="steps">${L.t.inst[variant].map((t, i) => `<li><span class="steps__n">${i + 1}</span><span class="steps__ic">${tabIcon[stepIcons[variant][i]]}</span><span class="steps__t">${t}</span></li>`).join("")}</ol>`;
-const TAB_ORDER = ["home", "news", "rumors", "reviews", "guide"];
+const TAB_ORDER = ["home", "news", "rumors", "cheats", "guide"];
 const tabbar = (L, active) => `
 <nav class="tabbar" aria-label="${esc(L.t.tabsLabel)}">
   ${TAB_ORDER.map((k, i) => `<a href="${u(L.paths[k])}" data-tab="${i}"${k === active ? ' aria-current="page"' : ""}>${tabIcon[k]}<span>${esc(L.t.tabs[k])}</span></a>`).join("")}
@@ -247,6 +268,7 @@ const header = (L, active, alts) => {
     [P.home, L.t.nav.home, "home"],
     [P.news, L.t.nav.news, "news"],
     [P.rumors, L.t.nav.rumors, "rumors"],
+    [P.cheats, L.t.tabs.cheats, "cheats"],
     [P.reviews, L.t.tabs.reviews, "reviews"],
     [P.guide, L.t.nav.guide, "guide"],
   ];
@@ -296,6 +318,8 @@ const footer = (L) => {
       <nav class="footer-nav" aria-label="${esc(L.t.footerNav)}">
         <a href="${u(P.news)}">${esc(L.t.nav.news)}</a>
         <a href="${u(P.rumors)}">${esc(L.t.nav.rumors)}</a>
+        <a href="${u(P.cheats)}">${esc(L.t.cheats.tile)}</a>
+        <a href="${u(P.reviews)}">${esc(L.t.tabs.reviews)}</a>
         <a href="${u(P.guide)}">${esc(L.t.footerLinks.guide)}</a>
         <a href="${u(P.archive)}">${esc(L.t.footerLinks.archive)}</a>
         <a href="${u(P.about)}">${esc(L.t.footerLinks.about)}</a>
@@ -410,6 +434,7 @@ const sourcesHtml = (L, sources) =>
 
 // ---------- tarjetas, portada, listados y páginas de detalle ----------
 const relLevel = { alta: 3, media: 2, baja: 1 };
+const isFresh = (iso, days = 7) => !!iso && Date.now() - new Date(iso + "T12:00:00Z").getTime() < days * 864e5;
 const relMeter = (L, r) =>
   `<span class="rel rel--${r}"><span class="rel__bars" aria-hidden="true">${[1, 2, 3].map((n) => `<i${n <= relLevel[r] ? ' class="on"' : ""}></i>`).join("")}</span>${esc(L.t.reliability[r])}</span>`;
 const via = (L, sources) =>
@@ -449,7 +474,7 @@ const guidesCard = (L) => {
   const P = L.paths;
   const link = (href, emoji, [name, sub]) => `<li><a href="${u(href)}"><span aria-hidden="true">${emoji}</span><span><b>${esc(name)}</b><small>${esc(sub)}</small></span></a></li>`;
   return `<div class="card"><h2 class="card__title">${esc(L.t.nav.guide)}</h2><ul class="guide-links">
-    ${link(P.release, "⏰", L.t.tiles.release)}${link(P.reviews, "⭐", L.t.tiles.reviews)}${link(P.leonida, "🌴", L.t.tiles.leonida)}${link(P.guide, "🧭", [L.t.nav.guide, L.t.hubGuideSub])}
+    ${link(P.cheats, "🎮", [L.t.cheats.tile, L.t.cheats.tileSub(TRUCOS.cheats.filter((c) => c.seq).length)])}${link(P.release, "⏰", L.t.tiles.release)}${link(P.reviews, "⭐", L.t.tiles.reviews)}${link(P.leonida, "🌴", L.t.tiles.leonida)}${link(P.guide, "🧭", [L.t.nav.guide, L.t.hubGuideSub])}
   </ul></div>`;
 };
 const sideCards = (L, { facts = true } = {}) => {
@@ -540,6 +565,7 @@ const briefBody = (L, b) => {
 
   <div class="wrap">
     <nav class="hub" aria-label="${esc(L.t.jumpsLabel)}">
+      <a class="hub__tile hub__tile--cheats" href="${u(P.cheats)}"><span class="hub__icon" aria-hidden="true">${tabIcon.cheats}</span><span class="hub__txt"><b>${esc(L.t.cheats.tile)}</b><small>${esc(L.t.cheats.tileSub(TRUCOS.cheats.filter((c) => c.seq).length))}</small></span>${TRUCOS.cheats.some((c) => isFresh(c.added)) ? `<span class="hub__new">${esc(L.t.cheats.isNew)}</span>` : ""}<span class="hub__go" aria-hidden="true">→</span></a>
       ${tile("news", P.news, "📰", L.t.nav.news, L.t.hubNewsSub(top.length + more.length))}
       ${tile("rumors", P.rumors, "🕵️", L.t.nav.rumors, L.t.hubRumorsSub(rumors.length))}
       ${tile("reviews", P.reviews, "⭐", L.t.tiles.reviews[0], (REVIEWS.aggregates || [])[0] ? `${REVIEWS.aggregates[0].name} ${REVIEWS.aggregates[0].score} · ${L.t.reviewsCount(reviewList.length)}` : reviewAvg !== null ? `${L.t.reviewsAvg}: ${reviewAvg} · ${L.t.reviewsCount(reviewList.length)}` : L.t.tiles.reviews[1])}
@@ -958,6 +984,73 @@ for (const code of ACTIVE) {
     })
   );
   sitemap.push(["reviews", P.reviews, REVIEWS.updated, "daily", "0.9"]);
+
+  // Trucos: códigos dibujados paso a paso, con su requisito y su estado
+  {
+    const T = L.t.cheats;
+    const withCode = TRUCOS.cheats.filter((c) => c.seq);
+    const pending = TRUCOS.cheats.filter((c) => !c.seq);
+    const holdL = '<span class="btn-ps">L1</span><span class="btn-xb">LB</span>';
+    const holdR = '<span class="btn-ps">R1</span><span class="btn-xb">RB</span>';
+    const steps = TRUCOS.howTo[code] || TRUCOS.howTo.es;
+    const stepIc = [cheatIcon.phone, cheatIcon.hold, cheatIcon.dpad];
+    const card = (c) => `
+      <article class="cheat cheat--${c.cat}${c.seq ? "" : " cheat--pending"}" id="${esc(c.id)}">
+        <div class="cheat__head">
+          <span class="cheat__ic" aria-hidden="true">${cheatIcon[c.cat] || cheatIcon.world}</span>
+          <div class="cheat__ttl"><span class="cheat__cat">${esc(T.cats[c.cat] || "")}${isFresh(c.added) && c.seq ? ` <span class="cheat__new">${esc(T.isNew)}</span>` : ""}</span><h3>${esc(c.name[code] || c.name.es)}</h3></div>
+        </div>
+        <p class="cheat__fx">${esc(c.effect[code] || c.effect.es)}</p>
+        ${
+          c.seq
+            ? `<div class="cheat__seq"><span class="cheat__hold" aria-hidden="true">${cheatIcon.phone}<b>+</b><span class="cbtn">${holdL}</span><span class="cbtn">${holdR}</span><b>+</b></span>
+          <ol class="pads" aria-label="${esc(T.seqLabel(c.seq.length))}">${c.seq.map((d) => dirKey(L, d)).join("")}</ol></div>
+        ${c.unlock ? `<p class="cheat__unlock">${cheatIcon.lock}<span><b>${esc(T.unlock)}</b> ${esc(c.unlock[code] || c.unlock.es)}</span></p>` : ""}
+        <p class="cheat__status cheat__status--ok">${tabIcon.check}${esc(T.status.coincide)}</p>`
+            : `<p class="cheat__status cheat__status--wait">⏳ ${esc(T.status.pendiente)}</p><p class="muted small">${esc(T.pending)}</p>`
+        }
+      </article>`;
+    write(
+      P.cheats,
+      layout(L, {
+        title: T.title,
+        description: T.desc,
+        key: "cheats",
+        active: "cheats",
+        type: "article",
+        jsonLd: [
+          { "@context": "https://schema.org", "@type": "Article", inLanguage: code, headline: T.title, description: T.desc, dateModified: TRUCOS.updated, author: { "@type": "Organization", name: cfg.name }, publisher: { "@type": "Organization", name: cfg.name } },
+          { "@context": "https://schema.org", "@type": "FAQPage", inLanguage: code, mainEntity: T.faq.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) },
+          crumbsLd([[L.t.crumbHome, P.home], [L.t.nav.guide, P.guide], [T.h1, P.cheats]]),
+        ],
+        body: `
+  <section class="page-head page-head--cheats"><div class="wrap"><p class="eyebrow">${esc(T.eyebrow)}</p><h1>${esc(T.h1)}</h1><p class="lead-text">${esc(T.lead)}</p></div></section>
+  <div class="wrap layout" data-cheats>
+    <div class="col-main">
+      <div class="plat" role="group" aria-label="${esc(T.platLabel)}">
+        <span class="plat__label">${esc(T.platLabel)}</span>
+        <button type="button" data-plat="ps" aria-pressed="true">PS5</button><button type="button" data-plat="xb" aria-pressed="false">Xbox Series</button>
+      </div>
+      <section class="block cheat-how" aria-labelledby="como"><div class="block__head"><h2 id="como">${esc(T.howTitle)}</h2></div>
+        <ol class="steps steps--how">${steps.map((t, i) => `<li><span class="steps__n">${i + 1}</span><span class="steps__ic">${stepIc[i] || cheatIcon.dpad}</span><span class="steps__t">${t.replace("{L}", holdL).replace("{R}", holdR)}</span></li>`).join("")}</ol>
+      </section>
+      <section class="block" aria-labelledby="lista"><div class="block__head"><h2 id="lista">${esc(T.listTitle)}</h2><span class="muted small">${esc(T.count(withCode.length, pending.length))}</span></div>
+        <div class="cheat-grid">${withCode.map(card).join("")}${pending.map(card).join("")}</div>
+      </section>
+      <aside class="callout callout--warn"><h2>⚠ ${esc(T.warnTitle)}</h2><ul>${T.warn.map((w) => `<li>${esc(w)}</li>`).join("")}</ul></aside>
+      ${adUnit(L, "bottom")}
+      <section class="block" aria-labelledby="faq"><div class="block__head"><h2 id="faq">${esc(L.t.faq)}</h2></div>
+        <div class="faq">${T.faq.map(([q, a], i) => `<details${i < 1 ? " open" : ""}><summary>${esc(q)}</summary><div class="faq__a"><p>${esc(a)}</p></div></details>`).join("")}</div>
+      </section>
+      <p class="muted small">${esc(T.updated(fmtDate(L, TRUCOS.updated, { day: "numeric", month: "long", year: "numeric" })))}</p>
+      ${sourcesHtml(L, TRUCOS.sources)}
+    </div>
+    <aside class="col-side">${sideCards(L)}</aside>
+  </div>`,
+      })
+    );
+    sitemap.push(["cheats", P.cheats, TRUCOS.updated, "weekly", "0.9"]);
+  }
 
   // App: cómo instalar en cada dispositivo (y qué se puede hacer)
   write(

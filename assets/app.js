@@ -171,6 +171,20 @@
     if (close) close.addEventListener("click", function () { hint.hidden = true; store.set("lh-hint-off", "1"); });
   }
 
+  // Trucos: botones de PS5 o de Xbox (se recuerda; en el navegador de la consola se detecta sola)
+  var platBtns = document.querySelectorAll("[data-plat]");
+  if (platBtns.length) {
+    var uaP = navigator.userAgent || "";
+    var plat = store.get("lh-plat") || (/Xbox/i.test(uaP) ? "xb" : "ps");
+    var setPlat = function (v) {
+      plat = v === "xb" ? "xb" : "ps";
+      document.documentElement.setAttribute("data-plat", plat);
+      platBtns.forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-plat") === plat)); });
+    };
+    setPlat(plat);
+    platBtns.forEach(function (b) { b.addEventListener("click", function () { setPlat(b.getAttribute("data-plat")); store.set("lh-plat", plat); }); });
+  }
+
   // Rumores: filtrar por fiabilidad
   var relBtns = document.querySelectorAll("[data-rel-filter]");
   relBtns.forEach(function (b) {

@@ -67,3 +67,10 @@ Una tarea programada de Claude se ejecuta cada mañana: busca las noticias de GT
 - Al entrar desde un móvil, a los pocos segundos (o en la segunda página vista) sale un panel **«Instala Leónida Hoy»** con los pasos de **su** dispositivo: iPhone con Safari, iPhone con Chrome/Firefox/Edge, Android (botón de instalar directo si el navegador lo permite) o aviso de «ábrelo en el navegador» si viene de Instagram, TikTok, Facebook…
 - Si alguien pulsa «Ahora no», no vuelve a salir en 14 días. Nunca sale en ordenador, dentro de la app ya instalada ni en la página `/app/`.
 - Dentro de la app: deslizar hacia abajo arriba del todo para actualizar, aviso cuando hay noticias nuevas y lectura sin conexión.
+
+## Trucos (`/trucos-gta-6/` y `/en/gta-6-cheats/`)
+- Los datos están en `content/trucos.json`. Cada truco lleva su secuencia de cruceta (`U`, `D`, `L`, `R`), qué hace, cómo se desbloquea y su estado: **coincide** (al menos 2 guías dan el mismo código) o **pendiente** (aún no está claro; sale sin código).
+- La página dibuja cada botón con iconos propios. Tiene un selector **PS5 / Xbox** que se recuerda y que en el navegador de la Xbox se elige solo.
+- La tarea programada busca trucos nuevos **cada lunes por la mañana** (instrucciones en `docs/TAREA-DIARIA.md`).
+- `node scripts/check-trucos.mjs` valida el archivo: formato, fuentes, y bloquea fallos, trucos online, mods o hacks. Se ejecuta también al publicar, así que un truco mal escrito nunca llega a la web.
+- En el móvil, **Trucos** ocupa la pestaña que antes era **Notas**. Notas sigue en la portada, en el menú de ordenador, en el pie y en la tarjeta «Guía».
