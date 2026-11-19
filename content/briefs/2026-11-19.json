@@ -38,7 +38,22 @@
     }
   ],
   "biggest": 0,
-  "more": [],
+  "more": [
+    {
+      "tag": "Impacto",
+      "title": "GTA 6 en las reseñas: elogios al mundo abierto y críticas a los 30 fps",
+      "change": "Según el repaso de Dot Esports, la prensa elogia el mundo abierto y la campaña, y la queja más repetida es el límite de 30 fps en consolas. Algunos críticos también apuntan un arranque algo lento. Metacritic marca 99.",
+      "plain": "Los análisis son casi perfectos; lo que más se critica es que el juego no ofrece un modo de 60 fps.",
+      "sources": [
+        {
+          "name": "Dot Esports",
+          "url": "https://dotesports.com/gta/news/gta-6-review-roundup"
+        }
+      ],
+      "detail": "Sin spoilers. Esta valoración es un resumen de la prensa y las notas pueden moverse conforme salgan más análisis. Los 30 fps coinciden con lo que ya contamos: varios medios decían que Rockstar apuntaba a esa cifra, incluso en PS5 Pro.",
+      "why": "Te ayuda a saber qué esperar antes de comprarlo: mucho elogio y un punto débil técnico claro."
+    }
+  ],
   "rumors": [],
   "posts": [
     "GTA VI ya está a la venta. Se desbloquea a medianoche local en cada región, así que en España es a las 00:00 del 19 según ese calendario. Quien precargó solo tiene que encender la consola. 🎮",
@@ -91,7 +106,16 @@
         "why": "It helps explain why a download or update can take longer than usual."
       }
     ],
-    "more": [],
+    "more": [
+      {
+        "tag": "Impact",
+        "title": "GTA 6 in the reviews: praise for the open world, criticism of the 30 fps",
+        "change": "According to Dot Esports' roundup, the press praises the open world and the campaign, and the most repeated complaint is the 30 fps cap on consoles. Some critics also note a slightly slow start. Metacritic shows 99.",
+        "plain": "Reviews are near-perfect; the main criticism is that the game doesn't offer a 60 fps mode.",
+        "detail": "No spoilers. This is a summary of the press and scores may move as more reviews come in. The 30 fps matches what we already covered: several outlets said Rockstar was aiming for that figure, even on PS5 Pro.",
+        "why": "It helps you know what to expect before buying: lots of praise and one clear technical weak spot."
+      }
+    ],
     "rumors": [],
     "posts": [
       "GTA VI is on sale. It unlocks at local midnight in each region, so in Spain that's 12:00 a.m. on the 19th by that schedule. If you preloaded, just switch your console on. 🎮",
