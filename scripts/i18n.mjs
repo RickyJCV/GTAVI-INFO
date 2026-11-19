@@ -273,7 +273,7 @@ export const LOCALES = {
       privacyEyebrow: "Legal",
       privacyH1: "Privacidad y cookies",
       privacyUpdated: (d) => `Última actualización: ${d}`,
-      privacyBody: (ga) => `
+      privacyBody: (ga, cf) => `
     <h2>Datos que recogemos</h2>
     <p>No pedimos registro ni guardamos datos personales en nuestros servidores. La web es estática y está alojada en GitHub Pages, que puede registrar datos técnicos de acceso (como la dirección IP) por motivos de seguridad.</p>
     <h2>Preferencias locales</h2>
@@ -282,6 +282,7 @@ export const LOCALES = {
     <p>Esta web puede mostrar anuncios de Google AdSense. Google y sus socios usan cookies para mostrar anuncios basados en tus visitas a esta y otras webs. Puedes desactivar la publicidad personalizada en <a href="https://adssettings.google.com" target="_blank" rel="noopener">Configuración de anuncios de Google</a> y consultar <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">cómo usa Google los datos de las webs que usan sus servicios</a>.</p>
     <p>Si visitas la web desde el Espacio Económico Europeo, Reino Unido o Suiza, te pediremos tu consentimiento antes de usar cookies publicitarias, mediante una plataforma de gestión de consentimiento certificada por Google.</p>
     ${ga ? `<h2>Analítica</h2><p>Usamos Google Analytics para contar visitas de forma agregada.</p>` : ""}
+    ${cf ? `<h2>Estadísticas de visitas</h2><p>Para saber cuántas personas leen la web y qué páginas interesan más usamos <a href="https://www.cloudflare.com/es-es/web-analytics/" target="_blank" rel="noopener">Cloudflare Web Analytics</a>. No usa cookies, no guarda nada en tu dispositivo ni te sigue entre webs: solo cuenta visitas de forma agregada (página vista, país, tipo de dispositivo y web de procedencia). Consulta la <a href="https://www.cloudflare.com/es-es/privacypolicy/" target="_blank" rel="noopener">política de privacidad de Cloudflare</a>.</p>` : ""}
     <h2>Enlaces externos</h2>
     <p>Cada noticia enlaza a su fuente original. Esas webs tienen sus propias políticas de privacidad.</p>`,
     },
@@ -558,7 +559,7 @@ export const LOCALES = {
       privacyEyebrow: "Legal",
       privacyH1: "Privacy and cookies",
       privacyUpdated: (d) => `Last updated: ${d}`,
-      privacyBody: (ga) => `
+      privacyBody: (ga, cf) => `
     <h2>Data we collect</h2>
     <p>We don't ask you to sign up and we don't store personal data on our servers. The site is static and hosted on GitHub Pages, which may log technical access data (such as your IP address) for security purposes.</p>
     <h2>Local preferences</h2>
@@ -567,6 +568,7 @@ export const LOCALES = {
     <p>This site may show Google AdSense ads. Google and its partners use cookies to show ads based on your visits to this and other websites. You can turn off personalized advertising in <a href="https://adssettings.google.com" target="_blank" rel="noopener">Google Ad Settings</a> and read <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">how Google uses data from sites that use its services</a>.</p>
     <p>If you visit from the European Economic Area, the UK or Switzerland, we will ask for your consent before using advertising cookies, through a Google-certified consent management platform.</p>
     ${ga ? `<h2>Analytics</h2><p>We use Google Analytics to count visits in aggregate.</p>` : ""}
+    ${cf ? `<h2>Visit statistics</h2><p>To know how many people read the site and which pages are most popular we use <a href="https://www.cloudflare.com/web-analytics/" target="_blank" rel="noopener">Cloudflare Web Analytics</a>. It uses no cookies, stores nothing on your device and does not track you across sites: it only counts visits in aggregate (page viewed, country, device type and referring site). See <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Cloudflare's privacy policy</a>.</p>` : ""}
     <h2>External links</h2>
     <p>Every story links to its original source. Those sites have their own privacy policies.</p>`,
     },

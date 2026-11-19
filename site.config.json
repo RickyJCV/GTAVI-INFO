@@ -16,7 +16,8 @@
     }
   },
   "analytics": {
-    "ga4": ""
+    "ga4": "",
+    "cloudflare": "d2a1a273acd54475a5fde44190d44ebe"
   },
   "social": {
     "x": "",

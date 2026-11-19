@@ -16,6 +16,7 @@ const SITE = cfg.siteUrl.replace(/\/$/, "");
 const BASE = new URL(SITE + "/").pathname.replace(/\/$/, "");
 const ADS = cfg.adsense?.client?.trim() || "";
 const GA = cfg.analytics?.ga4?.trim() || "";
+const CF = cfg.analytics?.cloudflare?.trim() || ""; // Cloudflare Web Analytics: sin cookies
 const BUILD_TIME = new Date().toISOString();
 const BUILD_ID = crypto.createHash("sha1").update(BUILD_TIME).digest("hex").slice(0, 10);
 const ISSUES_URL = "https://github.com/leonidahoy/leonidahoy.github.io/issues";
@@ -368,6 +369,7 @@ ${ADS ? `<meta name="google-adsense-account" content="${esc(ADS)}">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${esc(ADS)}" crossorigin="anonymous"></script>` : ""}
 ${GA ? `<script async src="https://www.googletagmanager.com/gtag/js?id=${esc(GA)}"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${esc(GA)}');</script>` : ""}
+${CF ? `<script>(function(){function go(){var s=document.createElement("script");s.defer=true;s.src="https://static.cloudflareinsights.com/beacon.min.js";s.setAttribute("data-cf-beacon",'{"token":"${esc(CF)}"}');document.head.appendChild(s)}if(document.prerendering)document.addEventListener("prerenderingchange",go,{once:true});else go()})()</script>` : ""}
 ${jsonLd.map((j) => `<script type="application/ld+json">${JSON.stringify(j).replace(/</g, "\\u003c")}</script>`).join("\n")}
 </head>
 <body data-base="${BASE}" data-app='${esc(JSON.stringify({ ...L.t.app, swipe: L.t.inst.swipe }))}'>
@@ -1088,7 +1090,7 @@ for (const code of ACTIVE) {
       active: "",
       body: `
   <section class="page-head"><div class="wrap"><p class="eyebrow">${esc(L.t.privacyEyebrow)}</p><h1>${esc(L.t.privacyH1)}</h1><p class="muted">${esc(L.t.privacyUpdated(dLong(BUILD_TIME.slice(0, 10))))}</p></div></section>
-  <div class="wrap narrow prose">${L.t.privacyBody(GA)}
+  <div class="wrap narrow prose">${L.t.privacyBody(GA, CF)}
   </div>`,
     })
   );
