@@ -1,0 +1,112 @@
+{
+  "date": "2026-11-19",
+  "title": "GTA VI ya está a la venta: se desbloquea a medianoche local en cada zona",
+  "summary": "Tras 13 años de espera, GTA VI sale hoy en PS5 y Xbox Series X|S con notas históricas en la prensa. La precarga disparó el tráfico de internet en algunas regiones.",
+  "lead": "Hoy es el día. El desbloqueo es a medianoche local, así que en cada país empieza a una hora distinta, y la nube de Xbox arranca a la 1:00 ET. Si algo va lento, recuerda que millones de personas lo están haciendo a la vez.",
+  "stories": [
+    {
+      "tag": "Lanzamiento",
+      "title": "GTA VI ya está a la venta: se desbloquea a medianoche local en cada zona",
+      "change": "Tras 13 años de espera, GTA VI sale hoy, 19 de noviembre, en PS5 y Xbox Series X|S. NBC News recoge que se esperan ventas superiores a los 1.000 millones de dólares (estimación) y que hay quien se ha pedido la baja para jugar.",
+      "plain": "El juego se abre a las 00:00 de tu zona horaria. Si lo precargaste, solo tienes que encender la consola.",
+      "sources": [
+        {
+          "name": "NBC News",
+          "url": "https://nbcnews.com/video/grand-theft-auto-vi-launches-after-13-years-of-development-273781317952"
+        },
+        {
+          "name": "Enstarz",
+          "url": "https://www.enstarz.com/articles/246660/20261118/gta-6-release-date-platforms-preload-details.htm"
+        }
+      ],
+      "detail": "Según Enstarz, Rockstar recomienda mirar la tienda de cada región para saber la hora exacta. Por ese desbloqueo a medianoche local, en Norteamérica algunos jugadores entraron la noche del 18. La cifra de 1.000 millones es una previsión, no un dato de la compañía.",
+      "why": "Te dice cuándo puedes empezar a jugar según dónde vivas."
+    },
+    {
+      "tag": "Aviso",
+      "title": "La precarga de GTA VI disparó el tráfico de internet en algunas regiones",
+      "change": "Dexerto recoge que la carrera por precargar el juego provocó picos de tráfico en las redes domésticas: en algunas regiones el uso de banda ancha subió más de un 50 %, según un informe. Es una cifra de terceros.",
+      "plain": "Millones de personas bajaron el juego a la vez, y eso puede notarse en tu conexión.",
+      "sources": [
+        {
+          "name": "Dexerto",
+          "url": "https://www.dexerto.com/gta/gta-6-is-causing-internet-issues-as-players-rush-to-preload-3427231/"
+        }
+      ],
+      "detail": "La información es de los días de la precarga, pero sigue siendo útil hoy: con el estreno vuelve a haber mucho tráfico. Si algo va lento, prueba un cable de red en lugar de wifi o espera a otra hora. No hay un fallo de servidores confirmado.",
+      "why": "Te ayuda a entender por qué una descarga o una actualización puede tardar más de lo normal."
+    }
+  ],
+  "biggest": 0,
+  "more": [],
+  "rumors": [],
+  "posts": [
+    "GTA VI ya está a la venta. Se desbloquea a medianoche local en cada región, así que en España es a las 00:00 del 19 según ese calendario. Quien precargó solo tiene que encender la consola. 🎮",
+    "Las notas de la prensa son históricas: 99 en Metacritic y 98 en OpenCritic, según los medios. En Leónida Hoy tienes la página de notas con cada análisis. Las cifras pueden moverse. ⭐",
+    "La precarga de GTA VI disparó el tráfico de internet en algunas regiones, según Dexerto. Si hoy va lento, prueba con cable en vez de wifi o espera a otra hora. 🌐"
+  ],
+  "context": [
+    {
+      "title": "GTA 6 ya tiene nota en la prensa: 99 en Metacritic",
+      "text": "Las primeras reseñas dieron la nota más alta de un juego de Rockstar, según Notebookcheck y Forbes. Pueden cambiar.",
+      "date": "2026-11-18",
+      "sources": [
+        {
+          "name": "Notebookcheck",
+          "url": "https://www.notebookcheck.net/GTA-6-reviews-award-99-Metacritic-score-topping-GTA-4-to-become-Rockstar-s-top-rated.1453363.0.html"
+        }
+      ]
+    },
+    {
+      "title": "GTA VI llegará a la nube de Xbox a la 1:00 ET del 19",
+      "text": "Microsoft indica streaming en Xbox One y Series X|S desde las 07:00 en España.",
+      "date": "2026-11-15",
+      "sources": [
+        {
+          "name": "Windows Central",
+          "url": "https://www.windowscentral.com/gaming/xbox/grand-theft-auto-6-will-be-playable-on-xbox-cloud-gaming-but-there-are-a-few-catches"
+        }
+      ]
+    }
+  ],
+  "en": {
+    "title": "GTA 6 is on sale: it unlocks at local midnight in each time zone",
+    "summary": "After 13 years of waiting, GTA VI launches today on PS5 and Xbox Series X|S with record press scores. Preload demand spiked internet traffic in some regions.",
+    "lead": "Today's the day. The unlock is at local midnight, so it starts at a different time in each country, and Xbox cloud kicks off at 1:00 a.m. ET. If something is slow, remember millions of people are doing it at once.",
+    "stories": [
+      {
+        "tag": "Launch",
+        "title": "GTA 6 is on sale: it unlocks at local midnight in each time zone",
+        "change": "After 13 years of waiting, GTA VI launches today, November 19, on PS5 and Xbox Series X|S. NBC News reports sales are expected to top $1 billion (estimate) and that some people have called in sick to play.",
+        "plain": "The game opens at 12:00 a.m. in your time zone. If you preloaded it, just switch your console on.",
+        "detail": "According to Enstarz, Rockstar recommends checking each region's store for the exact time. Because of the local-midnight unlock, some players in North America got in on the night of the 18th. The $1 billion figure is a forecast, not a company number.",
+        "why": "It tells you when you can start playing depending on where you live."
+      },
+      {
+        "tag": "Heads-up",
+        "title": "GTA VI preload demand spiked internet traffic in some regions",
+        "change": "Dexerto reports the rush to preload the game caused traffic spikes on home networks: in some regions broadband use rose by more than 50%, according to a report. It's a third-party figure.",
+        "plain": "Millions of people downloaded the game at the same time, and you may notice it on your connection.",
+        "detail": "The information dates from the preload days, but it's still useful today: with launch there's heavy traffic again. If something is slow, try a network cable instead of wifi or wait for another time. There's no confirmed server failure.",
+        "why": "It helps explain why a download or update can take longer than usual."
+      }
+    ],
+    "more": [],
+    "rumors": [],
+    "posts": [
+      "GTA VI is on sale. It unlocks at local midnight in each region, so in Spain that's 12:00 a.m. on the 19th by that schedule. If you preloaded, just switch your console on. 🎮",
+      "Press scores are historic: 99 on Metacritic and 98 on OpenCritic, per outlets. Leónida Hoy has a scores page with each review. Numbers can move. ⭐",
+      "GTA VI preload demand spiked internet traffic in some regions, per Dexerto. If it's slow today, try a cable instead of wifi or wait for another time. 🌐"
+    ],
+    "context": [
+      {
+        "title": "GTA 6 now has a press score: 99 on Metacritic",
+        "text": "First reviews gave the highest score for a Rockstar game, per Notebookcheck and Forbes. They may change."
+      },
+      {
+        "title": "GTA VI reaches Xbox cloud at 1:00 a.m. ET on the 19th",
+        "text": "Microsoft says it will stream on Xbox One and Series X|S from 7:00 a.m. Spain time."
+      }
+    ]
+  }
+}
