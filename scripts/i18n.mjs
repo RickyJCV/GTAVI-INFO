@@ -25,6 +25,7 @@ export const LOCALES = {
       cheats: "/trucos-gta-6/",
       guides: "/guias/",
       finds: "/descubrimientos-gta-6/",
+      clips: "/clips-gta-6/",
       patches: "/parches-gta-6/",
       guideItem: (s) => `/guias/${s}/`,
       brief: (d) => `/resumen/${d}/`,
@@ -142,7 +143,7 @@ export const LOCALES = {
       offlineTitle: "Sin conexión",
       offlineText: "No hay conexión a internet. Cuando vuelvas a tenerla, la web se actualizará sola. Mientras tanto puedes volver a las páginas que ya visitaste.",
       offlineRetry: "Reintentar",
-      tabs: { home: "Hoy", news: "Noticias", rumors: "Rumores", reviews: "Notas", cheats: "Trucos", finds: "Secretos", guide: "Guías" },
+      tabs: { home: "Hoy", news: "Noticias", rumors: "Rumores", reviews: "Notas", cheats: "Trucos", finds: "Secretos", community: "Comunidad", guide: "Guías" },
       tabsLabel: "Secciones",
       inst: {
         title: "Instala Leónida Hoy",
@@ -156,6 +157,37 @@ export const LOCALES = {
         inapp: "Estás dentro de otra app (Instagram, TikTok, Facebook…). Para instalar Leónida Hoy, ábrela antes en Safari o Chrome: pulsa el menú <b>⋯</b> y elige <b>«Abrir en el navegador»</b>.",
         swipe: "Consejo: desliza a izquierda o derecha para cambiar de sección",
         yours: "Tu dispositivo",
+      },
+      clips: {
+        title: "Clips de GTA 6: los mejores vídeos de la comunidad (YouTube, TikTok y X)",
+        desc: "Los clips de GTA 6 más destacados de la comunidad en español e inglés: momentos graciosos, acrobacias, gráficos y exploración. Se ven aquí mismo y enlazan al vídeo original de su autor.",
+        eyebrow: "Comunidad · Se actualiza cada día",
+        h1: "Clips de la comunidad",
+        lead: "Los vídeos de GTA 6 más destacados de creadores de habla hispana e inglesa. Puedes verlos aquí y cada uno enlaza al original: todo el mérito es de su autor.",
+        tile: "Clips",
+        tileSub: (n) => `${n} vídeos destacados de la comunidad`,
+        home: "Clips de la comunidad",
+        seeAll: "Ver todos los clips →",
+        all: "Todos",
+        langs: { es: "Español", en: "Inglés" },
+        flags: { es: "🇪🇸", en: "🇬🇧" },
+        cats: { humor: "Humor", stunts: "Acrobacias", graphics: "Gráficos", explore: "Exploración", easter: "Easter egg", tips: "Consejos", music: "Música", review: "Opinión" },
+        play: "Reproducir",
+        playLabel: (t, a) => `Reproducir «${t}» de ${a}`,
+        by: "Vídeo de",
+        on: (p) => `en ${p}`,
+        open: (p) => `Ver en ${p} ↗`,
+        vertical: "Vertical",
+        privacy: "Los vídeos se cargan desde YouTube, TikTok o X solo cuando pulsas reproducir; esas plataformas pueden usar cookies.",
+        thumbsOn: "Mostrar miniaturas",
+        thumbsOff: "Ocultar miniaturas",
+        credit: "Los vídeos pertenecen a sus autores y se reproducen con el reproductor oficial de cada plataforma. Si eres el autor y prefieres que no aparezca, escríbenos y lo quitamos.",
+        empty: "Aún no hay clips en este idioma.",
+        updated: (d) => `Actualizado el ${d}. Elegimos clips nuevos cada día.`,
+        faq: [
+          ["¿De dónde salen estos clips?", "Son vídeos públicos de creadores de YouTube, TikTok y X. Los reproducimos con el reproductor oficial de cada plataforma y cada clip enlaza a su vídeo original y a su autor."],
+          ["¿Puedo proponer un clip?", "Sí: escríbenos con el enlace. Solo publicamos vídeos sin spoilers de la historia, sin trampas para el modo online y aptos para todos."],
+        ],
       },
       ux: {
         seg: { news: "Confirmadas", rumors: "Rumores" },
@@ -171,7 +203,7 @@ export const LOCALES = {
           close: "Cerrar",
           loading: "Cargando…",
           results: (n) => `${n} resultado${n === 1 ? "" : "s"}`,
-          kinds: { page: "Sección", guide: "Guía", cheat: "Truco", find: "Secreto", patch: "Parche", news: "Noticia", rumor: "Rumor" },
+          kinds: { page: "Sección", guide: "Guía", cheat: "Truco", find: "Secreto", clip: "Clip", patch: "Parche", news: "Noticia", rumor: "Rumor" },
         },
         lb: { ok: "🎮 Nuevo en GTA 6: trucos, secretos y guías", watch: "🛠️ GTA 6: hay problemas en seguimiento", bad: "⚠️ GTA 6: problemas importantes ahora mismo" },
         lbCta: { ok: "Ver →", watch: "Ver estado →", bad: "Ver estado →" },
@@ -179,7 +211,9 @@ export const LOCALES = {
         allGuides: "Todas las guías →",
         doneCheats: "🎮 Trucos",
         doneFinds: "🥚 Secretos",
-        foot: { now: "Actualidad", play: "Para jugar", site: "La web" },
+        foot: { now: "Actualidad", community: "Comunidad", play: "Para jugar", site: "La web" },
+        seg2: { clips: "Clips", finds: "Secretos" },
+        seg2Label: "Comunidad",
         groups: { play: "Para jugar", status: "Estado del juego", world: "El juego y su mundo" },
       },
       finds: {
@@ -293,7 +327,7 @@ export const LOCALES = {
       appH1: "Leónida Hoy en tu móvil",
       appLead: "Instálala en tu pantalla de inicio en tres pasos. Es gratis, ocupa casi nada y no necesitas tienda de apps.",
       appFeatures: "Qué puedes hacer en la app",
-      appFeatureList: [["👆", "Desliza a izquierda o derecha", "para pasar de Hoy a Noticias, Trucos, Secretos y Guías."], ["🔄", "Desliza hacia abajo", "estando arriba del todo para actualizar."], ["🔔", "Aviso de noticias nuevas", "cuando vuelves a la app y hay algo nuevo."], ["📶", "Funciona sin conexión", "con las páginas que ya hayas leído."], ["🌓", "Modo claro u oscuro", "con el botón del sol o la luna."], ["🌐", "Español e inglés", "con el selector ES / EN."]],
+      appFeatureList: [["👆", "Desliza a izquierda o derecha", "para pasar de Hoy a Noticias, Trucos, Comunidad y Guías."], ["🔄", "Desliza hacia abajo", "estando arriba del todo para actualizar."], ["🔔", "Aviso de noticias nuevas", "cuando vuelves a la app y hay algo nuevo."], ["📶", "Funciona sin conexión", "con las páginas que ya hayas leído."], ["🌓", "Modo claro u oscuro", "con el botón del sol o la luna."], ["🌐", "Español e inglés", "con el selector ES / EN."]],
       appGuides: [
         ["iphone", "📱 iPhone · Safari", "ios"],
         ["iphone-chrome", "📱 iPhone · Chrome", "iosChrome"],
@@ -418,6 +452,8 @@ export const LOCALES = {
     <p>Si visitas la web desde el Espacio Económico Europeo, Reino Unido o Suiza, te pediremos tu consentimiento antes de usar cookies publicitarias, mediante una plataforma de gestión de consentimiento certificada por Google.</p>
     ${ga ? `<h2>Analítica</h2><p>Usamos Google Analytics para contar visitas de forma agregada.</p>` : ""}
     ${cf ? `<h2>Estadísticas de visitas</h2><p>Para saber cuántas personas leen la web y qué páginas interesan más usamos <a href="https://www.cloudflare.com/es-es/web-analytics/" target="_blank" rel="noopener">Cloudflare Web Analytics</a>. No usa cookies, no guarda nada en tu dispositivo ni te sigue entre webs: solo cuenta visitas de forma agregada (página vista, país, tipo de dispositivo y web de procedencia). Consulta la <a href="https://www.cloudflare.com/es-es/privacypolicy/" target="_blank" rel="noopener">política de privacidad de Cloudflare</a>.</p>` : ""}
+    <h2>Vídeos de otras plataformas</h2>
+    <p>La sección de clips muestra vídeos de YouTube, TikTok y X con el reproductor oficial de cada plataforma. <b>No se carga nada de esas plataformas hasta que pulsas reproducir</b> (o, si lo eliges, «Mostrar miniaturas» de YouTube). A partir de ese momento, la plataforma correspondiente puede usar cookies según su propia política de privacidad. Para YouTube usamos su modo de privacidad mejorada (youtube-nocookie.com).</p>
     <h2>Enlaces externos</h2>
     <p>Cada noticia enlaza a su fuente original. Esas webs tienen sus propias políticas de privacidad.</p>`,
     },
@@ -447,6 +483,7 @@ export const LOCALES = {
       cheats: "/en/gta-6-cheats/",
       guides: "/en/guides/",
       finds: "/en/gta-6-discoveries/",
+      clips: "/en/gta-6-clips/",
       patches: "/en/gta-6-patches/",
       guideItem: (s) => `/en/guides/${s}/`,
       brief: (d) => `/en/brief/${d}/`,
@@ -563,7 +600,7 @@ export const LOCALES = {
       offlineTitle: "You're offline",
       offlineText: "There's no internet connection. When it's back, the site will update by itself. Meanwhile you can go back to pages you've already visited.",
       offlineRetry: "Try again",
-      tabs: { home: "Today", news: "News", rumors: "Rumors", reviews: "Reviews", cheats: "Cheats", finds: "Secrets", guide: "Guides" },
+      tabs: { home: "Today", news: "News", rumors: "Rumors", reviews: "Reviews", cheats: "Cheats", finds: "Secrets", community: "Community", guide: "Guides" },
       tabsLabel: "Sections",
       inst: {
         title: "Install Leónida Hoy",
@@ -577,6 +614,37 @@ export const LOCALES = {
         inapp: "You're inside another app (Instagram, TikTok, Facebook…). To install Leónida Hoy, open it in Safari or Chrome first: tap the <b>⋯</b> menu and choose <b>“Open in browser”</b>.",
         swipe: "Tip: swipe left or right to switch sections",
         yours: "Your device",
+      },
+      clips: {
+        title: "GTA 6 clips: the best community videos (YouTube, TikTok and X)",
+        desc: "The standout GTA 6 community clips in English and Spanish: funny moments, stunts, graphics and exploration. Watch them right here, with a link to each creator's original video.",
+        eyebrow: "Community · Updated daily",
+        h1: "Community clips",
+        lead: "The standout GTA 6 videos from English- and Spanish-speaking creators. Watch them here; each one links to the original: all credit goes to its creator.",
+        tile: "Clips",
+        tileSub: (n) => `${n} standout community videos`,
+        home: "Community clips",
+        seeAll: "See all clips →",
+        all: "All",
+        langs: { es: "Spanish", en: "English" },
+        flags: { es: "🇪🇸", en: "🇬🇧" },
+        cats: { humor: "Funny", stunts: "Stunts", graphics: "Graphics", explore: "Exploration", easter: "Easter egg", tips: "Tips", music: "Music", review: "Opinion" },
+        play: "Play",
+        playLabel: (t, a) => `Play "${t}" by ${a}`,
+        by: "Video by",
+        on: (p) => `on ${p}`,
+        open: (p) => `Watch on ${p} ↗`,
+        vertical: "Vertical",
+        privacy: "Videos load from YouTube, TikTok or X only when you press play; those platforms may use cookies.",
+        thumbsOn: "Show thumbnails",
+        thumbsOff: "Hide thumbnails",
+        credit: "Videos belong to their creators and play through each platform's official player. If you're the creator and would rather it didn't appear, contact us and we'll remove it.",
+        empty: "No clips in this language yet.",
+        updated: (d) => `Updated ${d}. We pick new clips every day.`,
+        faq: [
+          ["Where do these clips come from?", "They're public videos from YouTube, TikTok and X creators. We play them with each platform's official player and every clip links to its original video and creator."],
+          ["Can I suggest a clip?", "Yes: send us the link. We only publish videos with no story spoilers, no online-mode cheats and suitable for everyone."],
+        ],
       },
       ux: {
         seg: { news: "Confirmed", rumors: "Rumors" },
@@ -592,7 +660,7 @@ export const LOCALES = {
           close: "Close",
           loading: "Loading…",
           results: (n) => `${n} result${n === 1 ? "" : "s"}`,
-          kinds: { page: "Section", guide: "Guide", cheat: "Cheat", find: "Secret", patch: "Patch", news: "News", rumor: "Rumor" },
+          kinds: { page: "Section", guide: "Guide", cheat: "Cheat", find: "Secret", clip: "Clip", patch: "Patch", news: "News", rumor: "Rumor" },
         },
         lb: { ok: "🎮 New in GTA 6: cheats, secrets and guides", watch: "🛠️ GTA 6: problems being tracked", bad: "⚠️ GTA 6: major problems right now" },
         lbCta: { ok: "See →", watch: "See status →", bad: "See status →" },
@@ -600,7 +668,9 @@ export const LOCALES = {
         allGuides: "All guides →",
         doneCheats: "🎮 Cheats",
         doneFinds: "🥚 Secrets",
-        foot: { now: "News", play: "Play", site: "The site" },
+        foot: { now: "News", community: "Community", play: "Play", site: "The site" },
+        seg2: { clips: "Clips", finds: "Secrets" },
+        seg2Label: "Community",
         groups: { play: "Play", status: "Game status", world: "The game and its world" },
       },
       finds: {
@@ -714,7 +784,7 @@ export const LOCALES = {
       appH1: "Leónida Hoy on your phone",
       appLead: "Install it on your home screen in three steps. It's free, takes almost no space and needs no app store.",
       appFeatures: "What you can do in the app",
-      appFeatureList: [["👆", "Swipe left or right", "to move between Today, News, Cheats, Secrets and Guides."], ["🔄", "Pull down", "at the very top to refresh."], ["🔔", "New-stories alert", "when you come back and there's something new."], ["📶", "Works offline", "with the pages you've already read."], ["🌓", "Light or dark mode", "with the sun or moon button."], ["🌐", "English and Spanish", "with the EN / ES switch."]],
+      appFeatureList: [["👆", "Swipe left or right", "to move between Today, News, Cheats, Community and Guides."], ["🔄", "Pull down", "at the very top to refresh."], ["🔔", "New-stories alert", "when you come back and there's something new."], ["📶", "Works offline", "with the pages you've already read."], ["🌓", "Light or dark mode", "with the sun or moon button."], ["🌐", "English and Spanish", "with the EN / ES switch."]],
       appGuides: [
         ["iphone", "📱 iPhone · Safari", "ios"],
         ["iphone-chrome", "📱 iPhone · Chrome", "iosChrome"],
@@ -839,6 +909,8 @@ export const LOCALES = {
     <p>If you visit from the European Economic Area, the UK or Switzerland, we will ask for your consent before using advertising cookies, through a Google-certified consent management platform.</p>
     ${ga ? `<h2>Analytics</h2><p>We use Google Analytics to count visits in aggregate.</p>` : ""}
     ${cf ? `<h2>Visit statistics</h2><p>To know how many people read the site and which pages are most popular we use <a href="https://www.cloudflare.com/web-analytics/" target="_blank" rel="noopener">Cloudflare Web Analytics</a>. It uses no cookies, stores nothing on your device and does not track you across sites: it only counts visits in aggregate (page viewed, country, device type and referring site). See <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Cloudflare's privacy policy</a>.</p>` : ""}
+    <h2>Videos from other platforms</h2>
+    <p>The clips section shows YouTube, TikTok and X videos with each platform's official player. <b>Nothing loads from those platforms until you press play</b> (or, if you choose, "Show thumbnails" for YouTube). From then on, that platform may use cookies under its own privacy policy. For YouTube we use its privacy-enhanced mode (youtube-nocookie.com).</p>
     <h2>External links</h2>
     <p>Every story links to its original source. Those sites have their own privacy policies.</p>`,
     },

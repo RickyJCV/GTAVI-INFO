@@ -28,11 +28,14 @@ jobs:
         run: node scripts/check-trucos.mjs
       - name: Comprobar descubrimientos y parches
         run: node scripts/check-juego.mjs
+      - name: Comprobar clips
+        run: node scripts/check-clips.mjs
       - name: Construir la web
         run: node scripts/build.mjs
         env:
           ADSENSE_CLIENT: ${{ vars.ADSENSE_CLIENT }}
           SITE_URL: ${{ vars.SITE_URL }}
+          CLIPS_VERIFY: "1"
       - name: Minificar CSS y JS
         run: npx --yes esbuild@0.25.0 _site/assets/app.js _site/assets/styles.css --minify --outdir=_site/assets --allow-overwrite --log-level=warning
       - name: Publicar en gh-pages

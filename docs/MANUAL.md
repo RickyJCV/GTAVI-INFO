@@ -97,3 +97,12 @@ Una tarea programada de Claude se ejecuta cada mañana: busca las noticias de GT
 - **Barra superior** tras el lanzamiento: muestra el estado del juego de `content/parches.json` y enlaza a Parches. Si todo va bien (`ok`), enlaza a las guías.
 - **Tarjeta lateral «Para jugar»**: Trucos, Secretos, Parches, Consejos y Dinero. La cuenta atrás lateral ya solo sale antes del lanzamiento.
 - **Pie en 3 columnas:** Actualidad, Para jugar y La web.
+
+## Comunidad: clips y secretos
+- La pestaña **Comunidad** abre **Clips** (`/clips-gta-6/`, `/en/gta-6-clips/`) y tiene un selector «Clips | Secretos».
+- **Clips:** vídeos destacados de YouTube (también Shorts), TikTok y X, de creadores hispanohablantes (sobre todo de España) e ingleses. Se ven en la propia web con el **reproductor oficial** de cada plataforma, con crédito al autor y enlace al original. Nunca se descargan ni se vuelven a subir.
+- **Privacidad y velocidad:** no se carga nada de YouTube, TikTok ni X hasta que se pulsa reproducir. Para YouTube se usa youtube-nocookie.com. Solo suena un vídeo a la vez, y las miniaturas de YouTube son opcionales («Mostrar miniaturas»). Explicado en la política de privacidad.
+- **Datos:** en `content/clips.json` hay solo enlace, idioma, categoría y una frase propia. Al publicar en GitHub, la web pregunta a cada plataforma (oEmbed) el **título y el autor reales**, y **descarta** los vídeos borrados, privados, que no permiten insertarse o que son oficiales de Rockstar.
+- `node scripts/check-clips.mjs` valida el formato, los enlaces admitidos, los duplicados y el contenido (sin spoilers, filtraciones, trampas online ni contenido +18).
+- La tarea diaria añade **2–4 clips nuevos cada mañana** (instrucciones en `docs/TAREA-DIARIA.md`).
+- En la portada hay una fila deslizable con los 6 últimos clips.

@@ -5,7 +5,7 @@ El dueño del repositorio autoriza **commit y push directo a `main`** (así se p
 
 **Cada ejecución es independiente:** no te bases en lo que recuerdes de ejecuciones anteriores (búsquedas, conclusiones o reglas). Las reglas y las noticias cambian: haz siempre todos los pasos con este documento recién leído.
 
-**Ahorra cuota:** sin subagentes, sin leer archivos que aquí no se indican, máximo 6 búsquedas web para el resumen (más las 2 de «Lo que se descubre del juego» por la mañana, y las 2 de trucos los lunes), sin abrir páginas web salvo que una búsqueda no aclare un dato, respuestas cortas.
+**Ahorra cuota:** sin subagentes, sin leer archivos que aquí no se indican, máximo 6 búsquedas web para el resumen (más, por la mañana, las 2 de «Lo que se descubre del juego» y las 2 de clips, y las 2 de trucos los lunes), sin abrir páginas web salvo que una búsqueda no aclare un dato, respuestas cortas.
 
 ## Pasos
 
@@ -84,6 +84,26 @@ En **modo TARDE** no hagas búsquedas extra: añade aquí solo lo que ya te haya
 - Si hubo parche o un problema gordo, suele ser también noticia del día en el resumen.
 
 **C) Verifica** con `node scripts/check-juego.mjs` hasta que diga «✓ juego listo» e incluye los archivos en el commit (`git add content`). En la respuesta, di en una línea qué descubrimientos y parches has añadido. Si no había nada nuevo, no toques estos archivos.
+
+## Clips de la comunidad (`content/clips.json`) — cada día, en modo MAÑANA
+
+La web muestra los vídeos más destacados de la comunidad con el **reproductor oficial** de cada plataforma (nunca se descargan ni se vuelven a subir) y siempre con crédito y enlace al original. En **modo MAÑANA** haz **2 búsquedas más** (`extended`, en el mismo turno):
+- `GTA 6 youtube clip viral $AYER_EN` (inglés: momentos graciosos, acrobacias, gráficos, exploración)
+- `GTA 6 vídeo youtube tiktok español` (español; **prioriza creadores de España**, después Latinoamérica)
+
+Añade al **principio** de `items` entre **2 y 4 clips nuevos** al día (mitad español, mitad inglés si los hay):
+`{"id": "slug-corto", "url": "https://www.youtube.com/watch?v=XXXXXXXXXXX", "lang": "es" | "en", "date": "AAAA-MM-DD (hoy)", "cat": "humor|stunts|graphics|explore|easter|tips|music|review", "title": "título tal cual sale en el resultado", "by": "canal o autor si sale en el resultado, si no null", "note": {"es": "una frase tuya sobre qué se ve", "en": "…"}}`
+
+Reglas (el verificador y la publicación lo comprueban):
+- **URL exacta de un vídeo concreto** sacada del resultado de búsqueda: YouTube (`/watch?v=`, `/shorts/`, `youtu.be/`), TikTok (`/@usuario/video/123…`) o X (`/usuario/status/123…`). **Nunca inventes ni completes un ID.** Nada de canales, listas, perfiles, Instagram ni Twitch.
+- **Solo vídeos de creadores**, no los oficiales de Rockstar (la publicación los descarta), ni resubidas de tráileres, ni vídeos generados con IA que se hagan pasar por el juego.
+- **Prohibido:** spoilers de la historia (finales, giros, misiones clave), filtraciones, glitches o trampas para el online, mods, piratería, contenido sexual, violencia explícita recreada, odio o insultos en el título. «Sin spoilers» en el título está bien.
+- **Mejor clips cortos y vistosos** (Shorts, TikTok, vídeos de pocos minutos) que directos de horas.
+- `note` con tus palabras: qué se ve y por qué merece la pena, sin copiar la descripción del vídeo.
+- No repitas un vídeo que ya esté (el verificador lo detecta aunque cambie el formato del enlace).
+- **Al publicar, la web pregunta a cada plataforma** el título y el autor reales (así el crédito siempre es correcto). Si un vídeo se ha borrado, es privado o no permite insertarse, no se publica: no hace falta que lo quites tú.
+
+Verifica con `node scripts/check-clips.mjs` hasta que diga «✓ clips.json listo», pon `updated` con la fecha de hoy e incluye el archivo en el commit (`git add content`). En la respuesta, lista en una línea los clips añadidos (autor y plataforma). Si no encuentras ninguno que cumpla las reglas, no añadas nada.
 
 ## Trucos (`content/trucos.json`) — cada lunes por la mañana
 

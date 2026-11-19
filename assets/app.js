@@ -187,6 +187,103 @@
     });
   }
 
+  // ================= Clips de la comunidad =================
+  // Nada de YouTube/TikTok/X se carga hasta que la persona pulsa reproducir (privacidad y velocidad).
+  (function () {
+    var players = document.querySelectorAll("[data-clip-player]");
+    if (!players.length) return;
+    var playing = null, tw = null;
+    var thumbBtns = document.querySelectorAll("[data-thumbs-toggle]");
+    function setThumbs(on) {
+      players.forEach(function (p) {
+        if (p.getAttribute("data-platform") !== "youtube" || p.classList.contains("is-playing")) return;
+        var t = p.querySelector(".clip__thumb");
+        if (!t) return;
+        if (on) { t.style.backgroundImage = 'url("https://i.ytimg.com/vi/' + p.getAttribute("data-vid") + '/hqdefault.jpg")'; p.classList.add("has-thumb"); }
+        else { t.style.backgroundImage = ""; p.classList.remove("has-thumb"); }
+      });
+      thumbBtns.forEach(function (b) { b.textContent = b.getAttribute(on ? "data-off" : "data-on"); b.setAttribute("aria-pressed", String(on)); });
+    }
+    if (store.get("lh-embeds") === "1") setThumbs(true);
+    thumbBtns.forEach(function (b) {
+      b.addEventListener("click", function () {
+        var on = store.get("lh-embeds") !== "1";
+        if (on) store.set("lh-embeds", "1"); else store.del("lh-embeds");
+        setThumbs(on);
+      });
+    });
+    function restore(p) {
+      if (!p || !p._face) return;
+      p.innerHTML = "";
+      p.appendChild(p._face);
+      p.classList.remove("is-playing");
+    }
+    function loadTw(cb) {
+      if (window.twttr && window.twttr.widgets) return cb();
+      if (!tw) {
+        tw = [];
+        var sc = document.createElement("script");
+        sc.src = "https://platform.twitter.com/widgets.js"; sc.async = true; sc.charset = "utf-8";
+        sc.onload = function () { var w = window.twttr; var go = function () { tw.forEach(function (f) { f(); }); tw = []; }; if (w && w.ready) w.ready(go); else go(); };
+        document.head.appendChild(sc);
+      }
+      tw.push(cb);
+    }
+    function play(p) {
+      if (playing && playing !== p) restore(playing);
+      var pf = p.getAttribute("data-platform"), id = p.getAttribute("data-vid"), title = p.getAttribute("data-title") || "";
+      if (!p._face) p._face = p.querySelector(".clip__face");
+      p.classList.add("is-playing");
+      playing = p;
+      if (pf === "x") {
+        var box = document.createElement("div");
+        box.className = "clip__tweet";
+        p.innerHTML = "";
+        p.appendChild(box);
+        loadTw(function () {
+          try { window.twttr.widgets.createTweet(id, box, { dnt: true, align: "center", theme: root.getAttribute("data-theme-now") === "light" ? "light" : "dark", conversation: "none" }); } catch (e) {}
+        });
+        return;
+      }
+      var src = pf === "youtube"
+        ? "https://www.youtube-nocookie.com/embed/" + id + "?autoplay=1&playsinline=1&rel=0&modestbranding=1"
+        : "https://www.tiktok.com/player/v1/" + id + "?autoplay=1&music_info=1&description=1&rel=0";
+      var f = document.createElement("iframe");
+      f.src = src;
+      f.title = title;
+      f.setAttribute("allow", "autoplay; encrypted-media; picture-in-picture; fullscreen; clipboard-write");
+      f.setAttribute("allowfullscreen", "");
+      f.setAttribute("referrerpolicy", "strict-origin-when-cross-origin");
+      p.innerHTML = "";
+      p.appendChild(f);
+    }
+    document.addEventListener("click", function (e) {
+      var b = e.target.closest && e.target.closest("[data-play]");
+      if (!b) return;
+      var p = b.closest("[data-clip-player]");
+      if (!p) return;
+      e.preventDefault();
+      buzz();
+      play(p);
+    });
+    // Filtro por idioma
+    var cBtns = document.querySelectorAll("[data-cl]");
+    var none = document.querySelector("[data-clips-none]");
+    cBtns.forEach(function (b) {
+      b.addEventListener("click", function () {
+        var want = b.getAttribute("data-cl"), shown = 0;
+        swapAnim();
+        cBtns.forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+        document.querySelectorAll("[data-clips] [data-clang]").forEach(function (c) {
+          var ok = want === "all" || c.getAttribute("data-clang") === want;
+          if (!ok && c.contains(playing)) { restore(playing); playing = null; }
+          c.hidden = !ok; if (ok) shown++;
+        });
+        if (none) none.hidden = shown > 0;
+      });
+    });
+  })();
+
   // Trucos: botones de PS5 o de Xbox (se recuerda; en el navegador de la consola se detecta sola)
   var platBtns = document.querySelectorAll("[data-plat]");
   if (platBtns.length) {
