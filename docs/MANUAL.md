@@ -85,3 +85,15 @@ Una tarea programada de Claude se ejecuta cada mañana: busca las noticias de GT
 - **`/parches-gta-6/`** (`/en/gta-6-patches/`): estado actual del juego, historial de actualizaciones y problemas (abiertos o resueltos) y qué hacer si tienes un fallo. Los datos están en `content/parches.json`.
 - En la portada, el bloque **«Lo último del juego»** muestra los 3 descubrimientos más recientes y el estado del juego.
 - La tarea diaria los renueva cada mañana con 2 búsquedas extra. `node scripts/check-juego.mjs` valida ambos archivos y bloquea spoilers, trampas online, filtraciones o contenido no apto para AdSense. Se ejecuta también al publicar.
+
+## Estructura de la web (tras el lanzamiento)
+- **5 secciones, iguales en móvil y ordenador:** Hoy · Noticias · Trucos · Secretos · Guías. Rumores está dentro de **Noticias**, con el selector «Confirmadas | Rumores»; se puede deslizar entre pestañas también desde Rumores.
+- **Guías** (`/guias/`) agrupa todo lo demás en 3 bloques:
+  - *Para jugar*: trucos, secretos, consejos, dinero, duración y radio.
+  - *Estado del juego*: parches, notas y hora de salida.
+  - *El juego y su mundo*: mapa y personajes, y lo básico.
+- **Buscador** (lupa en la cabecera, o las teclas `/` o `Ctrl+K`). Busca en secciones, guías, trucos, secretos, parches, noticias y rumores, sin importar las tildes. El índice (`/search-es.json`, `/search-en.json`) se genera solo al publicar y se carga al abrir el buscador.
+- **Migas de pan visibles** («Inicio › Guías › Trucos») en las páginas que están dentro de Guías.
+- **Barra superior** tras el lanzamiento: muestra el estado del juego de `content/parches.json` y enlaza a Parches. Si todo va bien (`ok`), enlaza a las guías.
+- **Tarjeta lateral «Para jugar»**: Trucos, Secretos, Parches, Consejos y Dinero. La cuenta atrás lateral ya solo sale antes del lanzamiento.
+- **Pie en 3 columnas:** Actualidad, Para jugar y La web.

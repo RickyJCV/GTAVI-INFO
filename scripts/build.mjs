@@ -180,6 +180,8 @@ const tabIcon = {
   add: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><path d="M12 8v8M8 12h8"/></g></svg>',
   dots: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></g></svg>',
   check: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="m5 12.5 4.5 4.5L19 7.5"/></svg>',
+  finds: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5c3.9 0 7 6 7 11a7 7 0 0 1-14 0c0-5 3.1-11 7-11z"/><path d="m5.6 12.5 2.4-1.5 2 1.5 2-1.5 2 1.5 2-1.5 2.4 1.5"/></g></svg>',
+  search: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></g></svg>',
   cheats: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10a5 5 0 0 1 4.9 6l-.8 4a2.6 2.6 0 0 1-4.6 1.1L15 16H9l-1.5 2.1A2.6 2.6 0 0 1 2.9 17l-.8-4A5 5 0 0 1 7 7z"/><path d="M7 10.5v3M5.5 12h3"/></g><circle cx="16" cy="11" r="1.2" fill="currentColor"/><circle cx="18" cy="13.2" r="1.2" fill="currentColor"/></svg>',
 };
 // Iconos propios de la sección de trucos
@@ -245,10 +247,12 @@ const dirKey = (L, d) =>
 const stepIcons = { ios: ["share", "add", "check"], iosChrome: ["share", "add", "check"], android: ["dots", "add", "check"] };
 const stepsHtml = (L, variant) =>
   `<ol class="steps">${L.t.inst[variant].map((t, i) => `<li><span class="steps__n">${i + 1}</span><span class="steps__ic">${tabIcon[stepIcons[variant][i]]}</span><span class="steps__t">${t}</span></li>`).join("")}</ol>`;
-const TAB_ORDER = ["home", "news", "rumors", "cheats", "guide"];
+const TAB_ORDER = ["home", "news", "cheats", "finds", "guide"];
+// Las páginas de rumores cuentan como «Noticias» (es la misma pestaña, con un selector Confirmadas | Rumores)
+const tabKey = (active) => (active === "rumors" ? "news" : active);
 const tabbar = (L, active) => `
 <nav class="tabbar" aria-label="${esc(L.t.tabsLabel)}">
-  ${TAB_ORDER.map((k, i) => `<a href="${u(k === "guide" ? L.paths.guides : L.paths[k])}" data-tab="${i}"${k === active ? ' aria-current="page"' : ""}>${tabIcon[k]}<span>${esc(L.t.tabs[k])}</span></a>`).join("")}
+  ${TAB_ORDER.map((k, i) => `<a href="${u(k === "guide" ? L.paths.guides : L.paths[k])}" data-tab="${i}"${k === tabKey(active) ? ' aria-current="page"' : ""}>${tabIcon[k]}<span>${esc(L.t.tabs[k])}</span></a>`).join("")}
 </nav>`;
 const installSheet = (L) => `
 <div class="sheet" data-install-sheet hidden>
@@ -301,7 +305,7 @@ const countdown = (L, size = "lg") => `
     <div class="countdown__grid">
       ${["d", "h", "m", "s"].map((k, i) => `<div><b data-unit="${k}">–</b><span>${esc(L.t.cdUnits[i])}</span></div>`).join("")}
     </div>
-    <div class="countdown__done" hidden><span class="countdown__done-title">${esc(L.t.cdDone)}</span><small>${esc(L.t.cdDoneSub)}</small><span class="countdown__done-cta"><a class="btn btn--primary" href="${u(L.paths.reviews)}">${esc(L.t.cdDoneReviews)}</a><a class="btn btn--ghost" href="${u(L.paths.guide)}">${esc(L.t.cdDoneGuide)}</a></span></div>
+    <div class="countdown__done" hidden><span class="countdown__done-title">${esc(L.t.cdDone)}</span><small>${esc(L.t.cdDoneSub)}</small><span class="countdown__done-cta"><a class="btn btn--primary" href="${u(L.paths.cheats)}">${esc(L.t.ux.doneCheats)}</a><a class="btn btn--ghost" href="${u(L.paths.finds)}">${esc(L.t.ux.doneFinds)}</a></span></div>
   </div>`;
 
 const langSwitch = (L, alts) => `
@@ -318,9 +322,8 @@ const header = (L, active, alts) => {
   const nav = [
     [P.home, L.t.nav.home, "home"],
     [P.news, L.t.nav.news, "news"],
-    [P.rumors, L.t.nav.rumors, "rumors"],
     [P.cheats, L.t.tabs.cheats, "cheats"],
-    [P.finds, L.t.finds.nav, "finds"],
+    [P.finds, L.t.tabs.finds, "finds"],
     [P.guides, L.t.nav.guide, "guide"],
   ];
   return `
@@ -331,10 +334,11 @@ const header = (L, active, alts) => {
         <span class="brand__text"><span class="brand__name">LEÓNIDA<em>Hoy</em></span><span class="brand__tag">${esc(L.t.tagline)}</span></span>
       </a>
       <nav class="nav" aria-label="${esc(L.t.mainNav)}">
-        ${nav.map(([href, label, key]) => `<a href="${u(href)}"${key === active ? ' aria-current="page"' : ""}>${esc(label)}</a>`).join("")}
+        ${nav.map(([href, label, key]) => `<a href="${u(href)}"${key === tabKey(active) ? ' aria-current="page"' : ""}>${esc(label)}</a>`).join("")}
       </nav>
       ${langSwitch(L, alts)}
       <div class="pill-count" data-countdown-mini="${esc(cfg.launchDate)}" data-done="${esc(L.t.miniDone)}" aria-hidden="true"><span class="dot"></span><span class="pill-pre" data-mini-pre>${esc(L.t.miniPre)}</span><span data-mini>19/11</span></div>
+      <button class="search-btn" type="button" data-search-open aria-label="${esc(L.t.ux.search.label)}" title="${esc(L.t.ux.search.open)} (/)">${tabIcon.search}</button>
       <button class="theme-toggle" type="button" data-theme-toggle data-to-light="${esc(L.t.themeToLight)}" data-to-dark="${esc(L.t.themeToDark)}" aria-label="${esc(L.t.themeTitle)}" title="${esc(L.t.themeTitle)}">
         <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></g></svg>
         <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.4 14.6A8.5 8.5 0 0 1 9.4 3.6a.6.6 0 0 0-.8-.7 9.6 9.6 0 1 0 12.5 12.5.6.6 0 0 0-.7-.8Z"/></svg>
@@ -366,29 +370,49 @@ const footer = (L) => {
         <a class="brand brand--sm" href="${u(P.home)}">${markSvg}<span class="brand__name">LEÓNIDA<em>Hoy</em></span></a>
         <p class="muted small">${esc(L.t.footerNote)}</p>
       </div>
-      <nav class="footer-nav" aria-label="${esc(L.t.footerNav)}">
-        <a href="${u(P.news)}">${esc(L.t.nav.news)}</a>
-        <a href="${u(P.rumors)}">${esc(L.t.nav.rumors)}</a>
-        <a href="${u(P.cheats)}">${esc(L.t.cheats.tile)}</a>
-        <a href="${u(P.finds)}">${esc(L.t.finds.nav)}</a>
-        <a href="${u(P.patches)}">${esc(L.t.patch.tile)}</a>
-        <a href="${u(P.reviews)}">${esc(L.t.tabs.reviews)}</a>
-        <a href="${u(P.guides)}">${esc(L.t.gd.tile)}</a>
-        <a href="${u(P.guide)}">${esc(L.t.footerLinks.guide)}</a>
-        <a href="${u(P.archive)}">${esc(L.t.footerLinks.archive)}</a>
-        <a href="${u(P.about)}">${esc(L.t.footerLinks.about)}</a>
-        <a href="${u(P.privacy)}">${esc(L.t.footerLinks.privacy)}</a>
-        <a href="${u(P.legal)}">${esc(L.t.footerLinks.legal)}</a>
-        <a href="${u(P.feed)}" class="rss">${icon.rss} RSS</a>
-        <a href="${u(P.app)}">📲 App</a>
-        <button class="footer-install" type="button" data-install hidden>${esc(L.t.app.install)}</button>
-        ${soc.map(([k, v]) => `<a href="${esc(v)}" rel="me noopener" target="_blank">${esc(k === "x" ? "X" : k.charAt(0).toUpperCase() + k.slice(1))}</a>`).join("")}
+      <nav class="footer-cols" aria-label="${esc(L.t.footerNav)}">
+        <div><h2>${esc(L.t.ux.foot.now)}</h2>
+          <a href="${u(P.home)}">${esc(L.t.nav.home)}</a>
+          <a href="${u(P.news)}">${esc(L.t.nav.news)}</a>
+          <a href="${u(P.rumors)}">${esc(L.t.nav.rumors)}</a>
+          <a href="${u(P.archive)}">${esc(L.t.footerLinks.archive)}</a>
+          <a href="${u(P.feed)}" class="rss">${icon.rss} RSS</a>
+        </div>
+        <div><h2>${esc(L.t.ux.foot.play)}</h2>
+          <a href="${u(P.cheats)}">${esc(L.t.tabs.cheats)}</a>
+          <a href="${u(P.finds)}">${esc(L.t.tabs.finds)}</a>
+          <a href="${u(P.patches)}">${esc(L.t.patch.tile)}</a>
+          <a href="${u(P.guides)}">${esc(L.t.nav.guide)}</a>
+          <a href="${u(P.reviews)}">${esc(L.t.tabs.reviews)}</a>
+        </div>
+        <div><h2>${esc(L.t.ux.foot.site)}</h2>
+          <a href="${u(P.app)}">📲 App</a>
+          <a href="${u(P.about)}">${esc(L.t.footerLinks.about)}</a>
+          <a href="${u(P.privacy)}">${esc(L.t.footerLinks.privacy)}</a>
+          <a href="${u(P.legal)}">${esc(L.t.footerLinks.legal)}</a>
+          <button class="footer-install" type="button" data-install hidden>${esc(L.t.app.install)}</button>
+          ${soc.map(([k, v]) => `<a href="${esc(v)}" rel="me noopener" target="_blank">${esc(k === "x" ? "X" : k.charAt(0).toUpperCase() + k.slice(1))}</a>`).join("")}
+        </div>
       </nav>
     </div>
   </footer>`;
 };
 
+const ROOT_KEYS = new Set(["home", "news", "rumors", "cheats", "finds", "guides"]);
+const visibleCrumbs = (L, jsonLd, body) => {
+  const bc = jsonLd.find((j) => j && j["@type"] === "BreadcrumbList");
+  if (!bc || bc.itemListElement.length < 3) return body;
+  const items = bc.itemListElement;
+  const html = `<nav class="crumbs" aria-label="${esc(L.t.ux.crumbs)}"><ol>${items
+    .map((it, i) => {
+      const href = new URL(it.item).pathname;
+      return i === items.length - 1 ? `<li aria-current="page"><span>${esc(it.name)}</span></li>` : `<li><a href="${esc(href)}">${esc(it.name)}</a></li>`;
+    })
+    .join("")}</ol></nav>`;
+  return body.replace(/(<section class="page-head[^"]*"><div class="wrap[^"]*">)/, `$1${html}`);
+};
 const layout = (L, { title, description, key, body, active, type = "website", jsonLd = [], published, noindex = false }) => {
+  body = visibleCrumbs(L, jsonLd, body);
   const alts = counterparts(key);
   const pathName = alts[L.code];
   const canonical = abs(pathName);
@@ -450,14 +474,14 @@ ${GA ? `<script async src="https://www.googletagmanager.com/gtag/js?id=${esc(GA)
 ${CF ? `<script>(function(){function go(){var s=document.createElement("script");s.defer=true;s.src="https://static.cloudflareinsights.com/beacon.min.js";s.setAttribute("data-cf-beacon",'{"token":"${esc(CF)}"}');document.head.appendChild(s)}if(document.prerendering)document.addEventListener("prerenderingchange",go,{once:true});else go()})()</script>` : ""}
 ${jsonLd.map((j) => `<script type="application/ld+json">${JSON.stringify(j).replace(/</g, "\\u003c")}</script>`).join("\n")}
 </head>
-<body data-base="${BASE}" data-app='${esc(JSON.stringify({ ...L.t.app, swipe: L.t.inst.swipe }))}'>
+<body data-base="${BASE}" data-search="${u(`/search-${L.code}.json`)}"${ROOT_KEYS.has(key) ? " data-root" : ""} data-app='${esc(JSON.stringify({ ...L.t.app, swipe: L.t.inst.swipe, search: { label: L.t.ux.search.label, ph: L.t.ux.search.ph, close: L.t.ux.search.close, loading: L.t.ux.search.loading, try: L.t.ux.search.try, tryWords: L.t.ux.search.tryWords, none: L.t.ux.search.none("{q}"), one: L.t.ux.search.results(1), many: L.t.ux.search.results(7).replace("7", "{n}") } }))}'>
 <a class="skip" href="#main">${esc(L.t.skip)}</a>
 ${header(L, active, alts)}
 ${langHint(L, alts)}
 <div class="launch-bar" data-launch-bar data-launch="${esc(cfg.launchDate)}">
   <div class="wrap launch-bar__inner">
     <span data-lb="pre">🗓️ ${esc(L.t.launchBarPre(""))} <a href="${u(L.paths.release)}">${esc(L.t.launchBarPreCta)}</a></span>
-    <span data-lb="out" hidden>🎮 ${esc(L.t.launchBarOut)} <a href="${u(L.paths.reviews)}">${esc(L.t.launchBarOutCta)}</a></span>
+    <span data-lb="out" hidden>${esc(L.t.ux.lb[PATCHES.status.level] || L.t.ux.lb.ok)} <a href="${u(PATCHES.status.level === "ok" ? L.paths.guides : L.paths.patches)}">${esc(L.t.ux.lbCta[PATCHES.status.level] || L.t.ux.lbCta.ok)}</a></span>
   </div>
 </div>
 <main id="main">
@@ -526,17 +550,23 @@ const itemCard = (L, it, { num, variant = "mini" } = {}) => {
 
 const guidesCard = (L) => {
   const P = L.paths;
-  const link = (href, emoji, [name, sub]) => `<li><a href="${u(href)}"><span aria-hidden="true">${emoji}</span><span><b>${esc(name)}</b><small>${esc(sub)}</small></span></a></li>`;
-  return `<div class="card"><h2 class="card__title">${esc(L.t.nav.guide)}</h2><ul class="guide-links">
-    ${GUIAS.slice(0, 2).map((g) => link(P.guideItem(g.slug[L.code]), g.icon === "money" ? "💰" : "💡", [g.h1[L.code], g.short[L.code]])).join("")}${link(P.cheats, "🎮", [L.t.cheats.tile, L.t.cheats.tileSub(TRUCOS.cheats.filter((c) => c.seq).length)])}${link(P.release, "⏰", L.t.tiles.release)}${link(P.reviews, "⭐", L.t.tiles.reviews)}${link(P.leonida, "🌴", L.t.tiles.leonida)}${link(P.guides, "🧭", [L.t.gd.indexH1, L.t.gd.tileSub])}
-  </ul></div>`;
+  const link = (href, emoji, name, sub) => `<li><a href="${u(href)}"><span aria-hidden="true">${emoji}</span><span><b>${esc(name)}</b><small>${esc(sub)}</small></span></a></li>`;
+  const g = (id) => GUIAS.find((x) => x.id === id);
+  const tip = g("consejos"), money = g("dinero");
+  return `<div class="card"><h2 class="card__title">${esc(L.t.ux.play)}</h2><ul class="guide-links">
+    ${link(P.cheats, "🎮", L.t.tabs.cheats, L.t.cheats.tileSub(TRUCOS.cheats.filter((c) => c.seq).length))}
+    ${link(P.finds, "🥚", L.t.tabs.finds, L.t.finds.tileSub(FINDS.items.length))}
+    ${link(P.patches, "🛠️", L.t.patch.tile, L.t.patch.level[PATCHES.status.level] || L.t.patch.tileSub)}
+    ${tip ? link(P.guideItem(tip.slug[L.code]), "💡", tip.h1[L.code], tip.short[L.code]) : ""}
+    ${money ? link(P.guideItem(money.slug[L.code]), "💰", money.h1[L.code], money.short[L.code]) : ""}
+  </ul><a class="card__more" href="${u(P.guides)}">${esc(L.t.ux.allGuides)}</a></div>`;
 };
 const sideCards = (L, { facts = true } = {}) => {
   const { guide } = DATA[L.code];
   const P = L.paths;
   return `
       ${guidesCard(L)}
-      <div class="card">${countdown(L, "sm")}</div>
+      <div class="card pre-only">${countdown(L, "sm")}</div>
       ${adUnit(L, "sidebar", "ad--sticky")}
       ${
         facts
@@ -620,12 +650,12 @@ const briefBody = (L, b) => {
   <div class="wrap">
     <nav class="hub" aria-label="${esc(L.t.jumpsLabel)}">
       <a class="hub__tile hub__tile--cheats" href="${u(P.cheats)}"><span class="hub__icon" aria-hidden="true">${tabIcon.cheats}</span><span class="hub__txt"><b>${esc(L.t.cheats.tile)}</b><small>${esc(L.t.cheats.tileSub(TRUCOS.cheats.filter((c) => c.seq).length))}</small></span>${TRUCOS.cheats.some((c) => isFresh(c.added)) ? `<span class="hub__new">${esc(L.t.cheats.isNew)}</span>` : ""}<span class="hub__go" aria-hidden="true">→</span></a>
+      ${tile("finds", P.finds, "🥚", L.t.tabs.finds, L.t.finds.tileSub(FINDS.items.length))}
+      ${tile("guide", P.guides, "🧭", L.t.gd.tile, L.t.gd.tileSub)}
       ${tile("news", P.news, "📰", L.t.nav.news, L.t.hubNewsSub(top.length + more.length))}
       ${tile("rumors", P.rumors, "🕵️", L.t.nav.rumors, L.t.hubRumorsSub(rumors.length))}
       ${tile("reviews", P.reviews, "⭐", L.t.tiles.reviews[0], (REVIEWS.aggregates || [])[0] ? `${REVIEWS.aggregates[0].name} ${REVIEWS.aggregates[0].score} · ${L.t.reviewsCount(reviewList.length)}` : reviewAvg !== null ? `${L.t.reviewsAvg}: ${reviewAvg} · ${L.t.reviewsCount(reviewList.length)}` : L.t.tiles.reviews[1])}
-      ${tile("finds", P.finds, "🥚", L.t.finds.nav, L.t.finds.tileSub(FINDS.items.length))}
       ${tile("patches", P.patches, "🛠️", L.t.patch.tile, L.t.patch.level[PATCHES.status.level] || L.t.patch.tileSub)}
-      ${tile("guide", P.guides, "🧭", L.t.gd.tile, L.t.gd.tileSub)}
     </nav>
     ${adUnit(L, "top")}
   </div>
@@ -724,6 +754,7 @@ const listBody = (L, kind) => {
   list.forEach((i) => days.set(i.date, [...(days.get(i.date) || []), i]));
   return `
   <section class="page-head page-head--${kind}"><div class="wrap">
+    <nav class="seg" aria-label="${esc(L.t.ux.segLabel)}"><a href="${u(P.news)}"${rumor ? "" : ' aria-current="page"'}>✔ ${esc(L.t.ux.seg.news)} <span>${items.filter((i) => i.kind === "news").length}</span></a><a href="${u(P.rumors)}"${rumor ? ' aria-current="page"' : ""}>⚠ ${esc(L.t.ux.seg.rumors)} <span>${items.filter((i) => i.kind === "rumor").length}</span></a></nav>
     <span class="kicker kicker--${kind}">${rumor ? "⚠ " + esc(L.t.kickerRumor) : "✔ " + esc(L.t.kickerNews)}</span>
     <h1>${esc(rumor ? L.t.rumorsH1 : L.t.newsH1)}</h1><p class="muted">${esc(rumor ? L.t.rumorsIntro : L.t.newsIntro)}</p></div></section>
   <div class="wrap layout">
@@ -944,7 +975,7 @@ for (const code of ACTIVE) {
         type: "article",
         jsonLd: [
           { "@context": "https://schema.org", "@type": "FAQPage", inLanguage: code, mainEntity: L.t.releaseFaq.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) },
-          crumbsLd([[L.t.crumbHome, P.home], [L.t.nav.guide, P.guide], [L.t.releaseH1, P.release]]),
+          crumbsLd([[L.t.crumbHome, P.home], [L.t.gd.indexH1, P.guides], [L.t.releaseH1, P.release]]),
         ],
         body: `
   <section class="page-head page-head--release"><div class="wrap">
@@ -994,7 +1025,7 @@ for (const code of ACTIVE) {
       type: "article",
       jsonLd: [
         { "@context": "https://schema.org", "@type": "Article", headline: L.t.leonidaTitle, description: L.t.leonidaDesc, inLanguage: code, dateModified: LEONIDA.updated, mainEntityOfPage: abs(P.leonida), author: { "@type": "Organization", name: cfg.name }, publisher, about: { "@type": "VideoGame", name: "Grand Theft Auto VI" }, image: [abs(code === "es" ? "/assets/og.png" : `/assets/og-${code}.png`)] },
-        crumbsLd([[L.t.crumbHome, P.home], [L.t.nav.guide, P.guide], [L.t.leonidaH1, P.leonida]]),
+        crumbsLd([[L.t.crumbHome, P.home], [L.t.gd.indexH1, P.guides], [L.t.leonidaH1, P.leonida]]),
       ],
       body: `
   <section class="page-head page-head--leonida"><div class="wrap"><p class="eyebrow">${esc(L.t.leonidaEyebrow)}</p><h1>${esc(L.t.leonidaH1)}</h1><p class="lead-text">${esc(L.t.leonidaLead)}</p></div></section>
@@ -1026,7 +1057,7 @@ for (const code of ACTIVE) {
       key: "reviews",
       active: "reviews",
       type: "article",
-      jsonLd: [crumbsLd([[L.t.crumbHome, P.home], [L.t.nav.guide, P.guide], [L.t.reviewsH1, P.reviews]])],
+      jsonLd: [crumbsLd([[L.t.crumbHome, P.home], [L.t.gd.indexH1, P.guides], [L.t.reviewsH1, P.reviews]])],
       body: `
   <section class="page-head page-head--reviews"><div class="wrap"><p class="eyebrow">${esc(L.t.reviewsEyebrow)}</p><h1>${esc(L.t.reviewsH1)}</h1><p class="lead-text">${esc(L.t.reviewsLead)}</p></div></section>
   <div class="wrap layout">
@@ -1084,7 +1115,7 @@ for (const code of ACTIVE) {
         jsonLd: [
           { "@context": "https://schema.org", "@type": "Article", inLanguage: code, headline: T.title, description: T.desc, dateModified: TRUCOS.updated, author: { "@type": "Organization", name: cfg.name }, publisher: { "@type": "Organization", name: cfg.name } },
           { "@context": "https://schema.org", "@type": "FAQPage", inLanguage: code, mainEntity: T.faq.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) },
-          crumbsLd([[L.t.crumbHome, P.home], [L.t.nav.guide, P.guide], [T.h1, P.cheats]]),
+          crumbsLd([[L.t.crumbHome, P.home], [L.t.gd.indexH1, P.guides], [T.h1, P.cheats]]),
         ],
         body: `
   <section class="page-head page-head--cheats"><div class="wrap"><p class="eyebrow">${esc(T.eyebrow)}</p><h1>${esc(T.h1)}</h1><p class="lead-text">${esc(T.lead)}</p></div></section>
@@ -1258,17 +1289,27 @@ for (const code of ACTIVE) {
       );
       sitemap.push([`g:${g.id}`, href, g.updated, "weekly", "0.9"]);
     }
-    // Índice de guías
-    const all = [
-      ...GUIAS.map((x) => ({ href: P.guideItem(x.slug[code]), ic: gIcon[x.icon] || gIcon.book, t: x.h1[code], d: x.short[code] })),
-      { href: P.cheats, ic: gIcon.cheat, t: L.t.cheats.h1, d: L.t.cheats.tileSub(TRUCOS.cheats.filter((c) => c.seq).length) },
-      { href: P.finds, ic: findIcon.easter, t: L.t.finds.h1, d: L.t.finds.tileSub(FINDS.items.length) },
-      { href: P.patches, ic: findIcon.update, t: L.t.patch.h1, d: L.t.patch.tileSub },
-      { href: P.release, ic: gIcon.clock, t: L.t.tiles.release[0], d: L.t.tiles.release[1] },
-      { href: P.leonida, ic: gIcon.map, t: L.t.tiles.leonida[0], d: L.t.tiles.leonida[1] },
-      { href: P.reviews, ic: gIcon.trophy, t: L.t.tiles.reviews[0], d: L.t.tiles.reviews[1] },
-      { href: P.guide, ic: gIcon.book, t: G.basics, d: G.basicsSub },
-    ];
+    // Índice de guías, agrupado por lo que busca la gente
+    const gi = (id) => GUIAS.find((x) => x.id === id);
+    const gItem = (x) => x && { href: P.guideItem(x.slug[code]), ic: gIcon[x.icon] || gIcon.book, t: x.h1[code], d: x.short[code] };
+    const groups = [
+      [L.t.ux.groups.play, [
+        { href: P.cheats, ic: gIcon.cheat, t: L.t.cheats.h1, d: L.t.cheats.tileSub(TRUCOS.cheats.filter((c) => c.seq).length) },
+        { href: P.finds, ic: findIcon.easter, t: L.t.finds.h1, d: L.t.finds.tileSub(FINDS.items.length) },
+        gItem(gi("consejos")), gItem(gi("dinero")), gItem(gi("duracion")), gItem(gi("radio")),
+        ...GUIAS.filter((x) => !["consejos", "dinero", "duracion", "radio"].includes(x.id)).map(gItem),
+      ]],
+      [L.t.ux.groups.status, [
+        { href: P.patches, ic: findIcon.update, t: L.t.patch.h1, d: L.t.patch.level[PATCHES.status.level] || L.t.patch.tileSub },
+        { href: P.reviews, ic: gIcon.trophy, t: L.t.tiles.reviews[0], d: L.t.tiles.reviews[1] },
+        { href: P.release, ic: gIcon.clock, t: L.t.tiles.release[0], d: L.t.tiles.release[1] },
+      ]],
+      [L.t.ux.groups.world, [
+        { href: P.leonida, ic: gIcon.map, t: L.t.tiles.leonida[0], d: L.t.tiles.leonida[1] },
+        { href: P.guide, ic: gIcon.book, t: G.basics, d: G.basicsSub },
+      ]],
+    ].map(([h, list]) => [h, list.filter(Boolean)]);
+    const all = groups.flatMap(([, list]) => list);
     write(
       P.guides,
       layout(L, {
@@ -1282,10 +1323,39 @@ for (const code of ACTIVE) {
         ],
         body: `
   <section class="page-head page-head--guide"><div class="wrap"><p class="eyebrow">${esc(G.indexEyebrow)}</p><h1>${esc(G.indexH1)}</h1><p class="lead-text">${esc(G.indexLead)}</p></div></section>
-  <div class="wrap"><div class="gcards gcards--index">${all.map(gcard).join("")}</div></div>`,
+  <div class="wrap gindex">${groups.map(([h, list]) => `<section class="block"><div class="block__head"><h2>${esc(h)}</h2></div><div class="gcards gcards--index">${list.map(gcard).join("")}</div></section>`).join("")}</div>`,
       })
     );
     sitemap.push(["guides", P.guides, GUIAS.map((g) => g.updated).sort().pop(), "weekly", "0.8"]);
+  }
+
+  // Índice de búsqueda (ligero: título, resumen corto, ruta y tipo)
+  {
+    const S = L.t.ux.search.kinds;
+    const cut = (x, n = 120) => {
+      const t = String(x || "").replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
+      return t.length > n ? t.slice(0, n - 1).replace(/\s\S*$/, "") + "…" : t;
+    };
+    const idx = [];
+    // «x»: texto extra solo para encontrar (no se muestra)
+    const add = (k, t, d, href, dt, x) => idx.push({ k, t: cut(t, 110), d: cut(d), u: u(href), ...(dt ? { dt } : {}), ...(x ? { x: cut(x, 400) } : {}) });
+    add("page", L.t.cheats.h1, L.t.cheats.desc, P.cheats, null, L.t.cheats.lead);
+    add("page", L.t.finds.h1, L.t.finds.desc, P.finds, null, `easter eggs ${L.t.finds.lead}`);
+    add("page", L.t.patch.h1, L.t.patch.desc, P.patches, null, `${L.t.patch.lead} PSN PlayStation Xbox`);
+    add("page", L.t.gd.indexH1, L.t.gd.indexDesc, P.guides);
+    add("page", L.t.reviewsH1, L.t.reviewsDesc, P.reviews);
+    add("page", L.t.releaseH1, L.t.releaseDesc || "", P.release, null, L.t.releaseDesc);
+    add("page", L.t.leonidaH1, L.t.leonidaDesc || "", P.leonida, null, `${L.t.leonidaDesc} Jason Lucía Lucia Vice City`);
+    add("page", L.t.gd.basics, L.t.gd.basicsSub, P.guide, null, (DATA[code].guide.faq || []).map((f) => f.q).join(" "));
+    add("page", L.t.appH1, L.t.appDesc, P.app);
+    add("page", L.t.newsH1, L.t.newsDesc, P.news);
+    add("page", L.t.rumorsH1, L.t.rumorsDesc, P.rumors);
+    for (const g of GUIAS) add("guide", g.h1[code], `${g.quick[code]}`, P.guideItem(g.slug[code]), g.updated, `${g.desc[code]} ${(g.faq?.[code] || []).map(([q]) => q).join(" ")}`);
+    for (const c of TRUCOS.cheats) add("cheat", c.name[code] || c.name.es, `${c.effect[code] || c.effect.es}${c.unlock ? " " + (c.unlock[code] || c.unlock.es) : ""}`, `${P.cheats}#${c.id}`, c.added, `${L.t.cheats.cats[c.cat] || ""} ${L.t.cheats.tile}`);
+    for (const f of FINDS.items) add("find", f.title[code] || f.title.es, f.text[code] || f.text.es, `${P.finds}#${f.id}`, f.date, L.t.finds.cats[f.cat] || "");
+    for (const e of PATCHES.entries) add("patch", e.title[code] || e.title.es, e.text[code] || e.text.es, `${P.patches}#${e.id}`, e.date);
+    for (const it of DATA[code].items.slice(0, 600)) add(it.kind === "rumor" ? "rumor" : "news", it.title, it.plain || it.change, it.path, it.date);
+    write(`/search-${code}.json`, JSON.stringify({ kinds: S, items: idx }));
   }
 
   // App: cómo instalar en cada dispositivo (y qué se puede hacer)

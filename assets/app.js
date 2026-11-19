@@ -572,7 +572,8 @@
   var cur = -1;
   tabs.forEach(function (a, i) { if (a.getAttribute("aria-current") === "page") cur = i; });
   var samePath = function (a) { try { return new URL(a.href, location.href).pathname.replace(/index\.html$/, "") === path; } catch (e) { return false; } };
-  var onSection = cur >= 0 && samePath(tabs[cur]);
+  // Secciones principales (y Rumores, que va dentro de Noticias): se puede deslizar entre pestañas
+  var onSection = cur >= 0 && (samePath(tabs[cur]) || body.hasAttribute("data-root"));
   function goTab(i, dir) {
     var a = tabs[i];
     if (!a) return;
@@ -585,7 +586,7 @@
     a.addEventListener("click", function (e) {
       if (e.metaKey || e.ctrlKey || e.shiftKey || e.button > 0) return;
       buzz();
-      if (i === cur && onSection) { // tocar la pestaña activa = volver arriba
+      if (i === cur && samePath(a)) { // tocar la pestaña activa = volver arriba
         e.preventDefault();
         window.scrollTo({ top: 0, behavior: mqm("(prefers-reduced-motion: reduce)") ? "auto" : "smooth" });
         return;
@@ -704,6 +705,133 @@
       }, autoSheet ? 2600 : 3000);
     });
   }
+
+  // ================= Buscador =================
+  (function () {
+    var openers = document.querySelectorAll("[data-search-open]");
+    var url = body.getAttribute("data-search");
+    var S = T.search || {};
+    if (!openers.length || !url) return;
+    var box = null, input = null, list = null, data = null, loading = null, sel = -1, results = [], lastFocus = null;
+    var norm = function (x) { return String(x || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase(); };
+    var escH = function (x) { return String(x).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); };
+    var weight = { page: 4, guide: 4, cheat: 3, find: 3, patch: 3, news: 1, rumor: 0 };
+    function load() {
+      if (data || loading) return loading;
+      loading = fetch(url).then(function (r) { return r.json(); }).then(function (j) {
+        data = j;
+        data.items.forEach(function (it) { it._t = norm(it.t); it._h = norm(it.t + " " + it.d + " " + (it.x || "")); });
+        return data;
+      }).catch(function () { loading = null; });
+      return loading;
+    }
+    function mark(text, terms) {
+      var out = escH(text);
+      terms.forEach(function (t) {
+        if (t.length < 2) return;
+        // marca la coincidencia aunque el texto lleve tildes
+        var src = text, n = norm(src), i = n.indexOf(t);
+        if (i < 0) return;
+        var frag = escH(src.slice(i, i + t.length));
+        out = out.replace(frag, "<mark>" + frag + "</mark>");
+      });
+      return out;
+    }
+    function render(q) {
+      if (!list) return;
+      var terms = norm(q).split(/\s+/).filter(Boolean);
+      sel = -1;
+      if (!data) { list.innerHTML = '<p class="search__msg">' + escH(S.loading || "…") + "</p>"; return; }
+      if (!terms.length) {
+        results = data.items.filter(function (it) { return it.k === "page"; }).slice(0, 7);
+        list.innerHTML = '<p class="search__msg">' + escH(S.try || "") + " " + (S.tryWords || []).map(function (w) { return '<button type="button" class="search__try">' + escH(w) + "</button>"; }).join(" ") + "</p>" + items(results, []);
+        return;
+      }
+      results = data.items.map(function (it) {
+        var sc = 0;
+        for (var i = 0; i < terms.length; i++) {
+          var t = terms[i];
+          if (it._h.indexOf(t) < 0) return null;
+          sc += it._t.indexOf(t) >= 0 ? (it._t.indexOf(t) === 0 || it._t.indexOf(" " + t) >= 0 ? 8 : 5) : 1;
+        }
+        sc += weight[it.k] || 0;
+        if (it.dt) sc += Math.max(0, 2 - (Date.now() - new Date(it.dt).getTime()) / (30 * 864e5));
+        return { it: it, sc: sc };
+      }).filter(Boolean).sort(function (a, b) { return b.sc - a.sc; }).slice(0, 25).map(function (x) { return x.it; });
+      if (!results.length) { list.innerHTML = '<p class="search__msg">' + escH((S.none || "").replace("{q}", q)) + "</p>"; return; }
+      list.innerHTML = '<p class="search__count">' + escH(results.length === 1 ? S.one : (S.many || "").replace("{n}", results.length)) + "</p>" + items(results, terms);
+    }
+    function items(arr, terms) {
+      return '<ul class="search__list" role="listbox">' + arr.map(function (it, i) {
+        return '<li role="option" id="sr-' + i + '"><a href="' + escH(it.u) + '" class="search__item search__item--' + it.k + '"><span class="search__kind">' + escH((data.kinds || {})[it.k] || it.k) + "</span><b>" + mark(it.t, terms) + "</b><small>" + mark(it.d, terms) + "</small></a></li>";
+      }).join("") + "</ul>";
+    }
+    function move(d) {
+      var links = list.querySelectorAll(".search__item");
+      if (!links.length) return;
+      sel = (sel + d + links.length) % links.length;
+      links.forEach(function (l, i) { l.classList.toggle("is-sel", i === sel); });
+      links[sel].scrollIntoView({ block: "nearest" });
+      input.setAttribute("aria-activedescendant", "sr-" + sel);
+    }
+    function build() {
+      box = document.createElement("div");
+      box.className = "search";
+      box.hidden = true;
+      box.setAttribute("role", "dialog");
+      box.setAttribute("aria-modal", "true");
+      box.setAttribute("aria-label", S.label || "");
+      box.innerHTML = '<div class="search__backdrop" data-search-close></div><div class="search__panel"><div class="search__bar"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></g></svg><input type="search" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" role="combobox" aria-expanded="true" aria-controls="search-results"><button type="button" class="search__x" data-search-close>' + escH(S.close || "×") + '</button></div><div class="search__body" id="search-results"></div></div>';
+      body.appendChild(box);
+      input = box.querySelector("input");
+      input.placeholder = S.ph || "";
+      input.setAttribute("aria-label", S.label || "");
+      list = box.querySelector(".search__body");
+      var tq = 0;
+      input.addEventListener("input", function () { clearTimeout(tq); tq = setTimeout(function () { render(input.value); }, 60); });
+      input.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowDown") { e.preventDefault(); move(1); }
+        else if (e.key === "ArrowUp") { e.preventDefault(); move(-1); }
+        else if (e.key === "Enter") {
+          var links = list.querySelectorAll(".search__item");
+          var go = links[sel >= 0 ? sel : 0];
+          if (go) { e.preventDefault(); location.href = go.href; }
+        }
+      });
+      box.addEventListener("click", function (e) {
+        var t = e.target;
+        if (t.closest("[data-search-close]")) close();
+        else if (t.closest(".search__try")) { input.value = t.closest(".search__try").textContent; render(input.value); input.focus(); }
+        else if (t.closest(".search__item")) setTimeout(close, 50);
+      });
+    }
+    function open() {
+      if (!box) build();
+      lastFocus = document.activeElement;
+      box.hidden = false;
+      root.classList.add("sheet-lock");
+      requestAnimationFrame(function () { box.classList.add("is-open"); });
+      input.value = "";
+      render("");
+      input.focus({ preventScroll: true });
+      var p = load();
+      if (p && p.then) p.then(function () { render(input.value); });
+    }
+    function close() {
+      if (!box || box.hidden) return;
+      box.classList.remove("is-open");
+      root.classList.remove("sheet-lock");
+      setTimeout(function () { box.hidden = true; }, 200);
+      try { if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true }); } catch (e) {}
+    }
+    openers.forEach(function (b) { b.addEventListener("click", function () { buzz(); open(); }); b.addEventListener("pointerenter", load, { once: true }); });
+    document.addEventListener("keydown", function (e) {
+      var a = document.activeElement, typing = a && (/INPUT|TEXTAREA|SELECT/.test(a.tagName) || a.isContentEditable);
+      if (e.key === "Escape" && box && !box.hidden) { close(); return; }
+      if (((e.key === "/" && !typing) || ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k")) && (!box || box.hidden)) { e.preventDefault(); open(); }
+    });
+    window.addEventListener("pageshow", function (e) { if (e.persisted) close(); });
+  })();
 
   // AdSense: activa cada bloque manual presente en la página
   var ads = document.querySelectorAll("ins.adsbygoogle");
