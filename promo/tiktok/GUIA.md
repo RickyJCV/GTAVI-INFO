@@ -4,7 +4,7 @@ Archivos de esta carpeta:
 
 | Archivo | Para qué |
 |---|---|
-| `video-tiktok-leonidahoy.mp4` | Vídeo vertical 1080×1920, 16 s, listo para TikTok, Reels, Shorts y X |
+| `video-tiktok-leonidahoy.mp4` | Vídeo vertical 1080×1920, 16 s. Señala que el enlace está en la descripción y en los comentarios |
 | `avatar-perfil.png` | Foto de perfil (1080×1080, pensada para el recorte en círculo) |
 | `portada-video.jpg` | Portada del vídeo (fotograma final con el enlace) |
 | `capturas/` | Capturas de la web por si quieres hacer más vídeos o publicaciones |
@@ -26,9 +26,9 @@ leonidahoy
 ```
 Si está cogido: `leonida.hoy` · `leonidahoy_web` · `leonidahoy.es`
 
-**Biografía (66 de 80 caracteres):**
+**Biografía / descripción corta (con la dirección escrita, porque el enlace pulsable aún no está disponible en la cuenta):**
 ```
-Noticias de GTA VI cada día, con fuente 🌴 Web de fans no oficial 👇
+Noticias de GTA VI cada día 🌴 Web de fans no oficial 👉 leonidahoy.github.io
 ```
 
 **Sitio web:**
@@ -58,13 +58,17 @@ https://leonidahoy.github.io
 4. **Siguiente** → **Editar portada** → elige el último fotograma, el del enlace.
 5. **Descripción** (copiar y pegar):
    ```
-   Todo GTA VI en una web 🌴 Noticias confirmadas, rumores con medidor de fiabilidad, notas de la prensa y hora de salida en tu país. Gratis y sin registro 👉 leonidahoy.github.io (enlace en el perfil) #GTA6 #GTAVI #GTA6Noticias #Leonida #videojuegos #gaming
+   🔗 LA WEB: leonidahoy.github.io
+
+   Todo GTA VI en una web 🌴 Noticias confirmadas, rumores con medidor de fiabilidad, notas de la prensa y hora de salida en tu país. Gratis y sin registro.
+
+   #GTA6 #GTAVI #Leonida #videojuegos #gamingespañol #parati
    ```
 6. **Más opciones → Divulgar contenido de la publicación → activa «Tu marca»**. Es lo que pide TikTok cuando promocionas algo tuyo.
 7. **Publicar**.
 8. Cuando salga, escribe un comentario en tu propio vídeo y fíjalo (mantén pulsado el comentario → **Fijar**):
    ```
-   📲 Entra en leonidahoy.github.io y añádela a tu pantalla de inicio: funciona como una app
+   🔗 La web: leonidahoy.github.io (cópiala en Safari o Chrome) 📲 Puedes añadirla a tu pantalla de inicio como una app
    ```
 
 ## 4. Publicar el tweet en X
