@@ -1,0 +1,90 @@
+{
+  "updated": "2026-11-19",
+  "status": {
+    "level": "watch",
+    "es": "Sin parche del día 1 con notas oficiales. Hay problemas para conectarse a PlayStation Network desde el lanzamiento; Sony no ha explicado la causa.",
+    "en": "No day-one patch with official notes. There have been PlayStation Network sign-in problems since launch; Sony hasn't explained the cause."
+  },
+  "entries": [
+    {
+      "id": "psn-lanzamiento",
+      "date": "2026-11-19",
+      "type": "issue",
+      "state": "open",
+      "platforms": [
+        "ps5"
+      ],
+      "title": {
+        "es": "Problemas para conectarse a PlayStation Network en el lanzamiento",
+        "en": "PlayStation Network sign-in problems at launch"
+      },
+      "text": {
+        "es": "Miles de jugadores de PS5 vieron el mensaje de «servicios ocupados» al iniciar sesión, y a algunos no les arrancaba el juego. En algunas regiones también falló la PlayStation Store. Sony no ha explicado la causa ni Rockstar ha hecho comunicado.",
+        "en": "Thousands of PS5 players got a \"services are busy\" message when signing in, and for some the game wouldn't start. In some regions the PlayStation Store also went down. Sony hasn't explained the cause and Rockstar hasn't issued a statement."
+      },
+      "sources": [
+        {
+          "name": "Newsweek",
+          "url": "https://www.newsweek.com/playstation-users-report-access-issues-hours-before-gta-vi-launch-12736310"
+        },
+        {
+          "name": "XDA",
+          "url": "https://www.xda-developers.com/playstation-network-is-down-right-now-as-gta-6s-worldwide-launch-is-underway/"
+        },
+        {
+          "name": "The Hollywood Reporter",
+          "url": "https://hollywoodreporter.com/business/digital/gta-6-playstation-crash-outage-1236758425"
+        }
+      ]
+    },
+    {
+      "id": "update-01-002-001",
+      "date": "2026-11-16",
+      "type": "update",
+      "state": "nonotes",
+      "version": "01.002.001",
+      "platforms": [
+        "ps5",
+        "xbox"
+      ],
+      "title": {
+        "es": "Segunda actualización antes del lanzamiento (01.002.001)",
+        "en": "Second pre-launch update (01.002.001)"
+      },
+      "text": {
+        "es": "Llegó una segunda actualización antes de que se pudiera jugar: unos 602,5 MB en PS5 y alrededor de 1,59 GB en Xbox. Rockstar no ha publicado notas de lo que cambia.",
+        "en": "A second update arrived before anyone could play: about 602.5 MB on PS5 and around 1.59 GB on Xbox. Rockstar hasn't published notes on what it changes."
+      },
+      "sources": [
+        {
+          "name": "Forbes",
+          "url": "https://www.forbes.com/sites/brianmazique/2026/11/17/gta-6-just-got-a-second-update-before-anyone-can-play-it-and-rockstar-still-isnt-saying-what-it-changes/"
+        }
+      ]
+    },
+    {
+      "id": "update-13-nov",
+      "date": "2026-11-13",
+      "type": "update",
+      "state": "nonotes",
+      "platforms": [
+        "ps5",
+        "xbox"
+      ],
+      "title": {
+        "es": "Primera actualización obligatoria (unos 1 GB)",
+        "en": "First mandatory update (about 1 GB)"
+      },
+      "text": {
+        "es": "Cuentas que siguen las descargas detectaron una primera actualización obligatoria de alrededor de 1 GB. Rockstar no la anunció ni publicó notas.",
+        "en": "Download-tracking accounts spotted a first mandatory update of around 1 GB. Rockstar didn't announce it or publish notes."
+      },
+      "sources": [
+        {
+          "name": "Forbes",
+          "url": "https://www.forbes.com/sites/brianmazique/2026/11/17/gta-6-just-got-a-second-update-before-anyone-can-play-it-and-rockstar-still-isnt-saying-what-it-changes/"
+        }
+      ]
+    }
+  ]
+}

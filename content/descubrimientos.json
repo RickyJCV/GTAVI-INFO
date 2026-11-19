@@ -1,0 +1,90 @@
+{
+  "updated": "2026-11-19",
+  "items": [
+    {
+      "id": "huevo-de-pascua",
+      "date": "2026-11-19",
+      "cat": "easter",
+      "title": {
+        "es": "Un «huevo de Pascua» literal en lo alto de una torre de Vice City",
+        "en": "A literal Easter egg on top of a Vice City tower"
+      },
+      "text": {
+        "es": "Un jugador encontró un nido con un huevo en lo más alto de una torre de Vice City. La subida lleva varios minutos y, si lanzas el huevo desde arriba, se activa una escena sorpresa. Rockstar se ríe así del propio concepto de «easter egg».",
+        "en": "A player found a nest with an egg at the very top of a Vice City tower. The climb takes several minutes and, if you throw the egg from the top, a surprise cutscene plays. It's Rockstar poking fun at the very idea of an Easter egg."
+      },
+      "sources": [
+        {
+          "name": "GameSpot",
+          "url": "https://www.gamespot.com/articles/gta-6-has-a-hilarious-riff-on-easter-eggs/"
+        },
+        {
+          "name": "IBTimes UK",
+          "url": "https://www.ibtimes.co.uk/gta-6-player-discovers-literal-easter-egg-leonida-1833342"
+        }
+      ]
+    },
+    {
+      "id": "guino-dexter",
+      "date": "2026-11-19",
+      "cat": "reference",
+      "title": {
+        "es": "Guiño a la serie Dexter: su edificio está en Vice City",
+        "en": "A nod to Dexter: his apartment building is in Vice City"
+      },
+      "text": {
+        "es": "Los jugadores han dado con un edificio que recuerda al de Dexter Morgan, el protagonista de la serie ambientada en Miami. Se puede llegar hasta la puerta, aunque no entrar, y en el agua hay una lancha parecida a la de la serie. GameSpot matiza que el guiño es más discreto de lo que se ha dicho.",
+        "en": "Players have found a building that looks like Dexter Morgan's from the Miami-set TV show. You can walk up to the door but not go in, and there's a boat on the water like the one in the show. GameSpot notes the reference is subtler than some coverage suggests."
+      },
+      "sources": [
+        {
+          "name": "Dexerto",
+          "url": "https://www.dexerto.com/gta/gta-6-players-find-dexters-apartment-serial-killer-kit-and-can-even-steal-his-boat-3429888/"
+        },
+        {
+          "name": "GameSpot",
+          "url": "https://gamespot.com/articles/how-to-find-dexter-morgans-apartment-in-gta-6"
+        }
+      ]
+    },
+    {
+      "id": "guardado-automatico",
+      "date": "2026-11-19",
+      "cat": "tip",
+      "link": "consejos",
+      "title": {
+        "es": "Cuidado con el guardado automático: no guarda en todo momento",
+        "en": "Careful with autosave: it doesn't save all the time"
+      },
+      "text": {
+        "es": "El juego solo guarda automáticamente en ciertos momentos, y un streamer perdió así 11 horas de progreso. Guarda a mano a menudo, sobre todo antes de cerrar el juego.",
+        "en": "The game only autosaves at certain points, and one streamer lost 11 hours of progress that way. Save manually often, especially before quitting."
+      },
+      "sources": [
+        {
+          "name": "Vandal",
+          "url": "https://vandal.elespanol.com/noticia/2026323012/gta-6-en-directo-todas-las-noticias-curiosidades-y-descubrimientos-del-dia-de-lanzamiento/"
+        }
+      ]
+    },
+    {
+      "id": "ketchup-gorge",
+      "date": "2026-11-19",
+      "cat": "curiosity",
+      "title": {
+        "es": "El ketchup inventado del juego llega al mundo real",
+        "en": "The game's made-up ketchup comes to real life"
+      },
+      "text": {
+        "es": "GORGE es una marca de ketchup ficticia que aparece en Leónida. Heinz ha lanzado una tirada limitada de botes reales inspirados en ella.",
+        "en": "GORGE is a fictional ketchup brand seen around Leonida. Heinz has released a limited run of real bottles inspired by it."
+      },
+      "sources": [
+        {
+          "name": "Parade",
+          "url": "https://parade.com/news/heinz-is-turning-a-gta-6-easter-egg-into-real-ketchup-bottles-and-fans-can-win-one"
+        }
+      ]
+    }
+  ]
+}

@@ -171,6 +171,22 @@
     if (close) close.addEventListener("click", function () { hint.hidden = true; store.set("lh-hint-off", "1"); });
   }
 
+  // Descubrimientos: filtrar por categoría
+  var fBtns = document.querySelectorAll("[data-fcat]");
+  if (fBtns.length) {
+    var fCards = document.querySelectorAll("[data-finds] [data-cat]");
+    var fNone = document.querySelector("[data-finds-none]");
+    fBtns.forEach(function (b) {
+      b.addEventListener("click", function () {
+        var want = b.getAttribute("data-fcat"), shown = 0;
+        swapAnim();
+        fBtns.forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+        fCards.forEach(function (c) { var ok = want === "all" || c.getAttribute("data-cat") === want; c.hidden = !ok; if (ok) shown++; });
+        if (fNone) fNone.hidden = shown > 0;
+      });
+    });
+  }
+
   // Trucos: botones de PS5 o de Xbox (se recuerda; en el navegador de la consola se detecta sola)
   var platBtns = document.querySelectorAll("[data-plat]");
   if (platBtns.length) {

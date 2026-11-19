@@ -5,7 +5,7 @@ El dueño del repositorio autoriza **commit y push directo a `main`** (así se p
 
 **Cada ejecución es independiente:** no te bases en lo que recuerdes de ejecuciones anteriores (búsquedas, conclusiones o reglas). Las reglas y las noticias cambian: haz siempre todos los pasos con este documento recién leído.
 
-**Ahorra cuota:** sin subagentes, sin leer archivos que aquí no se indican, máximo 6 búsquedas web, sin abrir páginas web salvo que una búsqueda no aclare un dato, respuestas cortas.
+**Ahorra cuota:** sin subagentes, sin leer archivos que aquí no se indican, máximo 6 búsquedas web para el resumen (más las 2 de «Lo que se descubre del juego» por la mañana, y las 2 de trucos los lunes), sin abrir páginas web salvo que una búsqueda no aclare un dato, respuestas cortas.
 
 ## Pasos
 
@@ -62,6 +62,28 @@ El juego ya está a la venta. Lo que más se busca ahora, por este orden: **prob
 - **Trucos, códigos o guías**: solo si los publica un medio reconocido o Rockstar, contados con tus palabras y con la fuente. Nada de exploits que rompan las normas del juego ni de métodos para conseguir dinero o ventajas en el modo online saltándose las reglas.
 
 **Notas:** en cada ejecución revisa también `content/reviews.json` → añade análisis nuevos de medios reconocidos y, si cambian, actualiza los `aggregates` (Metacritic/OpenCritic) con la cifra y la fuente que la publica. Si no encuentras la URL del análisis concreto pero un medio fiable publica la nota, añade `"via": "Nombre del medio"` y su URL.
+
+## Lo que se descubre del juego (cada día, en modo MAÑANA)
+
+El juego ya ha salido: la web debe renovarse con lo que se va sabiendo. Además de las 6 búsquedas del resumen, en **modo MAÑANA** haz **2 búsquedas más** (`extended`, en el mismo turno):
+- `GTA 6 easter egg OR secret OR discovered $AYER_EN` (secretos, guiños, curiosidades, récords)
+- `GTA 6 patch OR update OR bug OR outage $AYER_EN` (actualizaciones y problemas)
+En **modo TARDE** no hagas búsquedas extra: añade aquí solo lo que ya te hayan dado las búsquedas de la tarde.
+
+**A) Secretos y descubrimientos (`content/descubrimientos.json`).** Añade al **principio** de `items` cada hallazgo **nuevo** (que no esté ya) que haya contado al menos **un medio identificable** (GameSpot, IGN, Dexerto, Kotaku, Eurogamer, Vandal, 3DJuegos, VidaExtra, PC Gamer, Polygon…):
+`{"id": "slug-corto", "date": "AAAA-MM-DD", "cat": "easter|reference|curiosity|tip|secret|record|tech", "title": {"es": "…", "en": "…"}, "text": {"es": "…", "en": "…"}, "sources": [{"name": "Medio", "url": "https://…"}]}`
+- `easter` (easter egg), `reference` (guiño a otra obra o juego), `curiosity` (curiosidad), `tip` (detalle útil para jugar; puedes añadir `"link": "consejos"` u otro id de `content/guias.json`), `secret` (lugar o secreto del mapa), `record` (ventas, jugadores, récords), `tech` (rendimiento, gráficos, técnica).
+- Texto con tus palabras, 2–3 frases: qué es, dónde (sin coordenadas exactas si no importan) y por qué es curioso. **Nada de spoilers de la historia** (ni misiones, ni finales, ni giros), nada de glitches, trampas online, mods ni archivos filtrados o «datamines», nada sexual ni violento en detalle. Si un medio contradice a otro, dilo (como en el de Dexter).
+- Si una noticia del resumen **es** un descubrimiento, puede ir en los dos sitios.
+- Pon `updated` con la fecha de hoy si añades algo.
+
+**B) Parches y problemas (`content/parches.json`).**
+- **Actualización nueva** (Rockstar la publica o la cuentan medios fiables): añade al principio de `entries` `{"id": "update-x", "date": "…", "type": "update", "state": "notes" | "nonotes", "version": "1.03" (si se sabe), "platforms": ["ps5","xbox"], "title": {…}, "text": {…}, "sources": […]}`. En `text`, resume con tus palabras qué cambia (las notas oficiales) o di que no hay notas.
+- **Problema extendido** (caídas, errores que cuentan varios medios, no quejas sueltas de foros): `{"type": "issue", "state": "open", …}`. Cuando se arregle, **no lo borres**: cambia `state` a `fixed` y añade al final del `text` cuándo y cómo se arregló.
+- Actualiza `status`: `level` (`ok` si no hay problemas abiertos importantes, `watch` si hay algo en seguimiento, `bad` si hay un problema grave que impide jugar) y su resumen en `es` y `en` (1–2 frases). Pon `updated` con la fecha de hoy.
+- Si hubo parche o un problema gordo, suele ser también noticia del día en el resumen.
+
+**C) Verifica** con `node scripts/check-juego.mjs` hasta que diga «✓ juego listo» e incluye los archivos en el commit (`git add content`). En la respuesta, di en una línea qué descubrimientos y parches has añadido. Si no había nada nuevo, no toques estos archivos.
 
 ## Trucos (`content/trucos.json`) — cada lunes por la mañana
 

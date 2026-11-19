@@ -26,6 +26,8 @@ jobs:
           node-version: 22
       - name: Comprobar los trucos
         run: node scripts/check-trucos.mjs
+      - name: Comprobar descubrimientos y parches
+        run: node scripts/check-juego.mjs
       - name: Construir la web
         run: node scripts/build.mjs
         env:

@@ -117,6 +117,11 @@ const ACTIVE = Object.keys(LOCALES).filter((c) => DATA[c].briefs.length && DATA[
 const LEONIDA = JSON.parse(fs.readFileSync(path.join(ROOT, "content/leonida.json"), "utf8"));
 const REVIEWS = JSON.parse(fs.readFileSync(path.join(ROOT, "content/reviews.json"), "utf8"));
 const TRUCOS = JSON.parse(fs.readFileSync(path.join(ROOT, "content/trucos.json"), "utf8"));
+const FINDS = JSON.parse(fs.readFileSync(path.join(ROOT, "content/descubrimientos.json"), "utf8"));
+const PATCHES = JSON.parse(fs.readFileSync(path.join(ROOT, "content/parches.json"), "utf8"));
+const byDateDesc = (a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0);
+FINDS.items.sort(byDateDesc);
+PATCHES.entries.sort(byDateDesc);
 const GUIAS = JSON.parse(fs.readFileSync(path.join(ROOT, "content/guias.json"), "utf8")).guides;
 for (const g of GUIAS) for (const k of ["slug", "title", "desc", "h1", "lead", "quick"]) for (const c of ["es", "en"]) if (!g[k]?.[c]) throw new Error(`content/guias.json: a la guía «${g.id}» le falta ${k}.${c}`);
 (REVIEWS.reviews || []).forEach((r, i) => {
@@ -211,6 +216,28 @@ const gIcon = {
   tips: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.4 1 1.1 1 1.9V16h5v-.2c0-.8.4-1.5 1-1.9A6 6 0 0 0 12 3z"/></g></svg>',
   book: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 6.5C10 5 7 4.5 3.5 5v13.5c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5c-3.5-.5-6.5 0-8.5 1.5zM12 6.5V20"/></g></svg>',
 };
+const findIcon = {
+  easter: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5c3.9 0 7 6 7 11a7 7 0 0 1-14 0c0-5 3.1-11 7-11z"/><path d="m5.6 12.5 2.4-1.5 2 1.5 2-1.5 2 1.5 2-1.5 2.4 1.5"/></g></svg>',
+  reference: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="12" rx="2.5"/><path d="M8 21h8M12 17.5V21M10 9.5l4 2-4 2z"/></g></svg>',
+  curiosity: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6M12 17v.01"/></g></svg>',
+  tip: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.4 1 1.1 1 1.9V16h5v-.2c0-.8.4-1.5 1-1.9A6 6 0 0 0 12 3z"/></g></svg>',
+  secret: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4.5"/><path d="m11.2 11.8 8.3-8.3M16.5 6.5l2.5 2.5M14.5 8.5l2 2"/></g></svg>',
+  record: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18M6 20V11M11 20V5M16 20v-6M21 9l-4-4-4 4"/></g></svg>',
+  tech: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5.5" y="5.5" width="13" height="13" rx="2"/><path d="M9.5 9.5h5v5h-5zM9 2.5v3M15 2.5v3M9 18.5v3M15 18.5v3M2.5 9h3M2.5 15h3M18.5 9h3M18.5 15h3"/></g></svg>',
+  update: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v11M7.5 9.5 12 14l4.5-4.5"/><path d="M4 15v3.5A2.5 2.5 0 0 0 6.5 21h11a2.5 2.5 0 0 0 2.5-2.5V15"/></g></svg>',
+  issue: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2.5 20h19z"/><path d="M12 10v4.5M12 17.5v.01"/></g></svg>',
+  shield: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M12 2.5 4 5.5v6c0 5 3.4 8.6 8 10 4.6-1.4 8-5 8-10v-6z"/></svg>',
+};
+const findCard = (L, f, { compact = false } = {}) => {
+  const T = L.t.finds;
+  const c = L.code;
+  const g = f.link && GUIAS.find((x) => x.id === f.link);
+  return `<article class="find find--${f.cat}" data-cat="${esc(f.cat)}" id="${esc(f.id)}">
+    <div class="find__top"><span class="find__ic" aria-hidden="true">${findIcon[f.cat] || findIcon.curiosity}</span><span class="find__cat">${esc(T.cats[f.cat] || f.cat)}</span>${isFresh(f.date, 3) ? `<span class="find__new">${esc(T.isNew)}</span>` : ""}<time datetime="${f.date}">${esc(fmtDate(L, f.date, { day: "numeric", month: "short" }))}</time></div>
+    <h3>${esc(f.title[c] || f.title.es)}</h3>
+    ${compact ? "" : `<p>${esc(f.text[c] || f.text.es)}</p>${g ? `<a class="tip__more" href="${u(L.paths.guideItem(g.slug[c]))}">${esc(T.related)}</a>` : ""}${sourcesHtml(L, f.sources)}`}
+  </article>`;
+};
 // Flecha de la cruceta (una sola forma, girada)
 const dirRot = { U: 0, R: 90, D: 180, L: 270 };
 const dirKey = (L, d) =>
@@ -293,7 +320,7 @@ const header = (L, active, alts) => {
     [P.news, L.t.nav.news, "news"],
     [P.rumors, L.t.nav.rumors, "rumors"],
     [P.cheats, L.t.tabs.cheats, "cheats"],
-    [P.reviews, L.t.tabs.reviews, "reviews"],
+    [P.finds, L.t.finds.nav, "finds"],
     [P.guides, L.t.nav.guide, "guide"],
   ];
   return `
@@ -343,6 +370,8 @@ const footer = (L) => {
         <a href="${u(P.news)}">${esc(L.t.nav.news)}</a>
         <a href="${u(P.rumors)}">${esc(L.t.nav.rumors)}</a>
         <a href="${u(P.cheats)}">${esc(L.t.cheats.tile)}</a>
+        <a href="${u(P.finds)}">${esc(L.t.finds.nav)}</a>
+        <a href="${u(P.patches)}">${esc(L.t.patch.tile)}</a>
         <a href="${u(P.reviews)}">${esc(L.t.tabs.reviews)}</a>
         <a href="${u(P.guides)}">${esc(L.t.gd.tile)}</a>
         <a href="${u(P.guide)}">${esc(L.t.footerLinks.guide)}</a>
@@ -594,12 +623,21 @@ const briefBody = (L, b) => {
       ${tile("news", P.news, "📰", L.t.nav.news, L.t.hubNewsSub(top.length + more.length))}
       ${tile("rumors", P.rumors, "🕵️", L.t.nav.rumors, L.t.hubRumorsSub(rumors.length))}
       ${tile("reviews", P.reviews, "⭐", L.t.tiles.reviews[0], (REVIEWS.aggregates || [])[0] ? `${REVIEWS.aggregates[0].name} ${REVIEWS.aggregates[0].score} · ${L.t.reviewsCount(reviewList.length)}` : reviewAvg !== null ? `${L.t.reviewsAvg}: ${reviewAvg} · ${L.t.reviewsCount(reviewList.length)}` : L.t.tiles.reviews[1])}
-      ${tile("release", P.release, "⏰", L.t.tiles.release[0], L.t.tiles.release[1])}
-      ${tile("leonida", P.leonida, "🌴", L.t.tiles.leonida[0], L.t.tiles.leonida[1])}
+      ${tile("finds", P.finds, "🥚", L.t.finds.nav, L.t.finds.tileSub(FINDS.items.length))}
+      ${tile("patches", P.patches, "🛠️", L.t.patch.tile, L.t.patch.level[PATCHES.status.level] || L.t.patch.tileSub)}
       ${tile("guide", P.guides, "🧭", L.t.gd.tile, L.t.gd.tileSub)}
     </nav>
     ${adUnit(L, "top")}
   </div>
+  ${
+    FINDS.items.length
+      ? `<div class="wrap"><section class="block latest-game" aria-labelledby="ultimo">
+      <div class="block__head"><h2 id="ultimo">${esc(L.t.finds.latest)}</h2><a class="latest-game__status latest-game__status--${esc(PATCHES.status.level)}" href="${u(P.patches)}">${findIcon.shield}<span>${esc(L.t.patch.level[PATCHES.status.level] || "")}</span></a></div>
+      <div class="finds finds--home">${FINDS.items.slice(0, 3).map((f) => `<a class="find-link" href="${u(P.finds)}#${esc(f.id)}">${findCard(L, f, { compact: true })}</a>`).join("")}</div>
+      <a class="more-btn" href="${u(P.finds)}">${esc(L.t.finds.seeAll)}</a>
+    </section></div>`
+      : ""
+  }
 
   <div class="wrap layout">
     <div class="col-main">
@@ -1077,6 +1115,93 @@ for (const code of ACTIVE) {
     sitemap.push(["cheats", P.cheats, TRUCOS.updated, "weekly", "0.9"]);
   }
 
+  // Secretos y descubrimientos (se renueva cada día)
+  {
+    const T = L.t.finds;
+    const cats = [...new Set(FINDS.items.map((f) => f.cat))];
+    write(
+      P.finds,
+      layout(L, {
+        title: T.title,
+        description: T.desc,
+        key: "finds",
+        active: "finds",
+        type: "article",
+        jsonLd: [
+          { "@context": "https://schema.org", "@type": "Article", inLanguage: code, headline: T.title, description: T.desc, dateModified: FINDS.updated, author: { "@type": "Organization", name: cfg.name }, publisher: { "@type": "Organization", name: cfg.name } },
+          { "@context": "https://schema.org", "@type": "FAQPage", inLanguage: code, mainEntity: T.faq.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) },
+          crumbsLd([[L.t.crumbHome, P.home], [L.t.gd.indexH1, P.guides], [T.h1, P.finds]]),
+        ],
+        body: `
+  <section class="page-head page-head--finds"><div class="wrap"><p class="eyebrow">${esc(T.eyebrow)}</p><h1>${esc(T.h1)}</h1><p class="lead-text">${esc(T.lead)}</p></div></section>
+  <div class="wrap layout">
+    <div class="col-main">
+      ${cats.length > 1 ? `<div class="filter" role="group" data-find-filter><button type="button" data-fcat="all" aria-pressed="true">${esc(T.all)}</button>${cats.map((c) => `<button type="button" data-fcat="${esc(c)}" aria-pressed="false">${esc(T.cats[c] || c)}</button>`).join("")}</div>` : ""}
+      <p class="muted small">${esc(T.count(FINDS.items.length))}</p>
+      <div class="finds" data-finds>${FINDS.items.map((f) => findCard(L, f)).join("")}</div>
+      <p class="muted small" data-finds-none hidden>${esc(T.none)}</p>
+      ${adUnit(L, "bottom")}
+      <section class="block"><div class="block__head"><h2>${esc(L.t.gd.faqTitle)}</h2></div><div class="faq">${T.faq.map(([q, a], i) => `<details${i < 1 ? " open" : ""}><summary>${esc(q)}</summary><div class="faq__a"><p>${esc(a)}</p></div></details>`).join("")}</div></section>
+      <p class="muted small">${esc(T.updated(fmtDate(L, FINDS.updated, { day: "numeric", month: "long", year: "numeric" })))}</p>
+    </div>
+    <aside class="col-side">${sideCards(L)}</aside>
+  </div>`,
+      })
+    );
+    sitemap.push(["finds", P.finds, FINDS.updated, "daily", "0.9"]);
+  }
+
+  // Parches y problemas (estado del juego)
+  {
+    const T = L.t.patch;
+    const st = PATCHES.status;
+    const plat = { ps5: "PS5", xbox: "Xbox Series" };
+    write(
+      P.patches,
+      layout(L, {
+        title: T.title,
+        description: T.desc,
+        key: "patches",
+        active: "",
+        type: "article",
+        jsonLd: [
+          { "@context": "https://schema.org", "@type": "Article", inLanguage: code, headline: T.title, description: T.desc, dateModified: PATCHES.updated, author: { "@type": "Organization", name: cfg.name }, publisher: { "@type": "Organization", name: cfg.name } },
+          { "@context": "https://schema.org", "@type": "FAQPage", inLanguage: code, mainEntity: T.faq.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) },
+          crumbsLd([[L.t.crumbHome, P.home], [L.t.gd.indexH1, P.guides], [T.h1, P.patches]]),
+        ],
+        body: `
+  <section class="page-head page-head--patches"><div class="wrap"><p class="eyebrow">${esc(T.eyebrow)}</p><h1>${esc(T.h1)}</h1><p class="lead-text">${esc(T.lead)}</p></div></section>
+  <div class="wrap layout">
+    <div class="col-main">
+      <div class="pstatus pstatus--${esc(st.level)}"><span class="pstatus__ic" aria-hidden="true">${findIcon.shield}</span><div><b>${esc(T.now)} · ${esc(T.level[st.level] || "")}</b><p>${esc(st[code] || st.es)}</p></div></div>
+      <section class="block"><div class="block__head"><h2>${esc(T.timeline)}</h2></div>
+        <ol class="ptl">${PATCHES.entries
+          .map(
+            (e) => `<li class="ptl__item ptl__item--${esc(e.type)} ptl__item--${esc(e.state)}" id="${esc(e.id)}">
+          <span class="ptl__dot" aria-hidden="true">${findIcon[e.type] || findIcon.update}</span>
+          <div class="ptl__body">
+            <div class="ptl__meta"><time datetime="${e.date}">${esc(fmtDate(L, e.date, { day: "numeric", month: "long" }))}</time><span class="ptl__type">${esc(T.type[e.type] || "")}</span><span class="ptl__state">${esc(T.state[e.state] || "")}</span>${(e.platforms || []).map((p) => `<span class="ptl__plat">${esc(plat[p] || p)}</span>`).join("")}</div>
+            <h3>${esc(e.title[code] || e.title.es)}${e.version ? ` <small>${esc(T.version)} ${esc(e.version)}</small>` : ""}</h3>
+            <p>${esc(e.text[code] || e.text.es)}</p>
+            ${sourcesHtml(L, e.sources)}
+          </div></li>`
+          )
+          .join("")}</ol>
+      </section>
+      <section class="block phelp"><div class="block__head"><h2>${esc(T.helpTitle)}</h2></div>
+        <ol class="steps">${T.help.map(([h, t], i) => `<li><span class="steps__n">${i + 1}</span><span class="steps__ic">${[findIcon.shield, gIcon.phone, findIcon.issue, gIcon.save][i] || findIcon.tip}</span><span class="steps__t"><b>${esc(h)}.</b> ${t}</span></li>`).join("")}</ol>
+      </section>
+      ${adUnit(L, "bottom")}
+      <section class="block"><div class="block__head"><h2>${esc(L.t.gd.faqTitle)}</h2></div><div class="faq">${T.faq.map(([q, a], i) => `<details${i < 1 ? " open" : ""}><summary>${esc(q)}</summary><div class="faq__a"><p>${esc(a)}</p></div></details>`).join("")}</div></section>
+      <p class="muted small">${esc(T.updated(fmtDate(L, PATCHES.updated, { day: "numeric", month: "long", year: "numeric" })))}</p>
+    </div>
+    <aside class="col-side">${sideCards(L)}</aside>
+  </div>`,
+      })
+    );
+    sitemap.push(["patches", P.patches, PATCHES.updated, "daily", "0.9"]);
+  }
+
   // Guías útiles (no caducan): consejos, dinero, radio, duración…
   {
     const G = L.t.gd;
@@ -1137,6 +1262,8 @@ for (const code of ACTIVE) {
     const all = [
       ...GUIAS.map((x) => ({ href: P.guideItem(x.slug[code]), ic: gIcon[x.icon] || gIcon.book, t: x.h1[code], d: x.short[code] })),
       { href: P.cheats, ic: gIcon.cheat, t: L.t.cheats.h1, d: L.t.cheats.tileSub(TRUCOS.cheats.filter((c) => c.seq).length) },
+      { href: P.finds, ic: findIcon.easter, t: L.t.finds.h1, d: L.t.finds.tileSub(FINDS.items.length) },
+      { href: P.patches, ic: findIcon.update, t: L.t.patch.h1, d: L.t.patch.tileSub },
       { href: P.release, ic: gIcon.clock, t: L.t.tiles.release[0], d: L.t.tiles.release[1] },
       { href: P.leonida, ic: gIcon.map, t: L.t.tiles.leonida[0], d: L.t.tiles.leonida[1] },
       { href: P.reviews, ic: gIcon.trophy, t: L.t.tiles.reviews[0], d: L.t.tiles.reviews[1] },

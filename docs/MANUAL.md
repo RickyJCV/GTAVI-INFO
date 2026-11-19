@@ -79,3 +79,9 @@ Una tarea programada de Claude se ejecuta cada mañana: busca las noticias de GT
 - Páginas que no caducan, pensadas para Google: **consejos para empezar**, **cómo ganar dinero** (modo historia), **emisoras de radio** y **cuánto dura**. Más el índice de guías, que reúne también trucos, hora de salida, mapa, notas y lo básico.
 - Los textos están en `content/guias.json`, en español e inglés. Cada guía tiene una respuesta rápida, secciones con diseño propio (consejos numerados, línea de tiempo, emisoras, barras de horas), preguntas frecuentes, fuentes y enlaces a las demás guías.
 - La pestaña **Guía** del móvil y la del menú llevan ahora al índice de guías. La tarea diaria actualiza una guía cuando aparece un dato nuevo y confirmado.
+
+## Secretos y descubrimientos · Parches y problemas
+- **`/descubrimientos-gta-6/`** (`/en/gta-6-discoveries/`): easter eggs, guiños, curiosidades y detalles útiles que encuentran los jugadores, con su fuente y un filtro por categoría. Los datos están en `content/descubrimientos.json`.
+- **`/parches-gta-6/`** (`/en/gta-6-patches/`): estado actual del juego, historial de actualizaciones y problemas (abiertos o resueltos) y qué hacer si tienes un fallo. Los datos están en `content/parches.json`.
+- En la portada, el bloque **«Lo último del juego»** muestra los 3 descubrimientos más recientes y el estado del juego.
+- La tarea diaria los renueva cada mañana con 2 búsquedas extra. `node scripts/check-juego.mjs` valida ambos archivos y bloquea spoilers, trampas online, filtraciones o contenido no apto para AdSense. Se ejecuta también al publicar.
