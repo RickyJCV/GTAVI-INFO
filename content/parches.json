@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-19",
+  "updated": "2026-11-20",
   "status": {
     "level": "watch",
     "es": "Sin parche del día 1 con notas oficiales. Hay problemas para conectarse a PlayStation Network desde el lanzamiento; Sony no ha explicado la causa.",
@@ -34,6 +34,10 @@
         {
           "name": "The Hollywood Reporter",
           "url": "https://hollywoodreporter.com/business/digital/gta-6-playstation-crash-outage-1236758425"
+        },
+        {
+          "name": "Cybernews",
+          "url": "https://cybernews.com/tech/playstation-outage-gta-6-release/"
         }
       ]
     },

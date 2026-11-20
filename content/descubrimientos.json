@@ -1,6 +1,48 @@
 {
-  "updated": "2026-11-19",
+  "updated": "2026-11-20",
   "items": [
+    {
+      "id": "captura-san-andreas",
+      "date": "2026-11-20",
+      "cat": "secret",
+      "title": {
+        "es": "Una captura escondida en San Andreas en 2021 era de GTA VI",
+        "en": "A screenshot hidden in San Andreas in 2021 was from GTA VI"
+      },
+      "text": {
+        "es": "Según Dexerto, una captura que se coló en San Andreas Definitive Edition en 2021 era real: la casa aparece en Belville, en el condado de Leonard de Leónida. La localizó un jugador de la comunidad que cartografía el juego. Rockstar no ha dicho nada.",
+        "en": "According to Dexerto, a screenshot that slipped into San Andreas Definitive Edition in 2021 was real: the house appears in Belville, in Leonida's Leonard County. A player from the community that maps the game located it. Rockstar hasn't said anything."
+      },
+      "sources": [
+        {
+          "name": "Dexerto",
+          "url": "https://www.dexerto.com/gta/gta-6-screenshot-hidden-in-san-andreas-back-in-2021-was-real-and-the-house-has-a-dark-secret-3429837/"
+        }
+      ]
+    },
+    {
+      "id": "ventas-primer-dia",
+      "date": "2026-11-20",
+      "cat": "record",
+      "title": {
+        "es": "Unos 19 millones de copias el primer día, según una estimación",
+        "en": "About 19 million copies on day one, per an estimate"
+      },
+      "text": {
+        "es": "Sensor Tower calcula unos 19,1 millones de copias hasta la mañana del estreno, según Men's Journal, frente a los 11 millones de GTA V en sus primeras 24 horas. Take-Two no ha confirmado cifras y otro cálculo habla de 17,1 millones.",
+        "en": "Sensor Tower estimates about 19.1 million copies by the morning of launch, per Men's Journal, versus GTA V's 11 million in its first 24 hours. Take-Two hasn't confirmed figures and another estimate says 17.1 million."
+      },
+      "sources": [
+        {
+          "name": "Men's Journal",
+          "url": "https://www.mensjournal.com/news/gta-6-sales-19-million-copies-gta-v-record"
+        },
+        {
+          "name": "Happy Gamer",
+          "url": "https://happygamer.com/gta-6-launch-night-psn-ps5-update-sales-176014/"
+        }
+      ]
+    },
     {
       "id": "huevo-de-pascua",
       "date": "2026-11-19",

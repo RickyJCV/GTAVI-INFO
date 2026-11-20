@@ -1,0 +1,199 @@
+{
+  "date": "2026-11-20",
+  "title": "Rockstar anuncia que GTA VI ya está disponible; Sensor Tower estima 19 millones de copias",
+  "summary": "Estimación de 19 millones de copias el primer día y problemas para entrar en PSN. Un grupo afirma haber publicado una build de Xbox sin autenticar y se encuentra una casa escondida en 2021.",
+  "lead": "El primer día de GTA VI deja cifras enormes pero sin confirmar, y también las primeras averías: Sony no ha explicado por qué falló PSN. Aquí tienes lo que se sabe hoy y lo que es solo rumor.",
+  "stories": [
+    {
+      "tag": "Lanzamiento",
+      "title": "Rockstar anuncia que GTA VI ya está disponible en PS5 y Xbox Series X|S",
+      "change": "Rockstar y Take-Two han anunciado oficialmente que GTA VI ya está disponible en PS5 y Xbox Series X|S. La nota de prensa de Take-Two lo presenta como el juego mejor valorado de la historia en esas plataformas, un enfoque propio del editor.",
+      "plain": "Ya es oficial: el juego está a la venta. La frase del «mejor valorado» es la de la propia empresa.",
+      "sources": [
+        {
+          "name": "Rockstar Games",
+          "url": "https://www.rockstargames.com/newswire/article/39akk424a9oo53/grand-theft-auto-vi-now-available"
+        },
+        {
+          "name": "Take-Two Interactive",
+          "url": "https://www.take2games.com/ir/news/rockstar-games-announces-grand-theft-auto-vi-now-available"
+        }
+      ],
+      "detail": "Las notas de la prensa que cita el comunicado son las que ya recogimos: 99 en Metacritic y 98 en OpenCritic. Rockstar sigue sin dar cifras de ventas y sin fecha para el modo online o la versión de PC. El comunicado no menciona problemas de conexión.",
+      "why": "Es la confirmación oficial de que el juego ya se puede jugar."
+    },
+    {
+      "tag": "Negocio",
+      "title": "GTA VI habría vendido unos 19 millones de copias el primer día (estimación)",
+      "change": "Sensor Tower calcula unos 19,1 millones de copias vendidas hasta la mañana del estreno, según Men's Journal, frente al récord de GTA V de 11 millones en 24 horas. Take-Two no ha confirmado cifras. Otro cálculo habla de 17,1 millones.",
+      "plain": "Las cifras son cálculos de terceros y no datos oficiales, pero todas apuntan a un estreno récord.",
+      "sources": [
+        {
+          "name": "Men's Journal",
+          "url": "https://www.mensjournal.com/news/gta-6-sales-19-million-copies-gta-v-record"
+        },
+        {
+          "name": "Happy Gamer",
+          "url": "https://happygamer.com/gta-6-launch-night-psn-ps5-update-sales-176014/"
+        }
+      ],
+      "detail": "Las estimaciones difieren porque cada empresa mide distinto y no incluye las mismas ventas. Take-Two solo ha dicho que la demanda supera lo esperado. Cuando publique datos oficiales, los contaremos aquí.",
+      "why": "Da la escala del lanzamiento, que ya compite con los mayores de la historia."
+    },
+    {
+      "tag": "Aviso",
+      "title": "Problemas para iniciar sesión en PlayStation Network en pleno lanzamiento de GTA VI",
+      "change": "Jugadores de PS5 han tenido problemas para iniciar sesión en PlayStation Network en pleno lanzamiento, según Cybernews y Happy Gamer. Sony no ha explicado la causa y Rockstar no ha emitido comunicado. Una de las fuentes habla de una actualización obligatoria del sistema de PS5.",
+      "plain": "Si no puedes conectarte a PSN, no es tu consola: hubo muchos afectados.",
+      "sources": [
+        {
+          "name": "Cybernews",
+          "url": "https://cybernews.com/tech/playstation-outage-gta-6-release/"
+        },
+        {
+          "name": "Happy Gamer",
+          "url": "https://happygamer.com/gta-6-launch-night-psn-ps5-update-sales-176014/"
+        }
+      ],
+      "detail": "Los medios no coinciden en cuánto duraron los fallos. Mira el estado oficial de PlayStation antes de reiniciar la consola o reinstalar el juego: no hay ninguna solución confirmada por Sony o Rockstar. Lo seguimos en la sección de parches y problemas.",
+      "why": "Evita perder tiempo con arreglos que no hacen falta."
+    }
+  ],
+  "biggest": 0,
+  "more": [
+    {
+      "tag": "Mapa",
+      "title": "Una captura escondida en San Andreas en 2021 era de GTA VI: la casa existe en el mapa",
+      "change": "Según Dexerto, una captura escondida en San Andreas Definitive Edition en 2021 era real: una casa de Belville, en el condado de Leonard de Leónida, la encontró un jugador de la comunidad que cartografía el juego.",
+      "plain": "Un detalle que se había señalado hace años ahora se puede visitar en el mapa.",
+      "sources": [
+        {
+          "name": "Dexerto",
+          "url": "https://www.dexerto.com/gta/gta-6-screenshot-hidden-in-san-andreas-back-in-2021-was-real-and-the-house-has-a-dark-secret-3429837/"
+        }
+      ],
+      "detail": "Sin spoilers. Es un hallazgo de la comunidad, no una declaración de Rockstar. El titular original menciona un secreto de la casa, que no contamos para no destripar nada. Lo recogemos también en la sección de secretos.",
+      "why": "Une una teoría de hace años con el juego ya publicado."
+    }
+  ],
+  "rumors": [
+    {
+      "title": "Un grupo dice haber publicado una build de Xbox de GTA VI sin autenticar",
+      "change": "El grupo Cyberleek asegura haber publicado una build casi completa de Xbox, de unos 209 GB y sin ejecutable, según PC Gamer, VideoCardz y KeenGamer. Ni Rockstar ni investigadores independientes la han autenticado.",
+      "plain": "Hay una supuesta copia del juego en circulación, pero nadie ha comprobado que sea auténtica.",
+      "reliability": "baja",
+      "who": "Cyberleek · PC Gamer, VideoCardz y KeenGamer",
+      "sources": [
+        {
+          "name": "PC Gamer",
+          "url": "https://www.pcgamer.com/games/grand-theft-auto/cyberleek-drops-what-they-claim-is-a-near-complete-gta-6-xbox-build-online/"
+        },
+        {
+          "name": "VideoCardz",
+          "url": "https://videocardz.com/newz/gta-vi-xbox-build-allegedly-leaked-by-cyberleek"
+        },
+        {
+          "name": "KeenGamer",
+          "url": "https://www.keengamer.com/articles/news/gta-6-xbox-build-allegedly-leaked-by-cyberleek-209gb-files-surface-online/"
+        }
+      ],
+      "detail": "Según los medios, el grupo dice que soltará el ejecutable el 23 de noviembre. No enlazamos ni recomendamos buscar ese material: es contenido robado y puede ser peligroso. Rockstar no ha comentado el caso.",
+      "why": "Muestra que las filtraciones no paran ni tras el lanzamiento."
+    }
+  ],
+  "posts": [
+    "Rockstar ya ha anunciado oficialmente que GTA VI está disponible en PS5 y Xbox Series X|S. Sensor Tower estima unos 19 millones de copias vendidas el primer día: son cálculos, no cifras oficiales. 🎮",
+    "Si no puedes entrar en PSN para jugar a GTA VI: hubo problemas de inicio de sesión en el lanzamiento y Sony no ha explicado la causa. Mira el estado de PlayStation antes de reiniciarlo todo. 🔌",
+    "Una captura escondida en San Andreas en 2021 era de GTA VI: la casa está en el mapa, según Dexerto. La encontró alguien de la comunidad que cartografía el juego. ¿Ya la has visitado? 🏠"
+  ],
+  "context": [
+    {
+      "title": "GTA 6 ya tiene nota en la prensa: 99 en Metacritic",
+      "text": "Las primeras reseñas dieron la nota más alta de un juego de Rockstar, según Notebookcheck y Forbes. Pueden cambiar.",
+      "date": "2026-11-18",
+      "sources": [
+        {
+          "name": "Notebookcheck",
+          "url": "https://www.notebookcheck.net/GTA-6-reviews-award-99-Metacritic-score-topping-GTA-4-to-become-Rockstar-s-top-rated.1453363.0.html"
+        }
+      ]
+    },
+    {
+      "title": "La precarga de GTA VI disparó el tráfico de internet en algunas regiones",
+      "text": "Dexerto recogía un informe con más de un 50 % de aumento de banda ancha en algunas zonas.",
+      "date": "2026-11-19",
+      "sources": [
+        {
+          "name": "Dexerto",
+          "url": "https://www.dexerto.com/gta/gta-6-is-causing-internet-issues-as-players-rush-to-preload-3427231/"
+        }
+      ]
+    }
+  ],
+  "en": {
+    "title": "Rockstar announces GTA VI is available; Sensor Tower estimates 19 million copies",
+    "summary": "An estimated 19 million copies on day one and sign-in problems on PSN. A group claims to have released an unauthenticated Xbox build, and a house hidden in 2021 turns up in the map.",
+    "lead": "GTA VI's first day brings huge but unconfirmed numbers, and the first outages too: Sony hasn't explained why PSN failed. Here's what's known today and what's only rumor.",
+    "stories": [
+      {
+        "tag": "Launch",
+        "title": "Rockstar announces GTA VI is now available on PS5 and Xbox Series X|S",
+        "change": "Rockstar and Take-Two have officially announced GTA VI is now available on PS5 and Xbox Series X|S. Take-Two's press release presents it as the highest-rated game of all time on those platforms, the publisher's own framing.",
+        "plain": "It's official: the game is on sale. The \"highest rated\" line is the company's own.",
+        "detail": "The press scores the release cites are the ones we already covered: 99 on Metacritic and 98 on OpenCritic. Rockstar still gives no sales figures and no date for the online mode or the PC version. The release doesn't mention connection problems.",
+        "why": "It's the official confirmation that the game can now be played."
+      },
+      {
+        "tag": "Business",
+        "title": "GTA VI reportedly sold about 19 million copies on day one (estimate)",
+        "change": "Sensor Tower estimates about 19.1 million copies sold by the morning of launch, per Men's Journal, versus GTA V's record of 11 million in 24 hours. Take-Two hasn't confirmed figures. Another estimate says 17.1 million.",
+        "plain": "These are third-party calculations, not official data, but all point to a record launch.",
+        "detail": "Estimates differ because each firm measures differently and doesn't include the same sales. Take-Two has only said demand exceeds expectations. When it publishes official data, we'll cover it here.",
+        "why": "It gives the scale of a launch already rivaling the biggest in history."
+      },
+      {
+        "tag": "Heads-up",
+        "title": "PlayStation Network sign-in problems during GTA VI's launch",
+        "change": "PS5 players have had trouble signing in to PlayStation Network during launch, per Cybernews and Happy Gamer. Sony hasn't explained the cause and Rockstar hasn't issued a statement. One source mentions a mandatory PS5 system update.",
+        "plain": "If you can't connect to PSN, it isn't your console: many people were affected.",
+        "detail": "Outlets disagree on how long the failures lasted. Check PlayStation's official status before restarting your console or reinstalling the game: there's no fix confirmed by Sony or Rockstar. We're tracking it in the patches and issues section.",
+        "why": "It saves you time on fixes you don't need."
+      }
+    ],
+    "more": [
+      {
+        "tag": "Map",
+        "title": "A screenshot hidden in San Andreas in 2021 was from GTA VI: the house exists on the map",
+        "change": "According to Dexerto, a screenshot hidden in San Andreas Definitive Edition in 2021 was real: a house in Belville, in Leonida's Leonard County, found by a player from the community that maps the game.",
+        "plain": "A detail flagged years ago can now be visited on the map.",
+        "detail": "No spoilers. It's a community find, not a Rockstar statement. The original headline mentions a secret about the house, which we don't spell out so as not to spoil anything. We also list it in the secrets section.",
+        "why": "It ties a years-old theory to the released game."
+      }
+    ],
+    "rumors": [
+      {
+        "title": "A group says it released an unauthenticated Xbox build of GTA VI",
+        "change": "The group Cyberleek claims to have released a near-complete Xbox build, about 209 GB and without an executable, per PC Gamer, VideoCardz and KeenGamer. Neither Rockstar nor independent researchers have authenticated it.",
+        "plain": "A supposed copy of the game is circulating, but nobody has checked it's genuine.",
+        "detail": "According to the outlets, the group says it will drop the executable on November 23. We don't link or recommend looking for that material: it's stolen content and can be dangerous. Rockstar hasn't commented on the case.",
+        "why": "It shows leaks haven't stopped even after launch.",
+        "who": "Cyberleek · PC Gamer, VideoCardz and KeenGamer"
+      }
+    ],
+    "posts": [
+      "Rockstar has officially announced GTA VI is available on PS5 and Xbox Series X|S. Sensor Tower estimates about 19 million copies sold on day one: calculations, not official figures. 🎮",
+      "Can't get into PSN to play GTA VI? There were sign-in problems at launch and Sony hasn't explained the cause. Check PlayStation's status before restarting everything. 🔌",
+      "A screenshot hidden in San Andreas in 2021 was from GTA VI: the house is on the map, per Dexerto. A player from the community that maps the game found it. Visited it yet? 🏠"
+    ],
+    "context": [
+      {
+        "title": "GTA 6 now has a press score: 99 on Metacritic",
+        "text": "First reviews gave the highest score for a Rockstar game, per Notebookcheck and Forbes. They may change."
+      },
+      {
+        "title": "GTA VI preload demand spiked internet traffic in some regions",
+        "text": "Dexerto reported a more than 50% rise in broadband use in some areas."
+      }
+    ]
+  }
+}
