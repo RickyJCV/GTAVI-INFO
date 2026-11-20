@@ -2,10 +2,34 @@
   "updated": "2026-11-20",
   "status": {
     "level": "watch",
-    "es": "Sin parche del día 1 con notas oficiales. Hay problemas para conectarse a PlayStation Network desde el lanzamiento; Sony no ha explicado la causa.",
-    "en": "No day-one patch with official notes. There have been PlayStation Network sign-in problems since launch; Sony hasn't explained the cause."
+    "es": "Sin parche del día 1 con notas oficiales. Hubo problemas para conectarse a PlayStation Network desde el lanzamiento (Sony no ha explicado la causa) y algunos jugadores cuentan cierres que hacen perder progreso.",
+    "en": "No day-one patch with official notes. There were PlayStation Network sign-in problems from launch (Sony hasn't explained the cause) and some players report crashes that lose progress."
   },
   "entries": [
+    {
+      "id": "cierres-progreso-perdido",
+      "date": "2026-11-20",
+      "type": "issue",
+      "state": "open",
+      "platforms": [
+        "ps5",
+        "xbox"
+      ],
+      "title": {
+        "es": "Cierres inesperados que hacen perder progreso pese al autoguardado",
+        "en": "Crashes losing progress despite autosave"
+      },
+      "text": {
+        "es": "Algunos jugadores de PS5 y Xbox cuentan cierres y reinicios que les han costado horas de partida, aun con el sistema de autoguardado. Rockstar no ha publicado un arreglo ni un comunicado. Consejo: guarda a mano cuando puedas.",
+        "en": "Some PS5 and Xbox players report crashes and restarts that cost them hours of play, even with the autosave system. Rockstar hasn't published a fix or a statement. Tip: save manually when you can."
+      },
+      "sources": [
+        {
+          "name": "Notebookcheck",
+          "url": "https://www.notebookcheck.net/GTA-6-PS5-and-Xbox-crashes-are-losing-hours-of-progress-despite-autosave-system.1453724.0.html"
+        }
+      ]
+    },
     {
       "id": "psn-lanzamiento",
       "date": "2026-11-19",

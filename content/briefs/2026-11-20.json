@@ -74,6 +74,34 @@
       ],
       "detail": "Sin spoilers. Es un hallazgo de la comunidad, no una declaración de Rockstar. El titular original menciona un secreto de la casa, que no contamos para no destripar nada. Lo recogemos también en la sección de secretos.",
       "why": "Une una teoría de hace años con el juego ya publicado."
+    },
+    {
+      "tag": "Aviso",
+      "title": "Cierres inesperados en PS5 y Xbox hacen perder horas de progreso pese al autoguardado",
+      "change": "Según Notebookcheck, algunos jugadores de PS5 y Xbox han perdido horas de progreso tras cierres y reinicios de la consola, aun con el sistema de autoguardado. Rockstar no ha publicado un arreglo ni un comunicado.",
+      "plain": "Guarda la partida a mano cuando puedas: el autoguardado no siempre llega a tiempo.",
+      "sources": [
+        {
+          "name": "Notebookcheck",
+          "url": "https://www.notebookcheck.net/GTA-6-PS5-and-Xbox-crashes-are-losing-hours-of-progress-despite-autosave-system.1453724.0.html"
+        }
+      ],
+      "detail": "Son casos que cuentan los propios jugadores y no hay cifras de cuántos afectados hay. Si te pasa, no reinstales a ciegas: espera a que Rockstar diga algo. Lo seguimos en la sección de parches y problemas.",
+      "why": "Te ayuda a no perder horas de partida mientras llega una solución."
+    },
+    {
+      "tag": "Negocio",
+      "title": "The Hollywood Reporter: las ventas de GTA 6 ya superan los ingresos de «The Odyssey» (estimación)",
+      "change": "The Hollywood Reporter calcula que GTA 6 ya ha superado en ingresos a «The Odyssey», de Christopher Nolan. Sensor Tower estimó 1.840 millones de dólares solo en reservas hasta la víspera, y la revista cree que el total ya supera los 2.000 millones. Es una inferencia, no una cifra oficial.",
+      "plain": "Por dinero ingresado, el juego ya se compara con las mayores películas del año; los números son cálculos.",
+      "sources": [
+        {
+          "name": "The Hollywood Reporter",
+          "url": "https://www.hollywoodreporter.com/business/digital/gta-6-sales-the-odyssey-1236759454/"
+        }
+      ],
+      "detail": "Take-Two no ha dado cifras. Se mezclan estimaciones distintas: la de Sensor Tower cubre reservas hasta antes del estreno y la de la revista es una suposición propia. Las compararemos con los datos oficiales cuando lleguen.",
+      "why": "Sitúa el estreno del juego junto a los mayores del cine."
     }
   ],
   "rumors": [
@@ -168,6 +196,22 @@
         "plain": "A detail flagged years ago can now be visited on the map.",
         "detail": "No spoilers. It's a community find, not a Rockstar statement. The original headline mentions a secret about the house, which we don't spell out so as not to spoil anything. We also list it in the secrets section.",
         "why": "It ties a years-old theory to the released game."
+      },
+      {
+        "tag": "Heads-up",
+        "title": "Crashes on PS5 and Xbox are losing hours of progress despite autosave",
+        "change": "According to Notebookcheck, some PS5 and Xbox players have lost hours of progress after crashes and console restarts, even with the autosave system. Rockstar hasn't published a fix or a statement.",
+        "plain": "Save manually when you can: autosave doesn't always get there in time.",
+        "detail": "These are cases told by players themselves, with no figures on how many are affected. If it happens to you, don't reinstall blindly: wait for Rockstar to say something. We're tracking it in the patches and issues section.",
+        "why": "It helps you avoid losing hours of play while a fix arrives."
+      },
+      {
+        "tag": "Business",
+        "title": "The Hollywood Reporter: GTA 6 sales already top \"The Odyssey\"'s revenue (estimate)",
+        "change": "The Hollywood Reporter calculates GTA 6 has already passed Christopher Nolan's \"The Odyssey\" in revenue. Sensor Tower estimated $1.84 billion from preorders alone through the eve of launch, and the outlet thinks the total is already over $2 billion. It's an inference, not an official figure.",
+        "plain": "By money brought in, the game already compares with the biggest films of the year; the numbers are calculations.",
+        "detail": "Take-Two hasn't given figures. Different estimates are mixed: Sensor Tower's covers preorders through before launch and the outlet's is its own assumption. We'll compare them with official data when it arrives.",
+        "why": "It puts the game's launch next to the biggest in film."
       }
     ],
     "rumors": [
