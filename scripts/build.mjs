@@ -239,6 +239,21 @@ const tabIcon = {
   search: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></g></svg>',
   cheats: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10a5 5 0 0 1 4.9 6l-.8 4a2.6 2.6 0 0 1-4.6 1.1L15 16H9l-1.5 2.1A2.6 2.6 0 0 1 2.9 17l-.8-4A5 5 0 0 1 7 7z"/><path d="M7 10.5v3M5.5 12h3"/></g><circle cx="16" cy="11" r="1.2" fill="currentColor"/><circle cx="18" cy="13.2" r="1.2" fill="currentColor"/></svg>',
 };
+// Icono en línea con el texto (botones, avisos, etiquetas): mismo trazo y tamaño en todos los móviles
+const I = (svg) => (svg || "").replace("<svg ", '<svg class="i" ');
+const uiIcon = {
+  swipe: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 8 3 12l4 4M17 8l4 4-4 4M3 12h18"/></g></svg>',
+  refresh: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M20 12a8 8 0 1 1-2.34-5.66M20 4v5h-5"/></svg>',
+  bell: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5a2.2 2.2 0 0 0 4 0"/></g></svg>',
+  offline: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2.5 9a14 14 0 0 1 19 0M5.5 12.5a9.5 9.5 0 0 1 13 0M8.8 16a5 5 0 0 1 6.4 0"/><circle cx="12" cy="19.2" r="1" fill="currentColor"/></g></svg>',
+  theme: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5v17a8.5 8.5 0 0 0 0-17z" fill="currentColor"/></g></svg>',
+  globe: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></g></svg>',
+  install: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5"/><path d="M12 7.5v7M9 11.5l3 3 3-3"/></g></svg>',
+  calendar: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></g></svg>',
+  check: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="m5 12.5 4.5 4.5L19 7.5"/></svg>',
+  warn: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 2.5 20h19z"/><path d="M12 10v4.5M12 17.4v.01"/></g></svg>',
+  spark: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M12 3l2.2 6.3L20.5 12l-6.3 2.2L12 20.5l-2.2-6.3L3.5 12l6.3-2.7z"/></svg>',
+};
 // Iconos propios de la sección de trucos
 const cheatIcon = {
   money: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6" width="19" height="12" rx="2.5"/><circle cx="12" cy="12" r="2.6"/><path d="M6 9.5v5M18 9.5v5"/></g></svg>',
@@ -286,7 +301,7 @@ const findIcon = {
   shield: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M12 2.5 4 5.5v6c0 5 3.4 8.6 8 10 4.6-1.4 8-5 8-10v-6z"/></svg>',
 };
 const seg2 = (L, cur) =>
-  `<nav class="seg" aria-label="${esc(L.t.ux.seg2Label)}"><a href="${u(L.paths.clips)}"${cur === "clips" ? ' aria-current="page"' : ""}>🎬 ${esc(L.t.ux.seg2.clips)} <span>${CLIPS.items.length}</span></a><a href="${u(L.paths.finds)}"${cur === "finds" ? ' aria-current="page"' : ""}>🥚 ${esc(L.t.ux.seg2.finds)} <span>${FINDS.items.length}</span></a></nav>`;
+  `<nav class="seg" aria-label="${esc(L.t.ux.seg2Label)}"><a href="${u(L.paths.clips)}"${cur === "clips" ? ' aria-current="page"' : ""}>${I(tabIcon.community)}${esc(L.t.ux.seg2.clips)} <span>${CLIPS.items.length}</span></a><a href="${u(L.paths.finds)}"${cur === "finds" ? ' aria-current="page"' : ""}>${I(tabIcon.finds)}${esc(L.t.ux.seg2.finds)} <span>${FINDS.items.length}</span></a></nav>`;
 const findCard = (L, f, { compact = false } = {}) => {
   const T = L.t.finds;
   const c = L.code;
@@ -313,7 +328,7 @@ const clipCard = (L, c, { compact = false } = {}) => {
     <div class="clip__meta">
       <p class="clip__by">${c.author ? `${esc(T.by)} ${c.authorUrl ? `<a href="${esc(c.authorUrl)}" target="_blank" rel="noopener nofollow">${esc(c.author)}</a>` : `<b>${esc(c.author)}</b>`} ${esc(T.on(pf))}` : esc(T.on(pf).replace(/^./, (x) => x.toUpperCase()))}</p>
       ${compact ? "" : `<p class="clip__note">${esc(c.note?.[L.code] || c.note?.es || "")}</p>`}
-      <div class="clip__tags"><span>${T.flags[c.lang] || ""} ${esc(T.langs[c.lang] || c.lang)}</span>${c.cat ? `<span>${esc(T.cats[c.cat] || c.cat)}</span>` : ""}<time datetime="${c.date}">${esc(fmtDate(L, c.date, { day: "numeric", month: "short" }))}</time><a class="clip__open" href="${esc(c.url)}" target="_blank" rel="noopener nofollow">${esc(T.open(pf))}</a></div>
+      <div class="clip__tags"><span>${esc(T.langs[c.lang] || c.lang)}</span>${c.cat ? `<span>${esc(T.cats[c.cat] || c.cat)}</span>` : ""}<time datetime="${c.date}">${esc(fmtDate(L, c.date, { day: "numeric", month: "short" }))}</time><a class="clip__open" href="${esc(c.url)}" target="_blank" rel="noopener nofollow">${esc(T.open(pf))}</a></div>
     </div>
   </article>`;
 };
@@ -341,7 +356,7 @@ const installSheet = (L) => `
       <div><h2 id="sheet-title">${esc(L.t.inst.title)}</h2><p>${esc(L.t.inst.sub)}</p></div>
       <button type="button" class="sheet__x" data-sheet-close aria-label="${esc(L.t.app.close)}">×</button>
     </div>
-    <div data-variant="prompt" hidden><button type="button" class="btn btn--primary btn--block btn--big" data-install-go>${esc(L.t.appCta)}</button></div>
+    <div data-variant="prompt" hidden><button type="button" class="btn btn--primary btn--block btn--big" data-install-go>${I(uiIcon.install)}${esc(L.t.appCta)}</button></div>
     <div data-variant="ios" hidden>${stepsHtml(L, "ios")}</div>
     <div data-variant="iosChrome" hidden>${stepsHtml(L, "iosChrome")}</div>
     <div data-variant="android" hidden>${stepsHtml(L, "android")}</div>
@@ -382,7 +397,7 @@ const countdown = (L, size = "lg") => `
     <div class="countdown__grid">
       ${["d", "h", "m", "s"].map((k, i) => `<div><b data-unit="${k}">–</b><span>${esc(L.t.cdUnits[i])}</span></div>`).join("")}
     </div>
-    <div class="countdown__done" hidden><span class="countdown__done-title">${esc(L.t.cdDone)}</span><small>${esc(L.t.cdDoneSub)}</small><span class="countdown__done-cta"><a class="btn btn--primary" href="${u(L.paths.cheats)}">${esc(L.t.ux.doneCheats)}</a><a class="btn btn--ghost" href="${u(L.paths.finds)}">${esc(L.t.ux.doneFinds)}</a></span></div>
+    <div class="countdown__done" hidden><span class="countdown__done-title">${esc(L.t.cdDone)}</span><small>${esc(L.t.cdDoneSub)}</small><span class="countdown__done-cta"><a class="btn btn--primary" href="${u(L.paths.cheats)}">${I(tabIcon.cheats)}${esc(L.t.ux.doneCheats)}</a><a class="btn btn--ghost" href="${u(L.paths.finds)}">${I(tabIcon.finds)}${esc(L.t.ux.doneFinds)}</a></span></div>
   </div>`;
 
 const langSwitch = (L, alts) => `
@@ -466,11 +481,11 @@ const footer = (L) => {
           <a href="${u(P.reviews)}">${esc(L.t.tabs.reviews)}</a>
         </div>
         <div><h2>${esc(L.t.ux.foot.site)}</h2>
-          <a href="${u(P.app)}">📲 App</a>
+          <a href="${u(P.app)}">${I(uiIcon.install)} App</a>
           <a href="${u(P.about)}">${esc(L.t.footerLinks.about)}</a>
           <a href="${u(P.privacy)}">${esc(L.t.footerLinks.privacy)}</a>
           <a href="${u(P.legal)}">${esc(L.t.footerLinks.legal)}</a>
-          <button class="footer-install" type="button" data-install hidden>${esc(L.t.app.install)}</button>
+          <button class="footer-install" type="button" data-install hidden>${I(uiIcon.install)}${esc(L.t.app.install)}</button>
           ${soc.map(([k, v]) => `<a href="${esc(v)}" rel="me noopener" target="_blank">${esc(k === "x" ? "X" : k.charAt(0).toUpperCase() + k.slice(1))}</a>`).join("")}
         </div>
       </nav>
@@ -560,8 +575,8 @@ ${header(L, active, alts)}
 ${langHint(L, alts)}
 <div class="launch-bar" data-launch-bar data-launch="${esc(cfg.launchDate)}">
   <div class="wrap launch-bar__inner">
-    <span data-lb="pre">🗓️ ${esc(L.t.launchBarPre(""))} <a href="${u(L.paths.release)}">${esc(L.t.launchBarPreCta)}</a></span>
-    <span data-lb="out" hidden>${esc(L.t.ux.lb[PATCHES.status.level] || L.t.ux.lb.ok)} <a href="${u(PATCHES.status.level === "ok" ? L.paths.guides : L.paths.patches)}">${esc(L.t.ux.lbCta[PATCHES.status.level] || L.t.ux.lbCta.ok)}</a></span>
+    <span data-lb="pre">${I(uiIcon.calendar)} ${esc(L.t.launchBarPre(""))} <a href="${u(L.paths.release)}">${esc(L.t.launchBarPreCta)}</a></span>
+    <span data-lb="out" hidden>${I(PATCHES.status.level === "ok" ? uiIcon.spark : PATCHES.status.level === "bad" ? uiIcon.warn : findIcon.shield)} ${esc(L.t.ux.lb[PATCHES.status.level] || L.t.ux.lb.ok)} <a href="${u(PATCHES.status.level === "ok" ? L.paths.guides : L.paths.patches)}">${esc(L.t.ux.lbCta[PATCHES.status.level] || L.t.ux.lbCta.ok)}</a></span>
   </div>
 </div>
 <main id="main">
@@ -605,8 +620,8 @@ const readerHtml = (L) => `
           <div class="reader">
             <span class="reader__label" id="reader-label">${esc(L.t.readerQ)}</span>
             <div class="aud-toggle" role="group" aria-labelledby="reader-label">
-              <button type="button" data-aud-btn="fans" aria-pressed="true">${esc(L.t.fans)}</button>
-              <button type="button" data-aud-btn="nuevos" aria-pressed="false">${esc(L.t.nuevos)}</button>
+              <button type="button" data-aud-btn="fans" aria-pressed="true">${I(tabIcon.cheats)}${esc(L.t.fans)}</button>
+              <button type="button" data-aud-btn="nuevos" aria-pressed="false">${I(uiIcon.spark)}${esc(L.t.nuevos)}</button>
             </div>
           </div>`;
 
@@ -761,7 +776,7 @@ const briefBody = (L, b) => {
   <div class="wrap layout">
     <div class="col-main">
       <section class="block zone zone--news" aria-labelledby="top5">
-        <span class="kicker kicker--news">✔ ${esc(L.t.kickerNews)}</span>
+        <span class="kicker kicker--news">✔︎ ${esc(L.t.kickerNews)}</span>
         <div class="block__head">
           <h2 id="top5">${esc(L.t.top5)}</h2>
           ${readerHtml(L)}
@@ -775,7 +790,7 @@ const briefBody = (L, b) => {
       ${
         rumors.length
           ? `<section class="block zone zone--rumor" aria-labelledby="rumors">
-        <span class="kicker kicker--rumor">⚠ ${esc(L.t.kickerRumor)}</span>
+        <span class="kicker kicker--rumor">⚠︎ ${esc(L.t.kickerRumor)}</span>
         <div class="block__head"><h2 id="rumors">${esc(L.t.rumorsTitle)}</h2></div>
         <p class="rumor-note small">${esc(L.t.rumorsIntro)}</p>
         <div class="briefs-grid">${rumors.map((it) => itemCard(L, it)).join("")}</div>
@@ -826,7 +841,7 @@ const briefBody = (L, b) => {
         <h2 class="card__title">${esc(L.t.ctaTitle)}</h2>
         <p class="small">${esc(L.t.ctaText)}</p>
         <a class="btn btn--ghost btn--block" href="${u(P.feed)}">${icon.rss} ${esc(L.t.rss)}</a>
-        <button class="btn btn--primary btn--block" type="button" data-install hidden>${esc(L.t.app.install)}</button>
+        <button class="btn btn--primary btn--block" type="button" data-install hidden>${I(uiIcon.install)}${esc(L.t.app.install)}</button>
         <p class="ios-tip small" data-ios-tip hidden><b>${esc(L.t.app.iosTitle)}</b><br>${esc(L.t.app.iosSteps)}</p>
       </div>
     </aside>
@@ -843,8 +858,8 @@ const listBody = (L, kind) => {
   list.forEach((i) => days.set(i.date, [...(days.get(i.date) || []), i]));
   return `
   <section class="page-head page-head--${kind}"><div class="wrap">
-    <nav class="seg" aria-label="${esc(L.t.ux.segLabel)}"><a href="${u(P.news)}"${rumor ? "" : ' aria-current="page"'}>✔ ${esc(L.t.ux.seg.news)} <span>${items.filter((i) => i.kind === "news").length}</span></a><a href="${u(P.rumors)}"${rumor ? ' aria-current="page"' : ""}>⚠ ${esc(L.t.ux.seg.rumors)} <span>${items.filter((i) => i.kind === "rumor").length}</span></a></nav>
-    <span class="kicker kicker--${kind}">${rumor ? "⚠ " + esc(L.t.kickerRumor) : "✔ " + esc(L.t.kickerNews)}</span>
+    <nav class="seg" aria-label="${esc(L.t.ux.segLabel)}"><a href="${u(P.news)}"${rumor ? "" : ' aria-current="page"'}>${I(uiIcon.check)}${esc(L.t.ux.seg.news)} <span>${items.filter((i) => i.kind === "news").length}</span></a><a href="${u(P.rumors)}"${rumor ? ' aria-current="page"' : ""}>${I(uiIcon.warn)}${esc(L.t.ux.seg.rumors)} <span>${items.filter((i) => i.kind === "rumor").length}</span></a></nav>
+    <span class="kicker kicker--${kind}">${rumor ? "⚠\uFE0E " + esc(L.t.kickerRumor) : "✔\uFE0E " + esc(L.t.kickerNews)}</span>
     <h1>${esc(rumor ? L.t.rumorsH1 : L.t.newsH1)}</h1><p class="muted">${esc(rumor ? L.t.rumorsIntro : L.t.newsIntro)}</p></div></section>
   <div class="wrap layout">
     <div class="col-main">
@@ -877,7 +892,7 @@ const listBody = (L, kind) => {
       ${adUnit(L, "bottom")}
     </div>
     <aside class="col-side">
-      <a class="hub__tile hub__tile--${rumor ? "news" : "rumors"}" href="${u(rumor ? P.news : P.rumors)}"><span class="hub__icon" aria-hidden="true">${rumor ? "📰" : "🕵️"}</span><span class="hub__txt"><b>${esc(rumor ? L.t.nav.news : L.t.nav.rumors)}</b><small>${esc(rumor ? L.t.kickerNews : L.t.kickerRumor)}</small></span></a>
+      <a class="hub__tile hub__tile--${rumor ? "news" : "rumors"}" href="${u(rumor ? P.news : P.rumors)}"><span class="hub__icon" aria-hidden="true">${rumor ? tabIcon.news : tabIcon.rumors}</span><span class="hub__txt"><b>${esc(rumor ? L.t.nav.news : L.t.nav.rumors)}</b><small>${esc(rumor ? L.t.kickerNews : L.t.kickerRumor)}</small></span></a>
       ${sideCards(L)}
     </aside>
   </div>`;
@@ -911,7 +926,7 @@ const itemBody = (L, it) => {
       <article class="article">
         ${
           rumor
-            ? `<div class="rumor-banner"><b>⚠ ${esc(L.t.rumorBannerTitle)}</b><p>${esc(L.t.rumorBanner)}</p>
+            ? `<div class="rumor-banner"><b>⚠︎ ${esc(L.t.rumorBannerTitle)}</b><p>${esc(L.t.rumorBanner)}</p>
           ${it.who ? `<p><strong>${esc(L.t.who)}</strong> ${esc(it.who)}</p>` : ""}
           <p class="rumor-banner__rel">${relMeter(L, it.reliability)}<span>${esc(L.t.legend[it.reliability])}</span></p></div>`
             : ""
@@ -1127,7 +1142,7 @@ for (const code of ACTIVE) {
       <section class="block" aria-labelledby="chars"><div class="block__head"><h2 id="chars">${esc(L.t.leonidaCharacters)}</h2></div>
         <div class="char-grid">${LEONIDA.characters.map((c) => `<article class="char"><span class="char__av" aria-hidden="true">${esc(c.name.split(/\s+/).map((w) => w[0]).join("").slice(0, 2))}</span><div><h3>${esc(c.name)}</h3><span class="tag">${esc(c["role_" + code] || c.role_es)}</span><p>${esc(c[code] || c.es)}</p></div></article>`).join("")}</div>
       </section>
-      <p class="callout"><span>⚠ ${esc(L.t.leonidaRumor)}</span> <a href="${u(P.rumors)}">${esc(L.t.leonidaRumorCta)}</a></p>
+      <p class="callout"><span>⚠︎ ${esc(L.t.leonidaRumor)}</span> <a href="${u(P.rumors)}">${esc(L.t.leonidaRumorCta)}</a></p>
       ${sourcesHtml(L, LEONIDA.sources)}
       ${adUnit(L, "bottom")}
     </div>
@@ -1157,7 +1172,7 @@ for (const code of ACTIVE) {
       <div class="score-hero"><div class="score-ring" style="--p:${reviewAvg}"><b>${reviewAvg}</b><small>/100</small></div><div><h2>${esc(L.t.reviewsListAvg)}</h2><p class="muted">${esc(L.t.reviewsCount(reviewList.length))}</p></div></div>
       <div class="table-wrap"><table class="tz-table score-table"><thead><tr><th scope="col">${esc(L.t.reviewsOutlet)}</th><th scope="col">${esc(L.t.reviewsScore)}</th><th scope="col"></th></tr></thead>
         <tbody>${reviewList.map((r) => `<tr><th scope="row">${esc(r.outlet)}</th><td><span class="score score--${r.pct >= 90 ? "hi" : r.pct >= 75 ? "mid" : "lo"}">${esc(String(r.score))}${r.max !== 100 ? `/${esc(String(r.max))}` : ""}</span></td><td><a href="${esc(r.url)}" target="_blank" rel="noopener nofollow">${esc(r.via ? L.t.reviewsVia(r.via) : L.t.reviewsRead)} ↗</a></td></tr>`).join("")}</tbody></table></div>`
-          : `<div class="empty-state"><span aria-hidden="true">⏳</span><p>${esc(L.t.reviewsEmpty)}</p><div class="release-cd">${countdown(L, "sm")}</div></div>`
+          : `<div class="empty-state"><span aria-hidden="true">${gIcon.clock}</span><p>${esc(L.t.reviewsEmpty)}</p><div class="release-cd">${countdown(L, "sm")}</div></div>`
       }
       <p class="muted small">${esc(L.t.reviewsNote)}</p>
       ${adUnit(L, "bottom")}
@@ -1190,7 +1205,7 @@ for (const code of ACTIVE) {
           <ol class="pads" aria-label="${esc(T.seqLabel(c.seq.length))}">${c.seq.map((d) => dirKey(L, d)).join("")}</ol></div>
         ${c.unlock ? `<p class="cheat__unlock">${cheatIcon.lock}<span><b>${esc(T.unlock)}</b> ${esc(c.unlock[code] || c.unlock.es)}</span></p>` : ""}
         <p class="cheat__status cheat__status--ok">${tabIcon.check}${esc(T.status.coincide)}</p>`
-            : `<p class="cheat__status cheat__status--wait">⏳ ${esc(T.status.pendiente)}</p><p class="muted small">${esc(T.pending)}</p>`
+            : `<p class="cheat__status cheat__status--wait">${I(gIcon.clock)}${esc(T.status.pendiente)}</p><p class="muted small">${esc(T.pending)}</p>`
         }
       </article>`;
     write(
@@ -1220,7 +1235,7 @@ for (const code of ACTIVE) {
       <section class="block" aria-labelledby="lista"><div class="block__head"><h2 id="lista">${esc(T.listTitle)}</h2><span class="muted small">${esc(T.count(withCode.length, pending.length))}</span></div>
         <div class="cheat-grid">${withCode.map(card).join("")}${pending.map(card).join("")}</div>
       </section>
-      <aside class="callout callout--warn"><h2>⚠ ${esc(T.warnTitle)}</h2><ul>${T.warn.map((w) => `<li>${esc(w)}</li>`).join("")}</ul></aside>
+      <aside class="callout callout--warn"><h2>⚠︎ ${esc(T.warnTitle)}</h2><ul>${T.warn.map((w) => `<li>${esc(w)}</li>`).join("")}</ul></aside>
       ${adUnit(L, "bottom")}
       <section class="block" aria-labelledby="faq"><div class="block__head"><h2 id="faq">${esc(L.t.faq)}</h2></div>
         <div class="faq">${T.faq.map(([q, a], i) => `<details${i < 1 ? " open" : ""}><summary>${esc(q)}</summary><div class="faq__a"><p>${esc(a)}</p></div></details>`).join("")}</div>
@@ -1258,13 +1273,13 @@ for (const code of ACTIVE) {
   <div class="wrap layout">
     <div class="col-main">
       <div class="clips-bar">
-        ${langs.length > 1 ? `<div class="filter" role="group" data-clip-filter><button type="button" data-cl="all" aria-pressed="true">${esc(T.all)}</button>${["es", "en"].filter((x) => langs.includes(x)).map((x) => `<button type="button" data-cl="${x}" aria-pressed="false">${T.flags[x]} ${esc(T.langs[x])}</button>`).join("")}</div>` : ""}
+        ${langs.length > 1 ? `<div class="filter" role="group" data-clip-filter><button type="button" data-cl="all" aria-pressed="true">${esc(T.all)}</button>${["es", "en"].filter((x) => langs.includes(x)).map((x) => `<button type="button" data-cl="${x}" aria-pressed="false">${esc(T.langs[x])}</button>`).join("")}</div>` : ""}
         <button type="button" class="clips-thumbs" data-thumbs-toggle data-on="${esc(T.thumbsOn)}" data-off="${esc(T.thumbsOff)}">${esc(T.thumbsOn)}</button>
       </div>
       <p class="muted small clips-privacy">${esc(T.privacy)}</p>
       <div class="clips" data-clips>${CLIPS.items.map((c) => clipCard(L, c)).join("")}</div>
       <p class="muted small" data-clips-none hidden>${esc(T.empty)}</p>
-      <p class="callout clips-credit">🎬 ${esc(T.credit)}</p>
+      <p class="callout clips-credit">${I(tabIcon.community)} ${esc(T.credit)}</p>
       ${adUnit(L, "bottom")}
       <section class="block"><div class="block__head"><h2>${esc(L.t.gd.faqTitle)}</h2></div><div class="faq">${T.faq.map(([q, a], i) => `<details${i < 1 ? " open" : ""}><summary>${esc(q)}</summary><div class="faq__a"><p>${esc(a)}</p></div></details>`).join("")}</div></section>
       <p class="muted small">${esc(T.updated(fmtDate(L, CLIPS.updated, { day: "numeric", month: "long", year: "numeric" })))}</p>
@@ -1406,7 +1421,7 @@ for (const code of ACTIVE) {
     <div class="col-main">
       <div class="quick"><span class="quick__ic" aria-hidden="true">${gIcon[g.icon] || gIcon.tips}</span><div><b>${esc(G.quick)}</b><p>${esc(g.quick[code])}</p></div></div>
       ${g.sections.map(section).join("")}
-      ${g.note ? `<aside class="callout callout--warn"><p>⚠ ${esc(g.note[code])}</p></aside>` : ""}
+      ${g.note ? `<aside class="callout callout--warn"><p>⚠︎ ${esc(g.note[code])}</p></aside>` : ""}
       ${adUnit(L, "bottom")}
       ${faq.length ? `<section class="block"><div class="block__head"><h2>${esc(G.faqTitle)}</h2></div><div class="faq">${faq.map(([q, a], i) => `<details${i < 1 ? " open" : ""}><summary>${esc(q)}</summary><div class="faq__a"><p>${esc(a)}</p></div></details>`).join("")}</div></section>` : ""}
       <p class="muted small">${esc(G.updated(fmtDate(L, g.updated, { day: "numeric", month: "long", year: "numeric" })))}</p>
@@ -1508,7 +1523,7 @@ for (const code of ACTIVE) {
   <section class="page-head page-head--app"><div class="wrap app-head">
     <img class="app-head__icon" src="${u("/assets/icon-maskable-192.png")}" alt="" width="96" height="96">
     <div><p class="eyebrow">${esc(L.t.appEyebrow)}</p><h1>${esc(L.t.appH1)}</h1><p class="lead-text">${esc(L.t.appLead)}</p>
-    <button type="button" class="btn btn--primary btn--big" data-install hidden>${esc(L.t.appCta)}</button></div>
+    <button type="button" class="btn btn--primary btn--big" data-install hidden>${I(uiIcon.install)}${esc(L.t.appCta)}</button></div>
   </div></section>
   <div class="wrap layout">
     <div class="col-main">
@@ -1517,7 +1532,7 @@ for (const code of ACTIVE) {
         <section class="app-guide" data-guide="desktop" data-yours="${esc(L.t.inst.yours)}"><h2>${esc(L.t.appDesktop[0])}</h2><p>${esc(L.t.appDesktop[1])}</p></section>
       </div>
       <section class="block" aria-labelledby="feat"><div class="block__head"><h2 id="feat">${esc(L.t.appFeatures)}</h2></div>
-        <ul class="feat-grid">${L.t.appFeatureList.map(([ic, t, d]) => `<li><span aria-hidden="true">${ic}</span><div><b>${esc(t)}</b> ${esc(d)}</div></li>`).join("")}</ul>
+        <ul class="feat-grid">${L.t.appFeatureList.map(([ic, t, d]) => `<li><span class="feat__ic" aria-hidden="true">${uiIcon[ic] || uiIcon.spark}</span><div><b>${esc(t)}</b> ${esc(d)}</div></li>`).join("")}</ul>
       </section>
       <section class="block" aria-labelledby="faq"><div class="block__head"><h2 id="faq">${esc(L.t.faq)}</h2></div>
         <div class="faq">${L.t.appFaq.map(([q, a], i) => `<details${i < 1 ? " open" : ""}><summary>${esc(q)}</summary><div class="faq__a"><p>${esc(a)}</p></div></details>`).join("")}</div>

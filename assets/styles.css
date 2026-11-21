@@ -1473,3 +1473,48 @@ html, body { overflow-x: hidden; }
   .seg a span { min-width: 18px; padding: 1px 5px; font-size: 0.7rem; }
 }
 @media (max-width: 340px) { .seg a { padding: 7px 8px; font-size: 0.8rem; } }
+
+/* ================= botones e iconos sin cortes ================= */
+/* Los degradados se pintaban también bajo el borde transparente y asomaba el color del otro extremo
+   (una línea morada en el lateral de «Ver las 5 noticias», PS5, Todos…). Se ancla el fondo al borde exterior. */
+*, *::before, *::after { background-origin: border-box; }
+.btn--primary { border: 0; padding: 11px 17px; }
+/* Indicador de deslizar: una pestaña pegada al borde (icono y nombre juntos), nunca flotando en mitad del texto */
+.swipe-peek { flex-direction: row; gap: 8px; width: auto; padding: 11px 16px; top: 46%; font-size: 0.86rem; color: var(--text);
+  background: var(--bg-2); border: 1px solid var(--line-2); box-shadow: 0 12px 32px -12px rgba(0, 0, 0, 0.55); contain: layout paint style; }
+.swipe-peek.is-left { left: 0; border-left: 0; border-radius: 0 999px 999px 0; padding-left: max(14px, env(safe-area-inset-left)); }
+.swipe-peek.is-right { right: 0; border-right: 0; border-radius: 999px 0 0 999px; padding-right: max(14px, env(safe-area-inset-right)); flex-direction: row-reverse; }
+.swipe-peek__ic { width: 24px; height: 24px; border-radius: 0; background: none; border: 0; box-shadow: none; color: var(--accent-ink, var(--cyan)); }
+.swipe-peek__ic svg { width: 24px; height: 24px; }
+.swipe-peek__t { padding: 0; background: none; border: 0; font-weight: 800; }
+.swipe-peek.is-left::after, .swipe-peek.is-right::after { content: ""; width: 0; height: 0; border: 6px solid transparent; flex: none; opacity: 0.7; }
+.swipe-peek.is-left::after { border-left-color: currentColor; margin-left: 2px; order: 3; }
+.swipe-peek.is-right::after { border-right-color: currentColor; margin-right: 2px; order: 3; }
+.swipe-peek.is-ready { background: var(--sunset); color: #1a0730; border-color: transparent; box-shadow: 0 12px 30px -10px rgba(255, 47, 163, 0.75); }
+.swipe-peek.is-ready .swipe-peek__ic { color: #1a0730; transform: none; background: none; box-shadow: none; }
+/* Barra de pestañas: cristal más opaco (en modo claro se veían manchas de colores de lo que había detrás) */
+@media (max-width: 859px) {
+  .tabbar { background: color-mix(in srgb, var(--bg) 93%, transparent); }
+  :root[data-theme-now="light"] .tabbar { background: color-mix(in srgb, #fff 95%, transparent); }
+}
+
+/* Iconos en línea dentro de botones, avisos y selectores: mismo tamaño y trazo en todos los dispositivos */
+.i { width: 1.15em; height: 1.15em; flex: none; display: inline-block; vertical-align: -0.2em; }
+.btn .i, .seg .i, .aud-toggle .i, .footer-install .i, .cheat__status .i { margin-right: 0; }
+.aud-toggle button, .seg a, .footer-install { display: inline-flex; align-items: center; gap: 6px; }
+.launch-bar .i { width: 1.1em; height: 1.1em; margin-right: 2px; color: var(--pink-ink); }
+.footer-cols .i { width: 15px; height: 15px; }
+.clips-credit .i { color: var(--pink-ink); margin-right: 4px; }
+.empty-state > span svg { width: 40px; height: 40px; color: var(--muted); margin: 0 auto; }
+/* lista de funciones de la app: icono propio en un recuadro */
+.feat-grid .feat__ic { flex: none; width: 38px; height: 38px; border-radius: 11px; display: grid; place-items: center; background: var(--surface); border: 1px solid var(--line-2); color: var(--accent-ink, var(--cyan)); font-size: inherit; }
+.feat-grid .feat__ic svg { width: 20px; height: 20px; }
+/* ⚠ y ✔ siempre como símbolo de texto, nunca como emoji de colores */
+body { font-variant-emoji: text; }
+.kicker, .rumor-banner b, .callout { font-variant-emoji: text; }
+/* Filtros activos: el mismo estilo (degradado de la marca) en toda la web */
+.filter button[aria-pressed="true"] { background: var(--sunset); color: #1a0730; border-color: transparent; box-shadow: 0 6px 18px -10px rgba(255, 47, 163, 0.8); }
+/* Flecha del indicador: apunta hacia donde está la sección (izquierda = anterior, derecha = siguiente) */
+.swipe-peek.is-right { flex-direction: row; }
+.swipe-peek.is-left::after { border-left-color: transparent; border-right-color: currentColor; order: -1; margin: 0 2px 0 0; }
+.swipe-peek.is-right::after { border-right-color: transparent; border-left-color: currentColor; order: 3; margin: 0 0 0 2px; }

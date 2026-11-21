@@ -771,8 +771,8 @@
     var peekPaint = function () {
       pRaf = 0;
       var p = Math.min(1, Math.abs(dx) / TRIGGER);
-      // de escondido (fuera de la pantalla) a asomado 14 px dentro, con un poco de resistencia al final
-      var x = (p * (PEEK_W + 14)) - PEEK_W + Math.max(0, Math.abs(dx) - TRIGGER) * 0.12;
+      // de escondido (fuera de la pantalla) a pegado al borde; al pasar el umbral, solo un pequeño tirón elástico
+      var x = (p - 1) * PEEK_W; // nunca se despega del borde
       peek.style.transform = "translate3d(" + (side > 0 ? Math.round(x) : -Math.round(x)) + "px,-50%,0)";
       peek.style.opacity = String(Math.min(1, p * 1.6));
       var nowReady = p >= 1;
@@ -786,7 +786,7 @@
       setTimeout(function () { peek.classList.remove("is-back", "is-left", "is-right"); }, 260);
     };
     window.addEventListener("touchstart", function (e) {
-      active = false; lock = 0; dx = 0;
+      active = false; lock = 0; dx = 0; side = 0; swTo = -1; // cada gesto empieza de cero (forma y flecha del indicador)
       if (e.touches.length !== 1 || sheetOpen || window.innerWidth >= 860) return;
       var t = e.touches[0];
       if (t.clientX < EDGE || t.clientX > window.innerWidth - EDGE) return; // bordes: gesto «atrás» del sistema
@@ -815,6 +815,7 @@
         pT.textContent = (a.textContent || "").trim();
         peek.classList.toggle("is-left", s > 0); peek.classList.toggle("is-right", s < 0);
         peek.classList.remove("is-back");
+        PEEK_W = peek.offsetWidth || PEEK_W; // ancho real (depende del nombre de la sección)
       }
       if (!pRaf) pRaf = requestAnimationFrame(peekPaint);
     }, { passive: false });
@@ -841,7 +842,7 @@
       setTimeout(function () {
         if (sheetOpen || store.get("lh-swiped") || document.hidden) return;
         store.set("lh-swipe-tip", "1");
-        toast("👆 " + (T.swipe || ""), null, null, false);
+        toast(T.swipe || "", null, null, false);
       }, autoSheet ? 2600 : 3000);
     });
   }
