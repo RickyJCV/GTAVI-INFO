@@ -116,6 +116,8 @@ for (const code of Object.keys(LOCALES)) {
 const ACTIVE = Object.keys(LOCALES).filter((c) => DATA[c].briefs.length && DATA[c].guide);
 const LEONIDA = JSON.parse(fs.readFileSync(path.join(ROOT, "content/leonida.json"), "utf8"));
 const REVIEWS = JSON.parse(fs.readFileSync(path.join(ROOT, "content/reviews.json"), "utf8"));
+// Los textos listos para redes («Listo para publicar») no se muestran en la web pública: son para el editor
+const SHOW_POSTS = false;
 const TRUCOS = JSON.parse(fs.readFileSync(path.join(ROOT, "content/trucos.json"), "utf8"));
 const FINDS = JSON.parse(fs.readFileSync(path.join(ROOT, "content/descubrimientos.json"), "utf8"));
 const PATCHES = JSON.parse(fs.readFileSync(path.join(ROOT, "content/parches.json"), "utf8"));
@@ -305,6 +307,7 @@ const clipCard = (L, c, { compact = false } = {}) => {
         <span class="clip__pf">${pf}${c.vertical ? ` · ${esc(T.vertical)}` : ""}</span>
         <span class="clip__btn" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M8 5.5v13l11-6.5z"/></svg></span>
         <span class="clip__ttl">${esc(c.title)}</span>
+        ${c.author ? `<span class="clip__au">${esc(c.author)}</span>` : ""}
       </button>
     </div>
     <div class="clip__meta">
@@ -627,15 +630,15 @@ const itemCard = (L, it, { num, variant = "mini" } = {}) => {
 
 const guidesCard = (L) => {
   const P = L.paths;
-  const link = (href, emoji, name, sub) => `<li><a href="${u(href)}"><span aria-hidden="true">${emoji}</span><span><b>${esc(name)}</b><small>${esc(sub)}</small></span></a></li>`;
+  const link = (href, ic, name, sub) => `<li><a href="${u(href)}"><span class="gl__ic" aria-hidden="true">${ic}</span><span><b>${esc(name)}</b><small>${esc(sub)}</small></span></a></li>`;
   const g = (id) => GUIAS.find((x) => x.id === id);
   const tip = g("consejos"), money = g("dinero");
   return `<div class="card"><h2 class="card__title">${esc(L.t.ux.play)}</h2><ul class="guide-links">
-    ${link(P.cheats, "🎮", L.t.tabs.cheats, L.t.cheats.tileSub(TRUCOS.cheats.filter((c) => c.seq).length))}
-    ${link(P.finds, "🥚", L.t.tabs.finds, L.t.finds.tileSub(FINDS.items.length))}
-    ${link(P.patches, "🛠️", L.t.patch.tile, L.t.patch.level[PATCHES.status.level] || L.t.patch.tileSub)}
-    ${tip ? link(P.guideItem(tip.slug[L.code]), "💡", tip.h1[L.code], tip.short[L.code]) : ""}
-    ${money ? link(P.guideItem(money.slug[L.code]), "💰", money.h1[L.code], money.short[L.code]) : ""}
+    ${link(P.cheats, tabIcon.cheats, L.t.tabs.cheats, L.t.cheats.tileSub(TRUCOS.cheats.filter((c) => c.seq).length))}
+    ${link(P.finds, tabIcon.finds, L.t.tabs.finds, L.t.finds.tileSub(FINDS.items.length))}
+    ${link(P.patches, findIcon.update, L.t.patch.tile, L.t.patch.level[PATCHES.status.level] || L.t.patch.tileSub)}
+    ${tip ? link(P.guideItem(tip.slug[L.code]), gIcon.tips, tip.h1[L.code], tip.short[L.code]) : ""}
+    ${money ? link(P.guideItem(money.slug[L.code]), cheatIcon.money, money.h1[L.code], money.short[L.code]) : ""}
   </ul><a class="card__more" href="${u(P.guides)}">${esc(L.t.ux.allGuides)}</a></div>`;
 };
 const sideCards = (L, { facts = true } = {}) => {
@@ -727,12 +730,12 @@ const briefBody = (L, b) => {
   <div class="wrap">
     <nav class="hub" aria-label="${esc(L.t.jumpsLabel)}">
       <a class="hub__tile hub__tile--cheats" href="${u(P.cheats)}"><span class="hub__icon" aria-hidden="true">${tabIcon.cheats}</span><span class="hub__txt"><b>${esc(L.t.cheats.tile)}</b><small>${esc(L.t.cheats.tileSub(TRUCOS.cheats.filter((c) => c.seq).length))}</small></span>${TRUCOS.cheats.some((c) => isFresh(c.added)) ? `<span class="hub__new">${esc(L.t.cheats.isNew)}</span>` : ""}<span class="hub__go" aria-hidden="true">→</span></a>
-      ${tile("clips", P.clips, "🎬", L.t.clips.tile, L.t.clips.tileSub(CLIPS.items.length))}
-      ${tile("finds", P.finds, "🥚", L.t.tabs.finds, L.t.finds.tileSub(FINDS.items.length))}
-      ${tile("guide", P.guides, "🧭", L.t.gd.tile, L.t.gd.tileSub)}
-      ${tile("news", P.news, "📰", L.t.nav.news, L.t.hubNewsSub(top.length + more.length))}
-      ${tile("rumors", P.rumors, "🕵️", L.t.nav.rumors, L.t.hubRumorsSub(rumors.length))}
-      ${tile("patches", P.patches, "🛠️", L.t.patch.tile, L.t.patch.level[PATCHES.status.level] || L.t.patch.tileSub)}
+      ${tile("clips", P.clips, tabIcon.community, L.t.clips.tile, L.t.clips.tileSub(CLIPS.items.length))}
+      ${tile("finds", P.finds, tabIcon.finds, L.t.tabs.finds, L.t.finds.tileSub(FINDS.items.length))}
+      ${tile("guide", P.guides, tabIcon.guide, L.t.gd.tile, L.t.gd.tileSub)}
+      ${tile("news", P.news, tabIcon.news, L.t.nav.news, L.t.hubNewsSub(top.length + more.length))}
+      ${tile("rumors", P.rumors, tabIcon.rumors, L.t.nav.rumors, L.t.hubRumorsSub(rumors.length))}
+      ${tile("patches", P.patches, findIcon.update, L.t.patch.tile, L.t.patch.level[PATCHES.status.level] || L.t.patch.tileSub)}
     </nav>
     ${adUnit(L, "top")}
   </div>
@@ -782,7 +785,7 @@ const briefBody = (L, b) => {
       }
 
       ${
-        posts
+        posts && SHOW_POSTS
           ? `<section class="block" aria-labelledby="posts">
         <div class="block__head"><h2 id="posts">${esc(L.t.postsTitle)}</h2></div>
         <p class="muted">${L.t.postsIntro(esc(big.title))}</p>
