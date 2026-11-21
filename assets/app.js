@@ -724,24 +724,37 @@
 
   var main = document.querySelector("main");
   if (onSection && main && touch) {
-    var chip = document.createElement("div");
-    chip.className = "swipe-chip"; chip.setAttribute("aria-hidden", "true");
-    body.appendChild(chip);
-    var sx = 0, sy2 = 0, st = 0, dx = 0, lock = 0, active = false, swTo = -1, reduce = mqm("(prefers-reduced-motion: reduce)");
-    var EDGE = 24, TRIGGER = 70;
-    var vtOK = !!(window.CSS && CSS.supports && CSS.supports("view-transition-name: a"));
+    // Indicador que asoma por el borde y sigue al dedo (la página no se mueve: así va fluido y nada se corta)
+    var peek = document.createElement("div");
+    peek.className = "swipe-peek"; peek.setAttribute("aria-hidden", "true");
+    peek.innerHTML = '<span class="swipe-peek__ic"></span><span class="swipe-peek__t"></span>';
+    body.appendChild(peek);
+    var pIc = peek.firstChild, pT = peek.lastChild;
+    var sx = 0, sy2 = 0, st = 0, dx = 0, lock = 0, active = false, swTo = -1, side = 0, ready = false, pRaf = 0;
+    var EDGE = 24, TRIGGER = 72, PEEK_W = 96;
     var scrollsX = function (el) {
       for (; el && el !== body && el !== document.documentElement; el = el.parentElement) {
-        if (el.matches && el.matches("input,textarea,select,[contenteditable],.table-wrap,.filter,.aud-toggle,.sheet,[data-no-swipe]")) return true;
+        if (el.matches && el.matches("input,textarea,select,[contenteditable],.table-wrap,.filter,.aud-toggle,.sheet,.search,[data-no-swipe]")) return true;
         if (el.scrollWidth > el.clientWidth + 2) { var ox = getComputedStyle(el).overflowX; if (ox === "auto" || ox === "scroll") return true; }
       }
       return false;
     };
-    var reset = function (animate) {
-      main.style.transition = animate && !reduce ? "transform .3s cubic-bezier(.2,.8,.2,1)" : "";
-      main.style.transform = "";
-      chip.classList.remove("is-on");
-      setTimeout(function () { main.style.transition = ""; main.classList.remove("is-swiping"); }, 320);
+    var peekPaint = function () {
+      pRaf = 0;
+      var p = Math.min(1, Math.abs(dx) / TRIGGER);
+      // de escondido (fuera de la pantalla) a asomado 14 px dentro, con un poco de resistencia al final
+      var x = (p * (PEEK_W + 14)) - PEEK_W + Math.max(0, Math.abs(dx) - TRIGGER) * 0.12;
+      peek.style.transform = "translate3d(" + (side > 0 ? Math.round(x) : -Math.round(x)) + "px,-50%,0)";
+      peek.style.opacity = String(Math.min(1, p * 1.6));
+      var nowReady = p >= 1;
+      if (nowReady !== ready) { ready = nowReady; peek.classList.toggle("is-ready", ready); if (ready) buzz(); }
+    };
+    var hidePeek = function (animate) {
+      peek.classList.toggle("is-back", !!animate && !reduced);
+      peek.style.transform = "translate3d(" + (side >= 0 ? -PEEK_W - 20 : PEEK_W + 20) + "px,-50%,0)";
+      peek.style.opacity = "0";
+      ready = false; peek.classList.remove("is-ready");
+      setTimeout(function () { peek.classList.remove("is-back", "is-left", "is-right"); }, 260);
     };
     window.addEventListener("touchstart", function (e) {
       active = false; lock = 0; dx = 0;
@@ -759,39 +772,40 @@
       if (!lock) {
         if (Math.abs(mx) < 10 && Math.abs(my) < 10) return;
         lock = Math.abs(mx) > Math.abs(my) * 1.5 ? 1 : -1;
-        if (lock === 1) main.classList.add("is-swiping");
       }
       if (lock !== 1) { active = false; return; }
       if (e.cancelable) e.preventDefault(); // gesto horizontal: que la página no se mueva en vertical
       dx = mx;
-      swTo = cur + (dx < 0 ? 1 : -1);
-      var ok = swTo >= 0 && swTo < tabs.length;
-      var shift = ok ? dx * 0.35 : dx * 0.08; // sin pestaña a ese lado: resistencia elástica
-      if (!reduce) main.style.transform = "translate3d(" + Math.round(shift) + "px,0,0)";
-      if (ok) {
-        chip.textContent = (dx < 0 ? "" : "‹ ") + (tabs[swTo].textContent || "").trim() + (dx < 0 ? " ›" : "");
-        chip.classList.toggle("is-left", dx > 0); chip.classList.toggle("is-right", dx < 0);
-        chip.classList.toggle("is-on", Math.abs(dx) > 24);
-        chip.classList.toggle("is-ready", Math.abs(dx) > TRIGGER);
-      } else chip.classList.remove("is-on");
+      var to = cur + (dx < 0 ? 1 : -1);
+      if (to < 0 || to >= tabs.length) { swTo = -1; if (side) hidePeek(true); side = 0; return; } // no hay pestaña a ese lado
+      var s = dx > 0 ? 1 : -1; // 1: entra por la izquierda (pestaña anterior); -1: por la derecha (siguiente)
+      if (s !== side || to !== swTo) {
+        side = s; swTo = to;
+        var a = tabs[to], ic = a.querySelector("svg");
+        pIc.innerHTML = ic ? ic.outerHTML : "";
+        pT.textContent = (a.textContent || "").trim();
+        peek.classList.toggle("is-left", s > 0); peek.classList.toggle("is-right", s < 0);
+        peek.classList.remove("is-back");
+      }
+      if (!pRaf) pRaf = requestAnimationFrame(peekPaint);
     }, { passive: false });
     var end = function () {
       if (!active || lock !== 1) { active = false; return; }
       active = false;
+      if (pRaf) { cancelAnimationFrame(pRaf); pRaf = 0; }
       var v = Math.abs(dx) / Math.max(1, Date.now() - st);
-      var ok = swTo >= 0 && swTo < tabs.length;
-      if (ok && (Math.abs(dx) > TRIGGER || (Math.abs(dx) > 35 && v > 0.45))) {
-        buzz(); store.set("lh-swiped", "1");
-        // sin transición de página (navegador antiguo): el contenido acompaña el gesto hasta que llega la nueva
-        if (!reduce && !vtOK) { main.style.transition = "transform .2s ease-out"; main.style.transform = "translate3d(" + (dx < 0 ? -30 : 30) + "%,0,0)"; }
-        chip.classList.remove("is-on");
+      if (swTo >= 0 && (Math.abs(dx) > TRIGGER || (Math.abs(dx) > 35 && v > 0.45))) {
+        if (!ready) buzz();
+        store.set("lh-swiped", "1");
+        peek.classList.add("is-ready", "is-go");
         goTab(swTo, dx < 0 ? "next" : "prev");
-      } else reset(true);
+      } else hidePeek(true);
     };
     window.addEventListener("touchend", end, { passive: true });
-    window.addEventListener("touchcancel", function () { active = false; reset(true); }, { passive: true });
+    window.addEventListener("touchcancel", function () { active = false; hidePeek(true); }, { passive: true });
+    var reset = function () { peek.classList.remove("is-go"); hidePeek(false); };
     // Volver con «atrás» (caché del navegador): dejar la página en su sitio
-    window.addEventListener("pageshow", function (e) { if (e.persisted) { reset(false); root.classList.remove("vt-next", "vt-prev"); } });
+    window.addEventListener("pageshow", function (e) { if (e.persisted) { reset(); root.classList.remove("vt-next", "vt-prev"); } });
 
     // Un consejo, una sola vez, para descubrir el gesto
     if (!store.get("lh-swiped") && !store.get("lh-swipe-tip") && isPhone()) whenShown(function () {

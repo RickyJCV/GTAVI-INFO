@@ -965,7 +965,6 @@ html { touch-action: manipulation; }
 }
 .swipe-chip.is-left { left: max(10px, env(safe-area-inset-left)); } .swipe-chip.is-right { right: max(10px, env(safe-area-inset-right)); }
 .swipe-chip.is-on { opacity: 1; }
-main.is-swiping { will-change: transform; }
 
 /* Transiciones laterales al cambiar de pestaña (las páginas siguientes / anteriores) */
 @keyframes lh-in-right { from { transform: translateX(100%); } }
@@ -1390,3 +1389,28 @@ html.launched .pill-count { display: none !important; }
 .clip--compact .clip__meta { padding: 10px 12px 12px; gap: 6px; }
 .clip--compact .clip__tags time { display: none; }
 .hub__tile--clips { border-bottom-color: #ff3b5c; }
+
+/* ================= gesto de deslizar: indicador que asoma por el borde ================= */
+/* La página nunca se desplaza en horizontal (en iPhone, overflow-x: hidden en body no basta) */
+html, body { overflow-x: hidden; }
+@supports (overflow-x: clip) { html, body { overflow-x: clip; } }
+.swipe-chip { display: none !important; }
+.swipe-peek {
+  position: fixed; top: 50%; z-index: 86; display: flex; flex-direction: column; align-items: center; gap: 6px; width: 96px; padding: 14px 8px;
+  pointer-events: none; opacity: 0; transform: translate3d(-120px, -50%, 0); will-change: transform, opacity; contain: layout paint;
+  color: var(--text); font: 800 0.78rem var(--font); text-align: center;
+}
+.swipe-peek.is-left { left: 0; }
+.swipe-peek.is-right { right: 0; }
+.swipe-peek__ic { width: 54px; height: 54px; border-radius: 50%; display: grid; place-items: center; background: color-mix(in srgb, var(--bg-2) 88%, transparent); border: 2px solid var(--line-2); box-shadow: 0 10px 28px -10px rgba(0, 0, 0, 0.7); transition: background 0.18s, border-color 0.18s, transform 0.18s cubic-bezier(0.3, 1.6, 0.5, 1), color 0.18s; }
+.swipe-peek__ic svg { width: 26px; height: 26px; }
+.swipe-peek__t { padding: 3px 9px; border-radius: 999px; background: color-mix(in srgb, var(--bg-2) 88%, transparent); border: 1px solid var(--line-2); white-space: nowrap; }
+.swipe-peek.is-ready .swipe-peek__ic { background: var(--sunset); border-color: transparent; color: #1a0730; transform: scale(1.12); box-shadow: 0 10px 30px -8px rgba(255, 47, 163, 0.85); }
+.swipe-peek.is-back { transition: transform 0.26s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.2s; }
+@supports not (background: color-mix(in srgb, red, blue)) { .swipe-peek__ic, .swipe-peek__t { background: var(--bg-2); } }
+@media (prefers-reduced-motion: reduce) { .swipe-peek__ic { transition: none; } }
+/* Fila de clips de la portada: llega hasta el borde de la pantalla en el móvil (sin corte duro a 16 px) */
+@media (max-width: 719px) {
+  .clip-row { margin-inline: calc(-1 * max(16px, env(safe-area-inset-left))); padding-inline: max(16px, env(safe-area-inset-left)); scroll-padding-inline: max(16px, env(safe-area-inset-left)); scrollbar-width: none; }
+  .clip-row::-webkit-scrollbar { display: none; }
+}
