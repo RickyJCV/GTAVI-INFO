@@ -44,7 +44,12 @@
       t.textContent = Math.floor(s / 86400) + "d " + pad(Math.floor((s % 86400) / 3600)) + "h " + pad(Math.floor((s % 3600) / 60)) + "m";
     });
   }
-  if (boxes.length || minis.length) { tick(); setInterval(tick, 1000); }
+  // Tras el lanzamiento no hace falta seguir contando: se deja el estado final y se para (menos trabajo en cada segundo)
+  var launchAt = Math.max.apply(null, Array.prototype.map.call(boxes, function (el) { return new Date(el.getAttribute("data-countdown")).getTime() || 0; }).concat(Array.prototype.map.call(minis, function (el) { return new Date(el.getAttribute("data-countdown-mini")).getTime() || 0; })));
+  if (boxes.length || minis.length) {
+    tick();
+    if (Date.now() < launchAt) { var cdTimer = setInterval(function () { tick(); if (Date.now() >= launchAt) clearInterval(cdTimer); }, 1000); }
+  }
 
   // Animación suave solo cuando el contenido cambia por un toque (no al cargar cada página)
   var swapT = 0;
@@ -115,7 +120,10 @@
   btns.forEach(function (b) {
     b.addEventListener("click", function () {
       var a = b.getAttribute("data-aud-btn");
-      swapAnim(); setAud(a); store.set("lh-aud", a);
+      // primero se marca el botón (respuesta inmediata) y en el siguiente fotograma cambia el texto de toda la página
+      btns.forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+      store.set("lh-aud", a);
+      requestAnimationFrame(function () { setTimeout(function () { swapAnim(); setAud(a); }, 0); });
     });
   });
 
@@ -229,7 +237,28 @@
       }
       tw.push(cb);
     }
+    // Ceder el turno al navegador: primero se pinta la respuesta al toque y luego se crea el reproductor
+    var afterPaint = function (fn) { requestAnimationFrame(function () { setTimeout(fn, 0); }); };
+    // Abrir la conexión con la plataforma en cuanto el dedo toca el botón (el vídeo llega antes)
+    var warmed = {};
+    function preconnect(pf) {
+      var host = { youtube: "https://www.youtube-nocookie.com", tiktok: "https://www.tiktok.com", x: "https://platform.twitter.com" }[pf];
+      if (!host || warmed[host]) return;
+      warmed[host] = 1;
+      var l = document.createElement("link"); l.rel = "preconnect"; l.href = host; l.crossOrigin = "";
+      document.head.appendChild(l);
+    }
+    document.addEventListener("pointerdown", function (e) {
+      var b = e.target.closest && e.target.closest("[data-play]");
+      var p = b && b.closest("[data-clip-player]");
+      if (p) preconnect(p.getAttribute("data-platform"));
+    }, { passive: true });
     function play(p) {
+      if (p.classList.contains("is-loading")) return;
+      p.classList.add("is-loading");
+      afterPaint(function () { p.classList.remove("is-loading"); start(p); });
+    }
+    function start(p) {
       if (playing && playing !== p) restore(playing);
       var pf = p.getAttribute("data-platform"), id = p.getAttribute("data-vid"), title = p.getAttribute("data-title") || "";
       if (!p._face) p._face = p.querySelector(".clip__face");
@@ -920,11 +949,14 @@
       if (!box) build();
       lastFocus = document.activeElement;
       box.hidden = false;
-      root.classList.add("sheet-lock");
-      requestAnimationFrame(function () { box.classList.add("is-open"); });
       input.value = "";
-      render("");
+      list.innerHTML = "";
       input.focus({ preventScroll: true });
+      requestAnimationFrame(function () {
+        box.classList.add("is-open");
+        // bloquear el fondo y pintar sugerencias justo después del primer fotograma
+        setTimeout(function () { root.classList.add("sheet-lock"); if (!input.value) render(""); }, 0);
+      });
       var p = load();
       if (p && p.then) p.then(function () { render(input.value); });
     }

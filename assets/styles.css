@@ -1414,3 +1414,18 @@ html, body { overflow-x: hidden; }
   .clip-row { margin-inline: calc(-1 * max(16px, env(safe-area-inset-left))); padding-inline: max(16px, env(safe-area-inset-left)); scroll-padding-inline: max(16px, env(safe-area-inset-left)); scrollbar-width: none; }
   .clip-row::-webkit-scrollbar { display: none; }
 }
+
+/* ================= respuesta al toque (INP) y menos trabajo de pintado ================= */
+/* Al pulsar reproducir: respuesta inmediata (el reproductor se crea justo después) */
+.clip__player.is-loading .clip__btn { animation: lh-spin 0.8s linear infinite; background: conic-gradient(var(--pink), var(--orange), var(--yellow), var(--pink)); }
+.clip__player.is-loading .clip__btn svg { opacity: 0; }
+.clip__player.is-loading .clip__btn::after { content: ""; position: absolute; inset: 5px; border-radius: 50%; background: #1a0730; }
+/* Las tarjetas que están lejos de la pantalla no se dibujan hasta que se acercan */
+.clips > .clip, .finds > .find, .cheat-grid > .cheat, .briefs-grid > .mini-story, .tips > .tip, .stations > .station, .ptl__item, .day { content-visibility: auto; contain-intrinsic-size: auto 420px; }
+.clips > .clip--v { contain-intrinsic-size: auto 760px; }
+.tips > .tip, .stations > .station { contain-intrinsic-size: auto 140px; }
+/* En el móvil, el desenfoque de la cabecera y las pestañas es más ligero (se repinta en cada desplazamiento) */
+@media (pointer: coarse) {
+  .site-header { backdrop-filter: saturate(140%) blur(10px); -webkit-backdrop-filter: saturate(140%) blur(10px); }
+  .tabbar { backdrop-filter: saturate(140%) blur(12px); -webkit-backdrop-filter: saturate(140%) blur(12px); }
+}
