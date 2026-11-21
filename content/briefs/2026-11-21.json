@@ -66,9 +66,39 @@
       ],
       "detail": "Sin spoilers. Es un hallazgo de jugadores, sin confirmación de Rockstar, y no contamos dónde ocurre para no destripar nada. Lo recogemos también en la sección de secretos.",
       "why": "Reaviva uno de los enigmas más comentados de la saga."
+    },
+    {
+      "tag": "Negocio",
+      "title": "Un directo cifra en 32,5 millones las copias reservadas de GTA VI (sin confirmar)",
+      "change": "El directo de Yahoo Tech recoge que se habrían vendido un récord de 32,5 millones de copias solo en reservas, junto a los 3.790 millones de dólares de Take-Two. Pero Variety dice que el portavoz de la compañía no quiso dar el número de copias, así que no está confirmado.",
+      "plain": "Circula una cifra de copias, pero la empresa no la ha confirmado. Tómala como provisional.",
+      "sources": [
+        {
+          "name": "Yahoo Tech",
+          "url": "https://tech.yahoo.com/gaming/breaking-news/live/gta-6-release-live-updates-reviews-memes-and-more-as-gamers-explore-and-react-to-leonida-after-13-long-years-230554192.html"
+        }
+      ],
+      "detail": "Es un blog en directo que se actualiza y la atribución de la cifra no está del todo clara. Take-Two ha dicho que los resultados de Rockstar llegarán más adelante, así que los números pueden cambiar. Contaremos cualquier dato oficial cuando lo publique.",
+      "why": "Muestra cuánto ruido hay con las cifras antes de que haya datos oficiales de copias."
     }
   ],
-  "rumors": [],
+  "rumors": [
+    {
+      "title": "GTA Online podría llegar a finales de 2027, según Bloomberg (vía Vice)",
+      "change": "Vice recoge que informaciones de Bloomberg apuntan a un posible lanzamiento de GTA Online a finales de 2027. Rockstar no ha anunciado fecha y sigue describiendo GTA VI como una experiencia para un solo jugador.",
+      "plain": "El modo online no llegaría hasta dentro de un año o más, según este informe.",
+      "reliability": "media",
+      "who": "Bloomberg · Vice",
+      "sources": [
+        {
+          "name": "Vice",
+          "url": "https://vice.com/en/article/gta-6-pc-online-release-date"
+        }
+      ],
+      "detail": "El mismo artículo recuerda el rumor de GamesBeat que sitúa la versión de PC en el primer trimestre de 2027. Ni la fecha del online ni la de PC están confirmadas por Rockstar, y Bloomberg es una fuente fiable pero habla de «posible».",
+      "why": "Ayuda a saber cuánto tendrás que esperar por el modo multijugador."
+    }
+  ],
   "posts": [
     "Take-Two cifra en 3.790 millones de dólares las reservas y ventas del primer día de GTA VI y lo llama «el mayor lanzamiento de entretenimiento de la historia». No da copias vendidas. 💰",
     "Metacritic: 99 con 152 reseñas de prensa. Pero las notas de usuarios son otra historia: según Insider Gaming, cerca de la mitad son 49 o menos, señal de posible «review bombing». ⭐",
@@ -136,9 +166,26 @@
         "plain": "Rockstar is winking at a 13-year-old puzzle again.",
         "detail": "No spoilers. It's a player find, with no confirmation from Rockstar, and we don't say where it happens so as not to spoil anything. We also list it in the secrets section.",
         "why": "It revives one of the series' most talked-about puzzles."
+      },
+      {
+        "tag": "Business",
+        "title": "A live blog puts GTA VI's preordered copies at 32.5 million (unconfirmed)",
+        "change": "Yahoo Tech's live blog reports a record 32.5 million copies sold through preorders alone, alongside Take-Two's $3.79 billion. But Variety says the company's spokesperson wouldn't give a copies number, so it's unconfirmed.",
+        "plain": "A copies number is going around, but the company hasn't confirmed it. Treat it as provisional.",
+        "detail": "It's a live blog that keeps updating and the attribution of the figure isn't entirely clear. Take-Two has said Rockstar's results will come later, so the numbers may change. We'll report any official data when it's published.",
+        "why": "It shows how much noise there is around numbers before official copies data."
       }
     ],
-    "rumors": [],
+    "rumors": [
+      {
+        "title": "GTA Online could arrive in late 2027, per Bloomberg (via Vice)",
+        "change": "Vice relays Bloomberg reporting pointing to a possible GTA Online launch in late 2027. Rockstar hasn't announced a date and still describes GTA VI as a single-player experience.",
+        "plain": "The online mode wouldn't arrive for a year or more, per this report.",
+        "detail": "The same article recalls GamesBeat's rumor putting the PC version in Q1 2027. Neither the online date nor the PC date is confirmed by Rockstar, and Bloomberg is a reliable source but speaks of a \"possible\" date.",
+        "why": "It helps you know how long you may wait for multiplayer.",
+        "who": "Bloomberg · Vice"
+      }
+    ],
     "posts": [
       "Take-Two puts GTA VI's preorders and first-day sales at $3.79 billion and calls it \"the biggest entertainment launch in history.\" No copies-sold number. 💰",
       "Metacritic: 99 from 152 press reviews. User scores are another story: per Insider Gaming, about half are 49 or below, a sign of possible review bombing. ⭐",
