@@ -1,6 +1,44 @@
 {
-  "updated": "2026-11-20",
+  "updated": "2026-11-21",
   "items": [
+    {
+      "id": "monte-chiliad",
+      "date": "2026-11-21",
+      "cat": "reference",
+      "title": {
+        "es": "Un guiño al misterio del monte Chiliad de GTA V",
+        "en": "A nod to GTA V's Mount Chiliad mystery"
+      },
+      "text": {
+        "es": "Según GamingBible, jugadores han oído a unos NPC hablar de los sucesos extraños del monte Chiliad, el enigma sin resolver de GTA V desde hace 13 años. Es un hallazgo de la comunidad y Rockstar no lo ha confirmado.",
+        "en": "According to GamingBible, players have overheard NPCs talking about the strange events on Mount Chiliad, GTA V's unsolved puzzle for 13 years. It's a community find and Rockstar hasn't confirmed it."
+      },
+      "sources": [
+        {
+          "name": "GamingBible",
+          "url": "https://www.gamingbible.com/news/gta-6-gta-5-mount-chiliad-mystery-easter-egg-802897-20261120"
+        }
+      ]
+    },
+    {
+      "id": "facturacion-oficial",
+      "date": "2026-11-21",
+      "cat": "record",
+      "title": {
+        "es": "Cifra oficial: 3.790 millones de dólares entre reservas y primer día",
+        "en": "Official figure: $3.79 billion across preorders and day one"
+      },
+      "text": {
+        "es": "Según Variety, Take-Two dice que las reservas y las ventas del primer día de GTA VI sumaron 3.790 millones de dólares y lo llama «el mayor lanzamiento de entretenimiento de la historia». No ha dado el número de copias.",
+        "en": "According to Variety, Take-Two says GTA VI's preorders and first-day sales added up to $3.79 billion and calls it \"the biggest entertainment launch in history.\" It hasn't given the number of copies."
+      },
+      "sources": [
+        {
+          "name": "Variety",
+          "url": "https://variety.com/2026/gaming/news/gta-6-sales-billions-first-day-1236954198"
+        }
+      ]
+    },
     {
       "id": "captura-san-andreas",
       "date": "2026-11-20",

@@ -1,0 +1,158 @@
+{
+  "date": "2026-11-21",
+  "title": "Take-Two: GTA VI facturó 3.790 millones de dólares entre reservas y primer día",
+  "summary": "Cifra oficial de Take-Two, review bombing en las notas de usuarios mientras la prensa mantiene un 99 y un bug que cierra el juego en PS5. Sin cifra oficial de copias vendidas.",
+  "lead": "Take-Two ya da una cifra oficial del estreno y habla del mayor lanzamiento de entretenimiento de la historia. Lo que sigue sin aclararse son las copias vendidas y por qué algunos jugadores de PS5 sufren cierres.",
+  "stories": [
+    {
+      "tag": "Negocio",
+      "title": "Take-Two: GTA VI facturó 3.790 millones de dólares entre reservas y primer día",
+      "change": "Según Variety, Take-Two dice que las reservas y las ventas del primer día de GTA VI sumaron 3.790 millones de dólares, y lo llama «el mayor lanzamiento de entretenimiento de la historia». Un portavoz no quiso decir cuántas copias se han vendido.",
+      "plain": "Es la primera cifra oficial de ventas. Es de la propia empresa, no de un analista.",
+      "sources": [
+        {
+          "name": "Variety",
+          "url": "https://variety.com/2026/gaming/news/gta-6-sales-billions-first-day-1236954198"
+        }
+      ],
+      "detail": "La cifra mezcla reservas y primer día, y no equivale a copias. Hasta ahora solo había estimaciones de terceros, como los 19 millones de Sensor Tower que contamos ayer, que siguen sin confirmar. Take-Two aún no ha dado el número de copias.",
+      "why": "Pone una cifra oficial a un estreno que hasta ahora solo se medía con cálculos."
+    },
+    {
+      "tag": "Impacto",
+      "title": "Metacritic: la prensa mantiene un 99, pero los usuarios hunden la nota",
+      "change": "Insider Gaming cuenta que GTA VI sigue en 99 sobre 100 tras 152 reseñas de prensa, pero que cerca de la mitad de las notas de usuarios son de 49 o menos, lo que apunta a un posible «review bombing».",
+      "plain": "Las notas de los medios son casi perfectas y las de los usuarios, muy repartidas. Fíate más de las reseñas de medios que de la media de usuarios.",
+      "sources": [
+        {
+          "name": "Insider Gaming",
+          "url": "https://insider-gaming.com/gta-6-review-bombed"
+        }
+      ],
+      "detail": "El «review bombing» es cuando mucha gente pone notas muy bajas a la vez, a menudo por enfado y no por la calidad del juego. Insider Gaming lo atribuye a jugadores descontentos, y no hemos visto una explicación oficial de Metacritic.",
+      "why": "Evita que una nota de usuarios muy baja te confunda sobre la calidad real del juego."
+    },
+    {
+      "tag": "Aviso",
+      "title": "Un bug cierra GTA VI en PS5 y devuelve a algunos jugadores al menú",
+      "change": "Según DualShockers, un bug está cerrando el juego en PS5 durante las partidas. Ni Sony ni Rockstar han dado una causa ni un arreglo, y los reportes apuntan solo a PS5.",
+      "plain": "Si el juego se te cierra en PS5, no eres el único. Guarda a mano y mira que la consola esté actualizada.",
+      "sources": [
+        {
+          "name": "DualShockers",
+          "url": "https://dualshockers.com/a-sneaky-bug-is-crashing-ps5-players-gta-6-runs"
+        },
+        {
+          "name": "DLCompare",
+          "url": "https://www.dlcompare.com/gaming-news/gta-6-day-one-patch-two-silent-updates-and-a-psn-outage"
+        }
+      ],
+      "detail": "Rockstar no ha publicado notas de los parches 01.002.000 y 01.002.001 ni una lista de problemas conocidos. No hay confirmación oficial sobre cuántos jugadores están afectados. Lo seguimos en la sección de parches y problemas.",
+      "why": "Te ahorra probar arreglos a ciegas mientras no haya una solución oficial."
+    }
+  ],
+  "biggest": 0,
+  "more": [
+    {
+      "tag": "Jugabilidad",
+      "title": "Un guiño a GTA V: el misterio del monte Chiliad vuelve a aparecer",
+      "change": "Según GamingBible, jugadores han encontrado una conversación de NPC que menciona los sucesos extraños del monte Chiliad, el misterio sin resolver de GTA V.",
+      "plain": "Rockstar vuelve a hacer un guiño a un enigma de hace 13 años.",
+      "sources": [
+        {
+          "name": "GamingBible",
+          "url": "https://www.gamingbible.com/news/gta-6-gta-5-mount-chiliad-mystery-easter-egg-802897-20261120"
+        }
+      ],
+      "detail": "Sin spoilers. Es un hallazgo de jugadores, sin confirmación de Rockstar, y no contamos dónde ocurre para no destripar nada. Lo recogemos también en la sección de secretos.",
+      "why": "Reaviva uno de los enigmas más comentados de la saga."
+    }
+  ],
+  "rumors": [],
+  "posts": [
+    "Take-Two cifra en 3.790 millones de dólares las reservas y ventas del primer día de GTA VI y lo llama «el mayor lanzamiento de entretenimiento de la historia». No da copias vendidas. 💰",
+    "Metacritic: 99 con 152 reseñas de prensa. Pero las notas de usuarios son otra historia: según Insider Gaming, cerca de la mitad son 49 o menos, señal de posible «review bombing». ⭐",
+    "Si GTA VI se te cierra en PS5, no eres el único: DualShockers cuenta un bug que lo cierra. Ni Sony ni Rockstar han dado causa ni arreglo. Guarda a mano y actualiza la consola. 🛠️"
+  ],
+  "context": [
+    {
+      "title": "GTA VI habría vendido unos 19 millones de copias el primer día (estimación)",
+      "text": "Sensor Tower lo calculó según Men's Journal; Take-Two sigue sin confirmar copias.",
+      "date": "2026-11-20",
+      "sources": [
+        {
+          "name": "Men's Journal",
+          "url": "https://www.mensjournal.com/news/gta-6-sales-19-million-copies-gta-v-record"
+        }
+      ]
+    },
+    {
+      "title": "Cierres inesperados en PS5 y Xbox hacen perder horas de progreso",
+      "text": "Notebookcheck recogió casos de progreso perdido pese al autoguardado; Rockstar no ha dado arreglo.",
+      "date": "2026-11-20",
+      "sources": [
+        {
+          "name": "Notebookcheck",
+          "url": "https://www.notebookcheck.net/GTA-6-PS5-and-Xbox-crashes-are-losing-hours-of-progress-despite-autosave-system.1453724.0.html"
+        }
+      ]
+    }
+  ],
+  "en": {
+    "title": "Take-Two: GTA VI made $3.79 billion between preorders and day one",
+    "summary": "An official Take-Two figure, review bombing in user scores while the press holds a 99, and a bug that closes the game on PS5. No official copies-sold number.",
+    "lead": "Take-Two now gives an official launch figure and talks of the biggest entertainment launch in history. What's still unclear is copies sold and why some PS5 players are seeing crashes.",
+    "stories": [
+      {
+        "tag": "Business",
+        "title": "Take-Two: GTA VI made $3.79 billion between preorders and day one",
+        "change": "According to Variety, Take-Two says GTA VI preorders and first-day sales added up to $3.79 billion, and calls it \"the biggest entertainment launch in history.\" A spokesperson wouldn't say how many copies were sold.",
+        "plain": "It's the first official sales figure. It comes from the company itself, not an analyst.",
+        "detail": "The figure mixes preorders and day one, and isn't the same as copies. Until now there were only third-party estimates, like the 19 million from Sensor Tower we covered yesterday, which remain unconfirmed. Take-Two hasn't given a copies number yet.",
+        "why": "It puts an official number on a launch that until now was measured only with calculations."
+      },
+      {
+        "tag": "Impact",
+        "title": "Metacritic: the press holds a 99, but users sink the score",
+        "change": "Insider Gaming reports GTA VI is still at 99 out of 100 after 152 press reviews, but that about half of user scores are 49 or below, pointing to possible review bombing.",
+        "plain": "Press scores are near-perfect and user scores are all over the place. Trust outlet reviews more than the user average.",
+        "detail": "Review bombing is when lots of people post very low scores at once, often out of anger rather than the game's quality. Insider Gaming attributes it to unhappy players, and we haven't seen an official explanation from Metacritic.",
+        "why": "It keeps a very low user score from misleading you about the game's real quality."
+      },
+      {
+        "tag": "Heads-up",
+        "title": "A bug is closing GTA VI on PS5 and sending some players back to the menu",
+        "change": "According to DualShockers, a bug is closing the game on PS5 mid-session. Neither Sony nor Rockstar has given a cause or a fix, and reports point only to PS5.",
+        "plain": "If the game closes on your PS5, you're not alone. Save manually and make sure your console is up to date.",
+        "detail": "Rockstar hasn't published notes for patches 01.002.000 and 01.002.001, or a known-issues list. There's no official confirmation of how many players are affected. We're tracking it in the patches and issues section.",
+        "why": "It saves you from trying fixes blindly while there's no official solution."
+      }
+    ],
+    "more": [
+      {
+        "tag": "Gameplay",
+        "title": "A nod to GTA V: the Mount Chiliad mystery shows up again",
+        "change": "According to GamingBible, players have found an NPC conversation that mentions the strange events on Mount Chiliad, GTA V's unsolved mystery.",
+        "plain": "Rockstar is winking at a 13-year-old puzzle again.",
+        "detail": "No spoilers. It's a player find, with no confirmation from Rockstar, and we don't say where it happens so as not to spoil anything. We also list it in the secrets section.",
+        "why": "It revives one of the series' most talked-about puzzles."
+      }
+    ],
+    "rumors": [],
+    "posts": [
+      "Take-Two puts GTA VI's preorders and first-day sales at $3.79 billion and calls it \"the biggest entertainment launch in history.\" No copies-sold number. 💰",
+      "Metacritic: 99 from 152 press reviews. User scores are another story: per Insider Gaming, about half are 49 or below, a sign of possible review bombing. ⭐",
+      "If GTA VI closes on your PS5, you're not alone: DualShockers reports a bug that closes it. Neither Sony nor Rockstar has given a cause or fix. Save manually and update your console. 🛠️"
+    ],
+    "context": [
+      {
+        "title": "GTA VI reportedly sold about 19 million copies on day one (estimate)",
+        "text": "Sensor Tower calculated it per Men's Journal; Take-Two still hasn't confirmed copies."
+      },
+      {
+        "title": "Crashes on PS5 and Xbox are losing hours of progress",
+        "text": "Notebookcheck reported cases of lost progress despite autosave; Rockstar hasn't given a fix."
+      }
+    ]
+  }
+}

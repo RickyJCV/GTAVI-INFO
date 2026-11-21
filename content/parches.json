@@ -1,11 +1,34 @@
 {
-  "updated": "2026-11-20",
+  "updated": "2026-11-21",
   "status": {
     "level": "watch",
-    "es": "Sin parche del día 1 con notas oficiales. Hubo problemas para conectarse a PlayStation Network desde el lanzamiento (Sony no ha explicado la causa) y algunos jugadores cuentan cierres que hacen perder progreso.",
-    "en": "No day-one patch with official notes. There were PlayStation Network sign-in problems from launch (Sony hasn't explained the cause) and some players report crashes that lose progress."
+    "es": "Sin parche del día 1 con notas oficiales. Hubo problemas de conexión a PlayStation Network en el lanzamiento (Sony no ha explicado la causa) y siguen abiertos un bug que cierra el juego en PS5 y cierres que hacen perder progreso.",
+    "en": "No day-one patch with official notes. There were PlayStation Network sign-in problems at launch (Sony hasn't explained the cause) and a bug that closes the game on PS5 and crashes that lose progress remain open."
   },
   "entries": [
+    {
+      "id": "ps5-cierres-bug",
+      "date": "2026-11-21",
+      "type": "issue",
+      "state": "open",
+      "platforms": [
+        "ps5"
+      ],
+      "title": {
+        "es": "Un bug cierra el juego en PS5 y devuelve al menú",
+        "en": "A bug closes the game on PS5 and returns to the menu"
+      },
+      "text": {
+        "es": "Según DualShockers, un bug está cerrando GTA VI en PS5 durante las partidas. Ni Sony ni Rockstar han dado una causa ni un arreglo, y los reportes apuntan solo a PS5. Consejo: guarda a mano y mantén la consola actualizada.",
+        "en": "According to DualShockers, a bug is closing GTA VI on PS5 mid-session. Neither Sony nor Rockstar has given a cause or a fix, and reports point only to PS5. Tip: save manually and keep your console up to date."
+      },
+      "sources": [
+        {
+          "name": "DualShockers",
+          "url": "https://dualshockers.com/a-sneaky-bug-is-crashing-ps5-players-gta-6-runs"
+        }
+      ]
+    },
     {
       "id": "cierres-progreso-perdido",
       "date": "2026-11-20",
