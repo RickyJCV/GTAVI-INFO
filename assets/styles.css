@@ -1477,7 +1477,8 @@ html, body { overflow-x: hidden; }
 /* ================= botones e iconos sin cortes ================= */
 /* Los degradados se pintaban también bajo el borde transparente y asomaba el color del otro extremo
    (una línea morada en el lateral de «Ver las 5 noticias», PS5, Todos…). Se ancla el fondo al borde exterior. */
-*, *::before, *::after { background-origin: border-box; }
+/* !important: las reglas «background: …» abreviadas de botones activos y tarjetas reiniciaban este valor y la marca volvía */
+*, *::before, *::after { background-origin: border-box !important; }
 .btn--primary { border: 0; padding: 11px 17px; }
 /* Indicador de deslizar: una pestaña pegada al borde (icono y nombre juntos), nunca flotando en mitad del texto */
 .swipe-peek { flex-direction: row; gap: 8px; width: auto; padding: 11px 16px; top: 46%; font-size: 0.86rem; color: var(--text);
@@ -1518,3 +1519,11 @@ body { font-variant-emoji: text; }
 .swipe-peek.is-right { flex-direction: row; }
 .swipe-peek.is-left::after { border-left-color: transparent; border-right-color: currentColor; order: -1; margin: 0 2px 0 0; }
 .swipe-peek.is-right::after { border-right-color: transparent; border-left-color: currentColor; order: 3; margin: 0 0 0 2px; }
+/* iPhone: sin el rectángulo gris al tocar (no respeta las esquinas redondeadas) ni el estilo propio de Safari en botones */
+html { -webkit-tap-highlight-color: transparent; }
+*, *::before, *::after { -webkit-tap-highlight-color: transparent; }
+button, input[type="button"], input[type="submit"] { -webkit-appearance: none; appearance: none; }
+/* El anillo de foco solo para teclado (al tocar con el dedo no debe quedar marcado) */
+:focus:not(:focus-visible) { outline: none; }
+/* Respuesta al pulsar en todos los selectores, para no echar de menos el resaltado */
+.filter button:active, .plat button:active, .seg a:active, .aud-toggle button:active, .lang a:active, .clips-thumbs:active { transform: scale(0.95); }
